@@ -1,0 +1,221 @@
+<form ng-submit="submit(data)">
+	<div id="content-sidebar">
+		<h2>Toiminnot</h2>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas eaque tempora possimus, nisi eveniet ex veritatis temporibus ratione quo eos.</p>
+		<p>Doloremque porro maxime reprehenderit sequi harum reiciendis incidunt soluta rem ipsam nulla non, distinctio molestiae dolorum alias, eaque quia. Dolor, voluptates temporibus nesciunt ullam sed veritatis, ratione tenetur quo, ipsum minima consectetur est quam obcaecati cumque, porro.</p>
+
+		<button type="button" class="btn btn-success btn-block" ng-click="add_question()">
+			<span class="glyphicon glyphicon-plus"></span> Lisää uusi kysymys
+		</button>
+
+		<hr>
+		<button type="submit" class="btn btn-primary btn-block btn-lg">
+			<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
+		</button>
+		<a href="#/" class="btn btn-default btn-block">
+			<span class="glyphicon glyphicon-chevron-left"></span> Palaa takaisin
+		</a>
+	</div>
+	<div id="content-main">
+		<h1>Uusi koe <span ng-show="data.test.title">/ <b>{{ data.test.title }}</b></span></h1>
+		<div class="form-group">
+			<input type="text" class="form-control input-lg input-block" ng-model="data.test.title" placeholder="Kokeen otsikko">
+		</div>
+		<div class="form-group">
+			<textarea class="form-control" ng-model="data.test.description" placeholder="Kokeen kuvaus" style="resize:vertical;min-height:8em;"></textarea>
+		</div>
+		<ul class="questions" ui-sortable="sortableOptions" ng-model="questions">
+			<li class="question" ng-repeat="(qkey, question) in data.test.questions" id="question-{{ qkey }}">
+				<div class="info">
+					<div class="actions">
+						<button class="btn btn-primary btn-sm edit-btn" ng-click="edit(qkey, question.id)">
+							<span class="glyphicon glyphicon-edit"></span> Muokkaa
+						</button>
+						<button class="btn btn-danger btn-sm" ng-click="delete(qkey, question.id)">
+							<span class="glyphicon glyphicon-trash"></span> Poista
+						</button>
+					</div>
+					<div class="title-row">
+						<div class="number">{{ (qkey + 1) }}.</div>
+						<div class="title">{{ question.title }}</div>
+						<div class="subtitle">
+							{{ question.subtitle.split('\n')[0] }}
+						</div>
+					</div>
+				</div>
+				<div class="edit">
+					<div class="form-group clearfix">
+						<div class="col-xs-7">
+							<div class="form-group">
+								<label for="">Kysymys</label>
+								<input type="text" class="form-control" ng-model="question.title">
+							</div>
+							<div class="form-group">
+								<label for="">Kysymyksen tarkennus</label>
+								<textarea class="form-control vertical-textarea" ng-model="question.subtitle"></textarea>
+							</div>
+						</div>
+						<div class="col-xs-5" style="border-left: 1px solid #eee">
+							<p>
+								Syötä kysymys viereiseen tekstikenttään.
+							</p>
+							<p>
+								Voit halutessassi myös tarkentaa kysymystä alempaan kenttään, vaikka syöttämällä esimerkkejä, lisämateriaalia tai jopa kuvia. Voit käyttää normaalia HTML-merkintäkoodia kentässä.
+							</p>
+							<p>
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga placeat omnis consequuntur adipisci, eligendi architecto nobis. Doloremque vero quibusdam pariatur repudiandae, magni impedit ab totam quasi molestiae.
+							</p>
+						</div>
+					</div>
+					
+					<div class="form-group question-details">
+						<ul class="question-type">
+							<li><label><input type="radio" ng-model="question.type" value="CHOICE"> Yksivalinta</label></li>
+							<li><label><input type="radio" ng-model="question.type" value="MULTI"> Monivalinta</label></li>
+							<li><label><input type="radio" ng-model="question.type" value="TEXT"> Teksti</label></li>
+							<li><label><input type="radio" ng-model="question.type" value="MULTITEXT"> Moniteksti</label></li>
+							<li><label><input type="radio" ng-model="question.type" value="TEXTAREA"> Pitkä teksti</label></li>
+						</ul>
+						<div class="question-answers">
+							<div ng-show="question.type == 'MULTI'">
+								<h3>Vaihtoehdot / Monivalinta</h3>
+								<p>
+									Käyttäjän tulee valita yksi tai useampi oikea vastaus monesta:
+								</p>
+								<div class="form-group choice" ng-repeat="(ckey, choice) in question.answers">
+									<div class="col input-field">
+										<input type="text" class="form-control" id="question-{{ question.id }}-choice-{{ ckey }}" ng-model="choice.text">
+									</div>
+									<div class="col" ng-hide="question.answers.length <= 1">
+										<a class="cursor-pointer" ng-click="removeChoice(qkey, ckey)"><span class="glyphicon glyphicon-remove"></span></a>
+									</div>
+									<div class="col checkbox">
+										<label>
+											<input type="checkbox" ng-model="choice.is_correct"> Oikea vastaus
+										</label>
+									</div>
+								</div>
+								<div class="form-group choice">
+									<div class="col input-field">
+										<input type="text" class="form-control" ng-enter="addChoice.do(qkey, question.id)" ng-blur="addChoice.text = ''" ng-model="addChoice.text" placeholder="Lisää uusi vaihtoehto" data-toggle="tooltip" data-placement="right" title="Kirjoita vaihtoehto ja paina enter">
+										<div class="help-block" ng-show="addChoice.text != ''">
+											Paina Enter varmistaaksesi lisäys
+										</div>
+									</div>
+								</div>
+							</div>
+							<div ng-show="question.type == 'CHOICE'">
+								<h3>Vaihtoehdot / Yksivalinta</h3>
+								<p>
+									Käyttäjän tulee valita yksi oikea vastaus monesta:
+								</p>
+								<div class="form-group choice" ng-repeat="(ckey, choice) in question.answers">
+									<div class="col">
+										<input type="text" class="form-control" ng-model="choice.text">
+									</div>
+									<div class="col">
+										<a class="cursor-pointer" ng-click="removeChoice(qkey, ckey)"><span class="glyphicon glyphicon-remove"></span></a>
+									</div>
+									<div class="col radio">
+										<label>
+											<input type="radio" ng-model="question.correct_answer" value="{{ choice.id }}"> Oikea vastaus
+										</label>
+									</div>
+								</div>
+								<div class="form-group choice">
+									<div class="col">
+										<input type="text" class="form-control" ng-enter="addChoice.do(qkey, question.id)" ng-blur="addChoice.text = ''" ng-model="addChoice.text" placeholder="Lisää uusi vaihtoehto" data-toggle="tooltip" data-placement="right" title="Kirjoita vaihtoehto ja paina enter">
+									</div>
+									<div class="col" ng-show="addChoice.text != ''">
+										Paina Enter varmistaaksesi lisäys
+									</div>
+								</div>
+							</div>
+							<div ng-show="question.type == 'MULTITEXT'">
+								<h3>Vastaukset / Moniteksti</h3>
+								<p>
+									Käyttäjän tulee syöttää vastaukseksi kaikki alla olevat sanat tai lauseet:
+								</p>
+								<div class="form-group choice" ng-repeat="answer in question.answers">
+									<div class="col">
+										<input type="text" class="form-control" ng-model="answer.text">
+									</div>
+									<div class="col">
+										<a class="cursor-pointer" ng-click="removeChoice(qkey, ckey)"><span class="glyphicon glyphicon-remove"></span></a>
+									</div>
+								</div>
+								<div class="form-group choice">
+									<div class="col">
+										<input type="text" class="form-control" ng-enter="addChoice.do(qkey, question.id)" ng-blur="addChoice.text = ''" ng-model="addChoice.text" placeholder="Lisää uusi vaihtoehto" data-toggle="tooltip" data-placement="right" title="Kirjoita vaihtoehto ja paina enter">
+									</div>
+									<div class="col" ng-show="addChoice.text != ''">
+										Paina Enter varmistaaksesi lisäys
+									</div>
+								</div>
+							</div>
+							<div ng-show="question.type == 'TEXT'">
+								<h3>Vastaukset / Teksti</h3>
+								<p>
+									Käyttäjän tulee syöttää vastaukseksi alla oleva sana tai lause:
+								</p>
+								<div class="form-group">
+									<div class="col">
+										<input type="text" class="form-control" ng-model="question.answer.text">
+									</div>
+								</div>
+							</div>
+							<div ng-show="question.type == 'TEXTAREA'">
+								<h3>Vastaukset / Pitkä teksti</h3>
+								<p>
+									Käyttäjän tulee syöttää vastaukseksi jotain tekstikenttään joka tarkistetaan myöhemmin.
+								</p>
+								<div class="form-group">
+									<div class="col">
+										<textarea class="form-control" placeholder="Käyttäjä täyttää" style="resize:none" class="disabled" disabled></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="pull-left">
+						<b>Tallentamattomia muutoksia</b>
+					</div>
+					<div class="pull-right">
+						<button class="btn btn-success">
+							<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
+						</button>
+						<button class="btn btn-default" ng-click="cancel()">
+							Peruuta
+						</button>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</form>
+
+<div class="modal" id="modal-delete-confirmation">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+				<h4 class="modal-title">Poiston varmistus</h4>
+			</div>
+			<div class="modal-body" style="text-align:center;font-size:120%">
+				<p>
+					Oletko varma, että haluat poistaa kysymyksen <b>"{{ delete_info.key + 1 }}. {{ delete_info.question.title }}"</b>?
+				</p>
+				<p>
+					Tätä toimintoa ei voi peruuttaa!
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Peruuta</button>
+				<button type="button" class="btn btn-danger" ng-click="confirmed_delete()">
+					<span class="glyphicon glyphicon-trash"></span> Poista kysymys
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

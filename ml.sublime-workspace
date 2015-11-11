@@ -1,0 +1,608 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"ques",
+				"questions"
+			],
+			[
+				"ease-",
+				"ease-in-out"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"menu_",
+				"menu_primary"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"array_key",
+				"array_key_exists"
+			],
+			[
+				"arraky",
+				"array_key_exists"
+			],
+			[
+				"ob_",
+				"ob_end_clean"
+			],
+			[
+				"ob_get",
+				"ob_get_flush"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 87.0,
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"wrap",
+				"Word Wrap: Toggle"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"javasc",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ssangu",
+				"Set Syntax: HTML (Angular.js)"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"sid",
+				"View: Toggle Side Bar"
+			],
+			[
+				"snipp",
+				"Snippet: html"
+			],
+			[
+				"sshtml",
+				"Set Syntax: HTML"
+			],
+			[
+				"sshm",
+				"Set Syntax: HTML"
+			],
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"lowerc",
+				"Convert Case: Lower Case"
+			],
+			[
+				"lower",
+				"Convert Case: Lower Case"
+			],
+			[
+				"sscss",
+				"Set Syntax: CSS"
+			],
+			[
+				"sshml",
+				"Set Syntax: HTML Liquid"
+			],
+			[
+				"sshtm",
+				"Set Syntax: HTML"
+			],
+			[
+				"word",
+				"Word Wrap: Toggle"
+			],
+			[
+				"min",
+				"View: Toggle Minimap"
+			],
+			[
+				"mini",
+				"View: Toggle Minimap"
+			]
+		],
+		"width": 530.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/private/etc/hosts",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/config/routes.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/config/autoload.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/libraries/Layout.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/libraries/Auth.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/ng/test/form.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/m7.sublime-project",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/m7.sublime-workspace",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/controllers/AuthController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/views/login.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/controllers/Auth.php",
+		"/Applications/XAMPP/xamppfiles/apache2/conf/httpd.conf",
+		"/Applications/XAMPP/xamppfiles/etc/httpd.conf",
+		"/Users/media7/Documents/m7raamattu/m7raamattu/application/controllers/Home.php",
+		"/Users/media7/Documents/m7raamattu/m7raamattu/application/models/Questionnaire_model.php",
+		"/Applications/XAMPP/xamppfiles/apache2/README.txt",
+		"/Users/media7/Documents/media7layout/ohjeet.html",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts.yml",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/containers.yml",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts/super_wide.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts/right_column.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts/no_nothing.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts/menu_left.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts/no_containers.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts/left_column.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts/home.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts/default.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/untitled.html",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/public/assets/css/main.css",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts/right_column.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts/no_nothing.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts/no_containers.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts/menu_left.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts/left_column.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts/home.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts/default.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts.yml",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts/super_wide.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/about.yml",
+		"/Users/media7/Documents/media7layout/bluetheme_5.47/public/assets/css/main.css",
+		"/Users/media7/Documents/media7layout/bluetheme_5.47/about.yml",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/public/assets/css/widget.css",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/public/assets/css/untitled.html",
+		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/containers.yml",
+		"/Users/media7/Documents/aitolahtilayout/aitolahti/index.html",
+		"/Users/media7/Documents/media7layout/bluetheme_5.47/layouts/default.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/aitolahti/css/normalize.min.css",
+		"/Users/media7/Documents/aitolahtilayout/aitolahti/css/main.css",
+		"/Users/media7/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/media7/Documents/aitolahtilayout/3-crosses-aitolahti_2_3/layouts/default.html.liquid",
+		"/Users/media7/Documents/aitolahtilayout/3-crosses-aitolahti_2_3/about.yml",
+		"/Users/media7/Documents/aitolahtilayout/3-crosses-aitolahti_2_3/public/assets/css/main.css",
+		"/Users/media7/Documents/media7layout/layoutblue/css/main.css",
+		"/Users/media7/Documents/media7layout/layoutblue/js/mobile_menu_toggle.js",
+		"/Users/media7/Documents/media7layout/layoutblue/js/main.js",
+		"/Users/media7/Documents/media7layout/bluetheme_5.47/public/assets/css/widget.css",
+		"/Users/media7/Documents/media7layout/bluetheme_5.47/layouts/home.html.liquid",
+		"/Users/media7/Documents/media7layout/bluetheme_5.47/layouts/no_containers.html.liquid",
+		"/Users/media7/Documents/media7layout/bluetheme_5.47/layouts/refresh.html.liquid",
+		"/Users/media7/Documents/media7layout/bluetheme_5.47/layouts/f5home.html.liquid",
+		"/Users/media7/Documents/media7layout/layoutblue/info.html",
+		"/Users/media7/Documents/media7layout/netadventist teema/containers.yml",
+		"/Users/media7/Documents/media7layout/netadventist teema/public/assets/css/oldmain.css",
+		"/Users/media7/Documents/media7layout/layoutblue/css/normalize.min.css",
+		"/Users/media7/Documents/media7layout/netadventist teema/layouts/refresh.html.liquid",
+		"/Users/media7/Documents/media7layout/netadventist teema/layouts/f5player.html.liquid",
+		"/Users/media7/Documents/media7layout/netadventist teema/layouts/f5home.html.liquid",
+		"/Users/media7/Documents/media7layout/netadventist teema/layouts/no_containers.html.liquid",
+		"/Users/media7/Documents/media7layout/netadventist teema/layouts/home.html.liquid",
+		"/Users/media7/Documents/media7layout/netadventist teema/layouts/default.html.liquid",
+		"/Users/media7/Documents/media7layout/netadventist teema/layouts.yml",
+		"/Users/media7/Documents/media7layout/netadventist teema/about.yml",
+		"/Users/media7/Documents/media7layout/layout/css/main.css",
+		"/Users/media7/Documents/media7layout/layout/info.html",
+		"/Users/media7/Documents/media7layout/layout/index.html",
+		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/globals.js",
+		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/hammer.js",
+		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/myLogicSimple5.js",
+		"/Users/media7/Documents/mvtouch/streamaus/MVTouch5.html",
+		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/myLogicSimple.js",
+		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/hammer_003.js",
+		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/jquery.js",
+		"/Volumes/Projektit3/DVD-projekteja/missiodvd2015-4/bellet/Wk05_ShareThisLove.stp",
+		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/458E7F5D-C7AF-489A-9746-8333E5BCE809/build.php",
+		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/B3922C45-50E0-4A9F-952C-6A7C44472020/script.js",
+		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/CFFAE254-9C0C-474A-915C-F4EE27F1D0E5/controller.php",
+		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/3EA3EB9C-DCF6-4E68-9E2F-0C3D41867D7D/main.css",
+		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/38D53517-5BB1-4873-B49F-739EF7BFDA45/index.php",
+		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/D0E60613-804F-445A-912E-6A51294BE387/view_main.php",
+		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/EB985576-6086-4820-A11E-2531BA19046D/database.php",
+		"/Users/media7/Documents/infobuild/oldbuild.php",
+		"/Users/media7/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
+		"/Users/media7/Documents/infobuild/controller.php",
+		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/621926AC-4EA1-42C3-B138-332E4C0B9D1D/view_form.php",
+		"/Users/media7/Documents/infobuild/script.js",
+		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/50A5693F-5CDE-452B-9116-345D54C1AC91/form.php",
+		"/Users/media7/Documents/infobuild/index.php",
+		"/Users/media7/Documents/infobuild/form.php",
+		"/Users/media7/Documents/infobuild/main.css",
+		"/Users/media7/Documents/infobuild/database.php",
+		"/Users/media7/Documents/infobuild/build.php"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"choice",
+			"t\"]",
+			"[\"",
+			"indexed_choices[$question->id]",
+			"choice.title",
+			".title-row",
+			"choices",
+			"edit()",
+			".edit",
+			"\n								<div class=\"form-group\">\n									<input type=\"text\" class=\"form-control\" ng-model=\"question.answer\">\n								</div>",
+			"MULTITEXT",
+			"tab",
+			"tab-p",
+			"top",
+			"checkbox",
+			"div",
+			"h3",
+			"checkbox",
+			"style=\"width:50%;margin:0 0 5px 0\"",
+			"$scope.new_choice_text",
+			"elem",
+			"item.",
+			"useasta",
+			"choice",
+			"Text",
+			"text",
+			"Text",
+			"text",
+			"home",
+			"...",
+			"role=\"presentation\"",
+			"role=\"presentation\" ",
+			"30",
+			"30px",
+			",",
+			"30",
+			"logged_in",
+			"-5",
+			"form-group",
+			"questions",
+			"str",
+			"vhost",
+			"h-nav",
+			"super-w",
+			"#main-cont",
+			"div#login",
+			"#content ifram",
+			"iframe",
+			"<iframe  ",
+			"<iframe width=\"640\"",
+			"</iframe>",
+			"--><",
+			"--><iframe",
+			"<iframe",
+			"</p>",
+			"<p>",
+			"twitter",
+			"<iframe",
+			"iframe",
+			"<!--",
+			"<p>",
+			"respons",
+			"respon",
+			"respons",
+			"&amp;",
+			"img",
+			"respons",
+			"img",
+			"widget",
+			"overflow-x",
+			"widget",
+			"width: 100%",
+			"navigation-w",
+			"navigation",
+			"fonts/fonts",
+			"../",
+			"../fonts/",
+			"../fonts/glyphicons-halflings-regular.eot",
+			".eot",
+			"glyph",
+			"font",
+			"padding",
+			"display",
+			"b",
+			"navigat",
+			"active",
+			"expand",
+			"active",
+			"border 70ms",
+			" .menu_secondary",
+			"#navigation",
+			"tietoa toi",
+			"navig",
+			":focus",
+			"iframe",
+			"linear",
+			"ease-in",
+			"min-wid",
+			"col-md",
+			"<span class=\"hint\"></span>",
+			"class=\"\"",
+			"fieldset",
+			"content-column",
+			"md-",
+			"#main-col",
+			"border-rad",
+			"liity lista",
+			"search:hover",
+			"0e6f2f",
+			"8",
+			"009247",
+			"18bd4c",
+			"009247",
+			"fff",
+			"2",
+			"border",
+			"#ccc",
+			"1",
+			"1px",
+			"1",
+			"000",
+			"fff",
+			"000",
+			"first",
+			"Montserrat",
+			"body",
+			"iframe",
+			"#navigation li a"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			"\n"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.517224121094,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"model",
+				"js/ng/models.js"
+			],
+			[
+				"testmode",
+				"application/models/Tests_model.php"
+			],
+			[
+				"route",
+				"application/config/routes.php"
+			],
+			[
+				"ajax",
+				"application/controllers/Ajax_Controller.php"
+			],
+			[
+				"contjs",
+				"js/ng/controllers.js"
+			],
+			[
+				"contmain",
+				"application/views/layout/main.php"
+			],
+			[
+				"testsf",
+				"ng/tests/form.html"
+			],
+			[
+				"mainjs",
+				"js/ng/main.js"
+			],
+			[
+				"ngtestfor",
+				"ng/test/form.html"
+			],
+			[
+				"ngin",
+				"ng/index.html"
+			],
+			[
+				"adminjs",
+				"js/admin.js"
+			],
+			[
+				"admin",
+				"css/admin.css"
+			],
+			[
+				"login",
+				"application/views/login.php"
+			],
+			[
+				"rout",
+				"application/config/routes.php"
+			],
+			[
+				"layoutma",
+				"application/views/layout/main.php"
+			],
+			[
+				"autol",
+				"application/config/autoload.php"
+			],
+			[
+				"lay",
+				"application/libraries/Layout.php"
+			],
+			[
+				"cmss",
+				"css/main.css"
+			],
+			[
+				"ques",
+				"application/views/questionnaire.php"
+			],
+			[
+				"qu",
+				"application/models/Questionnaire_model.php"
+			],
+			[
+				"home",
+				"application/controllers/Home.php"
+			],
+			[
+				"datab",
+				"application/config/database.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}

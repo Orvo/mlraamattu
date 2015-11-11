@@ -1,0 +1,38 @@
+<div id="content-sidebar">
+	<h2>Sivupalkki</h2>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas eaque tempora possimus, nisi eveniet ex veritatis temporibus ratione quo eos.</p>
+	<p>Doloremque porro maxime reprehenderit sequi harum reiciendis incidunt soluta rem ipsam nulla non, distinctio molestiae dolorum alias, eaque quia. Dolor, voluptates temporibus nesciunt ullam sed veritatis, ratione tenetur quo, ipsum minima consectetur est quam obcaecati cumque, porro.</p>
+</div>
+<div id="content-main">
+	<h1>Kurssit</h1>
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<td style="width:40px">#</td>
+				<td style="width:250px">Kurssin otsikko</td>
+				<td style="width:50%">Kuvaus</td>
+				<td>Kurssin kokeet</td>
+				<td>Toiminnot</td>
+			</tr>
+		</thead>
+		<tbody ui-sortable="sortableOptions" ng-model="series" class="table-sortable">
+			<tr ng-repeat="item in series">
+				<td>{{ item.id }}</td>
+				<td>{{ item.title }}</td>
+				<td>{{ item.description }}</td>
+				<td>asd</td>
+				<td>
+					<a href="#/series/edit/{{ item.id }}" class="btn btn-primary btn-xs btn-block">
+						<span class="glyphicon glyphicon-edit"></span> Muokkaa
+					</a>
+					<a href="#/series/delete/{{ item.id }}" class="btn btn-danger btn-xs btn-block">
+						<span class="glyphicon glyphicon-trash"></span> Poista
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo vel maiores temporibus distinctio laborum asperiores odio ratione expedita reprehenderit rerum quos recusandae quae facilis necessitatibus ducimus minus exercitationem, atque dolorem omnis unde, ad, consectetur sed! Doloremque id distinctio perferendis, vel.
+	</p>
+</div>

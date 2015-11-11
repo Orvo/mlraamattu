@@ -1,0 +1,307 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
+html, body
+{
+	height: 100%;
+}
+
+body
+{
+	font-family: 'Source Sans Pro', sans-serif;
+	background: #f1f1f1;
+	overflow-y: scroll;
+	padding-top: 50px;
+}
+
+#main-container
+{
+	height: 100%;
+	padding: 0 80px;
+}
+
+#main-container > .wrapper
+{
+	min-height: 100%;
+	background: #fff;
+	margin: 0 auto;
+	padding: 20px 30px 150px 30px;
+}
+
+.navbar
+{
+	padding: 0 40px;
+}
+
+div#login-status
+{
+	float: right;
+	position: fixed;
+	top: 0;
+	right: 20px;
+	padding: 12px 16px;
+	background: #fff;
+}
+
+div#login-status a
+{
+	display: inline-block;
+	padding: 0 6px;
+}
+
+h1, h2, h3, h4
+{
+	font-family: 'Lato', sans-serif;
+}
+
+h1:first-child, h2:first-child, h3:first-child, h4:first-child
+{
+	margin-top: 0;
+	padding-top: 0;
+}
+
+table.table thead
+{
+	font-weight: bold;
+}
+
+table .table-sortable tr
+{
+	cursor: pointer;
+}
+
+#content-sidebar
+{
+	float: right;
+	width: 260px;
+}
+
+#content-main
+{
+	margin-right: 280px;
+}
+
+nav.navbar
+{
+	background: #F7C53E;
+	border-bottom: 1px solid #ECBA34;
+	font-family: 'Lato', sans-serif;
+	box-shadow: 0 -1px 3px #D4A320;
+}
+
+nav.navbar a.navbar-brand
+{
+	font-weight: bold;
+}
+
+nav.navbar a.navbar-brand,
+nav.navbar .nav.navbar-nav li a
+{
+	color: #473502;
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
+	transition: all 60ms ease-in;
+	outline: none !important;
+}
+
+nav.navbar a.navbar-brand:hover,
+nav.navbar .nav.navbar-nav li a:hover
+{
+	color: #433100;
+	background: #FFD971;
+	border-left: 1px solid #EAB933;
+	border-right: 1px solid #EAB933;
+	box-shadow: inset 0 0 4px #FFEBB6;
+}
+
+nav.navbar .nav.navbar-nav li.active a
+{
+	color: #433100;
+	background: #d9a52e;
+	border-left: 1px solid #EAB933;
+	border-right: 1px solid #EAB933;
+}
+
+nav.navbar .nav.navbar-nav li.active a:hover
+{
+	color: #433100;
+	background: #FFD971;
+	border-left: 1px solid #EAB933;
+	border-right: 1px solid #EAB933;
+}
+
+ul.questions, ul.questions li.question
+{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+ul.questions li.question
+{
+	border: 1px solid #e7e7e7;
+	border-radius: 5px;
+	overflow: hidden;
+	margin: 0.5em 0 0.6em 0;
+	background: #fff;
+	box-shadow: 0 1px 0 #e1e1e1;
+}
+
+ul.questions li.question .nav-tabs
+{
+	height: 41px;
+}
+
+ul.questions li.question .nav-tabs a
+{
+	outline: none !important;
+}
+
+ul.questions li.question div.info 
+{
+	position: relative;
+}
+
+ul.questions li.question div.info .actions
+{
+	float: right;
+	position: absolute;
+	top: 7px;
+	right: 9px;
+}
+
+ul.questions li.question div.info div.title-row
+{
+	height: 58px;
+	margin: 0;
+	padding: 8px 10px 12px 10px;
+	background: #f7f7f7;
+	border-bottom: 1px solid #f2f2f2;
+	box-shadow: inset 0 -5px 5px #f2f2f2;
+}
+
+ul.questions li.question div.info div.title-row .number
+{
+	float: left;
+	display: block;
+	font-family: 'Lato';
+	font-weight: bold;
+	font-size: 20pt;
+	padding: 0 0 0 5px;
+}
+
+ul.questions li.question div.info div.title-row .title
+{
+	padding: 0 0 0 3em;
+	margin: 0;
+	display: block;
+	font-weight: bold;
+}
+
+ul.questions li.question div.info div.title-row .subtitle
+{
+	/*display: inline-block;
+	width: 40%;*/
+	padding-left: 3em;
+}
+
+ul.questions li.question div.edit
+{
+	padding: 1em;
+	display: none;
+}
+
+ul.questions li.question.active div.edit
+{
+	display: block;
+}
+
+ul.questions li.question.active button.edit-btn
+{
+	display: none;
+}
+
+ul.question-type, ul.question-type li
+{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+ul.question-type
+{
+	padding: 6px;
+	background: #f4f4f4;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom: 1px solid #eee;
+}
+
+ul.question-type li
+{
+	display: inline-block;
+}
+
+ul.question-type li label
+{
+	display: inline-block;
+	padding: 8px 10px;
+	margin: 0 6px 0 0;
+	border-radius: 4px;
+}
+
+ul.question-type li label input
+{
+	outline: none !important;
+	margin-right: 5px;
+}
+
+ul.question-type li label:hover
+{
+	background: #F7C53E;
+	cursor: pointer;
+}
+
+ul.questions li.question div.edit div.question-answers
+{
+	padding: 1em;
+	background: #f9f9f9;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom: 1px solid #eee;
+}
+
+ul.questions div.choice
+{
+	display: table-row;
+	margin: 0 -15px 0 -15px;
+}
+
+ul.questions div.choice .col
+{
+	display: table-cell;
+	vertical-align: middle;
+	padding: 0 15px 5px 15px;
+}
+
+ul.questions div.choice .col.input-field
+{
+	width: 20% !important;
+}
+
+.ui-sortable-placeholder
+{
+	border-bottom: 1px solid #aaa;
+	margin: 1em 0;
+}
+
+.cursor-pointer
+{
+	cursor: pointer;
+}
+
+.vertical-textarea
+{
+	min-height: 4em;
+	resize: vertical;
+}
