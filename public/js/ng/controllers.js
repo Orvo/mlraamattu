@@ -68,21 +68,37 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 {
 	$scope.id = $routeParams.id;
 
+	$scope.bulk_actions = [];
+
 	TestsModel.get({id: $scope.id}, function(test)
 	{
 		console.log(test);
 		$scope.data = {
 			test: test,
 		};
+
+		$scope.loaded = true;
 	});
 
 	$scope.edit_data = false;
 
 	$scope.edit = function(key)
 	{
-		if(!$scope.edit_data || $scope.edit_data !== false)
+		if($scope.edit_data)
 		{
 			$scope.cancel();
+			// var edit_key = $scope.edit_data.key;
+			// var question = $scope.data.test.questions[edit_key];
+		
+			// $scope.modal_info = {
+			// 	key: edit_key,
+			// 	newKey: key,
+			// 	question: question,
+			// };
+
+			// $('#modal-cancel-confirmation').modal('show');
+
+			// return;
 		}
 
 		$('.question.active').removeClass('active');
@@ -90,8 +106,17 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 
 		$scope.edit_data = {
 			key: key,
-			copy: $.extend({}, $scope.data.test.questions[key]),
+			copy: angular.copy($scope.data.test.questions[key]),
 		};
+	}
+
+	$scope.confirmed_cancel = function()
+	{
+		$scope.cancel();
+		$scope.edit($scope.modal_info.newKey);
+		$scope.modal_info = false;
+		
+		$('#modal-cancel-confirmation').modal('hide');
 	}
 
 	$scope.cancel = function()
@@ -99,9 +124,13 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 		$('.question.active').removeClass('active');
 		$('button.edit-btn').show();
 
-		if($scope.edit_data !== false)
+		if($scope.edit_data || $scope.edit_data !== false)
 		{
-			$scope.data.test.questions[$scope.edit_data.key] = $.extend({}, $scope.edit_data.copy);
+			if($scope.edit_data.copy)
+			{
+				$scope.data.test.questions[$scope.edit_data.key] = angular.copy($scope.edit_data.copy);
+			}
+			
 			$scope.edit_data = false;
 		}
 	}
@@ -110,7 +139,7 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 	{
 		var question = $scope.data.test.questions[key];
 		
-		$scope.delete_info = {
+		$scope.modal_info = {
 			key: key,
 			question: question,
 		};
@@ -120,10 +149,10 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 
 	$scope.confirmed_delete = function()
 	{
-		if(!$scope.delete_info || $scope.delete_info === false) return;
+		if(!$scope.modal_info || $scope.modal_info === false) return;
 
-		$scope.data.test.questions.splice($scope.delete_info.key, 1);
-		$scope.delete_info = false;
+		$scope.data.test.questions.splice($scope.modal_info.key, 1);
+		$scope.modal_info = false;
 
 		$('#modal-delete-confirmation').modal('hide');
 	}
@@ -132,12 +161,14 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 	{
 		$scope.data.test.questions.push({
 			type: 'MULTI',
-			title: 'Hello',
-			subtitle: 'World',
+			title: 'Uusi kysymys',
+			subtitle: '',
 			answers: [],
 		});
 
 		var key = $scope.data.test.questions.length-1;
+
+		// $scope.edit(key);
 
 		console.log($scope.data.test.questions, $scope.data.test.questions.length);
 

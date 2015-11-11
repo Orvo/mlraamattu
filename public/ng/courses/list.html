@@ -15,17 +15,17 @@
 				<td>Toiminnot</td>
 			</tr>
 		</thead>
-		<tbody ui-sortable="sortableOptions" ng-model="series" class="table-sortable">
-			<tr ng-repeat="item in series">
+		<tbody>
+			<tr ng-repeat="item in courses">
 				<td>{{ item.id }}</td>
 				<td>{{ item.title }}</td>
 				<td>{{ item.description }}</td>
 				<td>asd</td>
 				<td>
-					<a href="#/series/edit/{{ item.id }}" class="btn btn-primary btn-xs btn-block">
+					<a href="#/courses/edit/{{ item.id }}" class="btn btn-primary btn-xs btn-blsock">
 						<span class="glyphicon glyphicon-edit"></span> Muokkaa
 					</a>
-					<a href="#/series/delete/{{ item.id }}" class="btn btn-danger btn-xs btn-block">
+					<a href="#/courses/delete/{{ item.id }}" class="btn btn-danger btn-xs btn-block">
 						<span class="glyphicon glyphicon-trash"></span> Poista
 					</a>
 				</td>

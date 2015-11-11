@@ -1,4 +1,4 @@
-<form ng-submit="submit(data)">
+<form ng-submit="submit(data)" ng-show="loaded">
 	<div id="content-sidebar">
 		<h2>Toiminnot</h2>
 		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas eaque tempora possimus, nisi eveniet ex veritatis temporibus ratione quo eos.</p>
@@ -17,27 +17,45 @@
 		</a>
 	</div>
 	<div id="content-main">
-		<h1>Uusi koe <span ng-show="data.test.title">/ <b>{{ data.test.title }}</b></span></h1>
+		<div class="breadcrumbs">
+			<ol class="breadcrumb">
+				<li><a href="#/">Ylläpitopaneeli</a></li>
+				<li><a href="#/courses/">Kurssit</a></li>
+				<li ng-cloak><a href="#/courses/{{ data.test.course.id }}">Kurssi: {{ data.test.course.title || '-' }}</a></li>
+				<li ng-cloak>
+					<span ng-show="!id">Uusi koe</span>
+					<span ng-show="id">Muokataan koetta</span>
+				</li>
+			</ol>
+		</div>
+		<h1>
+			<span ng-show="!id">Uusi koe</span>
+			<span ng-show="id">Muokataan koetta</span>
+			<span ng-show="data.test.title">/ <b>{{ data.test.title }}</b></span>
+		</h1>
 		<div class="form-group">
 			<input type="text" class="form-control input-lg input-block" ng-model="data.test.title" placeholder="Kokeen otsikko">
 		</div>
 		<div class="form-group">
 			<textarea class="form-control" ng-model="data.test.description" placeholder="Kokeen kuvaus" style="resize:vertical;min-height:8em;"></textarea>
 		</div>
-		<ul class="questions" ui-sortable="sortableOptions" ng-model="questions">
+		<ul class="questions" ui-sortables="sortableOptions" ng-model="data.test.questions">
 			<li class="question" ng-repeat="(qkey, question) in data.test.questions" id="question-{{ qkey }}">
 				<div class="info">
 					<div class="actions">
-						<button class="btn btn-primary btn-sm edit-btn" ng-click="edit(qkey, question.id)">
+						<button class="btn btn-primary btn-sm" ng-click="edit(qkey, question.id)">
 							<span class="glyphicon glyphicon-edit"></span> Muokkaa
 						</button>
 						<button class="btn btn-danger btn-sm" ng-click="delete(qkey, question.id)">
 							<span class="glyphicon glyphicon-trash"></span> Poista
 						</button>
 					</div>
-					<div class="title-row">
+					<div class="title-row clearfix">
+						<!-- <div class="bulk-checkbox">
+							<input type="checkbox" ng-model="bulk_actions" ng-value="qkey">
+						</div> -->
 						<div class="number">{{ (qkey + 1) }}.</div>
-						<div class="title">{{ question.title }}</div>
+						<div class="title" ng-class="{'no-subtitle': question.subtitle.trim().length == 0}">{{ question.title }}</div>
 						<div class="subtitle">
 							{{ question.subtitle.split('\n')[0] }}
 						</div>
@@ -160,7 +178,7 @@
 								</p>
 								<div class="form-group">
 									<div class="col">
-										<input type="text" class="form-control" ng-model="question.answer.text">
+										<input type="text" class="form-control" ng-model="question.answers[0].text">
 									</div>
 								</div>
 							</div>
@@ -178,22 +196,42 @@
 						</div>
 					</div>
 					<div class="pull-left">
-						<b>Tallentamattomia muutoksia</b>
+						<span ng-show="!hasChanged"><b>Ei muutoksia</b></span>
+						<span ng-show="hasChanged"><b>Tallentamattomia muutoksia</b></span>
 					</div>
 					<div class="pull-right">
-						<button class="btn btn-success">
-							<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
-						</button>
 						<button class="btn btn-default" ng-click="cancel()">
 							Peruuta
+						</button>
+						<button class="btn btn-danger" ng-click="delete(qkey, question.id)">
+							<span class="glyphicon glyphicon-trash"></span> Poista
+						</button>
+						<button class="btn btn-success">
+							<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
 						</button>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 			</li>
+			<li class="no-questions" ng-show="data.test.questions.length == 0">
+				<h4>Aloita lisäämällä kysymys</h4>
+				<button type="button" class="btn btn-success" ng-click="add_question()">
+					<span class="glyphicon glyphicon-plus"></span> Lisää uusi kysymys
+				</button>
+			</li>
 		</ul>
+		<hr>
+		<div>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit omnis explicabo a distinctio molestiae, sit, dignissimos iusto consequuntur nemo est atque quae perspiciatis, repellendus quisquam natus assumenda excepturi dolorum. Aut harum consequatur nostrum quam nemo assumenda ratione, qui, fugit, distinctio libero ut dolorem ipsam maxime sed aperiam, error mollitia deleniti!
+		</div>
 	</div>
 </form>
+
+<div class="load-placeholder" ng-show="!loaded">
+	<h3>
+		<img src="/img/ajax-loader.gif" alt=""> Ladataan...
+	</h3>
+</div>
 
 <div class="modal" id="modal-delete-confirmation">
 	<div class="modal-dialog">
@@ -204,7 +242,7 @@
 			</div>
 			<div class="modal-body" style="text-align:center;font-size:120%">
 				<p>
-					Oletko varma, että haluat poistaa kysymyksen <b>"{{ delete_info.key + 1 }}. {{ delete_info.question.title }}"</b>?
+					Oletko varma, että haluat poistaa kysymyksen <b>"{{ modal_info.key + 1 }}. {{ modal_info.question.title }}"</b>?
 				</p>
 				<p>
 					Tätä toimintoa ei voi peruuttaa!
@@ -214,6 +252,27 @@
 				<button type="button" class="btn btn-default" data-dismiss="modal">Peruuta</button>
 				<button type="button" class="btn btn-danger" ng-click="confirmed_delete()">
 					<span class="glyphicon glyphicon-trash"></span> Poista kysymys
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="modal-cancel-confirmation">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Poiston varmistus</h4>
+			</div>
+			<div class="modal-body" style="text-align:center;font-size:120%">
+				<p>
+					Kysymyksen <b>"{{ modal_info.key + 1 }}. {{ modal_info.question.title }}"</b> muokkaus on vielä kesken. Haluatko jatkaa tallentamatta?
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Peruuta</button>
+				<button type="button" class="btn btn-warning" ng-click="confirmed_cancel()">
+					<span class="glyphicon glyphicon-remove"></span> Älä tallenna
 				</button>
 			</div>
 		</div>

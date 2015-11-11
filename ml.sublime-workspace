@@ -44,17 +44,23 @@
 	"buffers":
 	[
 		{
+			"file": "vendor/mockery/mockery/library/Mockery/Generator/StringManipulationGenerator.php",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 778,
 				"line_ending": "Unix"
 			}
 		}
 	],
 	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
 	"command_palette":
 	{
 		"height": 87.0,
+		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -138,7 +144,11 @@
 	},
 	"console":
 	{
-		"height": 125.0
+		"height": 125.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
 	},
 	"distraction_free":
 	{
@@ -149,8 +159,13 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu"
+	],
 	"file_history":
 	[
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/ml.sublime-project",
 		"/private/etc/hosts",
 		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/config/routes.php",
 		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/config/autoload.php",
@@ -421,9 +436,11 @@
 			[
 				{
 					"buffer": 0,
+					"file": "vendor/mockery/mockery/library/Mockery/Generator/StringManipulationGenerator.php",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 778,
 						"regions":
 						{
 						},
@@ -436,12 +453,15 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -490,6 +510,12 @@
 		]
 	},
 	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "ml.sublime-project",
 	"replace":
 	{
 		"height": 64.0
@@ -498,8 +524,17 @@
 	"select_file":
 	{
 		"height": 0.0,
+		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"ngmain",
+				"vendor/mockery/mockery/library/Mockery/Generator/StringManipulationGenerator.php"
+			],
+			[
+				"sublime",
+				"ml.sublime-project"
+			],
 			[
 				"model",
 				"js/ng/models.js"
@@ -594,15 +629,32 @@
 	"select_project":
 	{
 		"height": 500.0,
+		"last_filter": "",
 		"selected_items":
 		[
 		],
 		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
 	},
 	"show_minimap": false,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": false,
 	"side_bar_width": 150.0,
-	"status_bar_visible": true
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
 }

@@ -87,34 +87,38 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth'], function()
 		return $question;
 	});
 
-	Route::get('/tests/', function ()
-	{
-		$tests = App\Test::all();
-		return $tests;
-	});
+	// Route::get('/tests/', function ()
+	// {
+	// 	$tests = App\Test::all();
+	// 	return $tests;
+	// });
 
-	Route::get('/tests/{id}', function ($id)
-	{
-		$test = App\Test::findOrFail($id);
+	// Route::get('/tests/{id}', function ($id)
+	// {
+	// 	sleep(1);
 
-		$test->course;
+	// 	$test = App\Test::findOrFail($id);
 
-		foreach($test->questions as $question)
-		{
-			foreach($question->answers as $key => &$answer)
-			{
-				$answer->is_correct = $answer->is_correct ? true : false;
+	// 	$test->course;
 
-				if($question->type == 'CHOICE' and $answer->is_correct)
-				{
-					$question->correct_answer = $answer->id;
-				}
-			}
-		}
+	// 	foreach($test->questions as $question)
+	// 	{
+	// 		foreach($question->answers as $key => &$answer)
+	// 		{
+	// 			$answer->is_correct = $answer->is_correct ? true : false;
 
-		// dd($test->questions);
-		return $test;
-	});
+	// 			if($question->type == 'CHOICE' and $answer->is_correct)
+	// 			{
+	// 				$question->correct_answer = $answer->id;
+	// 			}
+	// 		}
+	// 	}
+
+	// 	// dd($test->questions);
+	// 	return $test;
+	// });
+
+	Route::resource('tests', 'TestsController');
 
 });
 
