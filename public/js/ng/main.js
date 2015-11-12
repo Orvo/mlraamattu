@@ -23,7 +23,11 @@ app.config(
 				controller: 'CoursesController',
 				templateUrl: '/ng/courses/list.html',
 			})
-			.when('/courses/edit/:id/', {
+			.when('/courses/:id', {
+				controller: 'CourseDisplayController',
+				templateUrl: '/ng/courses/show.html',
+			})
+			.when('/courses/:id/edit', {
 				controller: 'CoursesFormController',
 				templateUrl: '/ng/courses/form.html',
 			})
@@ -32,7 +36,15 @@ app.config(
 				controller: 'TestsController',
 				templateUrl: '/ng/tests/list.html',
 			})
-			.when('/tests/edit/:id/', {
+			.when('/tests/:id', {
+				controller: 'TestsDisplayController',
+				templateUrl: '/ng/tests/show.html',
+			})
+			.when('/tests/new/:course_id', {
+				controller: 'TestsFormController',
+				templateUrl: '/ng/tests/form.html',
+			})
+			.when('/tests/:id/edit', {
 				controller: 'TestsFormController',
 				templateUrl: '/ng/tests/form.html',
 			})

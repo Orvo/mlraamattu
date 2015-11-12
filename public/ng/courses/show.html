@@ -1,32 +1,28 @@
-<div id="content-sidebar">
-	<h2>Sivupalkki</h2>
+<div id="content-sidebar" ng-show="loaded">
+	<h2>Toiminnot</h2>
 	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas eaque tempora possimus, nisi eveniet ex veritatis temporibus ratione quo eos.</p>
-	<p>Doloremque porro maxime reprehenderit sequi harum reiciendis incidunt soluta rem ipsam nulla non, distinctio molestiae dolorum alias, eaque quia. Dolor, voluptates temporibus nesciunt ullam sed veritatis, ratione tenetur quo, ipsum minima consectetur est quam obcaecati cumque, porro.</p>
+	<a href="#/tests/new/{{ course.id }}" class="btn btn-success btn-block btn-lg">
+		<span class="glyphicon glyphicon-plus"></span> Lisää uusi koe
+	</a>
 </div>
 <div id="content-main">
-	<h1>Kokeet</h1>
+	<h1>Kurssi: {{ course.title }}</h1>
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<td style="width:40px;"></td>
+				<td style="width:40px"></td>
 				<td style="width:250px">Kokeen otsikko</td>
-				<td>Kurssi</td>
 				<td style="width:25%">Kuvaus</td>
 				<td>Kysymykset</td>
-				<td style="width:12%;min-width:130px">Toiminnot</td>
+				<td>Toiminnot</td>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="(key, test) in tests">
+			<tr ng-repeat="(key, test) in course.tests">
 				<td style="font-weight: bold;text-align: right;background:#fafafa">{{ key + 1 }}.</td>
 				<td>
 					<a href="#/tests/{{ test.course.id }}">
 						{{ test.title }}
-					</a>
-				</td>
-				<td>
-					<a href="#/courses/{{ test.course.id }}">
-						{{ test.course.title }}
 					</a>
 				</td>
 				<td>{{ test.description }}</td>
@@ -50,4 +46,10 @@
 	<p>
 		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo vel maiores temporibus distinctio laborum asperiores odio ratione expedita reprehenderit rerum quos recusandae quae facilis necessitatibus ducimus minus exercitationem, atque dolorem omnis unde, ad, consectetur sed! Doloremque id distinctio perferendis, vel.
 	</p>
+</div>
+
+<div class="load-placeholder" ng-show="!loaded">
+	<h3>
+		<img src="/img/ajax-loader.gif" alt=""> Ladataan...
+	</h3>
 </div>

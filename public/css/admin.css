@@ -1,9 +1,20 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700);
-@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700,700italic);
+
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
 html, body
 {
 	height: 100%;
+}
+
+html
+{
+	min-width: 1000px;
 }
 
 body
@@ -40,7 +51,8 @@ body
 #main-container
 {
 	height: 100%;
-	padding: 0 80px;
+	padding: 0 3%;
+	position: relative;
 }
 
 #main-container > .wrapper
@@ -49,27 +61,30 @@ body
 	background: #fff;
 	margin: 0 auto;
 	padding: 20px 30px 150px 30px;
+	position: relative;
 }
 
-.navbar
-{
-	padding: 0 40px;
-}
-
-div#login-status
+#content-sidebar
 {
 	float: right;
-	position: fixed;
-	top: 0;
-	right: 20px;
-	padding: 12px 16px;
-	background: #fff;
+	width: 240px;
 }
 
-div#login-status a
+/*#content-sidebar.fixed
 {
-	display: inline-block;
-	padding: 0 6px;
+	position: fixed;
+	right: 30px;
+	top: 20px;
+}*/
+
+#content-main
+{
+	margin-right: 260px;
+}
+
+form
+{
+	position: relative;
 }
 
 h1, h2, h3, h4
@@ -93,15 +108,9 @@ table .table-sortable tr
 	cursor: pointer;
 }
 
-#content-sidebar
+.navbar
 {
-	float: right;
-	width: 260px;
-}
-
-#content-main
-{
-	margin-right: 280px;
+	padding: 0 40px;
 }
 
 nav.navbar
@@ -164,8 +173,8 @@ ul.questions li.no-questions
 {
 	padding: 2em;
 	text-align: center;
-	border: 1px solid #ddd;
-	border-bottom-color: #d3d3d3;
+	border: 1px solid #d5d5d5;
+	border-bottom-color: #cacaca;
 	border-radius: 6px;
 	box-shadow: 0 2px 0 #eee, inset 0 -5px 2px #f2f2f2;
 	background: #fafafa;
@@ -221,7 +230,24 @@ ul.questions li.question div.info div.title-row
 	box-shadow: inset 0 -5px 2px #f2f2f2;
 }
 
-ul.questions li.question div.info div.title-row .bulk-checkbox
+ul.questions li.question div.info div.title-row .right-aligned
+{
+	float: right;
+	margin-right: 145px;
+}
+
+ul.questions li.question.active div.info div.title-row .right-aligned
+{
+	float: right;
+	margin-right: 0px;
+}
+
+ul.questions li.question div.info div.title-row .right-aligned .type
+{
+	font-weight: bold;
+}
+
+ul.questions li.question div.info div.title-row .left-aligned .bulk-checkbox
 {
 	float: left;
 	position: absolute;
@@ -231,7 +257,7 @@ ul.questions li.question div.info div.title-row .bulk-checkbox
 	padding: 0 0 0 5px;
 }
 
-ul.questions li.question div.info div.title-row .number
+ul.questions li.question div.info div.title-row .left-aligned .number
 {
 	float: left;
 	display: block;
@@ -239,25 +265,39 @@ ul.questions li.question div.info div.title-row .number
 	font-weight: bold;
 	font-size: 20pt;
 	padding: 0 0 0 5px;
+	width: 36px;
+	text-align: right;
 }
 
-ul.questions li.question div.info div.title-row .title
+ul.questions li.question div.info div.title-row .left-aligned .title
 {
-	padding: 0 0 0 40px;
+	padding: 0 0 0 52px;
 	display: block;
 	font-weight: bold;
 }
 
-
-ul.questions li.question div.info div.title-row .title.no-subtitle
+ul.questions li.question div.info div.title-row .left-aligned .title.dimmed
 {
-	padding: 6px 0 0 40px;
+	font-style: italic;
+	color: #aaa;
+}
+
+ul.questions li.question div.info div.title-row .left-aligned .title.no-subtitle
+{
+	padding: 6px 0 0 52px;
 	font-size: 17px;
 }
 
-ul.questions li.question div.info div.title-row .subtitle
+ul.questions li.question div.info div.title-row .left-aligned .subtitle
 {
-	padding: 0 0 0 40px;
+	padding: 0 0 0 52px;
+}
+
+ul.questions li.question.large-number div.info div.title-row .left-aligned .title,
+ul.questions li.question.large-number div.info div.title-row .left-aligned .title.no-subtitle,
+ul.questions li.question.large-number div.info div.title-row .left-aligned .subtitle
+{
+	padding-left: 52px;
 }
 
 ul.questions li.question div.edit
@@ -281,6 +321,13 @@ ul.question-type, ul.question-type li
 	padding: 0;
 	margin: 0;
 	list-style: none;
+}
+
+div.help-sidepanel
+{
+	border-left: 1px solid #eee;
+	max-height: 180px;
+	overflow-y: auto;
 }
 
 div.spacer
@@ -332,22 +379,139 @@ ul.questions li.question div.edit div.question-answers
 	border-bottom: 1px solid #eee;
 }
 
-ul.questions div.choice
+ul.questions div.question-answers div.answer
 {
-	display: table-row;
-	margin: 0 -15px 0 -15px;
+	display: block;
+	background: #fff;
+	/*border: 1px solid #ddd;*/
+	box-shadow: 0 1px #eee;
+	padding: 8px 12px;
+	margin: 0 0 5px 0;
+	border-radius: 6px;
 }
 
-ul.questions div.choice .col
+ul.questions div.question-answers div.answer:after
 {
-	display: table-cell;
+	content: "";
+	display: table;
+	clear: both;
+}
+
+ul.questions div.question-answers div.answer .answer-label
+{
+	float: left;
+	font-size: 18px;
+	font-weight: bold;
+	padding: 3px 14px 0 3px;
+}
+
+ul.questions div.question-answers div.answer div.col
+{
+	float: left;
+	min-height: 35px;
 	vertical-align: middle;
-	padding: 0 15px 5px 15px;
+	margin: 0 5px 0 0;
+	/*background: #f55;*/
+}
+
+ul.questions div.question-answers div.answer div.help-block
+{
+	float: right;
+	display: inline-block;
+	font-weight: bold;
+	padding-right: 1em;
+}
+
+ul.questions div.question-answers div.answer div.col.answer-text
+{
+	width: 35%;
+	min-width: 200px;
+	max-width: 500px;
+}
+
+ul.questions div.question-answers div.answer div.col.answer-text.wide
+{
+	width: 55%;
+	min-width: 200px;
+	max-width: 800px;
+}
+
+ul.questions div.question-answers div.answer div.col.answer-delete
+{
+	float: right;
+	font-weight: bold;
+	padding: 4px 0 0 0;
+	text-align: center;
+}
+
+ul.questions div.question-answers div.answer div.col.answer-delete a
+{
+	display: inline-block;
+	color: #a22;
+	text-decoration: none;
+	border-radius: 4px;
+	padding: 4px 7px;
+}
+
+ul.questions div.question-answers div.answer div.col.answer-delete a:hover
+{
+	background: #D2232E;
+	color: #fff;
+}
+
+ul.questions div.question-answers div.answer div.col.answer-is-correct
+{
+	padding: 2px 0 0 10px;
+}
+
+ul.questions div.question-answers div.answer div.col.answer-is-correct .checkbox,
+ul.questions div.question-answers div.answer div.col.answer-is-correct .radio
+{
+	padding: 0;
+	margin: 0;
+}
+
+ul.questions div.question-answers div.answer div.col.answer-is-correct .checkbox label,
+ul.questions div.question-answers div.answer div.col.answer-is-correct .radio label
+{
+	display: inline-block;
+	padding: 4px 7px 4px 27px;
+	font-weight: bold;
+}
+
+ul.questions div.question-answers div.answer div.col.answer-is-correct .checkbox label:hover,
+ul.questions div.question-answers div.answer div.col.answer-is-correct .radio label:hover
+{
+	background: #FEA852;
+	border-radius: 4px;
+}
+
+ul.questions div.question-answers div.answer .control-label,
+ul.questions div.question-answers div.answer .form-control
+{
+	float: left;
 }
 
 ul.questions div.choice .col.input-field
 {
 	width: 20% !important;
+}
+
+.center-text
+{
+	text-align: center;
+}
+
+.valign-middle
+{
+	vertical-align: middle;
+}
+
+.vertical-textarea
+{
+	min-height: 4em;
+	max-height: 16em;
+	resize: vertical;
 }
 
 .ui-sortable-placeholder
@@ -359,10 +523,4 @@ ul.questions div.choice .col.input-field
 .cursor-pointer
 {
 	cursor: pointer;
-}
-
-.vertical-textarea
-{
-	min-height: 4em;
-	resize: vertical;
 }

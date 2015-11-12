@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Course;
 use App\Test;
 
-class TestsController extends Controller
+class CoursesController extends Controller
 {
 	/**
 	 * Display a listing of the resource.
@@ -18,13 +19,7 @@ class TestsController extends Controller
 	 */
 	public function index()
 	{
-		$tests = Test::all();
-		foreach($tests as $test)
-		{
-			$test->questions;
-			$test->course;
-		}
-		return $tests;
+		return Course::all();
 	}
 
 	/**
@@ -56,25 +51,13 @@ class TestsController extends Controller
 	 */
 	public function show($id)
 	{
-		$test = Test::findOrFail($id);
-
-		$test->course;
-
-		foreach($test->questions as $question)
+		$course = Course::findOrFail($id);
+		foreach($course->tests as $test)
 		{
-			foreach($question->answers as $key => &$answer)
-			{
-				$answer->is_correct = $answer->is_correct ? true : false;
-
-				if(!$question->correct_answer and $answer->is_correct)
-				{
-					$question->correct_answer = $answer->id;
-				}
-			}
+			$test->questions;
 		}
-
-		// dd($test->questions);
-		return $test;
+		
+		return $course;
 	}
 
 	/**
@@ -85,24 +68,7 @@ class TestsController extends Controller
 	 */
 	public function edit($id)
 	{
-		$test = Test::findOrFail($id);
-
-		$test->course;
-
-		foreach($test->questions as $question)
-		{
-			foreach($question->answers as $key => &$answer)
-			{
-				$answer->is_correct = $answer->is_correct ? true : false;
-
-				if($question->type == 'CHOICE' and $answer->is_correct)
-				{
-					$question->correct_answer = $answer->id;
-				}
-			}
-		}
-
-		return $test;
+		//
 	}
 
 	/**

@@ -5,27 +5,30 @@
 </div>
 <div id="content-main">
 	<h1>Kurssit</h1>
-	<table class="table table-striped table-hover">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<td style="width:40px">#</td>
 				<td style="width:250px">Kurssin otsikko</td>
-				<td style="width:50%">Kuvaus</td>
+				<td style="width:30%">Kuvaus</td>
 				<td>Kurssin kokeet</td>
 				<td>Toiminnot</td>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="item in courses">
-				<td>{{ item.id }}</td>
-				<td>{{ item.title }}</td>
-				<td>{{ item.description }}</td>
+			<tr ng-repeat="course in courses">
+				<td>{{ course.id }}</td>
+				<td>{{ course.title }}</td>
+				<td>{{ course.description }}</td>
 				<td>asd</td>
 				<td>
-					<a href="#/courses/edit/{{ item.id }}" class="btn btn-primary btn-xs btn-blsock">
+					<a href="#/courses/{{ course.id }}" class="btn btn-success btn-xs">
+						<span class="glyphicon glyphicon-search"></span> Näytä
+					</a>
+					<a href="#/courses/{{ course.id }}/edit" class="btn btn-primary btn-xs">
 						<span class="glyphicon glyphicon-edit"></span> Muokkaa
 					</a>
-					<a href="#/courses/delete/{{ item.id }}" class="btn btn-danger btn-xs btn-block">
+					<a href="#/courses/delete/{{ course.id }}" class="btn btn-danger btn-xs">
 						<span class="glyphicon glyphicon-trash"></span> Poista
 					</a>
 				</td>

@@ -118,6 +118,7 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth'], function()
 	// 	return $test;
 	// });
 
+	Route::resource('courses', 'CoursesController');
 	Route::resource('tests', 'TestsController');
 
 });

@@ -3,6 +3,24 @@
  * Controllers
  */
 
+var question_type_names = {
+	CHOICE: 'Monivalinta (yksi)',
+	MULTI: 'Monivalinta (moni)',
+	TEXT: 'Teksti',
+	MULTITEXT: 'Moniteksti',
+	TEXTAREA: 'Pitkä teksti',
+};
+
+var translate_type = function(type)
+{
+	if(question_type_names[type])
+	{
+		return question_type_names[type];
+	}
+
+	return "Tuntematon tyyppi: " + type;
+}
+
 app.controller('IndexController', function($scope, $window, $location, $routeParams, QuestionsModel)
 {
 	QuestionsModel.query(function(data)
@@ -11,26 +29,7 @@ app.controller('IndexController', function($scope, $window, $location, $routePar
 		
 		angular.forEach($scope.questions, function(value, key)
 		{
-			if(value.type == "CHOICE")
-			{
-				$scope.questions[key].type = "Yksivalinta";
-			}
-			else if(value.type == "MULTI")
-			{
-				$scope.questions[key].type = "Monivalinta";
-			}
-			else if(value.type == "TEXT")
-			{
-				$scope.questions[key].type = "Teksti";
-			}
-			else if(value.type == "TEXTAREA")
-			{
-				$scope.questions[key].type = "Pitkä teksti";
-			}
-			else if(value.type == "MULTITEXT")
-			{
-				$scope.questions[key].type = "Moniteksti";
-			}
+			$scope.questions[key].type = translate_type(value.type);
 		});
 	});
 		
@@ -51,6 +50,21 @@ app.controller('CoursesController', function($scope, $window, $location, $routeP
 	};
 });
 
+app.controller('CourseDisplayController', function($scope, $window, $location, $routeParams, CoursesModel)
+{
+	$scope.id = $routeParams.id;
+
+	CoursesModel.get({id: $scope.id}, function(data)
+	{
+		$scope.course = data;
+		$scope.loaded = true;
+	});
+		
+	$scope.sortableOptions = {
+		axis: 'y',
+	};
+});
+
 app.controller('CoursesFormController', function($scope, $window, $location, $routeParams, CoursesModel)
 {
 	$scope.id = $routeParams.id;
@@ -64,27 +78,59 @@ app.controller('TestsController', function($scope, $window, $location, $routePar
 	});
 });
 
-app.controller('TestsFormController', function($scope, $window, $location, $routeParams, TestsModel)
+app.controller('TestsFormController', function($scope, $window, $location, $routeParams, CoursesModel, TestsModel)
 {
 	$scope.id = $routeParams.id;
+	$scope.course_id = $routeParams.course_id;
 
 	$scope.bulk_actions = [];
 
-	TestsModel.get({id: $scope.id}, function(test)
+	$scope.question_types = [
+		'CHOICE',
+		'MULTI',
+		'TEXT',
+		'MULTITEXT',
+		'TEXTAREA',
+	];
+
+	$scope.translate_type = translate_type;
+
+	if($scope.id)
 	{
-		console.log(test);
+		TestsModel.get({id: $scope.id}, function(test)
+		{
+			console.log(test);
+			$scope.data = {
+				course: test.course,
+				test: test,
+			};
+
+			$scope.loaded = true;
+		});
+	}
+	else
+	{
 		$scope.data = {
-			test: test,
-		};
+			course: {},
+			test: {
+				questions: [],
+			},
+		}
+
+		CoursesModel.get({id: $scope.course_id}, function(data)
+		{
+			$scope.data.course = data;
+		});
 
 		$scope.loaded = true;
-	});
+
+		$("#test-title").focus();
+	}
 
 	$scope.edit_data = false;
-
 	$scope.edit = function(key)
 	{
-		if($scope.edit_data)
+		if($scope.edit_data !== false)
 		{
 			$scope.cancel();
 			// var edit_key = $scope.edit_data.key;
@@ -101,13 +147,17 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 			// return;
 		}
 
-		$('.question.active').removeClass('active');
-		$('#question-' + key).addClass('active');
-
 		$scope.edit_data = {
 			key: key,
 			copy: angular.copy($scope.data.test.questions[key]),
 		};
+
+		$('.question.active').removeClass('active');
+		$('#question-' + key).addClass('active');
+
+		$("html, body").stop().delay(50).animate({
+			scrollTop: $('#question-' + key).offset().top - 75
+		}, 400);
 	}
 
 	$scope.confirmed_cancel = function()
@@ -122,17 +172,18 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 	$scope.cancel = function()
 	{
 		$('.question.active').removeClass('active');
-		$('button.edit-btn').show();
 
-		if($scope.edit_data || $scope.edit_data !== false)
+		$scope.add_answer.text = '';
+
+		if($scope.edit_data)
 		{
 			if($scope.edit_data.copy)
 			{
 				$scope.data.test.questions[$scope.edit_data.key] = angular.copy($scope.edit_data.copy);
 			}
-			
-			$scope.edit_data = false;
 		}
+
+		$scope.edit_data = false;
 	}
 
 	$scope.delete = function(key, id)
@@ -160,42 +211,48 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 	$scope.add_question = function()
 	{
 		$scope.data.test.questions.push({
-			type: 'MULTI',
+			type: 'CHOICE',
 			title: 'Uusi kysymys',
 			subtitle: '',
-			answers: [],
+			correct_answer: 0,
+			answers: [
+				{
+					text: "Vaihtoehto #1",
+					is_correct: true,
+				},
+			],
 		});
 
 		var key = $scope.data.test.questions.length-1;
 
-		// $scope.edit(key);
+		$scope.edit(key);
 
 		console.log($scope.data.test.questions, $scope.data.test.questions.length);
 
 		$('#question-' + key).addClass('active');
-	};
-
-	$scope.removeChoice = function(q, c)
-	{
-		$scope.data.test.questions[q].choices.splice(c, 1);
 	}
 
-	$scope.addChoice = {
-		do: function(key, qid)
+	$scope.add_answer = {
+		do: function(key)
 		{
-			var text = $scope.addChoice.text.trim();
+			var text = $scope.add_answer.text.trim();
 
 			if(text.length > 0)
 			{
-				$scope.questions[key].choices.push({
+				$scope.data.test.questions[key].answers.push({
 					title: text,
 				});
 			}
 
-			$scope.addChoice.text = '';
+			$scope.add_answer.text = '';
 		},
 		text: '',
 	};
+
+	$scope.remove_answer = function(qkey, ckey)
+	{
+		$scope.data.test.questions[qkey].answers.splice(ckey, 1);
+	}
 
 	$scope.sortableOptions = {
 		axis: 'y',
@@ -216,22 +273,5 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 
 app.controller('NavbarController', function($rootScope, $scope, $window, $location, $routeParams)
 {
-	// $scope.categories = CategoryModel.query(null, null, function(data)
-	// {
-	// 	if(data.status == 401)
-	// 	{
-	// 		$window.location = '/login';
-	// 	}
-	// });
-
-	// $scope.changeCategory = function(id, $event)
-	// {
-	// 	if($location.path() != '/article/') return;
-
-	// 	$event.preventDefault();
-
-	// 	$rootScope.$broadcast('hello', {
-	// 		id: id
-	// 	});
-	// }
+	
 });

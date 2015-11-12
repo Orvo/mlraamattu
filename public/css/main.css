@@ -50,6 +50,7 @@ h1, h2, h3, h4
 
 div.list div.list-item
 {
+	border: 1px solid #f1f1f1;
 	border-bottom: 1px solid #e5e5e5;
 	box-shadow: 0 2px 0px #f4f4f4;
 	border-radius: 6px;
@@ -71,6 +72,7 @@ div.list div.list-item .title a
 	background: #f6f6f6;
 	font-family: 'Lato', sans-serif;
 	font-weight: bold;
+	outline: none !important;
 }
 
 div.list div.list-item .title a:hover,
