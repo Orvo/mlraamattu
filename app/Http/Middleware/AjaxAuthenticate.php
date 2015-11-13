@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
-class AdminAuthenticate
+class AjaxAuthenticate
 {
     /**
      * The Guard implementation.
@@ -35,7 +35,10 @@ class AdminAuthenticate
     public function handle($request, Closure $next)
     {
         if (!$this->auth->check() or $this->auth->user()->access_level != 1) {
-            abort(401, "No access");
+            return [
+                'status' => 401,
+                'error' => 'No access',
+            ];
         }
 
         return $next($request);

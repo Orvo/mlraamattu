@@ -69,7 +69,7 @@ Route::group(['prefix' => 'course'], function()
 Route::get('test/{id}', 'TestsController@show');
 Route::post('test/{id}', 'TestsController@check');
 
-Route::group(['prefix' => 'ajax', 'middleware' => 'auth.admin'], function()
+Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 {
 	Route::get('/', function ()
 	{
