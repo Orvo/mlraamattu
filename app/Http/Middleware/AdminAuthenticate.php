@@ -35,7 +35,11 @@ class AdminAuthenticate
     public function handle($request, Closure $next)
     {
         if (!$this->auth->check() or $this->auth->user()->access_level != 1) {
-            return redirect('/');
+            return [
+                'status' => 401,
+                'error' => 'No access',
+            ];
+            // abort(401, "No access");
         }
 
         return $next($request);

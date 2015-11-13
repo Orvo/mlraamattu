@@ -45,33 +45,35 @@ Route::group(['prefix' => 'course'], function()
 	});
 });
 
-Route::get('test/{id}', function($id)
-{
-	$test = App\Test::findOrFail($id);
+// Route::get('test/{id}', function($id)
+// {
+// 	$test = App\Test::findOrFail($id);
 	
-	return view('test.show')
-			->with([
-				'test' => $test,
-			]);
-});
+// 	return view('test.show')
+// 			->with([
+// 				'test' => $test,
+// 			]);
+// });
 
-Route::post('test/{id}', function($id, Request $request)
-{
-	$test = App\Test::findOrFail($id);
+// Route::post('test/{id}', function($id, Request $request)
+// {
+// 	$test = App\Test::findOrFail($id);
 	
-	return view('test.show')
-			->with([
-				'test' => $test,
-			])
-			->withInput();
-});
+// 	return view('test.show')
+// 			->with([
+// 				'test' => $test,
+// 			])
+// 			->withInput();
+// });
 
-Route::group(['prefix' => 'ajax', 'middleware' => 'auth'], function()
+Route::get('test/{id}', 'TestsController@show');
+Route::post('test/{id}', 'TestsController@check');
+
+Route::group(['prefix' => 'ajax', 'middleware' => 'auth.admin'], function()
 {
 	Route::get('/', function ()
 	{
-		$question = Question::find(1);
-		return $question->answers;
+		return redirect('/');
 	});
 
 	Route::get('/questions', function ()
@@ -87,39 +89,8 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth'], function()
 		return $question;
 	});
 
-	// Route::get('/tests/', function ()
-	// {
-	// 	$tests = App\Test::all();
-	// 	return $tests;
-	// });
-
-	// Route::get('/tests/{id}', function ($id)
-	// {
-	// 	sleep(1);
-
-	// 	$test = App\Test::findOrFail($id);
-
-	// 	$test->course;
-
-	// 	foreach($test->questions as $question)
-	// 	{
-	// 		foreach($question->answers as $key => &$answer)
-	// 		{
-	// 			$answer->is_correct = $answer->is_correct ? true : false;
-
-	// 			if($question->type == 'CHOICE' and $answer->is_correct)
-	// 			{
-	// 				$question->correct_answer = $answer->id;
-	// 			}
-	// 		}
-	// 	}
-
-	// 	// dd($test->questions);
-	// 	return $test;
-	// });
-
-	Route::resource('courses', 'CoursesController');
-	Route::resource('tests', 'TestsController');
+	Route::resource('courses', 'Ajax\CoursesController');
+	Route::resource('tests', 'Ajax\TestsController');
 
 });
 

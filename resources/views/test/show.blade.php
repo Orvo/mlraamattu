@@ -37,7 +37,7 @@
 						<?php endif; ?>
 						
 						<div class="number">
-							{{ ($qkey + 1) . '. ' }}
+							{{ ($qkey + 9) . '. ' }}
 						</div>
 						<div class="title">
 							{{ $question->title }}
@@ -48,6 +48,7 @@
 								</div>
 							@endif
 						</div>
+						<div class="clearfix"></div>
 					</div>
 					<div class="form-group">
 						<div class="answer">

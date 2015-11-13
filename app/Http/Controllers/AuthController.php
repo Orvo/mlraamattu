@@ -19,17 +19,21 @@ class AuthController extends Controller
 	{
 		$credentials = $request->only('email', 'password');
 
-		if(\Auth::attempt($credentials))
+		if(Auth::attempt($credentials))
 		{
 			return redirect('/');
 		}
 
-		return 'Login fail';
+		return redirect('/auth/login')
+			  		->withInput($request->only('email', 'remember_me'))
+			  		->withErrors([
+			  			'Kirjautuminen annetuilla tunnuksilla ei onnistunut!'
+			  		]);
 	}
 	
 	public function logout()
 	{
-		\Auth::logout();	
+		Auth::logout();	
 	}
 
 }

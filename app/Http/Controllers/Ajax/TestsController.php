@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Ajax;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-use App\Course;
 use App\Test;
 
-class CoursesController extends Controller
+class TestsController extends Controller
 {
 	/**
 	 * Display a listing of the resource.
@@ -19,7 +18,13 @@ class CoursesController extends Controller
 	 */
 	public function index()
 	{
-		return Course::all();
+		$tests = Test::all();
+		foreach($tests as $test)
+		{
+			$test->questions;
+			$test->course;
+		}
+		return $tests;
 	}
 
 	/**
@@ -51,13 +56,25 @@ class CoursesController extends Controller
 	 */
 	public function show($id)
 	{
-		$course = Course::findOrFail($id);
-		foreach($course->tests as $test)
+		$test = Test::findOrFail($id);
+
+		$test->course;
+
+		foreach($test->questions as $question)
 		{
-			$test->questions;
+			foreach($question->answers as $key => &$answer)
+			{
+				$answer->is_correct = $answer->is_correct ? true : false;
+
+				if(!$question->correct_answer and $answer->is_correct)
+				{
+					$question->correct_answer = $answer->id;
+				}
+			}
 		}
-		
-		return $course;
+
+		// dd($test->questions);
+		return $test;
 	}
 
 	/**
@@ -68,7 +85,24 @@ class CoursesController extends Controller
 	 */
 	public function edit($id)
 	{
-		//
+		$test = Test::findOrFail($id);
+
+		$test->course;
+
+		foreach($test->questions as $question)
+		{
+			foreach($question->answers as $key => &$answer)
+			{
+				$answer->is_correct = $answer->is_correct ? true : false;
+
+				if($question->type == 'CHOICE' and $answer->is_correct)
+				{
+					$question->correct_answer = $answer->id;
+				}
+			}
+		}
+
+		return $test;
 	}
 
 	/**
