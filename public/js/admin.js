@@ -6,6 +6,12 @@ $(function(){
 		$(this).getParent().addClass('active');
 	});
 
-	console.log($('#content-sidebar.fixed').top());
+	$(document).scroll(function()
+	{
+		if($('#content-sidebar').hasClass('fixed'))
+		{
+			$('#content-sidebar').css({'padding-top': $(document).scrollTop() + 'px'});
+		}
+	});
 
 });
