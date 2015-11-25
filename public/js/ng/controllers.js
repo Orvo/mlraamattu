@@ -156,7 +156,7 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 		$('#question-' + key).addClass('active');
 
 		$("html, body").stop().delay(50).animate({
-			scrollTop: $('#question-' + key).offset().top - 75
+			scrollTop: $('#question-' + key).position().top
 		}, 400);
 	}
 
@@ -211,6 +211,8 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 	$scope.add_question = function()
 	{
 		$scope.data.test.questions.push({
+			id: 9000,
+			test_id: 1,
 			type: 'CHOICE',
 			title: 'Uusi kysymys',
 			subtitle: '',
@@ -225,9 +227,12 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 
 		var key = $scope.data.test.questions.length-1;
 
-		$scope.edit(key);
+		$scope.data.test.questions[key].order = key+1;
 
+		console.log('#question-' + key, $('#question-' + key).html());
 		console.log($scope.data.test.questions, $scope.data.test.questions.length);
+
+		$scope.edit(key);
 
 		$('#question-' + key).addClass('active');
 	}
