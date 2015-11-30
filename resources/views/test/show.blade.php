@@ -95,7 +95,7 @@
 											<div class="row">
 												<label for="answer-<?php echo $question->id .'-'. $i; ?>" class="col-xs-1 control-label"><?php echo $i+1; ?>.</label>
 												<div class="col-xs-11">
-													{!! Form::text('answer-' . $question->id, null, ['class' => 'form-control', 'placeholder' => 'Vastaus tähän']) !!}
+													{!! Form::text('answer-' . $question->id . '[]', null, ['class' => 'form-control', 'placeholder' => 'Vastaus tähän', 'id' => 'answer-' . $question->id .'-'. $i]) !!}
 													<small class="text-danger">{{ $errors->first('answer-' . $question->id) }}</small>
 												</div>
 											</div>
@@ -106,7 +106,7 @@
 									//--------------------------------------------------------------------------
 									case 'TEXTAREA':
 								?>
-								    {!! Form::textarea('answer-' . $question->ids, null, ['class' => 'form-control', 'placeholder' => 'Vastaus tähän']) !!}
+								    {!! Form::textarea('answer-' . $question->id, null, ['class' => 'form-control', 'placeholder' => 'Vastaus tähän']) !!}
 								    <small class="text-danger">{{ $errors->first('answer-' . $question->id) }}</small>
 								<?php
 									break;
