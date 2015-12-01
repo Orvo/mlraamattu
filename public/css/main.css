@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
-@import url(https://fonts.googleapis.com/css?family=Lato:100,400,700);
+@import url(https://fonts.googleapis.com/css?family=Lato:100,400,700,900);
 
 html, body
 {
@@ -62,6 +62,45 @@ div.list div.list-item .title
 {
 	font-size: 18pt;
 	margin: 0;
+	position: relative;
+}
+
+div.list div.list-item .title div.completion
+{
+	float: right;
+	position: absolute;
+	top: -10px;
+	right: 0;
+	bottom: 0;
+	width: 200px;
+	overflow: hidden;
+	text-align: right;
+}
+
+div.list div.list-item .title div.completion .glyphicon
+{
+	font-size: 50pt;
+}
+
+div.list div.list-item.completed .title div.completion
+{
+	color: #62AF49;
+}
+
+div.list div.list-item.in-progress .title div.completion
+{
+	color: #FEA43E;
+}
+
+div.list div.list-item .title div.completion p
+{
+	float: right;
+	position: absolute;
+	right: 78px;
+	bottom: -2px;
+	font-weight: 900;
+	font-size: 13pt;
+	color: #000;
 }
 
 div.list div.list-item .title a
@@ -140,6 +179,8 @@ div.question div.header
 	min-height: 48px;
 	background: #f1f1f1;
 	border-left: 4px solid #e4e4e4;
+	position: relative;
+	overflow: hidden;
 }
 
 div.question div.header .number
@@ -177,9 +218,104 @@ div.question div.header .subtitle img
 	overflow: hidden;
 }
 
+div.question div.header .big-validation-icon
+{
+	width: 110px;
+	height: 90px;
+	font-size: 80pt;
+	position: absolute;
+	top: -30px;
+	right: 0;
+	text-align: right;
+	overflow: hidden;
+}
+
+div.question.correct div.header .big-validation-icon
+{
+	color: #347F15;
+	/*text-shadow: 0 1px 0 #16370B;*/
+}
+
+div.question.partially-correct div.header .big-validation-icon
+{
+	color: #B1720F;
+	/*text-shadow: 0 1px 0 #854F0C;*/
+}
+
+div.question.incorrect div.header .big-validation-icon
+{
+	color: #77000F;
+	/*text-shadow: 0 1px 0 #54000C;*/
+}
+
+div.question div.validation
+{
+	color: #fff;
+	padding: 8px 16px;
+	font-weight: bold;
+}
+
+div.question div.validation.correct
+{
+	background: #4CA920;
+	border-left: 4px solid #347F15;
+}
+
+div.question div.validation.partially-correct
+{
+	background: #E39E11;
+	border-left: 4px solid #B1720F;
+}
+
+div.question div.validation.incorrect
+{
+	background: #A30017;
+	border-left: 4px solid #77000F;
+}
+
 div.question div.answer
 {
 	padding: 1em 0 0 0;
+}
+
+div.question div.answer div.correct-answers
+{
+	background: #fff;
+	border: 1px solid #67C82C;
+	box-shadow: inset 0 1px 0 #ddd;
+	padding: 10px 12px;
+	margin-top: 10px;
+	border-radius: 4px;
+}
+
+div.question div.answer div.correct-answers p
+{
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+}
+
+div.question div.answer div.correct-answers ul
+{
+	padding: 0;
+	margin: 0;
+}
+
+div.question div.answer div.correct-answers li
+{
+	display: inline-block;
+	padding: 0;
+	margin: 0;
+}
+
+div.question div.answer div.correct-answers li:after
+{
+	content: ', ';
+}
+
+div.question div.answer div.correct-answers li:last-child:after
+{
+	content: '';
 }
 
 div.question div.checkbox,
@@ -199,12 +335,38 @@ div.question .checkbox label
 	transition: all 80ms ease-in-out;
 }
 
+div.question .radio.has-answer label,
+div.question .checkbox.has-answer label
+{
+	background: #fff;
+	box-shadow: 0 1px 0 #ccc;
+	border-radius: 4px;
+}
+
 div.question .radio label:hover,
 div.question .checkbox label:hover
 {
-	background: #F9EAAE;
-	border: 1px solid #E3D28F;
+	background: #fff;
+	border: 1px solid #e2e2e2;
+	box-shadow: 0 1px 0 #ddd;
 	border-radius: 4px;
+}
+
+div.question .radio label .glyphicon,
+div.question .checkbox label .glyphicon
+{
+	float: right;
+}
+
+div.question .multitext .row .glyphicon
+{
+	display: none;
+}
+
+div.question .multitext .row.has-success .glyphicon,
+div.question .multitext .row.has-error .glyphicon
+{
+	display: block;
 }
 
 div.question input,
@@ -235,16 +397,43 @@ div.question textarea
 	box-shadow: 0 2px 0 #e7e7e7;
 }
 
+div.question input:focus,
+div.question textarea:focus
+{
+	border-color: #CDA12B;
+	box-shadow: 0 2px 2px #F2EAD1;
+}
+
+div.question .has-success input[type="text"],
+div.question .has-success textarea
+{
+	box-shadow: 0 2px 0 #D4E4CC;
+}
+
+div.question .has-success input:focus,
+div.question .has-success textarea:focus
+{
+	border-color: #4E9633;
+	box-shadow: 0 2px 2px #9DDE86;
+}
+
+div.question .has-error input[type="text"],
+div.question .has-error textarea
+{
+	box-shadow: 0 2px 0 #E5BEC0;
+}
+
+div.question .has-error input:focus,
+div.question .has-error textarea:focus
+{
+	border-color: #832226;
+	box-shadow: 0 2px 2px #E58D92;
+}
+
 div.question input:hover, div.question input:focus,
 div.question textarea:hover, div.question textarea:focus
 {
 	background: #fff;
-}
-
-div.question input:focus, div.question textarea:focus
-{
-	border-color: #CDA12B;
-	box-shadow: 0 2px 2px #F2EAD1;
 }
 
 div.question .multitext div.row
@@ -255,4 +444,18 @@ div.question .multitext div.row
 div.question .multitext .control-label
 {
 	text-align: right;
+}
+
+div.alert.alert-danger
+{
+	color: #fff;
+	border: 1px solid #8F0923;
+	border-radius: 5px;
+	background: #BA1D34;
+}
+
+div.alert.alert-danger hr
+{
+	margin-top: 8px;
+	margin-bottom: 10px;
 }

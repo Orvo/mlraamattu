@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use \Auth;
+
 class AuthController extends Controller
 {
 
@@ -19,7 +21,7 @@ class AuthController extends Controller
 	{
 		$credentials = $request->only('email', 'password');
 
-		if(\Auth::attempt($credentials))
+		if(Auth::attempt($credentials))
 		{
 			return redirect('/');
 		}
@@ -33,7 +35,8 @@ class AuthController extends Controller
 	
 	public function logout()
 	{
-		\Auth::logout();	
+		Auth::logout();
+		return redirect('/');
 	}
 
 }

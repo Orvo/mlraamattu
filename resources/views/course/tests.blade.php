@@ -13,10 +13,21 @@
 	</p>
 	<div class="list">
 		@foreach($course->tests as $test)
-			<div class="test list-item">
+			<div class="test list-item<?php echo (@$user_completed[$test->id] ? ' ' . ( $user_completed[$test->id]->all_correct ? 'completed' : 'in-progress' ) : '') ?>">
 				<div class="title">
 					<a href="/test/{{ $test->id }}">
 						{{ $test->title }}
+						<?php if(@$user_completed[$test->id]): ?>
+							<div class="completion">
+								<?php if($user_completed[$test->id]->all_correct): ?>
+									<span class="glyphicon glyphicon-ok-circle"></span>
+									<p>Suoritettu</p>
+								<?php else: ?>
+									<span class="glyphicon glyphicon-remove-circle"></span>
+									<p>Kesken</p>
+								<?php endif; ?>
+							</div>
+						<?php endif; ?>
 					</a>
 				</div>
 				<div class="description">

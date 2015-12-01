@@ -7,7 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use \Auth;
+use \Hash;
+
+use App\User;
 use App\Test;
+use App\Archive;
 
 class TestsController extends Controller
 {
@@ -16,85 +21,148 @@ class TestsController extends Controller
 	{
 		$test = Test::findOrFail($id);
 		
+		$data = [];
+		if(Auth::check())
+		{
+			$archive = Auth::user()->archives()->where('test_id', $id)->first();
+			
+			if($archive && $archive->data)
+			{
+				$data = (object)json_decode($archive->data, true);
+				$validation = $this->_validateTestWithAnswers($test, $data->given_answers);
+			}
+		}
+		
+		// print_r($data);die;
+		// dd($data);
+		
 		return view('test.show')
-				->with([
-					'test' => $test,
-				]);
+			->with([
+				'test' => $test,
+				'given_answers' => @$data->given_answers,
+				'validation' => @$validation['validation'],
+			]);
 	}
 	
 	public function check($id, Request $request)
 	{
+		// dd($request->all());
+		
 		$test = Test::findOrFail($id);
-		
-		$result = [];
-		
-		$derp = [];
 		
 		$validation = $this->_validateTestWithRequest($test, $request);
 		
-		// foreach($test->questions as $question)
-		// {
-		// 	$answers = $request->input('answer-' . $question->id);
-		// 	$correct_answers = $question->answers->where('is_correct', 1);
+		if(!Auth::check())
+		{
+			$v = \Validator::make($request->all(), [
+				'user-name'		=> 'required',
+				'user-email'	=> 'required|email|unique:users,email',
+				'user-password'	=> 'required|min:8|confirmed'
+			],
+			[
+				'user-name.required'		=> 'Nimi on pakollinen.',
+				'user-email.required'		=> 'Sähköpostiosoite on pakollinen.',
+				'user-email.email'			=> 'Annettu sähköpostiosoite ei ole pätevä.',
+				'user-email.unique'			=> 'Tunnus samalla sähköpostiosoitteella on jo olemassa.',
+				'user-password.required'	=> 'Salasana on pakollinen.',
+				'user-password.min'			=> 'Salasanan pitää olla ainakin :min merkkiä pitkä.',
+				'user-password.confirmed'	=> 'Salasanat eivät täsmää.',
+			]);
 			
-		// 	$derp[] = [
-		// 		"wasCorrect" => $this->_validateAnswer($question, $answers),
-		// 		"answers" => $answers,
-		// 		"correct" => $correct_answers,
-		// 	];
-		// }
+			if($v->passes())
+			{
+				$user = new User;
+				$user->name = $request->input('user-name');
+				$user->email = $request->input('user-email');
+				$user->password = Hash::make($request->input('user-password'));
+				$user->save();
+				
+				Auth::login($user);
+			}
+		}
 		
-		return response(json_encode($validation, JSON_PRETTY_PRINT))->header("Content-Type", "text/plain");
+		if(Auth::check())
+		{
+			$archive = Auth::user()->archives()->where('test_id', $id)->first();
+			
+			if(!$archive)
+			{
+				$archive = new Archive;
+				$archive->user_id = Auth::user()->id;
+				$archive->test_id = $test->id;
+				$archive->data = json_encode($validation);
+				$archive->save();
+			}
+			else
+			{
+				$archive->data = json_encode($validation);
+				$archive->save();
+			}
+		}
+		
+		// return response(json_encode($validation, JSON_PRETTY_PRINT))->header("Content-Type", "text/plain");
+
+		return view('test.show')
+			->with(array_merge($validation, [
+				'test' => $test
+			]))
+			->withErrors(@$v);
 	}
 	
-	protected function _validateTestWithRequest($test, Request $request)
+	protected function _validateTestWithAnswers($test, $given_answers)
 	{
-		$validation = [];
 		$all_correct = true;
+		$validation = [];
 		
 		foreach($test->questions as $question)
 		{
-			$answers = $request->input('answer-' . $question->id);
-			
-			$result = $this->_validateAnswer($question, $answers);
+			$result = $this->_validateAnswer($question, $given_answers[$question->id]);
+			$validation[$question->id] = $result;
 			
 			$all_correct = $all_correct && $result['correct'];
-			
-			$validation[$question->id] = $result;
 		}
 		
 		return [
 			'all_correct' => $all_correct,
+			'given_answers' => $given_answers,
 			'validation' => $validation,
 		];
 	}
 	
+	protected function _validateTestWithRequest($test, Request $request)
+	{
+		$given_answers = [];
+		foreach($test->questions as $question)
+		{
+			$answers = $request->input('answer-' . $question->id);
+			$given_answers[$question->id] = $answers;
+		}
+		
+		return $this->_validateTestWithAnswers($test, $given_answers);
+	}
+	
 	protected function _validateAnswer($question, $given_answer)
 	{
+		$response = [];
+		
 		if(!$question)
 		{
-			return [
+			$response = [
 				'correct' 	=> false,
 				'error' 	=> 'Invalid question argument',
 			];
 		}
 		
-		if($given_answer === null || (!is_array($given_answer) && strlen(trim($given_answer)) == 0))
-		{
-			return [
-				'correct' 	=> false,
-				'error' 	=> 'No given answer',
-			];
-		}
+		$empty_answer = ($given_answer === null || (!is_array($given_answer) && strlen(trim($given_answer)) == 0));
 		
 		$correct_answers = $question->answers->where('is_correct', 1);
 		
 		switch($question->type)
 		{
 			case 'CHOICE':
-				return [
+				$response = [
 					'correct' 			=> $correct_answers->first()->id == $given_answer,
-					'correct_answers' 	=> $correct_answers->first()->id,
+					'correct_answers' 	=> $correct_answers->first(),
 				];
 			break;
 			
@@ -108,7 +176,7 @@ class TestsController extends Controller
 					}
 				}
 				
-				return [
+				$response = [
 					'correct' 			=> count($matched) == $correct_answers->count() && $correct_answers->count() == count($given_answer),
 					'partial' 			=> count($matched),
 					'total'				=> $correct_answers->count(),
@@ -119,14 +187,15 @@ class TestsController extends Controller
 			case 'TEXT':
 				$correct_answer = $correct_answers->first();
 				
-				return [
+				$response = [
 					'correct' 			=> $this->_string_match($correct_answer->text, $given_answer, 10),
-					'correct_answers'	=> $correct_answer->text,
+					'correct_answers'	=> $correct_answer,
 				];
 			break;
 			
 			case 'MULTITEXT':
 				$matched = [];
+				$correct_rows = [];
 				if(count($given_answer) > 0)
 				{
 					foreach($correct_answers as $correct_answer)
@@ -136,6 +205,7 @@ class TestsController extends Controller
 							if($this->_string_match($correct_answer->text, $answer, 10))
 							{
 								$matched[] = $answer;
+								$correct_rows[$key] = true;
 								unset($given_answer[$key]);
 								break;
 							}
@@ -143,25 +213,37 @@ class TestsController extends Controller
 					}
 				}
 				
-				return [
+				$response = [
 					'correct'			=> count($matched) == $correct_answers->count(),
 					'partial'			=> count($matched),
 					'total'				=> $correct_answers->count(),
+					'correct_answers'	=> $correct_answers,
+					'correct_rows'		=> $correct_rows,
 				];
 			break;
 			
 			case 'TEXTAREA':
 				// Text area just needs to be something else than empty
-				return [
+				$response = [
 					'correct' => strlen($given_answer) > 0,
+				];
+			break;
+			
+			default:
+				$response = [
+					'correct' 	=> false,
+					'error'		=> 'Invalid question type.',
 				];
 			break;
 		}
 		
-		return [
-			'correct' 	=> false,
-			'error'		=> 'Invalid question type.',
-		];
+		if($empty_answer)
+		{
+			$response['correct'] = false;
+			$response['empty_answer'] = true;
+		}
+		
+		return $response;
 	}
 	
 	protected function _string_match($str1, $str2, $margin)

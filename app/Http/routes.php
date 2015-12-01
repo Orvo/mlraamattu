@@ -39,8 +39,18 @@ Route::group(['prefix' => 'course'], function()
 
 	Route::get('{id}', function($id)
 	{
+		$user_completed = [];
+		if(\Auth::check())
+		{
+			foreach(\Auth::user()->archives as $item)
+			{
+				$user_completed[$item->test_id] = json_decode($item->data);
+			}
+		}
+
 		return view('course.tests', [
 			'course' => App\Course::findOrFail($id),
+			'user_completed' => $user_completed,
 		]);
 	});
 });
@@ -69,6 +79,11 @@ Route::group(['prefix' => 'course'], function()
 Route::get('test/{id}', 'TestsController@show');
 Route::post('test/{id}', 'TestsController@check');
 
+Route::get('archive/{id}', function($id)
+{
+	return User::findOrFail($id)->archives;
+});
+
 Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 {
 	Route::get('/', function ()
@@ -84,8 +99,7 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 
 	Route::get('/questions/{id}', function ($id)
 	{
-		$question = Question::findOrFail($id);
-		$question->answers;
+		$question = Question::with('answers')->findOrFail($id);
 		return $question;
 	});
 
