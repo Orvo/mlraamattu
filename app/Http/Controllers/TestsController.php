@@ -90,14 +90,13 @@ class TestsController extends Controller
 				$archive = new Archive;
 				$archive->user_id = Auth::user()->id;
 				$archive->test_id = $test->id;
-				$archive->data = json_encode($validation);
-				$archive->save();
 			}
-			else
-			{
-				$archive->data = json_encode($validation);
-				$archive->save();
-			}
+			
+			$data = $validation;
+			unset($data['validation']);
+			
+			$archive->data = json_encode($data);
+			$archive->save();
 		}
 		
 		// return response(json_encode($validation, JSON_PRETTY_PRINT))->header("Content-Type", "text/plain");
@@ -112,6 +111,7 @@ class TestsController extends Controller
 	protected function _validateTestWithAnswers($test, $given_answers)
 	{
 		$all_correct = true;
+		$num_correct = 0;
 		$validation = [];
 		
 		foreach($test->questions as $question)
@@ -120,12 +120,19 @@ class TestsController extends Controller
 			$validation[$question->id] = $result;
 			
 			$all_correct = $all_correct && $result['correct'];
+			if($result['correct'])
+			{
+				$num_correct++;
+			}
 		}
 		
 		return [
-			'all_correct' => $all_correct,
-			'given_answers' => $given_answers,
-			'validation' => $validation,
+			'all_correct'	=> $all_correct,
+			'num_correct'	=> $num_correct,
+			'total'			=> $test->questions->count(),
+			
+			'given_answers'	=> $given_answers,
+			'validation'	=> $validation,
 		];
 	}
 	
@@ -143,17 +150,16 @@ class TestsController extends Controller
 	
 	protected function _validateAnswer($question, $given_answer)
 	{
-		$response = [];
-		
 		if(!$question)
 		{
-			$response = [
+			return [
 				'correct' 	=> false,
 				'error' 	=> 'Invalid question argument',
 			];
 		}
 		
-		$empty_answer = ($given_answer === null || (!is_array($given_answer) && strlen(trim($given_answer)) == 0));
+		$response = [];
+		$empty_answer = ($given_answer === null || (!is_array($given_answer) && strlen(trim($given_answer)) == 0) || is_array($given_answer) && count($given_answer) == 0);
 		
 		$correct_answers = $question->answers->where('is_correct', 1);
 		
@@ -168,11 +174,15 @@ class TestsController extends Controller
 			
 			case 'MULTI':
 				$matched = [];
-				foreach($correct_answers as $correct_answer)
+				
+				if(!$empty_answer)
 				{
-					if(in_array($correct_answer->id, $given_answer))
+					foreach($correct_answers as $correct_answer)
 					{
-						$matched[] = $correct_answer->id;
+						if(in_array($correct_answer->id, $given_answer))
+						{
+							$matched[] = $correct_answer->id;
+						}
 					}
 				}
 				
@@ -196,7 +206,8 @@ class TestsController extends Controller
 			case 'MULTITEXT':
 				$matched = [];
 				$correct_rows = [];
-				if(count($given_answer) > 0)
+				
+				if(!$empty_answer)
 				{
 					foreach($correct_answers as $correct_answer)
 					{

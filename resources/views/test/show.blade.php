@@ -47,7 +47,6 @@
 @endsection
 
 @section('content')
-
 	<a href="/course/{{ $test->course->id }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Takaisin pääsivulle</a>
 
 	<form action="/test/{{ $test->id }}" method="post" class="test-form form-horizontal">
@@ -78,31 +77,24 @@
 		<fieldset class="questions">
 			<legend>Kysymykset</legend>
 			<?php foreach($test->questions as $qkey => $question): ?>
-				<div class="question<?php 
-					if(@$validation[$question->id]['correct'])
-					{
-						echo ' correct';
-					}
-					elseif(!@$validation[$question->id]['correct'] && @$validation[$question->id]['partial'] > 0)
-					{
-						echo ' partially-correct';
-					}
-					elseif(@$validation[$question->id] && !@$validation[$question->id]['correct'])
-					{
-						echo ' incorrect';
-					}
-				?>">
+				<div class="question {{
+					css([
+						'correct'			=> @$validation && @$validation[$question->id]['correct'],
+						'partially-correct'	=> @$validation && !@$validation[$question->id]['correct'] && @$validation[$question->id]['partial'] > 0,
+						'incorrect'			=> @$validation && !@$validation[$question->id]['correct'] && !@$validation[$question->id]['partial']
+					])
+				}}">
 					<input type="hidden" name="questions[]" value="{{ $question->id }}">
 					<div class="header">
-						<?php if(@$validation): ?>
+						@if(@$validation)
 							<div class="big-validation-icon">
-								<?php if(@$validation[$question->id]['correct']): ?>
+								@if(@$validation[$question->id]['correct'])
 									<span class="glyphicon glyphicon-ok-circle"></span>
-								<?php else: ?>
+								@else
 									<span class="glyphicon glyphicon-remove-circle"></span>
-								<?php endif; ?>
+								@endif
 							</div>
-						<?php endif; ?>
+						@endif
 						
 						<div class="number">
 							{{ ($qkey + 1) . '. ' }}
@@ -119,11 +111,11 @@
 						<div class="clearfix"></div>
 					</div>
 					
-					<?php if(@$validation[$question->id]['correct']): ?>
+					@if(@$validation[$question->id]['correct'])
 						<div class="validation correct">
 							<span class="glyphicon glyphicon-ok"></span> Oikein!
 						</div>
-					<?php elseif(!@$validation[$question->id]['correct'] && @$validation[$question->id]['partial'] > 0): ?>
+					@elseif(!@$validation[$question->id]['correct'] && @$validation[$question->id]['partial'] > 0)
 						<div class="validation partially-correct">
 							<span class="glyphicon glyphicon-remove"></span>
 							<?php if($question->type == "MULTITEXT"): ?>
@@ -132,11 +124,11 @@
 								Osittain oikein!
 							<?php endif; ?>
 						</div>
-					<?php elseif(@$validation[$question->id] && !@$validation[$question->id]['correct']): ?>
+					@elseif(@$validation[$question->id] && !@$validation[$question->id]['correct'])
 						<div class="validation incorrect">
 							<span class="glyphicon glyphicon-remove"></span> Väärin!
 						</div>
-					<?php endif; ?>
+					@endif
 					
 					<div class="form-group has-feedback">
 						<div class="answer">
@@ -145,13 +137,16 @@
 									case 'MULTI':
 								?>
 									<?php foreach($question->answers as $answer): ?>
-										<div class="checkbox<?php echo @in_array($answer->id, @$given_answers[$question->id]) ? ' has-answer' : ''?>">
+										<div class="checkbox {{
+											css([
+												'has-answer' => @in_array($answer->id, @$given_answers[$question->id]),
+											])
+										}}">
 											<label>
 												{!! Form::checkbox('answer-' . $question->id . '[]', $answer->id, @in_array($answer->id, @$given_answers[$question->id])) !!}
 												<?php echo $answer->text; ?>
-												<?php if(@$validation): ?>
-													<?php if(@in_array($answer->id, @$given_answers[$question->id]) && $answer->is_correct ||
-														!@in_array($answer->id, @$given_answers[$question->id]) && !$answer->is_correct): ?>
+												<?php if(@$validation && @in_array($answer->id, @$given_answers[$question->id])): ?>
+													<?php if($answer->is_correct): ?>
 														<span class="glyphicon glyphicon-ok" style="color:#329f07"></span>
 													<?php else: ?>
 														<span class="glyphicon glyphicon-remove" style="color:#af000d"></span>
@@ -163,6 +158,7 @@
 
 									<?php if(@$validation && @$validation[$question->id]['correct_answers']): ?>
 										<div class="correct-answers">
+											<span class="glyphicon glyphicon-exclamation-sign"></span>
 											<p>Oikeat vastaukset:</p>
 											<ul>
 												<?php foreach($validation[$question->id]['correct_answers'] as $answer): ?>
@@ -177,7 +173,11 @@
 									case 'CHOICE':
 								?>
 									<?php foreach($question->answers as $answer): ?>
-										<div class="radio<?php echo @$given_answers[$question->id] == $answer->id ? ' has-answer' : ''?>">
+										<div class="radio {{
+											css([
+												'has-answer' => (@$given_answers[$question->id] == $answer->id),
+											])
+										}}">
 											<label>
 												{!! Form::radio('answer-' . $question->id, $answer->id, @$given_answers[$question->id] == $answer->id) !!}
 												<?php echo $answer->text; ?>
@@ -194,6 +194,7 @@
 
 									<?php if(@$validation && @$validation[$question->id]['correct_answers']): ?>
 										<div class="correct-answers">
+											<span class="glyphicon glyphicon-exclamation-sign"></span>
 											<p>Oikea vastaus:</p>
 											<ul>
 												<li>{{ $validation[$question->id]['correct_answers']['text'] }}</li>
@@ -205,47 +206,70 @@
 									//--------------------------------------------------------------------------
 									case 'TEXT':
 								?>
-									{!! Form::text('answer-' . $question->id, @$given_answers[$question->id], [
-										'class' => 'form-control',
-										'placeholder' => 'Vastaus tähän'
-									]) !!}
+									<div class="row {{
+										css([
+											'has-success' 	=> (@$validation && @$validation[$question->id]['correct']),
+											'has-error'		=> (@$validation && !@$validation[$question->id]['correct']),
+										])
+									}}">
+										<div class="col-xs-12">
+											{!! Form::text('answer-' . $question->id, @$given_answers[$question->id], [
+												'class' => 'form-control',
+												'placeholder' => 'Vastaus tähän'
+											]) !!}
+											@if(@$validation)
+												@if(@$validation[$question->id]['correct'])
+													<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+												@else
+													<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+												@endif
+											<?php endif; ?>
+										</div>
+									</div>
 									
-									<?php if(@$validation && @$validation[$question->id]['correct_answers']): ?>
+									@if(@$validation && @$validation[$question->id]['correct_answers'])
 										<div class="correct-answers">
+											<span class="glyphicon glyphicon-exclamation-sign"></span>
 											<p>Oikea vastaus:</p>
 											<ul>
 												<li>{{ $validation[$question->id]['correct_answers']['text'] }}</li>
 											</ul>
 										</div>
-									<?php endif; ?>
+									@endif
 								<?php
 									break;
 									//--------------------------------------------------------------------------
 									case 'MULTITEXT':
 								?>
 									<div class="multitext">
-										<?php for($i=0; $i < $question->answers->count(); ++$i): ?>
-											<div class="row<?php echo @$validation ? (@$validation[$question->id]['correct_rows'][$i] ? ' has-success' : ' has-error') : ''?>">
-												<label for="answer-<?php echo $question->id .'-'. $i; ?>" class="col-xs-1 control-label"><?php echo $i+1; ?>.</label>
+										@for($i=0; $i < $question->answers->count(); ++$i)
+											<div class="row {{
+												css([
+													'has-success' 	=> (@$validation && @$validation[$question->id]['correct_rows'][$i]),
+													'has-error'		=> (@$validation && !@$validation[$question->id]['correct_rows'][$i]),
+												])
+											}}">
+												<label for="answer-{{ $question->id .'-'. $i }}" class="col-xs-1 control-label"><?php echo $i+1; ?>.</label>
 												<div class="col-xs-11">
 													{!! Form::text('answer-' . $question->id . '[]', @$given_answers[$question->id][$i], [
 														'class' => 'form-control',
 														'placeholder' => 'Vastaus tähän',
 														'id' => 'answer-' . $question->id .'-'. $i
 													]) !!}
-													<?php if(@$validation): ?>
-														<?php if(@$validation[$question->id]['correct_rows'][$i]): ?>
+													@if(@$validation)
+														@if(@$validation[$question->id]['correct_rows'][$i])
 	  														<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-	  													<?php else: ?>
+	  													@else
 															<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-	  													<?php endif; ?>
-	  												<?php endif; ?>
+	  													@endif
+	  												@endif
 												</div>
 											</div>
-										<?php endfor; ?>
+										@endfor
 
 										<?php if(@$validation && @$validation[$question->id]['correct_answers']): ?>
 											<div class="correct-answers">
+											<span class="glyphicon glyphicon-exclamation-sign"></span>
 												<p>Oikeat vastaukset:</p>
 												<ul>
 													<?php foreach($validation[$question->id]['correct_answers'] as $answer): ?>
@@ -267,8 +291,11 @@
 
 									<?php if(@$validation): ?>
 										<div class="correct-answers">
+											<span class="glyphicon glyphicon-exclamation-sign"></span>
 											<p>Oikea vastaus:</p>
-											Syöttämäsi vastaus tarkistetaan erikseen, mutta vastauksen ei tule olla tyhjä.
+											<ul>
+												<li>Syöttämäsi vastaus tarkistetaan erikseen, mutta vastauksen ei tule olla tyhjä.</li>
+											</ul>
 										</div>
 									<?php endif; ?>
 								<?php

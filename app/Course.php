@@ -8,6 +8,6 @@ class Course extends Model
 {
     public function tests()
     {
-    	return $this->hasMany('App\Test');
+    	return $this->hasMany('App\Test')->orderBy('order');
     }
 }

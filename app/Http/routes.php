@@ -19,6 +19,10 @@ Route::get('/', function ()
 	return redirect('/course');
 });
 
+Route::get('potato', function ()
+{
+	echo App\Test::find(2)->isUnlocked();
+});
 
 Route::get('make', function()
 {
@@ -47,34 +51,15 @@ Route::group(['prefix' => 'course'], function()
 				$user_completed[$item->test_id] = json_decode($item->data);
 			}
 		}
+		
+		$course = App\Course::with('tests')->findOrFail($id);
 
 		return view('course.tests', [
-			'course' => App\Course::findOrFail($id),
+			'course' => $course,
 			'user_completed' => $user_completed,
 		]);
 	});
 });
-
-// Route::get('test/{id}', function($id)
-// {
-// 	$test = App\Test::findOrFail($id);
-	
-// 	return view('test.show')
-// 			->with([
-// 				'test' => $test,
-// 			]);
-// });
-
-// Route::post('test/{id}', function($id, Request $request)
-// {
-// 	$test = App\Test::findOrFail($id);
-	
-// 	return view('test.show')
-// 			->with([
-// 				'test' => $test,
-// 			])
-// 			->withInput();
-// });
 
 Route::get('test/{id}', 'TestsController@show');
 Route::post('test/{id}', 'TestsController@check');

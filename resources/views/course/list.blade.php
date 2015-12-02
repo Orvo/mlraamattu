@@ -10,7 +10,7 @@
 		@foreach($courses as $course)
 			<div class="course list-item">
 				<div class="title">
-					<a href="/course/{{ $course->id }}">
+					<a href="/course/{{ $course->id }}" class="title-anchor">
 						{{ $course->title }}
 					</a>
 				</div>

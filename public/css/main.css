@@ -65,34 +65,50 @@ div.list div.list-item .title
 	position: relative;
 }
 
-div.list div.list-item .title div.completion
+div.list div.list-item .title div.test-status
 {
 	float: right;
 	position: absolute;
 	top: -10px;
 	right: 0;
 	bottom: 0;
-	width: 200px;
+	width: 350px;
 	overflow: hidden;
 	text-align: right;
 }
 
-div.list div.list-item .title div.completion .glyphicon
+div.list div.list-item .title div.test-status .glyphicon
 {
 	font-size: 50pt;
 }
 
-div.list div.list-item.completed .title div.completion
+div.list div.list-item .title div.test-status.completed
 {
 	color: #62AF49;
 }
 
-div.list div.list-item.in-progress .title div.completion
+div.list div.list-item .title div.test-status.in-progress
 {
 	color: #FEA43E;
 }
 
-div.list div.list-item .title div.completion p
+div.list div.list-item .title div.test-status.locked
+{
+	color: #aaa;
+}
+
+div.list div.list-item .title div.test-status.new-test
+{
+	color: #00B4FF;
+}
+
+div.list div.list-item .title div.test-status.locked .glyphicon
+{
+	/*padding: 12px 10px 0 0;
+	font-size: 30pt;*/
+}
+
+div.list div.list-item .title div.test-status p
 {
 	float: right;
 	position: absolute;
@@ -103,7 +119,7 @@ div.list div.list-item .title div.completion p
 	color: #000;
 }
 
-div.list div.list-item .title a
+div.list div.list-item .title .title-anchor
 {
 	display: block;
 	padding: 7px 15px;
@@ -248,6 +264,21 @@ div.question.incorrect div.header .big-validation-icon
 	/*text-shadow: 0 1px 0 #54000C;*/
 }
 
+div.question.correct div.header
+{
+	border-top: 2px solid #4CA920;
+}
+
+div.question.partially-correct div.header
+{
+	border-top: 2px solid #E39E11;
+}
+
+div.question.incorrect div.header
+{
+	border-top: 2px solid #C20B25;
+}
+
 div.question div.validation
 {
 	color: #fff;
@@ -278,42 +309,51 @@ div.question div.answer
 	padding: 1em 0 0 0;
 }
 
-div.question div.answer div.correct-answers
+div.question div.correct-answers
 {
 	background: #fff;
-	border: 1px solid #67C82C;
-	box-shadow: inset 0 1px 0 #ddd;
-	padding: 10px 12px;
+	border: 1px solid #0C7EB9;
+	box-shadow: inset 0 1px 1px #93CAE6;
+	padding: 7px 12px 9px 12px;
 	margin-top: 10px;
 	border-radius: 4px;
+	line-height: 1.3;
 }
 
-div.question div.answer div.correct-answers p
+div.question div.correct-answers span.glyphicon
+{
+	float: left;
+	display: block;
+	font-size: 35px;
+	color: #096FA4;
+}
+
+div.question div.correct-answers p
 {
 	font-weight: bold;
-	margin: 0;
+	margin: 0 0 0 45px;
 	padding: 0;
 }
 
-div.question div.answer div.correct-answers ul
+div.question div.correct-answers ul
 {
-	padding: 0;
+	padding: 0 0 0 45px;
 	margin: 0;
 }
 
-div.question div.answer div.correct-answers li
+div.question div.correct-answers li
 {
 	display: inline-block;
 	padding: 0;
 	margin: 0;
 }
 
-div.question div.answer div.correct-answers li:after
+div.question div.correct-answers li:after
 {
 	content: ', ';
 }
 
-div.question div.answer div.correct-answers li:last-child:after
+div.question div.correct-answers li:last-child:after
 {
 	content: '';
 }
@@ -358,13 +398,13 @@ div.question .checkbox label .glyphicon
 	float: right;
 }
 
-div.question .multitext .row .glyphicon
+div.question div.answer .row .glyphicon
 {
 	display: none;
 }
 
-div.question .multitext .row.has-success .glyphicon,
-div.question .multitext .row.has-error .glyphicon
+div.question div.answer .row.has-success .glyphicon,
+div.question div.answer .row.has-error .glyphicon
 {
 	display: block;
 }

@@ -15,7 +15,7 @@ $(function(){
 		
 	});
 	
-	$('div.multitext .row.has-success input, div.multitext .row.has-error input').keypress(function()
+	$('div.question .row.has-success input, div.question .row.has-error input').keypress(function()
 	{
 		$(this).parent().parent().removeClass('has-success has-error');
 	});
