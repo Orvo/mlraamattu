@@ -48,6 +48,45 @@ h1, h2, h3, h4
 	transition: all 80ms ease-out;
 }
 
+div.course-description
+{
+	padding: 10px 14px;
+	margin-bottom: 1em;
+	border: 1px solid #eee;
+	border-radius: 3px;
+	color: #444;
+	box-shadow: 0 2px 0 #e7e7e7;
+}
+
+div.error-block
+{
+	font-family: 'Lato', sans-serif;
+	background: #B00016;
+	border: 1px solid #6B000D;
+	color: #fff;
+	text-align: center;
+	margin: 1em 0;
+	padding: 12px;
+	border-radius: 3px;
+}
+
+div.error-block a
+{
+	color: #fff;
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+div.error-block a:hover
+{
+	text-decoration: none;
+}
+
+div.error-block b
+{
+	font-style: oblique;
+}
+
 div.list div.list-item
 {
 	border: 1px solid #f1f1f1;
@@ -65,7 +104,7 @@ div.list div.list-item .title
 	position: relative;
 }
 
-div.list div.list-item .title div.test-status
+div.list div.list-item .title div.status
 {
 	float: right;
 	position: absolute;
@@ -77,38 +116,38 @@ div.list div.list-item .title div.test-status
 	text-align: right;
 }
 
-div.list div.list-item .title div.test-status .glyphicon
+div.list div.list-item .title div.status .glyphicon
 {
 	font-size: 50pt;
 }
 
-div.list div.list-item .title div.test-status.completed
+div.list div.list-item .title div.status.completed
 {
 	color: #62AF49;
 }
 
-div.list div.list-item .title div.test-status.in-progress
+div.list div.list-item .title div.status.in-progress
 {
 	color: #FEA43E;
 }
 
-div.list div.list-item .title div.test-status.locked
+div.list div.list-item .title div.status.locked
 {
 	color: #aaa;
 }
 
-div.list div.list-item .title div.test-status.new-test
+div.list div.list-item .title div.status.new-test
 {
 	color: #00B4FF;
 }
 
-div.list div.list-item .title div.test-status.locked .glyphicon
+div.list div.list-item .title div.status.locked .glyphicon
 {
 	/*padding: 12px 10px 0 0;
 	font-size: 30pt;*/
 }
 
-div.list div.list-item .title div.test-status p
+div.list div.list-item .title div.status p
 {
 	float: right;
 	position: absolute;

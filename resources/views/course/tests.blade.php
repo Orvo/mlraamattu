@@ -5,12 +5,17 @@
 	<a href="/" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Takaisin pääsivulle</a>
 	
 	<h1>Kurssi: {{ $course->title }}</h1>
-	<div>
+	<div class="course-description">
 		{!! nl2br($course->description) !!}
 	</div>
-	<p>
-		Alla lista kokeista joita valitsemallasi kurssilta löytyy.
-	</p>
+	
+	@if(session('error'))
+		<div class="error-block">
+			<p>{!! session('error') !!}</p>
+			Jos olet jo edennyt kurssissa, <a href="/auth/login">kirjaudu sisään</a> ja yritä uudelleen!
+		</div>
+	@endif
+	
 	<div class="list">
 		@foreach($course->tests as $test)
 			<div class="test list-item">
@@ -22,7 +27,7 @@
 					@endif
 					
 					{{ $test->title }}
-					<div class="test-status {{
+					<div class="status {{
 						css([
 							'locked' 		=> !$test->isUnlocked(),
 							'completed'		=> (@$user_completed[$test->id] && $user_completed[$test->id]->all_correct),
