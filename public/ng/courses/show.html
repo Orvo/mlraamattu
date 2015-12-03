@@ -1,12 +1,29 @@
 <div id="content-sidebar" ng-show="loaded">
 	<h2>Toiminnot</h2>
 	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas eaque tempora possimus, nisi eveniet ex veritatis temporibus ratione quo eos.</p>
-	<a href="#/tests/new/{{ course.id }}" class="btn btn-success btn-block btn-lg">
+	<a href="#/tests/new/[[ course.id ]]" class="btn btn-success btn-block btn-lg">
 		<span class="glyphicon glyphicon-plus"></span> Lisää uusi koe
 	</a>
 </div>
-<div id="content-main">
-	<h1>Kurssi: {{ course.title }}</h1>
+<div id="content-main" ng-show="loaded">
+	<div class="breadcrumbs">
+		<ol class="breadcrumb">
+			<li><a href="#/">Ylläpitopaneeli</a></li>
+			<li><a href="#/courses/">Kurssit</a></li>
+			<li>Kurssi: [[ course.title || '-' ]]</li>
+		</ol>
+	</div>
+	<h1>Kurssi: [[ course.title ]]</h1>
+	<div class="actions-row">
+		<div class="pull-right" style="text-align: right">
+			<a href="#/courses/new" class="btn btn-success">
+				<span class="glyphicon glyphicon-plus"></span> Lisää uusi koe
+			</a>
+		</div>
+		<div>
+			<input type="text" ng-model="searchFilter" placeholder="Hae kursseja" class="form-control search-filter">
+		</div>
+	</div>
 	<table class="table table-hover">
 		<thead>
 			<tr>
@@ -14,31 +31,36 @@
 				<td style="width:250px">Kokeen otsikko</td>
 				<td style="width:25%">Kuvaus</td>
 				<td>Kysymykset</td>
-				<td>Toiminnot</td>
+				<td style="width:160px">Toiminnot</td>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="(key, test) in course.tests">
-				<td style="font-weight: bold;text-align: right;background:#fafafa">{{ key + 1 }}.</td>
+			<tr ng-repeat="(key, test) in course.tests | filter : searchFilter">
+				<td style="font-weight: bold;text-align: right;background:#fafafa">[[ key + 1 ]].</td>
 				<td>
-					<a href="#/tests/{{ test.course.id }}">
-						{{ test.title }}
+					<a href="#/tests/[[ test.course.id ]]">
+						[[ test.title ]]
 					</a>
 				</td>
-				<td>{{ test.description }}</td>
+				<td>[[ test.description ]]</td>
 				<td>
 					<ul>
-						<li ng-repeat="question in test.questions">{{ question.title }}</li>
+						<li ng-repeat="question in test.questions">[[ question.title ]]</li>
 					</ul>
 					<span ng-show="test.questions.length == 0">Ei kysymyksiä</span>
 				</td>
 				<td>
-					<a href="#/tests/{{ test.id }}/edit" class="btn btn-primary btn-xs btn-block">
+					<a href="#/tests/[[ test.id ]]/edit" class="btn btn-primary btn-xs btn-block">
 						<span class="glyphicon glyphicon-edit"></span> Muokkaa
 					</a>
-					<a href="#/tests/{{ test.id }}/delete" class="btn btn-danger btn-xs btn-block">
+					<a href="#/tests/[[ test.id ]]/delete" class="btn btn-danger btn-xs btn-block">
 						<span class="glyphicon glyphicon-trash"></span> Poista
 					</a>
+				</td>
+			</tr>
+			<tr ng-hide="(course.tests | filter : searchFilter).length > 0">
+				<td colspan="5" style="text-align: center;">
+					<b>Ei tuloksia.</b>
 				</td>
 			</tr>
 		</tbody>

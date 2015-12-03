@@ -1,10 +1,5 @@
-$(function(){
-	
-	$('nav.navbar a').click(function()
-	{
-		$('nav.navbar li').removeClass('active');
-		$(this).getParent().addClass('active');
-	});
+$(function()
+{
 
 	$(document).scroll(function()
 	{
@@ -12,6 +7,23 @@ $(function(){
 		{
 			$('#content-sidebar').css({'padding-top': $(document).scrollTop() + 'px'});
 		}
+	});
+	
+	$('.search-filter').focus(function()
+	{
+		console.log($(this));
+		$(this).addClass('focused');
+	});
+	
+	// $('nav.navbar a').click(function()
+	// {
+	// 	$('nav.navbar li').removeClass('active');
+	// 	$(this).parent().addClass('active');
+	// });
+	
+	$('nav.navbar .dropdown-toggle').click(function(e)
+	{
+		e.preventDefault();
 	});
 
 });

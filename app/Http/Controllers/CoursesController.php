@@ -19,28 +19,9 @@ class CoursesController extends Controller
 	 */
 	public function index()
 	{
-		return Course::all();
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store(Request $request)
-	{
-		//
+		return view('course.list', [
+			'courses' => Course::all(),
+		]);
 	}
 
 	/**
@@ -51,46 +32,21 @@ class CoursesController extends Controller
 	 */
 	public function show($id)
 	{
-		$course = Course::findOrFail($id);
-		foreach($course->tests as $test)
+		$user_completed = [];
+		if(\Auth::check())
 		{
-			$test->questions;
+			foreach(\Auth::user()->archives as $item)
+			{
+				$user_completed[$item->test_id] = json_decode($item->data);
+			}
 		}
 		
-		return $course;
-	}
+		$course = App\Course::with('tests')->findOrFail($id);
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id)
-	{
-		//
+		return view('course.tests', [
+			'course' => $course,
+			'user_completed' => $user_completed,
+		]);
 	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function update(Request $request, $id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+	
 }

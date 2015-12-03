@@ -19,7 +19,10 @@ class Course extends Model
     
     public function courseProgress()
     {
-    	if(!Auth::check()) return [];
+    	if(!Auth::check()) return (object)[
+    		'completed' => false,
+    		'num_completed' => 0,
+    	];
     	
     	if($this->courseProgress !== null)
     	{
@@ -31,7 +34,7 @@ class Course extends Model
     	$num_completed = 0;
     	foreach($this->tests as $test)
     	{
-    		if($test->isCompleted())
+    		if($test->isCompleted(true))
     		{
     			$num_completed++;
     		}

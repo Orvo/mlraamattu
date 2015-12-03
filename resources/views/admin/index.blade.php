@@ -1,6 +1,9 @@
 @extends('admin.layout')
 
 @section('content')
-	<h1>Hello World!</h1>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque inventore esse ad odio, repudiandae voluptas nulla aspernatur id. Soluta, incidunt!</p>
+	<div class="load-placeholder">
+		<h3>
+			<img src="/img/ajax-loader.gif" alt=""> Ladataan...
+		</h3>
+	</div>
 @endsection

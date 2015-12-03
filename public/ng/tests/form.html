@@ -15,7 +15,7 @@
 		<button type="submit" class="btn btn-primary btn-block btn-lg">
 			<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
 		</button>
-		<a href="#/courses/{{ data.course.id }}" class="btn btn-default btn-block">
+		<a href="#/courses/[[ data.test.course.id ]]" class="btn btn-default btn-block">
 			<span class="glyphicon glyphicon-chevron-left"></span> Palaa takaisin
 		</a>
 	</div>
@@ -24,7 +24,7 @@
 			<ol class="breadcrumb">
 				<li><a href="#/">Ylläpitopaneeli</a></li>
 				<li><a href="#/courses/">Kurssit</a></li>
-				<li ng-cloak><a href="#/courses/{{ data.course.id }}">Kurssi: {{ data.course.title || '-' }}</a></li>
+				<li ng-cloak><a href="#/courses/[[ data.test.course.id ]]">Kurssi: [[ data.test.course.title || '-' ]]</a></li>
 				<li ng-cloak>
 					<span ng-show="!id">Uusi koe</span>
 					<span ng-show="id">Muokataan koetta</span>
@@ -34,7 +34,7 @@
 		<h1>
 			<span ng-show="!id">Uusi koe</span>
 			<span ng-show="id">Muokataan koetta</span>
-			<span ng-show="data.test.title">/ <b>{{ data.test.title }}</b></span>
+			<span ng-show="data.test.title">/ <b>[[ data.test.title ]]</b></span>
 		</h1>
 		<div class="form-group">
 			<input type="text" class="form-control input-lg input-block" id="test-title" ng-model="data.test.title" placeholder="Kokeen otsikko">
@@ -43,32 +43,32 @@
 			<textarea class="form-control" ng-model="data.test.description" placeholder="Kokeen kuvaus" style="resize:vertical;min-height:8em;"></textarea>
 		</div>
 		<ul class="questions" ui-sortables="sortableOptions" ng-model="data.test.questions">
-			<li class="question" ng-repeat="(qkey, question) in data.test.questions" id="question-{{ qkey }}">
+			<li class="question" ng-repeat="(qkey, question) in data.test.questions" id="question-[[ qkey ]]">
 				<div class="info">
 					<div class="actions">
-						<button class="btn btn-primary btn-xs" ng-click="edit(qkey, question.id)">
+						<button type="button" class="btn btn-primary btn-xs" ng-click="edit(qkey, question.id)">
 							<span class="glyphicon glyphicon-edit"></span> Muokkaa
 						</button>
-						<button class="btn btn-danger btn-xs" ng-click="delete(qkey, question.id)">
+						<button type="button" class="btn btn-danger btn-xs" ng-click="delete(qkey, question.id)">
 							<span class="glyphicon glyphicon-trash"></span> Poista
 						</button>
 					</div>
 					<div class="title-row clearfix">
 						<div class="right-aligned">
 							<div class="type">
-								{{ translate_type(question.type) }}
+								[[ translate_type(question.type) ]]
 							</div>
 						</div>
 						<div class="left-aligned">
 							<!-- <div class="bulk-checkbox">
 								<input type="checkbox" ng-model="bulk_actions" ng-value="qkey">
 							</div> -->
-							<div class="number">{{ (qkey + 1) }}.</div>
+							<div class="number">[[ (qkey + 1) ]].</div>
 							<div class="title" ng-class="{'no-subtitle': question.subtitle.trim().length == 0, 'dimmed': question.title.trim().length == 0}">
-								{{ question.title || 'Kysymys puuttuu' }}
+								[[ question.title || 'Kysymys puuttuu' ]]
 							</div>
 							<div class="subtitle">
-								{{ question.subtitle.split('\n')[0] }}
+								[[ question.subtitle.split('\n')[0] ]]
 							</div>
 						</div>
 					</div>
@@ -101,7 +101,7 @@
 					<div class="form-group question-details">
 						<ul class="question-type">
 							<li ng-repeat="type in question_types">
-								<label><input type="radio" ng-model="question.type" ng-value="type"> {{ translate_type(type) }}</label>
+								<label><input type="radio" ng-model="question.type" ng-value="type"> [[ translate_type(type) ]]</label>
 							</li>
 						</ul>
 						<div class="question-answers">
@@ -111,9 +111,9 @@
 									Käyttäjän tulee valita yksi tai useampi oikea vastaus monesta:
 								</p>
 								<div class="form-group answer" ng-repeat="(akey, answer) in question.answers">
-									<label for="question-{{ question.id }}-answer-{{ akey }}" class="answer-label">{{ akey + 1 }}.</label>
+									<label for="question-[[ question.id ]]-answer-[[ akey ]]" class="answer-label">[[ akey + 1 ]].</label>
 									<div class="col answer-text">
-										<input type="text" class="form-control" id="question-{{ question.id }}-answer-{{ akey }}" ng-model="answer.text">
+										<input type="text" class="form-control" id="question-[[ question.id ]]-answer-[[ akey ]]" ng-model="answer.text">
 									</div>
 									<div class="col answer-is-correct">
 										<div class="checkbox">
@@ -129,7 +129,7 @@
 									</div>
 								</div>
 								<div class="form-group answer">
-									<label for="question-{{ question.id }}-answer-{{ akey }}" class="answer-label">Lisää uusi</label>
+									<label for="question-[[ question.id ]]-answer-[[ akey ]]" class="answer-label">Lisää uusi</label>
 									<div class="col answer-text">
 										<input type="text" class="form-control" ng-enter="add_answer.do(qkey, question.id)" ng-model="add_answer.text" placeholder="Kirjoita vaihtoehdon teksti">
 									</div>
@@ -145,14 +145,14 @@
 									Käyttäjän tulee valita yksi oikea vastaus monesta:
 								</p>
 								<div class="form-group answer" ng-repeat="(akey, answer) in question.answers">
-									<label for="question-{{ question.id }}-answer-{{ akey }}" class="answer-label">{{ akey + 1 }}.</label>
+									<label for="question-[[ question.id ]]-answer-[[ akey ]]" class="answer-label">[[ akey + 1 ]].</label>
 									<div class="col answer-text">
-										<input type="text" class="form-control" id="question-{{ question.id }}-answer-{{ akey }}" ng-model="answer.text">
+										<input type="text" class="form-control" id="question-[[ question.id ]]-answer-[[ akey ]]" ng-model="answer.text">
 									</div>
 									<div class="col answer-is-correct">
 										<div class="radio">
 											<label>
-												<input type="radio" ng-model="question.correct_answer" value="{{ answer.id }}"> Oikea vaihtoehto
+												<input type="radio" ng-model="question.correct_answer" value="[[ answer.id ]]"> Oikea vaihtoehto
 											</label>
 										</div>
 									</div>
@@ -163,7 +163,7 @@
 									</div>
 								</div>
 								<div class="form-group answer">
-									<label for="question-{{ question.id }}-answer-{{ akey }}" class="answer-label">Lisää uusi</label>
+									<label for="question-[[ question.id ]]-answer-[[ akey ]]" class="answer-label">Lisää uusi</label>
 									<div class="col answer-text">
 										<input type="text" class="form-control" ng-enter="add_answer.do(qkey, question.id)" ng-model="add_answer.text" placeholder="Kirjoita vaihtoehdon teksti">
 									</div>
@@ -180,9 +180,9 @@
 								</p>
 
 								<div class="form-group answer" ng-repeat="(akey, answer) in question.answers">
-									<label for="question-{{ question.id }}-answer-{{ akey }}" class="answer-label">{{ akey + 1 }}.</label>
+									<label for="question-[[ question.id ]]-answer-[[ akey ]]" class="answer-label">[[ akey + 1 ]].</label>
 									<div class="col answer-text">
-										<input type="text" class="form-control" id="question-{{ question.id }}-answer-{{ akey }}" ng-model="answer.text">
+										<input type="text" class="form-control" id="question-[[ question.id ]]-answer-[[ akey ]]" ng-model="answer.text">
 									</div>
 									<div class="col answer-delete" ng-hide="question.answers.length <= 2">
 										<a class="cursor-pointer" ng-click="remove_answer(qkey, akey)">
@@ -191,7 +191,7 @@
 									</div>
 								</div>
 								<div class="form-group answer">
-									<label for="question-{{ question.id }}-answer-{{ akey }}" class="answer-label">Lisää uusi</label>
+									<label for="question-[[ question.id ]]-answer-[[ akey ]]" class="answer-label">Lisää uusi</label>
 									<div class="col answer-text">
 										<input type="text" class="form-control" ng-enter="add_answer.do(qkey, question.id)" ng-model="add_answer.text" placeholder="Kirjoita sana tai lause">
 									</div>
@@ -274,7 +274,7 @@
 			</div>
 			<div class="modal-body" style="text-align:center;font-size:120%">
 				<p>
-					Oletko varma, että haluat poistaa kysymyksen <b>"{{ modal_info.key + 1 }}. {{ modal_info.question.title }}"</b>?
+					Oletko varma, että haluat poistaa kysymyksen <b>"[[ modal_info.key + 1 ]]. [[ modal_info.question.title ]]"</b>?
 				</p>
 				<p>
 					Tätä toimintoa ei voi peruuttaa!
@@ -298,7 +298,7 @@
 			</div>
 			<div class="modal-body" style="text-align:center;font-size:120%">
 				<p>
-					Kysymyksen <b>"{{ modal_info.key + 1 }}. {{ modal_info.question.title }}"</b> muokkaus on vielä kesken. Haluatko jatkaa tallentamatta?
+					Kysymyksen <b>"[[ modal_info.key + 1 ]]. [[ modal_info.question.title ]]"</b> muokkaus on vielä kesken. Haluatko jatkaa tallentamatta?
 				</p>
 			</div>
 			<div class="modal-footer">

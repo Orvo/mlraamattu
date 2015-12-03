@@ -40,9 +40,10 @@ app.controller('IndexController', function($scope, $window, $location, $routePar
 
 app.controller('CoursesController', function($scope, $window, $location, $routeParams, CoursesModel)
 {
+	$scope.loaded = false;
 	$scope.courses = CoursesModel.query(function(data)
 	{
-		
+		$scope.loaded = true;
 	});
 		
 	$scope.sortableOptions = {
@@ -56,8 +57,23 @@ app.controller('CourseDisplayController', function($scope, $window, $location, $
 
 	CoursesModel.get({id: $scope.id}, function(data)
 	{
-		$scope.course = data;
-		$scope.loaded = true;
+		if(!data.error)
+		{
+			$scope.course = data;
+			$scope.loaded = true;
+		}
+		else
+		{
+			if(data.status == 401)
+			{
+				$window.location = '/auth/login?ref=admin';
+			}
+			
+			if(data.status == 404)
+			{
+				alert("NOT FOUNDS");
+			}
+		}
 	});
 		
 	$scope.sortableOptions = {
@@ -94,15 +110,32 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 	];
 
 	$scope.translate_type = translate_type;
+	
+	$scope.submit = function(data)
+	{
+		if($scope.id) // existing entry
+		{
+			$scope.data.test = TestsModel.update({id: $scope.id}, $scope.data.test, function(data, h)
+			{
+				console.log("ASD", data, h);
+			});
+		}
+		else // new entry
+		{
+			$scope.data.test.$save(function(data, h)
+			{
+				console.log(data, h);
+			});
+		}
+	}
 
 	if($scope.id)
 	{
-		TestsModel.get({id: $scope.id}, function(test)
+		TestsModel.get({id: $scope.id}, function(data)
 		{
-			console.log(test);
+			console.log(data);
 			$scope.data = {
-				course: test.course,
-				test: test,
+				test: data,
 			};
 
 			$scope.loaded = true;
@@ -111,7 +144,6 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 	else
 	{
 		$scope.data = {
-			course: {},
 			test: {
 				questions: [],
 			},
@@ -119,10 +151,9 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 
 		CoursesModel.get({id: $scope.course_id}, function(data)
 		{
-			$scope.data.course = data;
+			$scope.data.test.course = data;
+			$scope.loaded = true;
 		});
-
-		$scope.loaded = true;
 
 		$("#test-title").focus();
 	}

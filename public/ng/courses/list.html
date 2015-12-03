@@ -1,14 +1,31 @@
-<div id="content-sidebar">
-	<h2>Sivupalkki</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas eaque tempora possimus, nisi eveniet ex veritatis temporibus ratione quo eos.</p>
-	<p>Doloremque porro maxime reprehenderit sequi harum reiciendis incidunt soluta rem ipsam nulla non, distinctio molestiae dolorum alias, eaque quia. Dolor, voluptates temporibus nesciunt ullam sed veritatis, ratione tenetur quo, ipsum minima consectetur est quam obcaecati cumque, porro.</p>
+<div id="content-sidebar" class="fixed" ng-show="loaded">
+	<h2>Toiminnot</h2>
+	<p>
+		Tällä hetkellä olevat kurssit.
+	</p>
 </div>
-<div id="content-main">
+<div id="content-main" ng-show="loaded">
+	<div class="breadcrumbs">
+		<ol class="breadcrumb">
+			<li><a href="#/">Ylläpitopaneeli</a></li>
+			<li>Kurssit</li>
+		</ol>
+	</div>
 	<h1>Kurssit</h1>
+	<div class="actions-row">
+		<div class="pull-right" style="text-align: right">
+			<a href="#/courses/new" class="btn btn-success">
+				<span class="glyphicon glyphicon-plus"></span> Lisää uusi kurssi
+			</a>
+		</div>
+		<div>
+			<input type="text" ng-model="searchFilter" placeholder="Hae kursseja" class="form-control search-filter">
+		</div>
+	</div>
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<td style="width:40px">#</td>
+				<td style="width:40px">ID</td>
 				<td style="width:250px">Kurssin otsikko</td>
 				<td style="width:30%">Kuvaus</td>
 				<td>Kurssin kokeet</td>
@@ -16,21 +33,37 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="course in courses">
-				<td>{{ course.id }}</td>
-				<td>{{ course.title }}</td>
-				<td>{{ course.description }}</td>
-				<td>asd</td>
+			<tr ng-repeat="course in courses | filter : searchFilter">
+				<td style="font-weight: bold;background:#fafafa">[[ course.id ]]</td>
 				<td>
-					<a href="#/courses/{{ course.id }}" class="btn btn-success btn-xs">
+					<a href="#/courses/[[ course.id ]]">
+						[[ course.title ]]
+					</a>
+				</td>
+				<td>[[ course.description ]]</td>
+				<td>
+					<ul>
+						<li ng-repeat="test in course.tests">
+							<a href="#/tests/[[ test.id ]]">[[ test.title ]]</a>
+						</li>
+					</ul>
+					<span ng-show="course.tests.length == 0">Ei kokeita</span>
+				</td>
+				<td>
+					<a href="#/courses/[[ course.id ]]" class="btn btn-success btn-xs">
 						<span class="glyphicon glyphicon-search"></span> Näytä
 					</a>
-					<a href="#/courses/{{ course.id }}/edit" class="btn btn-primary btn-xs">
+					<a href="#/courses/[[ course.id ]]/edit" class="btn btn-primary btn-xs">
 						<span class="glyphicon glyphicon-edit"></span> Muokkaa
 					</a>
-					<a href="#/courses/delete/{{ course.id }}" class="btn btn-danger btn-xs">
+					<a href="#/courses/delete/[[ course.id ]]" class="btn btn-danger btn-xs">
 						<span class="glyphicon glyphicon-trash"></span> Poista
 					</a>
+				</td>
+			</tr>
+			<tr ng-hide="(courses | filter : searchFilter).length > 0">
+				<td colspan="5" style="text-align: center;">
+					<b>Ei tuloksia.</b>
 				</td>
 			</tr>
 		</tbody>
@@ -38,4 +71,10 @@
 	<p>
 		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo vel maiores temporibus distinctio laborum asperiores odio ratione expedita reprehenderit rerum quos recusandae quae facilis necessitatibus ducimus minus exercitationem, atque dolorem omnis unde, ad, consectetur sed! Doloremque id distinctio perferendis, vel.
 	</p>
+</div>
+
+<div class="load-placeholder" ng-show="!loaded">
+	<h3>
+		<img src="/img/ajax-loader.gif" alt=""> Ladataan...
+	</h3>
 </div>

@@ -18,10 +18,10 @@ class Test extends Model
 
 	public function questions()
 	{
-		return $this->hasMany('App\Question');
+		return $this->hasMany('App\Question')->orderBy('order');
 	}
 	
-	public function isCompleted($user = false)
+	public function isCompleted($requireFullCompletion = false, $user = false)
 	{
 		if(Auth::check() || $user !== false)
 		{
@@ -33,7 +33,7 @@ class Test extends Model
 			if($archive)
 			{
 				$data = json_decode($archive->data, true);
-				return $data['all_correct'] || ($data['num_correct'] >= $data['total'] * 0.5);
+				return $data['all_correct'] || (!$requireFullCompletion && ($data['num_correct'] >= $data['total'] * 0.5));
 			}
 		}
 		

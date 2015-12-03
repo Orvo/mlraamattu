@@ -18,29 +18,29 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="(key, test) in tests">
-				<td style="font-weight: bold;text-align: right;background:#fafafa">{{ key + 1 }}.</td>
+				<td style="font-weight: bold;text-align: right;background:#fafafa">[[ key + 1 ]].</td>
 				<td>
-					<a href="#/tests/{{ test.course.id }}">
-						{{ test.title }}
+					<a href="#/tests/[[ test.course.id ]]">
+						[[ test.title ]]
 					</a>
 				</td>
 				<td>
-					<a href="#/courses/{{ test.course.id }}">
-						{{ test.course.title }}
+					<a href="#/courses/[[ test.course.id ]]">
+						[[ test.course.title ]]
 					</a>
 				</td>
-				<td>{{ test.description }}</td>
+				<td>[[ test.description ]]</td>
 				<td>
 					<ul>
-						<li ng-repeat="question in test.questions">{{ question.title }}</li>
+						<li ng-repeat="question in test.questions">[[ question.title ]]</li>
 					</ul>
 					<span ng-show="test.questions.length == 0">Ei kysymyksiä</span>
 				</td>
 				<td>
-					<a href="#/tests/{{ test.id }}/edit" class="btn btn-primary btn-xs btn-block">
+					<a href="#/tests/[[ test.id ]]/edit" class="btn btn-primary btn-xs btn-block">
 						<span class="glyphicon glyphicon-edit"></span> Muokkaa
 					</a>
-					<a href="#/tests/{{ test.id }}/delete" class="btn btn-danger btn-xs btn-block">
+					<a href="#/tests/[[ test.id ]]/delete" class="btn btn-danger btn-xs btn-block">
 						<span class="glyphicon glyphicon-trash"></span> Poista
 					</a>
 				</td>

@@ -19,7 +19,7 @@ class CoursesController extends Controller
 	 */
 	public function index()
 	{
-		return Course::all();
+		return Course::with('tests')->get();
 	}
 
 	/**
@@ -51,13 +51,17 @@ class CoursesController extends Controller
 	 */
 	public function show($id)
 	{
-		$course = Course::findOrFail($id);
-		foreach($course->tests as $test)
+		$course = Course::with('tests', 'tests.questions')->find($id);
+		
+		if($course)
 		{
-			$test->questions;
+			return $course;
 		}
 		
-		return $course;
+		return [
+			'error' => true,
+			'status' => 404,
+		];
 	}
 
 	/**

@@ -85,9 +85,7 @@ class TestsController extends Controller
 	 */
 	public function edit($id)
 	{
-		$test = Test::findOrFail($id);
-
-		$test->course;
+		$test = Test::with('course', 'questions')->findOrFail($id);
 
 		foreach($test->questions as $question)
 		{
@@ -114,7 +112,18 @@ class TestsController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		//
+		$test = Test::with('course', 'questions')->find($id);
+		if($test)
+		{
+			$data = $request->all();
+			unset($data['questions'][2]);
+			return $data;
+		}
+		
+		return [
+			'error' 		=> true,
+			'not_found'		=> true,
+		];
 	}
 
 	/**

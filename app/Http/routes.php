@@ -32,41 +32,29 @@ Route::get('make', function()
 	// $user->save();
 });
 
-Route::group(['prefix' => 'course'], function()
-{
-	Route::get('/', function()
-	{
-		return view('course.list', [
-			'courses' => App\Course::all(),
-		]);
-	});
-
-	Route::get('{id}', function($id)
-	{
-		$user_completed = [];
-		if(\Auth::check())
-		{
-			foreach(\Auth::user()->archives as $item)
-			{
-				$user_completed[$item->test_id] = json_decode($item->data);
-			}
-		}
-		
-		$course = App\Course::with('tests')->findOrFail($id);
-
-		return view('course.tests', [
-			'course' => $course,
-			'user_completed' => $user_completed,
-		]);
-	});
-});
-
 Route::get('test/{id}', 'TestsController@show');
 Route::post('test/{id}', 'TestsController@check');
+
+Route::get('course', 'CoursesController@index');
+Route::post('course/{id}', 'CoursesController@show');
 
 Route::get('archive/{id}', function($id)
 {
 	return User::findOrFail($id)->archives;
+});
+	
+Route::get('ajax/auth', function()
+{
+	$response = [
+		'authenticated' => Auth::check() && Auth::user()->isAdmin(),
+	];
+	
+	if($response['authenticated'])
+	{
+		$response['user'] = Auth::user();
+	}
+	
+	return $response;
 });
 
 Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()

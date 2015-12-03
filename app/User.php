@@ -41,5 +41,10 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany("App\Archive");
     }
+    
+    public function isAdmin()
+    {
+        return $this->access_level >= 1;
+    }
 
 }
