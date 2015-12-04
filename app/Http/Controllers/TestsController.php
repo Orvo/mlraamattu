@@ -23,7 +23,7 @@ class TestsController extends Controller
 		if(!$test->isUnlocked())
 		{
 			return redirect('course/' . $test->course->id)->with([
-				'error' => 'Koe <b>' . $test->title . '</b> on lukittu etkä voi vielä suorittaa sitä!'	
+				'error' => 'Et voi vielä suorittaa koetta <b>' . $test->title . '</b>!'	
 			]);
 		}
 		

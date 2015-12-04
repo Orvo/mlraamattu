@@ -8,7 +8,7 @@
 			<td style="width:40px">#</td>
 			<td style="width:150px">Tyyppi</td>
 			<td style="width:350px">Kysymys</td>
-			<td>Alaviite</td>
+			<td>Kuvaus/alaviite</td>
 		</tr>
 	</thead>
 	<tbody ui-sortable="sortableOptions" ng-model="questions" class="table-sortable">
@@ -16,7 +16,7 @@
 			<td>[[ item.id ]]</td>
 			<td>[[ item.type ]]</td>
 			<td>[[ item.title ]]</td>
-			<td>[[ item.subtitle ]]</td>
+			<td class="ng-html-output clearfix" ng-bind-html="item.subtitle"></td>
 		</tr>
 	</tbody>
 </table>

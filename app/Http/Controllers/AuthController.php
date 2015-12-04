@@ -12,9 +12,12 @@ use \Auth;
 class AuthController extends Controller
 {
 
-	public function index()
+	public function index(Request $request)
 	{
-		return view('auth.login');
+		return view('auth.login')
+				->with([
+					'referer' => $request->input('ref'),	
+				]);
 	}
 	
 	public function login(Requests\LoginFormRequest $request)
@@ -23,11 +26,16 @@ class AuthController extends Controller
 
 		if(Auth::attempt($credentials))
 		{
+			if($request->input('ref') == "admin" && Auth::user()->isAdmin())
+			{
+				return redirect()->intended('admin');	
+			}
+			
 			return redirect('/');
 		}
 
 		return redirect('/auth/login')
-			  		->withInput($request->only('email', 'remember_me'))
+			  		->withInput($request->only('email', 'remember_me', 'ref'))
 			  		->withErrors([
 			  			'Kirjautuminen annetuilla tunnuksilla ei onnistunut!'
 			  		]);

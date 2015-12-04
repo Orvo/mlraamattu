@@ -7,6 +7,10 @@
 	{!! Form::open(['method' => 'POST', 'action' => 'AuthController@login', 'style' => 'width:75%;margin:2em auto 0 auto']) !!}
 
 		{!! csrf_field() !!}
+		
+		@if($referer)
+			<input type="hidden" name="ref" value="{{ $referer }}">
+		@endif
 
 		@if($errors->any())
 			<div class="alert alert-danger">
@@ -20,12 +24,10 @@
 
 		<div class="form-group @if($errors->first('email')) has-error @endif">
 			{!! Form::text('email', null, ['class' => 'form-control input-lg', 'placeholder' => 'Sähköposti']) !!}
-			<small class="text-danger">{{ $errors->first('email') }}</small>
 		</div>
 
 		<div class="form-group @if($errors->first('password')) has-error @endif">
 			{!! Form::password('password', ['class' => 'form-control input-lg', 'placeholder' => 'Salasana']) !!}
-			<small class="text-danger">{{ $errors->first('password') }}</small>
 		</div>
 
 		<div class="form-group row">

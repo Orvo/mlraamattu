@@ -213,6 +213,47 @@ nav.navbar .nav.navbar-nav > .open > a:hover
 	background-color: #f3f3f3;
 }
 
+/*.breadcrumb
+{
+	padding: 0 5px;
+}
+
+.breadcrumb > li a
+{
+	display: inline-block;
+	padding: 8px 15px;
+}
+
+.breadcrumb > li a:hover
+{
+	display: inline-block;
+	background: #eaeaea;
+	text-decoration: none;
+}
+
+.breadcrumb > li + li::before
+{
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  content: "\e080";
+}*/
+
+.ng-html-output img
+{
+	float: left;
+	max-width: 150px;
+	margin: 0 10px 6px 0;
+}
+
 ul.questions, ul.questions li.question
 {
 	margin: 0;
@@ -405,7 +446,7 @@ ul.question-type
 	background: #f4f4f4;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #eaeaea;
 }
 
 ul.question-type li
@@ -419,6 +460,8 @@ ul.question-type li label
 	padding: 8px 10px;
 	margin: 0 6px 0 0;
 	border-radius: 4px;
+	border: 1px solid transparent;
+	transition: background 120ms ease-out, box-shadow 120ms ease-out, border 120ms ease-out;
 }
 
 ul.question-type li label input
@@ -427,9 +470,19 @@ ul.question-type li label input
 	margin-right: 5px;
 }
 
+ul.question-type li label.active
+{
+	background: #fff;
+	border: 1px solid #f0f0f0;
+	box-shadow: 0 1px 0 #e5e5e5;
+}
+
 ul.question-type li label:hover
 {
 	background: #F7C53E;
+	border: 1px solid #E5A72A;
+	box-shadow: 0 1px 0 #E7C463;
+	color: #302404;
 	cursor: pointer;
 }
 
@@ -446,7 +499,6 @@ ul.questions div.question-answers div.answer
 {
 	display: block;
 	background: #fff;
-	/*border: 1px solid #ddd;*/
 	box-shadow: 0 1px #eee;
 	padding: 8px 12px;
 	margin: 0 0 5px 0;
@@ -512,13 +564,16 @@ ul.questions div.question-answers div.answer div.col.answer-delete a
 	display: inline-block;
 	color: #a22;
 	text-decoration: none;
-	border-radius: 4px;
+	border-radius: 3px;
 	padding: 4px 7px;
+	border: 1px solid transparent;
 }
 
 ul.questions div.question-answers div.answer div.col.answer-delete a:hover
 {
 	background: #D2232E;
+	border: 1px solid #A51223;
+	box-shadow: 0 1px 0 #CB424F;
 	color: #fff;
 }
 
@@ -540,13 +595,17 @@ ul.questions div.question-answers div.answer div.col.answer-is-correct .radio la
 	display: inline-block;
 	padding: 4px 7px 4px 27px;
 	font-weight: bold;
+	border: 1px solid transparent;
 }
 
 ul.questions div.question-answers div.answer div.col.answer-is-correct .checkbox label:hover,
 ul.questions div.question-answers div.answer div.col.answer-is-correct .radio label:hover
 {
-	background: #FEA852;
-	border-radius: 4px;
+	background: #F7C53E;
+	border: 1px solid #E5A72A;
+	box-shadow: 0 1px 0 #E7C463;
+	color: #302404;
+	border-radius: 3px;
 }
 
 ul.questions div.question-answers div.answer .control-label,
@@ -586,4 +645,19 @@ ul.questions div.choice .col.input-field
 .cursor-pointer
 {
 	cursor: pointer;
+}
+
+input[type="text"].form-control,
+textarea.form-control
+{
+	border: 1px solid #d5d5d5;
+	box-shadow: 0 2px 0 #eaeaea;
+	/*transform: border 600ms ease-out, box-shadow 600ms ease-out !important;*/
+}
+
+input[type="text"].form-control:focus,
+textarea.form-control:focus
+{
+	border: 1px solid #F7C53E;
+	box-shadow: 0 2px 1px #F5D57B;
 }

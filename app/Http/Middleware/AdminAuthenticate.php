@@ -34,8 +34,9 @@ class AdminAuthenticate
      */
     public function handle($request, Closure $next)
     {
-        if (!$this->auth->check() or $this->auth->user()->access_level != 1) {
-            abort(401, "No access");
+        if (!$this->auth->check() or $this->auth->user()->access_level != 1)
+        {
+            return redirect('/auth/login?ref=admin');
         }
 
         return $next($request);

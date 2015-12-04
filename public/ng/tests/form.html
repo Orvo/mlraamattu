@@ -4,10 +4,10 @@
 		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas eaque tempora possimus, nisi eveniet ex veritatis temporibus ratione quo eos.</p>
 		<p>Doloremque porro maxime reprehenderit sequi harum reiciendis incidunt soluta rem ipsam nulla non, distinctio molestiae dolorum alias, eaque quia. Dolor, voluptates temporibus nesciunt ullam sed veritatis, ratione tenetur quo, ipsum minima consectetur est quam obcaecati cumque, porro.</p>
 
-		<button type="button" class="btn btn-success btn-block" ng-click="add_question()" ng-disabled="data.test.questions.length >= 8">
+		<button type="button" class="btn btn-success btn-block" ng-click="add_question()" ng-disabled="data.test.questions.length >= 15">
 			<span class="glyphicon glyphicon-plus"></span> Lisää uusi kysymys
 		</button>
-		<div class="help-block center-text" ng-show="data.test.questions.length >= 8">
+		<div class="help-block center-text" ng-show="data.test.questions.length >= 15">
 			Maksimimäärä kysymyksiä saavutettu
 		</div>
 
@@ -16,7 +16,7 @@
 			<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
 		</button>
 		<a href="#/courses/[[ data.test.course.id ]]" class="btn btn-default btn-block">
-			<span class="glyphicon glyphicon-chevron-left"></span> Palaa takaisin
+			<span class="glyphicon glyphicon-chevron-left"></span> Peruuta
 		</a>
 	</div>
 	<div id="content-main">
@@ -24,8 +24,8 @@
 			<ol class="breadcrumb">
 				<li><a href="#/">Ylläpitopaneeli</a></li>
 				<li><a href="#/courses/">Kurssit</a></li>
-				<li ng-cloak><a href="#/courses/[[ data.test.course.id ]]">Kurssi: [[ data.test.course.title || '-' ]]</a></li>
-				<li ng-cloak>
+				<li><a href="#/courses/[[ data.test.course.id ]]">Kurssi: [[ data.test.course.title || '-' ]]</a></li>
+				<li>
 					<span ng-show="!id">Uusi koe</span>
 					<span ng-show="id">Muokataan koetta</span>
 				</li>
@@ -101,7 +101,9 @@
 					<div class="form-group question-details">
 						<ul class="question-type">
 							<li ng-repeat="type in question_types">
-								<label><input type="radio" ng-model="question.type" ng-value="type"> [[ translate_type(type) ]]</label>
+								<label ng-class="{'active': question.type == type}">
+									<input type="radio" ng-model="question.type" ng-value="type"> [[ translate_type(type) ]]
+								</label>
 							</li>
 						</ul>
 						<div class="question-answers">
@@ -111,9 +113,9 @@
 									Käyttäjän tulee valita yksi tai useampi oikea vastaus monesta:
 								</p>
 								<div class="form-group answer" ng-repeat="(akey, answer) in question.answers">
-									<label for="question-[[ question.id ]]-answer-[[ akey ]]" class="answer-label">[[ akey + 1 ]].</label>
+									<label for="question-[[ qkey ]]-answer-[[ akey ]]" class="answer-label">[[ akey + 1 ]].</label>
 									<div class="col answer-text">
-										<input type="text" class="form-control" id="question-[[ question.id ]]-answer-[[ akey ]]" ng-model="answer.text">
+										<input type="text" class="form-control" id="question-[[ qkey ]]-answer-[[ akey ]]" ng-model="answer.text" placeholder="Vaihtoehdon teksti">
 									</div>
 									<div class="col answer-is-correct">
 										<div class="checkbox">
@@ -129,9 +131,9 @@
 									</div>
 								</div>
 								<div class="form-group answer">
-									<label for="question-[[ question.id ]]-answer-[[ akey ]]" class="answer-label">Lisää uusi</label>
+									<label for="question-[[ qkey ]]-answer-[[ akey ]]" class="answer-label">Lisää uusi</label>
 									<div class="col answer-text">
-										<input type="text" class="form-control" ng-enter="add_answer.do(qkey, question.id)" ng-model="add_answer.text" placeholder="Kirjoita vaihtoehdon teksti">
+										<input type="text" class="form-control" ng-enter="add_answer.do(qkey, question.id)" ng-model="add_answer.text" placeholder="Syötä uusi vaihtoehto">
 									</div>
 									<div class="help-block" ng-show="add_answer.text != ''">
 										Paina Enter varmistaaksesi lisäys
@@ -145,14 +147,14 @@
 									Käyttäjän tulee valita yksi oikea vastaus monesta:
 								</p>
 								<div class="form-group answer" ng-repeat="(akey, answer) in question.answers">
-									<label for="question-[[ question.id ]]-answer-[[ akey ]]" class="answer-label">[[ akey + 1 ]].</label>
+									<label for="question-[[ qkey ]]-answer-[[ akey ]]" class="answer-label">[[ akey + 1 ]].</label>
 									<div class="col answer-text">
-										<input type="text" class="form-control" id="question-[[ question.id ]]-answer-[[ akey ]]" ng-model="answer.text">
+										<input type="text" class="form-control" id="question-[[ qkey ]]-answer-[[ akey ]]" ng-model="answer.text" placeholder="Vaihtoehdon teksti">
 									</div>
 									<div class="col answer-is-correct">
 										<div class="radio">
 											<label>
-												<input type="radio" ng-model="question.correct_answer" value="[[ answer.id ]]"> Oikea vaihtoehto
+												<input type="radio" ng-model="question.correct_answer" value="[[ akey ]]"> Oikea vaihtoehto
 											</label>
 										</div>
 									</div>
@@ -163,9 +165,9 @@
 									</div>
 								</div>
 								<div class="form-group answer">
-									<label for="question-[[ question.id ]]-answer-[[ akey ]]" class="answer-label">Lisää uusi</label>
+									<label for="question-[[ qkey ]]-answer-[[ akey ]]" class="answer-label">Lisää uusi</label>
 									<div class="col answer-text">
-										<input type="text" class="form-control" ng-enter="add_answer.do(qkey, question.id)" ng-model="add_answer.text" placeholder="Kirjoita vaihtoehdon teksti">
+										<input type="text" class="form-control" ng-enter="add_answer.do(qkey, question.id)" ng-model="add_answer.text" placeholder="Syötä uusi vaihtoehto">
 									</div>
 									<div class="help-block" ng-show="add_answer.text != ''">
 										Paina Enter varmistaaksesi lisäys
@@ -180,9 +182,9 @@
 								</p>
 
 								<div class="form-group answer" ng-repeat="(akey, answer) in question.answers">
-									<label for="question-[[ question.id ]]-answer-[[ akey ]]" class="answer-label">[[ akey + 1 ]].</label>
+									<label for="question-[[ qkey ]]-answer-[[ akey ]]" class="answer-label">[[ akey + 1 ]].</label>
 									<div class="col answer-text">
-										<input type="text" class="form-control" id="question-[[ question.id ]]-answer-[[ akey ]]" ng-model="answer.text">
+										<input type="text" class="form-control" id="question-[[ qkey ]]-answer-[[ akey ]]" ng-model="answer.text" placeholder="Vastaus">
 									</div>
 									<div class="col answer-delete" ng-hide="question.answers.length <= 2">
 										<a class="cursor-pointer" ng-click="remove_answer(qkey, akey)">
@@ -191,7 +193,7 @@
 									</div>
 								</div>
 								<div class="form-group answer">
-									<label for="question-[[ question.id ]]-answer-[[ akey ]]" class="answer-label">Lisää uusi</label>
+									<label for="question-[[ qkey ]]-answer-[[ akey ]]" class="answer-label">Lisää uusi</label>
 									<div class="col answer-text">
 										<input type="text" class="form-control" ng-enter="add_answer.do(qkey, question.id)" ng-model="add_answer.text" placeholder="Kirjoita sana tai lause">
 									</div>
@@ -208,7 +210,7 @@
 								</p>
 								<div class="form-group answer">
 									<div class="col answer-text wide">
-										<input type="text" class="form-control" ng-model="question.answers[0].text">
+										<input type="text" class="form-control" ng-model="question.answers[0].text" placeholder="Vastaus">
 									</div>
 								</div>
 							</div>

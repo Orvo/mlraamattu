@@ -21,6 +21,11 @@ var translate_type = function(type)
 	return "Tuntematon tyyppi: " + type;
 }
 
+function nl2br (str, is_xhtml) {
+    var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+    return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+}
+
 app.controller('IndexController', function($scope, $window, $location, $routeParams, QuestionsModel)
 {
 	QuestionsModel.query(function(data)
@@ -30,6 +35,7 @@ app.controller('IndexController', function($scope, $window, $location, $routePar
 		angular.forEach($scope.questions, function(value, key)
 		{
 			$scope.questions[key].type = translate_type(value.type);
+			$scope.questions[key].subtitle = nl2br(value.subtitle);
 		});
 	});
 		
@@ -64,14 +70,9 @@ app.controller('CourseDisplayController', function($scope, $window, $location, $
 		}
 		else
 		{
-			if(data.status == 401)
-			{
-				$window.location = '/auth/login?ref=admin';
-			}
-			
 			if(data.status == 404)
 			{
-				alert("NOT FOUNDS");
+				// alert("NOT FOUNDS");
 			}
 		}
 	});
@@ -242,16 +243,18 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 	$scope.add_question = function()
 	{
 		$scope.data.test.questions.push({
-			id: 9000,
-			test_id: 1,
 			type: 'CHOICE',
 			title: 'Uusi kysymys',
 			subtitle: '',
 			correct_answer: 0,
 			answers: [
 				{
-					text: "Vaihtoehto #1",
+					text: "",
 					is_correct: true,
+				},
+				{
+					text: "",
+					is_correct: false,
 				},
 			],
 		});

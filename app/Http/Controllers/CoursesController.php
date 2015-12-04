@@ -41,7 +41,7 @@ class CoursesController extends Controller
 			}
 		}
 		
-		$course = App\Course::with('tests')->findOrFail($id);
+		$course = Course::with('tests')->findOrFail($id);
 
 		return view('course.tests', [
 			'course' => $course,

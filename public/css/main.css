@@ -219,7 +219,36 @@ div.question
 	border-bottom: 1px solid #ddd;
 	border-radius: 4px;
 	overflow: hidden;
+	transition: border 200ms ease-out, box-shadow 200ms ease-out;
 }
+
+/*div.question:hover
+{
+	border-top: 1px solid #d2d2d2;
+	border-bottom: 1px solid #d2d2d2;
+	box-shadow: 0 2px 4px 2px #d2d2d2;
+}
+
+div.question.correct:hover
+{
+	border-top: 1px solid #347F15;
+	border-bottom: 1px solid #347F15;
+	box-shadow: 0 2px 4px 2px #3DA217;
+}
+
+div.question.partially-correct:hover
+{
+	border-top: 1px solid #B1720F;
+	border-bottom: 1px solid #B1720F;
+	box-shadow: 0 2px 4px 2px #D57D11;
+}
+
+div.question.incorrect:hover
+{
+	border-top: 1px solid #77000F;
+	border-bottom: 1px solid #77000F;
+	box-shadow: 0 2px 4px 2px #9C0013;
+}*/
 
 div.question .form-group
 {

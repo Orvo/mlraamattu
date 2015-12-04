@@ -32,7 +32,7 @@
 						</li>
 						<li class="dropdown" ng-show="userData">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-								Tervetuloa, <b>[[ userData.user.name ]]</b> <span class="caret"></span>
+								<b>[[ userData.user.name ]]</b> <span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="#">Action</a></li>
@@ -40,7 +40,7 @@
 									<a href="#/users/edit/[[ userData.user.id ]]">Muokkaa tietoja</a>
 								</li>
 								<li role="separator" class="divider"></li>
-								<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Kirjaudu ulos</a></li>
+								<li><a href="/auth/logout"><span class="glyphicon glyphicon-log-out"></span> Kirjaudu ulos</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -59,6 +59,7 @@
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-resource.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.min.js"></script>
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 		
 		<script src="/js/ng/main.js"></script>

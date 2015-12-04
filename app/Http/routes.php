@@ -36,7 +36,7 @@ Route::get('test/{id}', 'TestsController@show');
 Route::post('test/{id}', 'TestsController@check');
 
 Route::get('course', 'CoursesController@index');
-Route::post('course/{id}', 'CoursesController@show');
+Route::get('course/{id}', 'CoursesController@show');
 
 Route::get('archive/{id}', function($id)
 {

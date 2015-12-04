@@ -3,7 +3,7 @@
  * Application
  */
  
-var app = angular.module('adminpanel', ['ngResource', 'ngRoute', 'ui.sortable'],
+var app = angular.module('adminpanel', ['ngResource', 'ngRoute', 'ngSanitize', 'ui.sortable'],
 	function($interpolateProvider)
 	{
 		$interpolateProvider.startSymbol('[[');
@@ -14,31 +14,39 @@ var app = angular.module('adminpanel', ['ngResource', 'ngRoute', 'ui.sortable'],
 app.config(
 	function($routeProvider)
 	{
+		var userData;
+		
 		var authProvider = function($rootScope, $window, $q, $http)
 		{
 			var deferred = $q.defer();
 			
-			$http.get('/ajax/auth')
-				.then(function success(response)
-				{
-					// console.log("SUCCESS", response.data);
-					
-					if(!response.data.authenticated)
+			if($rootScope.userData && $rootScope.userData.authenticated && Date.now()-$rootScope.userData.lastCheck < 30000)
+			{
+				deferred.resolve($rootScope.userData);
+			}
+			else
+			{
+				$http.get('/ajax/auth')
+					.then(function success(response)
+					{
+						if(!response.data.authenticated)
+						{
+							deferred.reject(false);
+							$window.location = "/auth/login/?ref=admin";
+						}
+						else
+						{
+							deferred.resolve(response.data);
+							$rootScope.userData = response.data;
+							$rootScope.userData.lastCheck = Date.now();
+						}
+					}, function error(response)
 					{
 						deferred.reject(false);
 						$window.location = "/auth/login/?ref=admin";
-					}
-					else
-					{
-						deferred.resolve(response.data);
-						$rootScope.userData = response.data;
-					}
-				}, function error(response)
-				{
-					deferred.reject(false);
-					$window.location = "/auth/login/?ref=admin";
-				});
-				
+					});
+			}
+			
 			return deferred.promise;
 		}
 		
@@ -145,19 +153,22 @@ app.config(
 // 	}
 // ]);
 
-// app.directive('ngEnter', function() {
-// 	return function(scope, element, attrs) {
-// 		element.bind("keydown keypress", function(event) {
-// 			if(event.which === 13) {
-// 				scope.$apply(function(){
-// 					scope.$eval(attrs.ngEnter);
-// 				});
-
-// 				event.preventDefault();
-// 			}
-// 		});
-// 	};
-// });
+app.directive('ngEnter', function()
+{
+	return function(scope, element, attrs)
+	{
+		element.bind("keydown keypress", function(event)
+		{
+			if(event.which === 13) {
+				scope.$apply(function(){
+					scope.$eval(attrs.ngEnter);
+				});
+				
+				event.preventDefault();
+			}
+		});
+	};
+});
 
 // app.directive('ngBlur', ['$parse', function($parse) {
 // 	return function(scope, element, attr) {

@@ -18,12 +18,7 @@ class TestsController extends Controller
 	 */
 	public function index()
 	{
-		$tests = Test::all();
-		foreach($tests as $test)
-		{
-			$test->questions;
-			$test->course;
-		}
+		$tests = Test::with('questions', 'course')->get();
 		return $tests;
 	}
 
@@ -68,7 +63,7 @@ class TestsController extends Controller
 
 				if(!$question->correct_answer and $answer->is_correct)
 				{
-					$question->correct_answer = $answer->id;
+					$question->correct_answer = $key;
 				}
 			}
 		}
