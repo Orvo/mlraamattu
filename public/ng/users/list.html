@@ -1,0 +1,82 @@
+<div id="content-sidebar" class="fixed" ng-show="loaded">
+	<h2>Toiminnot</h2>
+	<p>
+		Käyttäjät. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, magni, quo. Porro, iusto facilis repellendus eligendi, voluptatum assumenda sed provident nesciunt eveniet odio quos dignissimos hic, dolores eum ad consequuntur ullam. Dolores at aut, quia culpa rem aliquid perferendis error sed animi dolor eos facere illo, provident nobis officia ipsa!
+	</p>
+</div>
+<div id="content-main" ng-show="loaded">
+	<div class="breadcrumbs">
+		<ol class="breadcrumb">
+			<li><a href="#/">Ylläpitopaneeli</a></li>
+			<li>Käyttäjät</li>
+		</ol>
+	</div>
+	<h1>Käyttäjät</h1>
+	<div class="actions-row">
+		<div class="pull-right" style="text-align: right">
+			<a href="#/users/new" class="btn btn-success">
+				<span class="glyphicon glyphicon-plus"></span> Lisää uusi käyttäjä
+			</a>
+		</div>
+		<div class="list-actions">
+			<input type="text" ng-model="searchFilter" placeholder="Hae käyttäjiä" class="form-control search-filter">
+			<button type="button" class="btn btn-default" ng-click="searchFilter='ylläpitäjä'">
+				Hae ylläpitäjiä
+			</button>
+			<button type="button" class="btn btn-default" ng-click="searchFilter='käyttäjä'">
+				Hae käyttäjiä
+			</button>
+		</div>
+	</div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<td style="width:40px">ID</td>
+				<td>Käyttäjän tiedot</td>
+				<td style="width:200px">Koesuoritukset</td>
+				<td>Toiminnot</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in users | filter : searchFilter">
+				<td style="font-weight: bold; background:#fafafa">[[ user.id ]]</td>
+				<td>
+					<div class="pull-right">
+						<div ng-show="user.access_level == 1" class="label label-primary">Ylläpitäjä</div>
+					</div>
+					<div class="info">
+						<a href="#/users/[[ user.id ]]">
+							[[ user.name ]]
+						</a>
+						([[ user.email ]])
+					</div>
+				</td>
+				<td style="text-align: left">
+					-
+				</td>
+				<td>
+					<a href="#/users/[[ user.id ]]" class="btn btn-success btn-xs">
+						<span class="glyphicon glyphicon-search"></span> Näytä
+					</a>
+					<a href="#/users/[[ user.id ]]/edit" class="btn btn-primary btn-xs">
+						<span class="glyphicon glyphicon-edit"></span> Muokkaa
+					</a>
+					<a href="#/users/delete/[[ user.id ]]" class="btn btn-danger btn-xs">
+						<span class="glyphicon glyphicon-trash"></span> Poista
+					</a>
+				</td>
+			</tr>
+			<tr ng-hide="(users | filter : searchFilter).length > 0">
+				<td colspan="5" style="text-align: center;">
+					<b>Ei tuloksia.</b>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="load-placeholder" ng-show="!loaded">
+	<h3>
+		<img src="/img/ajax-loader.gif" alt=""> Ladataan...
+	</h3>
+</div>

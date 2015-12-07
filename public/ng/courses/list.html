@@ -42,11 +42,11 @@
 				</td>
 				<td>[[ course.description ]]</td>
 				<td>
-					<ul>
+					<ol>
 						<li ng-repeat="test in course.tests">
 							<a href="#/tests/[[ test.id ]]">[[ test.title ]]</a>
 						</li>
-					</ul>
+					</ol>
 					<span ng-show="course.tests.length == 0">Ei kokeita</span>
 				</td>
 				<td>

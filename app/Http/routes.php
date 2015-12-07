@@ -78,6 +78,7 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 
 	Route::resource('courses', 'Ajax\CoursesController');
 	Route::resource('tests', 'Ajax\TestsController');
+	Route::resource('users', 'Ajax\UsersController');
 
 });
 

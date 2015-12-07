@@ -254,6 +254,23 @@ nav.navbar .nav.navbar-nav > .open > a:hover
 	margin: 0 10px 6px 0;
 }
 
+.list-actions input,
+.list-actions a,
+.list-actions button
+{
+	display: inline-block;
+}
+
+.list-actions .search-filter
+{
+	margin-right: 10px;
+}
+
+.list-actions .btn
+{
+	border: none;
+}
+
 ul.questions, ul.questions li.question
 {
 	margin: 0;

@@ -95,6 +95,14 @@ app.controller('TestsController', function($scope, $window, $location, $routePar
 	});
 });
 
+app.controller('UsersController', function($scope, $window, $location, $routeParams, UsersModel)
+{
+	$scope.users = UsersModel.query(function(data)
+	{
+		$scope.loaded = true;
+	});
+});
+
 app.controller('TestsFormController', function($scope, $window, $location, $routeParams, CoursesModel, TestsModel)
 {
 	$scope.id = $routeParams.id;

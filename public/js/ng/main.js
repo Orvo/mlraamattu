@@ -99,6 +99,27 @@ app.config(
 				resolve: { factory: authProvider, },
 			})
 			
+			.when('/users', {
+				controller: 'UsersController',
+				templateUrl: '/ng/users/list.html',
+				resolve: { factory: authProvider, },
+			})
+			// .when('/users/:id', {
+			// 	controller: 'TestsDisplayController',
+			// 	templateUrl: '/ng/users/show.html',
+			// 	resolve: { factory: authProvider, },
+			// })
+			// .when('/users/new/:course_id', {
+			// 	controller: 'TestsFormController',
+			// 	templateUrl: '/ng/users/form.html',
+			// 	resolve: { factory: authProvider, },
+			// })
+			// .when('/users/:id/edit', {
+			// 	controller: 'TestsFormController',
+			// 	templateUrl: '/ng/users/form.html',
+			// 	resolve: { factory: authProvider, },
+			// })
+			
 			////////////////////////////////////////////////
 			// Misc
 			

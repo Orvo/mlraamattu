@@ -21,7 +21,7 @@ $(function()
 	// 	$(this).parent().addClass('active');
 	// });
 	
-	$('nav.navbar .dropdown-toggle').click(function(e)
+	$('nav.navbar .dropdown-toggle, .list-actions a').click(function(e)
 	{
 		e.preventDefault();
 	});

@@ -42,19 +42,14 @@ app.factory('TestsModel', function($resource)
 	});
 });
  
-// app.factory('UserModel', ['$resource', function($resource)
-// {
-// 	return $resource('/ajax/user/:id', null, {
-// 		'get': {
-// 			method: 'GET'
-// 		},
-// 		'update': {
-// 			method: 'PUT'
-// 		},
-// 	});
-// }]);
-
-// app.factory('CategoryModel', ['$resource', function($resource)
-// {
-// 	return $resource('/ajax/category/', null);
-// }]);
+app.factory('UsersModel', function($resource)
+{
+	return $resource('/ajax/users/:id', { id: '@_id' }, {
+		'get': {
+			method: 'GET'
+		},
+		'update': {
+			method: 'PUT'
+		},
+	});
+});
