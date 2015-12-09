@@ -192,6 +192,26 @@ nav.navbar .nav.navbar-nav > .open > a:hover
 	border-right: 1px solid #FEC140;
 }
 
+nav.navbar .badge
+{
+	background: #fff;
+	color: #433100;
+	margin: -2px 0 0 6px;
+}
+
+@keyframes glow-animation {
+  0%   { box-shadow: 0 0 4px 2px #F7C53E; }
+  10%   { box-shadow: 0 0 1px 0 #FFDA6D; }
+  40% { box-shadow: 0 0 4px 3px #FFF3CE; }
+  100% { box-shadow: 0 0 4px 2px #F7C53E; }
+}
+
+.glow-animation
+{
+	box-shadow: 0 0 4px 2px #FFF3CE;
+	animation: glow-animation 4s infinite;
+}
+
 .dropdown-menu
 {
 	width: 100%;

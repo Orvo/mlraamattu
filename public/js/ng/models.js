@@ -41,10 +41,22 @@ app.factory('TestsModel', function($resource)
 		},
 	});
 });
- 
+
 app.factory('UsersModel', function($resource)
 {
 	return $resource('/ajax/users/:id', { id: '@_id' }, {
+		'get': {
+			method: 'GET'
+		},
+		'update': {
+			method: 'PUT'
+		},
+	});
+});
+
+app.factory('ArchiveModel', function($resource)
+{
+	return $resource('/ajax/archive/:id', { id: '@_id' }, {
 		'get': {
 			method: 'GET'
 		},

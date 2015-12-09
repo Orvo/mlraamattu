@@ -14,6 +14,11 @@ class AuthController extends Controller
 
 	public function index(Request $request)
 	{
+		if(Auth::check())
+		{
+			return redirect('/');
+		}
+		
 		return view('auth.login')
 				->with([
 					'referer' => $request->input('ref'),	
@@ -23,6 +28,11 @@ class AuthController extends Controller
 	
 	public function login(Requests\LoginFormRequest $request)
 	{
+		if(Auth::check())
+		{
+			return redirect('/');
+		}
+		
 		$credentials = $request->only('email', 'password');
 		$remember = $request->input('remember_me');
 
@@ -55,14 +65,14 @@ class AuthController extends Controller
 	
 	public function ajax_login(Request $request)
 	{
-		// if(Auth::check())
-		// {
-		// 	return [
-		// 		'success' 	=> true,
-		// 		'user'		=> Auth::user(),
-		// 		'isAdmin'	=> Auth::user()->isAdmin(),
-		// 	];
-		// }
+		if(Auth::check())
+		{
+			return [
+				'success' 	=> true,
+				'user'		=> Auth::user(),
+				'isAdmin'	=> Auth::user()->isAdmin(),
+			];
+		}
 		
 		$validation = \Validator::make($request->all(), [
 			'email' => 'required',

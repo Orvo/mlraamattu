@@ -115,7 +115,7 @@
 							<div ng-show="question.type == 'MULTI'">
 								<h3>Vaihtoehdot / Monivalinta</h3>
 								<p>
-									Käyttäjän tulee valita yksi tai useampi oikea vastaus monesta:
+									Käyttäjän tulee valita yksi tai useampi oikea vastaus monesta. Kysymyksellä pitää olla ainakin kaksi vaihtoehtoa.
 								</p>
 								<div class="form-group answer" ng-repeat="(akey, answer) in question.answers">
 									<label for="question-[[ qkey ]]-answer-[[ akey ]]" class="answer-label">[[ akey + 1 ]].</label>
@@ -149,7 +149,7 @@
 							<div ng-show="question.type == 'CHOICE'">
 								<h3>Vaihtoehdot / Yksivalinta</h3>
 								<p>
-									Käyttäjän tulee valita yksi oikea vastaus monesta:
+									Käyttäjän tulee valita yksi oikea vastaus monesta. Kysymyksellä pitää olla ainakin kaksi vaihtoehtoa.
 								</p>
 								<div class="form-group answer" ng-repeat="(akey, answer) in question.answers">
 									<label for="question-[[ qkey ]]-answer-[[ akey ]]" class="answer-label">[[ akey + 1 ]].</label>
@@ -183,7 +183,7 @@
 							<div ng-show="question.type == 'MULTITEXT'">
 								<h3>Vastaukset / Moniteksti</h3>
 								<p>
-									Käyttäjän tulee syöttää vastaukseksi kaikki alla olevat sanat tai lauseet:
+									Käyttäjän tulee syöttää vastaukseksi kaikki alla olevat sanat tai lauseet. Kysymyksellä pitää olla ainakin kaksi vastausta.
 								</p>
 
 								<div class="form-group answer" ng-repeat="(akey, answer) in question.answers">
@@ -211,7 +211,7 @@
 							<div ng-show="question.type == 'TEXT'">
 								<h3>Vastaukset / Teksti</h3>
 								<p>
-									Käyttäjän tulee syöttää vastaukseksi alla oleva sana tai lause:
+									Käyttäjän tulee syöttää vastaukseksi alla oleva sana tai lause.
 								</p>
 								<div class="form-group answer">
 									<div class="col answer-text wide">
@@ -223,7 +223,7 @@
 							<div ng-show="question.type == 'TEXTAREA'">
 								<h3>Vastaukset / Pitkä teksti</h3>
 								<p>
-									Käyttäjän tulee syöttää vastaukseksi jotain tekstikenttään joka tarkistetaan myöhemmin.
+									Käyttäjän tulee syöttää vastaukseksi jotain tekstikenttään ja vastauksen voi tarkistaa myöhemmin ylläpitopaneelista.
 								</p>
 								<div class="form-group answer">
 									<div class="col answer-text wide">

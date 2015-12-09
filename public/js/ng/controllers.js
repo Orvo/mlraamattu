@@ -314,7 +314,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 			if(text.length > 0)
 			{
 				$scope.data.test.questions[key].answers.push({
-					title: text,
+					text: text,
 				});
 			}
 
@@ -345,9 +345,22 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	};
 });
 
-app.controller('NavbarController', function($rootScope, $scope, $window, $location, $routeParams)
+app.controller('NavbarController', function($rootScope, $scope, $window, $location, $routeParams, $http)
 {
+	$rootScope.update_archive_stats = function()
+	{
+		$http.get('/ajax/archive/stats').then(function success(response)
+		{
+			$scope.test_records = response.data;
+		});
+	}
 	
+	setInterval(function()
+	{
+		$rootScope.update_archive_stats();
+	}, 5 * 60 * 1000);
+	
+	$rootScope.update_archive_stats();
 });
 
 app.controller('AjaxLogin', function($rootScope, $scope, $window, $location, $routeParams, $http)

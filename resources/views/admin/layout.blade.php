@@ -22,6 +22,14 @@
 					<ul class="nav navbar-nav">
 						<li><a href="#/courses">Kurssit</a></li>
 						<li><a href="#/tests">Kokeet</a></li>
+						<li>
+							<a href="#/archive">
+								Koesuoritukset
+								<span class="badge glow-animation ng-cloak" ng-show="test_records !== undefined && test_records.new > 0">
+									[[ test_records.new ]] uutta!
+								</span>
+							</a>
+						</li>
 					</ul>
 					
 					<ul class="nav navbar-nav navbar-right">
@@ -30,7 +38,7 @@
 								<span class="glyphicon glyphicon-user"></span> Käyttäjät
 							</a>
 						</li>
-						<li class="dropdown" ng-show="userData">
+						<li class="dropdown ng-cloak" ng-show="userData">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 								<b>[[ userData.user.name ]]</b> <span class="caret"></span>
 							</a>

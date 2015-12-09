@@ -82,6 +82,16 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 	Route::resource('tests', 'Ajax\TestsController');
 	Route::resource('users', 'Ajax\UsersController');
 	
+	Route::get('archive/stats', function()
+	{
+		$archive = App\Archive::all();
+		
+		return [
+			'new' 		=> $archive->where('replied_to', 0)->count(),
+			'total' 	=> $archive->count(),
+			// 'archive'	=> $archive->,
+		];
+	});
 	// Route::get('login', 'AuthController@ajax_login');
 
 });
