@@ -678,3 +678,45 @@ textarea.form-control:focus
 	border: 1px solid #F7C53E;
 	box-shadow: 0 2px 1px #F5D57B;
 }
+
+#modal-login .modal-body > p
+{
+	padding-bottom: 0.4em;
+}
+
+#modal-login .modal-body .body-content
+{
+	width: 470px;
+	margin: 0 auto;
+}
+
+#modal-login .modal-footer
+{
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.errors
+{
+	display: none;
+	background: #940F18;
+	color: #fff;
+	font-size: 11pt;
+	text-align: left;
+	padding: 7px;
+	border: 1px solid #6B0010;
+	border-radius: 4px;
+	margin-bottom: 1em;
+}
+
+.errors ul
+{
+	margin: 0;
+	padding: 0 0 0 22px;
+}
+
+.errors ul li
+{
+	margin: 0;
+	padding: 0;
+}

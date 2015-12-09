@@ -103,7 +103,7 @@ app.controller('UsersController', function($scope, $window, $location, $routePar
 	});
 });
 
-app.controller('TestsFormController', function($scope, $window, $location, $routeParams, CoursesModel, TestsModel)
+app.controller('TestsFormController', function($rootScope, $scope, $window, $location, $routeParams, $http, CoursesModel, TestsModel)
 {
 	$scope.id = $routeParams.id;
 	$scope.course_id = $routeParams.course_id;
@@ -122,20 +122,47 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 	
 	$scope.submit = function(data)
 	{
-		if($scope.id) // existing entry
+		$scope.processing = true;
+		
+		var do_submit = function()
 		{
-			$scope.data.test = TestsModel.update({id: $scope.id}, $scope.data.test, function(data, h)
+			$scope.processing = false;
+			
+			if($scope.id) // existing entry
 			{
-				console.log("ASD", data, h);
-			});
-		}
-		else // new entry
-		{
-			$scope.data.test.$save(function(data, h)
+				$scope.data.test = TestsModel.update({id: $scope.id}, $scope.data.test, function(data, h)
+				{
+					console.log("ASD", data, h);
+				});
+			}
+			else // new entry
 			{
-				console.log(data, h);
-			});
+				$scope.data.test.$save(function(data, h)
+				{
+					console.log(data, h);
+				});
+			}
 		}
+		
+		// Check authentication and show login form if not authenticated
+		$http.get('/ajax/auth')
+			.then(function success(response)
+			{
+				if(response.data.authenticated)
+				{
+					do_submit();
+				}
+				else
+				{
+					$rootScope.login_callback = do_submit;
+					
+					$('#modal-login').modal({
+						show: true,
+						keyboard: false,
+						backdrop: 'static',
+					});
+				}
+			});
 	}
 
 	if($scope.id)
@@ -321,4 +348,51 @@ app.controller('TestsFormController', function($scope, $window, $location, $rout
 app.controller('NavbarController', function($rootScope, $scope, $window, $location, $routeParams)
 {
 	
+});
+
+app.controller('AjaxLogin', function($rootScope, $scope, $window, $location, $routeParams, $http)
+{
+	$scope.do_login = function()
+	{
+		$scope.verifying = true;
+		$('#modal-login .errors').stop().fadeOut(200);
+		
+		$http.post('/ajax/login', {
+			email: $scope.email,
+			password: $scope.password,
+			remember_me: $scope.remember_me
+		}).then(function success(response)
+			{
+				$scope.verifying = false;
+				console.log(response.status, response.data);
+				
+				if(response.data.success)
+				{
+					if(!response.data.isAdmin)
+					{
+						$window.location = '/';
+					}
+					
+					$rootScope.userData = response.data;
+					$scope.errors = [];
+					
+					$('#modal-login').modal('hide');
+					
+					if($rootScope.login_callback)
+					{
+						$rootScope.login_callback();	
+					}
+				}
+				else
+				{
+					$('#modal-login .errors').stop().fadeIn(200);
+					$scope.errors = response.data.errors;
+				}
+				
+			}, function error(response)
+			{
+				$scope.verifying = false;
+				console.log(response.status, response.data);
+			});
+	}
 });

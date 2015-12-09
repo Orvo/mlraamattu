@@ -1,6 +1,9 @@
 <div id="content-sidebar" ng-show="loaded">
 	<h2>Toiminnot</h2>
 	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas eaque tempora possimus, nisi eveniet ex veritatis temporibus ratione quo eos.</p>
+	<a href="#/course/[[ course.id ]]/edit" class="btn btn-primary btn-block btn-lg">
+		<span class="glyphicon glyphicon-edit"></span> Muokkaa kurssia
+	</a>
 	<a href="#/tests/new/[[ course.id ]]" class="btn btn-success btn-block btn-lg">
 		<span class="glyphicon glyphicon-plus"></span> Lisää uusi koe
 	</a>
@@ -13,7 +16,11 @@
 			<li>Kurssi: [[ course.title || '-' ]]</li>
 		</ol>
 	</div>
+	
 	<h1>Kurssi: [[ course.title ]]</h1>
+	<p>
+		[[ course.description ]]
+	</p>
 	<div class="actions-row">
 		<div class="pull-right" style="text-align: right">
 			<a href="#/tests/new/[[ course.id ]]" class="btn btn-success">

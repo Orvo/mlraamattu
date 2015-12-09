@@ -12,12 +12,17 @@
 		</div>
 
 		<hr>
-		<button type="submit" class="btn btn-primary btn-block btn-lg">
-			<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
-		</button>
-		<a href="#/courses/[[ data.test.course.id ]]" class="btn btn-default btn-block">
-			<span class="glyphicon glyphicon-chevron-left"></span> Peruuta
-		</a>
+		<div ng-hide="processing">
+			<button type="submit" class="btn btn-primary btn-block btn-lg">
+				<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
+			</button>
+			<a href="#/courses/[[ data.test.course.id ]]" class="btn btn-default btn-block">
+				<span class="glyphicon glyphicon-chevron-left"></span> Peruuta
+			</a>
+		</div>
+		<div ng-show="processing" style="text-align: center">
+			<img src="/img/ajax-loader.gif" alt="">
+		</div>
 	</div>
 	<div id="content-main">
 		<div class="breadcrumbs">
@@ -233,14 +238,14 @@
 						<span ng-show="hasChanged"><b>Tallentamattomia muutoksia</b></span>
 					</div>
 					<div class="pull-right">
-						<button class="btn btn-danger" ng-click="delete(qkey, question.id)">
+						<button type="button" class="btn btn-danger" ng-click="delete(qkey, question.id)">
 							<span class="glyphicon glyphicon-trash"></span> Poista
 						</button>
 						<div style="display:inline-block;width:0.5em;"></div>
-						<button class="btn btn-default" ng-click="cancel()">
+						<button type="button" class="btn btn-default" ng-click="cancel()">
 							Peruuta
 						</button>
-						<button class="btn btn-success">
+						<button type="button" class="btn btn-success">
 							<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
 						</button>
 					</div>
@@ -312,3 +317,61 @@
 		</div>
 	</div>
 </div>
+
+<form ng-submit="do_login()" ng-controller="AjaxLogin" class="form-horizontal">
+	<div class="modal fade" id="modal-login">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Kirjaudu sisään</h4>
+				</div>
+				<div class="modal-body" style="text-align:center;font-size:120%">
+					<p>
+						Istuntosi on päättynyt ja jatkaaksesi sinun tulee kirjautua sisään.
+					</p>
+					<div class="body-content">
+						<div class="fields clearfix">
+							<div class="form-group">
+								<div class="col-xs-12">
+									<input type="text" class="form-control input-lg" ng-model="email" placeholder="Sähköposti">
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-xs-12">
+									<input type="password" class="form-control input-lg" ng-model="password" placeholder="Salasana">
+								</div>
+							</div>
+						</div>
+						<div class="errors">
+							<ul>
+								<li ng-repeat="error in errors">[[ error ]]</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="col-xs-4" style="text-align: left">
+						<a href="/auth/login" class="btn btn-danger" ng-hide="verifying">
+							Hylkää muutokset
+						</a>
+					</div>
+					<div class="col-xs-4">
+						<div class="checkbox" ng-hide="verifying" ng-hide="verifying">
+							<label>
+								<input type="checkbox" ng-model="remember_me"> Muista kirjautuminen
+							</label>
+						</div>
+					</div>
+					<div class="col-xs-4">
+						<button class="btn btn-primary btn-block" ng-hide="verifying">
+							<span class="glyphicon glyphicon-log-in"></span> Kirjaudu sisään
+						</button>
+						<div ng-show="verifying">
+							<img src="/img/ajax-loader.gif" alt="" style="width:30px;">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

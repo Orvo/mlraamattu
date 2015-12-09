@@ -57,6 +57,8 @@ Route::get('ajax/auth', function()
 	return $response;
 });
 
+Route::post('ajax/login', 'AuthController@ajax_login');
+	
 Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 {
 	Route::get('/', function ()
@@ -79,6 +81,8 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 	Route::resource('courses', 'Ajax\CoursesController');
 	Route::resource('tests', 'Ajax\TestsController');
 	Route::resource('users', 'Ajax\UsersController');
+	
+	// Route::get('login', 'AuthController@ajax_login');
 
 });
 

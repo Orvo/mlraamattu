@@ -20,19 +20,22 @@ app.config(
 		{
 			var deferred = $q.defer();
 			
-			if($rootScope.userData && $rootScope.userData.authenticated && Date.now()-$rootScope.userData.lastCheck < 30000)
-			{
-				deferred.resolve($rootScope.userData);
-			}
-			else
-			{
+			// if($rootScope.userData && $rootScope.userData.authenticated && Date.now()-$rootScope.userData.lastCheck < 30000)
+			// {
+			// 	deferred.resolve($rootScope.userData);
+			// }
+			// else
+			// {
 				$http.get('/ajax/auth')
 					.then(function success(response)
 					{
 						if(!response.data.authenticated)
 						{
 							deferred.reject(false);
-							$window.location = "/auth/login/?ref=admin";
+							
+							var hash = $window.location.hash.substr(1);
+							$window.location.hash = '';
+							$window.location = "/auth/login/?ref=admin&route=" + hash;
 						}
 						else
 						{
@@ -43,9 +46,12 @@ app.config(
 					}, function error(response)
 					{
 						deferred.reject(false);
-						$window.location = "/auth/login/?ref=admin";
+						
+						var hash = $window.location.hash.substr(1);
+						$window.location.hash = '';
+						$window.location = "/auth/login/?ref=admin&route=" + hash;
 					});
-			}
+			// }
 			
 			return deferred.promise;
 		}

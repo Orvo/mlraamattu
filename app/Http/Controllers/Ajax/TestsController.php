@@ -51,9 +51,7 @@ class TestsController extends Controller
 	 */
 	public function show($id)
 	{
-		$test = Test::findOrFail($id);
-
-		$test->course;
+		$test = Test::with('course', 'questions', 'questions.answers')->findOrFail($id);
 
 		foreach($test->questions as $question)
 		{
@@ -67,8 +65,7 @@ class TestsController extends Controller
 				}
 			}
 		}
-
-		// dd($test->questions);
+		
 		return $test;
 	}
 
@@ -111,7 +108,6 @@ class TestsController extends Controller
 		if($test)
 		{
 			$data = $request->all();
-			unset($data['questions'][2]);
 			return $data;
 		}
 		
