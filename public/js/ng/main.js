@@ -120,11 +120,11 @@ app.config(
 			// 	templateUrl: '/ng/users/form.html',
 			// 	resolve: { factory: authProvider, },
 			// })
-			// .when('/users/:id/edit', {
-			// 	controller: 'TestsFormController',
-			// 	templateUrl: '/ng/users/form.html',
-			// 	resolve: { factory: authProvider, },
-			// })
+			.when('/users/:id/edit', {
+				controller: 'UsersFormController',
+				templateUrl: '/ng/users/form.html',
+				resolve: { factory: authProvider, },
+			})
 			
 			////////////////////////////////////////////////
 			// Misc

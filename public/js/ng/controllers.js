@@ -60,6 +60,17 @@ app.controller('CoursesController', function($scope, $window, $location, $routeP
 app.controller('CourseDisplayController', function($scope, $window, $location, $routeParams, CoursesModel)
 {
 	$scope.id = $routeParams.id;
+			
+	$scope.isEditing = false;
+	$scope.startEditing = function()
+	{
+		$scope.isEditing = true;
+	}
+	
+	$scope.saveCourseInfo = function()
+	{
+		$scope.isEditing = false;
+	}
 
 	CoursesModel.get({id: $scope.id}, function(data)
 	{
@@ -99,6 +110,18 @@ app.controller('UsersController', function($scope, $window, $location, $routePar
 {
 	$scope.users = UsersModel.query(function(data)
 	{
+		$scope.loaded = true;
+	});
+});
+
+app.controller('UsersFormController', function($scope, $window, $location, $routeParams, UsersModel)
+{
+	$scope.id = $routeParams.id;
+	$scope.data = {};
+	
+	UsersModel.get({id: $routeParams.id}, function(data)
+	{
+		$scope.data.user = data;
 		$scope.loaded = true;
 	});
 });

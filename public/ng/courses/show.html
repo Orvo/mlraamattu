@@ -17,10 +17,30 @@
 		</ol>
 	</div>
 	
-	<h1>Kurssi: [[ course.title ]]</h1>
-	<p>
-		[[ course.description ]]
-	</p>
+	<form ng-submit="saveCourseInfo()" class="form-horizontal">
+		<div class="pull-right" ng-show="!isEditing">
+			<button class="btn btn-primary" type="button" ng-click="startEditing()">
+				<span class="glyphicon glyphicon-edit"></span> Muokkaa kurssia
+			</button>
+		</div>
+		<div class="course-title">
+			<div ng-show="!isEditing">
+				<h1>Kurssi: [[ course.title ]]</h1>
+				<p>
+					[[ course.description ]]
+				</p>
+			</div>
+			<div ng-show="isEditing">
+				<h1>Kurssi: [[ course.title ]]</h1>
+				<input type="text" class="form-control input-lg" ng-model="course.title" placeholder="Kurssin otsikko"/>
+				<textarea class="form-control input-lg vertical-textarea" ng-model="course.description" placeholder="Kurssin kuvaus"></textarea>
+				<button class="btn btn-primary pull-right">
+					<span class="glyphicon glyphicon-save"></span> Tallenna
+				</button>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</form>
 	<div class="actions-row">
 		<div class="pull-right" style="text-align: right">
 			<a href="#/tests/new/[[ course.id ]]" class="btn btn-success">
