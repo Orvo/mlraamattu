@@ -82,6 +82,25 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 	Route::resource('tests', 'Ajax\TestsController');
 	Route::resource('users', 'Ajax\UsersController');
 	
+	Route::get('archive', function()
+	{
+		$archive = App\Archive::with('user', 'test', 'test.course')->get();
+		
+		foreach($archive as &$row)
+		{
+			$row->data = json_decode($row->data);
+			
+			// $row->search_info = $row->data->num_correct . " oikein";
+			
+			if($row->data->all_correct)
+			{
+				$row->search_info = "kaikki oikein";
+			}
+		}
+		
+		return $archive;
+	});
+	
 	Route::get('archive/stats', function()
 	{
 		$archive = App\Archive::all();

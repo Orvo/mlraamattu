@@ -31,11 +31,23 @@ app.config(
 					{
 						if(!response.data.authenticated)
 						{
-							deferred.reject(false);
+							// deferred.reject(false);
 							
-							var hash = $window.location.hash.substr(1);
-							$window.location.hash = '';
-							$window.location = "/auth/login/?ref=admin&route=" + hash;
+							// var hash = $window.location.hash.substr(1);
+							// $window.location.hash = '';
+							// $window.location = "/auth/login/?ref=admin&route=" + hash;
+							
+							$rootScope.promptLogin({
+								unsavedData: false,
+								redirectURL: '/auth/login/?ref=admin&route=' + $window.location.hash.substr(1),
+								callback: function()
+								{
+									deferred.resolve(response.data);
+									
+									$rootScope.userData = response.data;
+									$rootScope.userData.lastCheck = Date.now();
+								}
+							});
 						}
 						else
 						{
@@ -126,6 +138,13 @@ app.config(
 				resolve: { factory: authProvider, },
 			})
 			
+			
+			.when('/archive/', {
+				controller: 'ArchiveController',
+				templateUrl: '/ng/archive/list.html',
+				resolve: { factory: authProvider, },
+			})
+			
 			////////////////////////////////////////////////
 			// Misc
 			
@@ -136,49 +155,77 @@ app.config(
 	}
 );
 
-
-
-// app.factory('authProvider', function authProviderFactory($q, $http)
-// {
-// 	var user;
-// 	return {
-// 		isLoggedIn: function()
-// 		{
-// 			return $http.get('/ajax/auth')
-// 				.then(function success(response)
-// 				{
-// 					console.log("SUCCESS", response);
-// 					return response.data;
-// 				}, function error(response)
-// 				{
-// 					console.log("ERROR", response);
-// 					return false;
-// 				});
-// 		}
-// 	};
-// });
-
-// app.run([
-// 	'$rootScope', '$location', 'authProvider',
-// 	function ($rootScope, $location, authProvider)
-// 	{
-// 		$rootScope.$on('$routeChangeStart', function(event)
-// 		{
-// 			var loggedIn = authProvider.isLoggedIn();
-// 			console.log("ASD", loggedIn)
-// 			if (!false)
-// 			{
-// 				console.log('DENY : Redirecting to Login');
-// 				event.preventDefault();
-// 				// $location.path('/login');
-// 			}
-// 			else
-// 			{
-// 				console.log('ALLOW');
-// 			}
-// 		});
-// 	}
-// ]);
+app.controller('AjaxLogin', function($rootScope, $scope, $window, $location, $routeParams, $http)
+{
+	$rootScope.promptLogin = function(options, callback)
+	{
+		if(typeof options == 'object')
+		{
+			$scope.unsavedData = options.unsavedData;
+			$scope.redirectURL = options.redirectURL;
+			$rootScope.login_callback = options.callback;
+		}
+		else
+		{
+			$scope.unsavedData = options;
+			$rootScope.login_callback = callback;
+		}
+		
+		$('#modal-login').modal({
+			show: true,
+			keyboard: false,
+			backdrop: 'static',
+		});
+	}
+	
+	$scope.do_login = function()
+	{
+		$scope.verifying = true;
+		$('#modal-login .errors').stop().fadeOut(200);
+		
+		$http.post('/ajax/login', {
+			email: $scope.email,
+			password: $scope.password,
+			remember_me: $scope.remember_me
+		}).then(function success(response)
+			{
+				$scope.verifying = false;
+				console.log(response.status, response.data);
+				
+				if(response.data.success)
+				{
+					if(!response.data.isAdmin)
+					{
+						$window.location = '/';
+					}
+					
+					$rootScope.userData = response.data;
+					$scope.errors = [];
+					
+					$scope.email = '';
+					$scope.password = '';
+					$scope.remember_me = false;
+					
+					$('#modal-login').modal('hide');
+					
+					if($rootScope.login_callback)
+					{
+						$rootScope.login_callback();	
+					}
+				}
+				else
+				{
+					$('#modal-login .errors').stop().fadeIn(200);
+					$scope.errors = response.data.errors;
+				}
+				
+			}, function error(response)
+			{
+				$scope.verifying = false;
+				console.log(response.status, response.data);
+			});
+	}
+});
 
 app.directive('ngEnter', function()
 {
@@ -196,14 +243,3 @@ app.directive('ngEnter', function()
 		});
 	};
 });
-
-// app.directive('ngBlur', ['$parse', function($parse) {
-// 	return function(scope, element, attr) {
-// 		var fn = $parse(attr['ngBlur']);
-// 		element.bind('blur', function(event) {
-// 			scope.$apply(function() {
-// 				fn(scope, {$event:event});
-// 			});
-// 		});
-// 	}
-// }]);

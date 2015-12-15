@@ -171,20 +171,17 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		$http.get('/ajax/auth')
 			.then(function success(response)
 			{
-				if(response.data.authenticated)
-				{
-					do_submit();
-				}
-				else
-				{
-					$rootScope.login_callback = do_submit;
-					
-					$('#modal-login').modal({
-						show: true,
-						keyboard: false,
-						backdrop: 'static',
+				// if(response.data.authenticated)
+				// {
+				// 	do_submit();
+				// }
+				// else
+				// {
+					$rootScope.promptLogin(true, function()
+					{
+						do_submit();
 					});
-				}
+				// }
 			});
 	}
 
@@ -242,12 +239,17 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 			copy: angular.copy($scope.data.test.questions[key]),
 		};
 
-		$('.question.active').removeClass('active');
-		$('#question-' + key).addClass('active');
-
-		$("html, body").stop().delay(50).animate({
-			scrollTop: $('#question-' + key).position().top
-		}, 400);
+		//$('.question.active').removeClass('active');
+		//$('#question-' + key).addClass('active');
+		
+		setTimeout(function()
+		{
+			$("html, body").stop().delay(50).animate({
+				scrollTop: $('#question-' + key).position().top
+			}, 400);
+			
+			$('#question-' + key + ' .question-title').select();
+		}, 20);
 	}
 
 	$scope.confirmed_cancel = function()
@@ -368,6 +370,18 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	};
 });
 
+
+app.controller('ArchiveController', function($rootScope, $scope, $window, $location, $routeParams, $http)
+{
+	$http.get('/ajax/archive').then(function success(response)
+	{
+		if(response)
+		{
+			$scope.archive = response.data;
+		}
+	})
+});
+
 app.controller('NavbarController', function($rootScope, $scope, $window, $location, $routeParams, $http)
 {
 	$rootScope.update_archive_stats = function()
@@ -384,51 +398,4 @@ app.controller('NavbarController', function($rootScope, $scope, $window, $locati
 	}, 5 * 60 * 1000);
 	
 	$rootScope.update_archive_stats();
-});
-
-app.controller('AjaxLogin', function($rootScope, $scope, $window, $location, $routeParams, $http)
-{
-	$scope.do_login = function()
-	{
-		$scope.verifying = true;
-		$('#modal-login .errors').stop().fadeOut(200);
-		
-		$http.post('/ajax/login', {
-			email: $scope.email,
-			password: $scope.password,
-			remember_me: $scope.remember_me
-		}).then(function success(response)
-			{
-				$scope.verifying = false;
-				console.log(response.status, response.data);
-				
-				if(response.data.success)
-				{
-					if(!response.data.isAdmin)
-					{
-						$window.location = '/';
-					}
-					
-					$rootScope.userData = response.data;
-					$scope.errors = [];
-					
-					$('#modal-login').modal('hide');
-					
-					if($rootScope.login_callback)
-					{
-						$rootScope.login_callback();	
-					}
-				}
-				else
-				{
-					$('#modal-login .errors').stop().fadeIn(200);
-					$scope.errors = response.data.errors;
-				}
-				
-			}, function error(response)
-			{
-				$scope.verifying = false;
-				console.log(response.status, response.data);
-			});
-	}
 });

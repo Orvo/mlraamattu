@@ -1,4 +1,4 @@
-$(function()
+$(window).load(function()
 {
 
 	$(document).scroll(function()
@@ -7,6 +7,24 @@ $(function()
 		{
 			$('#content-sidebar').css({'padding-top': $(document).scrollTop() + 'px'});
 		}
+	});
+	
+	var doResize = function(width)
+	{
+		if(width >= 1200)
+		{
+			$('#main-container').css('padding', '0 3%');	
+		}
+		else
+		{
+			$('#main-container').css('padding', '0 10px');
+		}
+	}
+	doResize($(window).width());
+	
+	$(window).resize(function()
+	{
+		doResize($(window).width());
 	});
 	
 	$('.search-filter').focus(function()

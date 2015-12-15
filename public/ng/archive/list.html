@@ -1,0 +1,80 @@
+<div id="content-sidebar">
+	<h2>Sivupalkki</h2>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas eaque tempora possimus, nisi eveniet ex veritatis temporibus ratione quo eos.</p>
+	<p>Doloremque porro maxime reprehenderit sequi harum reiciendis incidunt soluta rem ipsam nulla non, distinctio molestiae dolorum alias, eaque quia. Dolor, voluptates temporibus nesciunt ullam sed veritatis, ratione tenetur quo, ipsum minima consectetur est quam obcaecati cumque, porro.</p>
+</div>
+<div id="content-main">
+	<h1>Koesuoritukset</h1>
+	<div class="actions-row">
+		<div>
+			<input type="text" ng-model="searchFilter" placeholder="Hae koesuorituksia" class="form-control search-filter">
+			<div class="radio">
+				<label>
+					<input type="radio" ng-model="replyFilter.replied_to" value="-1"> Näytä kaikki
+				</label>
+			</div>
+			<div class="radio">
+				<label>
+					<input type="radio" ng-model="replyFilter.replied_to" value="1"> Näytä vastatut
+				</label>
+			</div>
+			<div class="radio">
+				<label>
+					<input type="radio" ng-model="replyFilter.replied_to" value="0"> Näytä vastaamattomat
+				</label>
+			</div>
+		</div>
+	</div>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<td style="width:40px;"></td>
+				<td style="width:160px">Kokeen suorittaja</td>
+				<td>Koe</td>
+				<td>Kurssi</td>
+				<td>Tulos</td>
+				<td class="list-actions" style="width:200px">Toiminnot</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="(key, item) in archive | filter : searchFilter | filter : archiveFilter">
+				<td style="font-weight: bold;text-align: right;background:#fafafa">[[ key + 1 ]].</td>
+				<td>
+					[[ item.user.name ]]
+				</td>
+				<td>
+					<a href="#/tests/[[ item.test.id ]]">
+						[[ item.test.title ]]
+					</a>
+				</td>
+				<td>
+					<a href="#/courses/[[ item.test.course.id ]]">
+						[[ item.test.course.title ]]
+					</a><br>
+				</td>
+				<td class="test-result">
+					<div class="clearfix">
+						<span class="icon" ng-class="{'all-correct': item.data.all_correct, 'partially-correct': !item.data.all_correct && item.data.num_correct > 0, 'incorrect': item.data.num_correct == 0}">
+							<span class="glyphicon glyphicon-ok-circle" ng-show="item.data.all_correct"></span>
+							<span class="glyphicon glyphicon-remove-circle" ng-show="!item.data.all_correct"></span>
+						</span>
+						<span class="number">
+							<b>[[ item.data.num_correct ]] / [[ item.data.total ]]</b> oikein
+						</span>
+					</div>
+				</td>
+				<td class="list-actions">
+					<a href="#/tests/[[ test.id ]]/edit" class="btn btn-success btn-sm">
+						<span class="glyphicon glyphicon-ok"></span> Vastaa
+					</a>
+					<a href="#/tests/[[ test.id ]]/delete" class="btn btn-warning btn-sm">
+						<span class="glyphicon glyphicon-remove"></span> Hylkää
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo vel maiores temporibus distinctio laborum asperiores odio ratione expedita reprehenderit rerum quos recusandae quae facilis necessitatibus ducimus minus exercitationem, atque dolorem omnis unde, ad, consectetur sed! Doloremque id distinctio perferendis, vel.
+	</p>
+</div>
