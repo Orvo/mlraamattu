@@ -17,7 +17,7 @@
 				<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
 			</button>
 			<a href="#/courses/[[ data.test.course.id ]]" class="btn btn-default btn-block">
-				<span class="glyphicon glyphicon-chevron-left"></span> Peruuta
+				<span class="glyphicon glyphicon-chevron-left"></span> Palaa kurssiin
 			</a>
 		</div>
 		<div ng-show="processing" style="text-align: center">
@@ -41,6 +41,13 @@
 			<span ng-show="id">Muokataan koetta</span>
 			<span ng-show="data.test.title">/ <b>[[ data.test.title ]]</b></span>
 		</h1>
+		<div class="errors" ng-show="data.errors.messages.length > 0">
+			<img src="/img/ajax-loader-error.gif" alt="" class="pull-right" ng-show="processing" style="height:40px">
+			<b>Tallennus epäonnistui!</b>
+			<ul>
+				<li ng-repeat="error in data.errors.messages">[[ error ]]</li>
+			</ul>
+		</div>
 		<div class="form-group">
 			<input type="text" class="form-control input-lg input-block" id="test-title" ng-model="data.test.title" placeholder="Kokeen otsikko">
 		</div>
@@ -48,7 +55,8 @@
 			<textarea class="form-control" ng-model="data.test.description" placeholder="Kokeen kuvaus" style="resize:vertical;min-height:8em;"></textarea>
 		</div>
 		<ul class="questions" ui-sortables="sortableOptions" ng-model="data.test.questions">
-			<li class="question" ng-repeat="(qkey, question) in data.test.questions" id="question-[[ qkey ]]" ng-class="{'active': edit_data.key == qkey}">
+			<li class="question" ng-repeat="(qkey, question) in data.test.questions" id="question-[[ qkey ]]"
+				ng-class="{'active': edit_data.key == qkey, 'area-has-error': data.errors.questions[qkey] !== undefined}">
 				<div class="info">
 					<div class="actions">
 						<button type="button" class="btn btn-primary btn-sm" ng-click="edit(qkey, question.id)">
@@ -79,6 +87,11 @@
 					</div>
 				</div>
 				<div class="edit">
+					<div class="errors" ng-show="data.errors.questions[qkey] !== undefined">
+						<ul>
+							<li ng-repeat="error in data.errors.questions[qkey]">[[ error ]]</li>
+						</ul>
+					</div>
 					<div class="form-group clearfix">
 						<div class="col-xs-7">
 							<div class="form-group">
@@ -245,8 +258,8 @@
 						<button type="button" class="btn btn-default" ng-click="cancel()">
 							Peruuta
 						</button>
-						<button type="button" class="btn btn-success">
-							<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
+						<button type="button" class="btn btn-success" ng-click="accept(qkey)">
+							<span class="glyphicon glyphicon-ok"></span>&nbsp;&nbsp;Valmis
 						</button>
 					</div>
 					<div class="clearfix"></div>

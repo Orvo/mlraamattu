@@ -86,7 +86,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="errors">
+									<div class="errors" ng-show="errors.length > 0">
 										<ul>
 											<li ng-repeat="error in errors">[[ error ]]</li>
 										</ul>

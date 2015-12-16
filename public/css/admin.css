@@ -789,8 +789,7 @@ td.list-actions .btn
 
 .errors
 {
-	display: none;
-	background: #940F18;
+	background: #910014;
 	color: #fff;
 	font-size: 11pt;
 	text-align: left;
@@ -810,6 +809,22 @@ td.list-actions .btn
 {
 	margin: 0;
 	padding: 0;
+}
+
+.edit .errors
+{
+	background: #9B001B;
+}
+
+.edit .errors li
+{
+	list-style: disc;
+}
+
+.area-has-error
+{
+	border: 1px solid #A4000F !important;
+	box-shadow: 0 2px 2px #B70023 !important;
 }
 
 .modal

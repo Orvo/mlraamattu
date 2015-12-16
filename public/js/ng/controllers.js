@@ -131,7 +131,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	$scope.id = $routeParams.id;
 	$scope.course_id = $routeParams.course_id;
 
-	$scope.bulk_actions = [];
+	$scope.edit_data = false;
 
 	$scope.question_types = [
 		'CHOICE',
@@ -149,20 +149,37 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		
 		var do_submit = function()
 		{
-			$scope.processing = false;
+			$scope.edit_data = false;
+			// $scope.data.errors = [];
 			
 			if($scope.id) // existing entry
 			{
 				$scope.data.test = TestsModel.update({id: $scope.id}, $scope.data.test, function(data, h)
 				{
+					$scope.processing = false;
+					$scope.data.errors = data.errors;
 					console.log("ASD", data, h);
+				}, function(data)
+				{
+					var pop = window.open('', 'Error', 'width=1280,height=720');
+					pop.document.write(data.data);
+					pop.document.close();
+					console.log("AERRRRSD", data);
 				});
 			}
 			else // new entry
 			{
 				$scope.data.test.$save(function(data, h)
 				{
-					console.log(data, h);
+					$scope.processing = false;
+					$scope.data.errors = data.errors;
+					console.log("asd", data, h);
+				}, function(data)
+				{
+					var pop = window.open('', 'Error', 'width=1280,height=720');
+					pop.document.write(data.data);
+					pop.document.close();
+					console.log("AERRRRSD", data);
 				});
 			}
 		}
@@ -171,17 +188,17 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		$http.get('/ajax/auth')
 			.then(function success(response)
 			{
-				// if(response.data.authenticated)
-				// {
-				// 	do_submit();
-				// }
-				// else
-				// {
+				if(response.data.authenticated)
+				{
+					do_submit();
+				}
+				else
+				{
 					$rootScope.promptLogin(true, function()
 					{
 						do_submit();
 					});
-				// }
+				}
 			});
 	}
 
@@ -200,10 +217,10 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	else
 	{
 		$scope.data = {
-			test: {
-				questions: [],
-			},
-		}
+			test: new TestsModel(),
+		};
+		
+		$scope.data.test.questions = [];
 
 		CoursesModel.get({id: $scope.course_id}, function(data)
 		{
@@ -213,8 +230,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 
 		$("#test-title").focus();
 	}
-
-	$scope.edit_data = false;
+	
 	$scope.edit = function(key)
 	{
 		if($scope.edit_data !== false)
@@ -250,6 +266,11 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 			
 			$('#question-' + key + ' .question-title').select();
 		}, 20);
+	}
+	
+	$scope.accept = function(key)
+	{
+		$scope.edit_data = false;
 	}
 
 	$scope.confirmed_cancel = function()

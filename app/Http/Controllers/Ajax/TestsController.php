@@ -40,7 +40,12 @@ class TestsController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		//
+		$validation = $this->_validateTest($request->all());
+		
+		$data = $validation->data;
+		$data['errors'] = $validation->errors;
+		
+		return $data;
 	}
 
 	/**
@@ -107,13 +112,120 @@ class TestsController extends Controller
 		$test = Test::with('course', 'questions')->find($id);
 		if($test)
 		{
-			$data = $request->all();
+			$validation = $this->_validateTest($request->all());
+			
+			$data = $validation->data;
+			$data['errors'] = $validation->errors;
+			
 			return $data;
 		}
 		
 		return [
 			'error' 		=> true,
 			'not_found'		=> true,
+		];
+	}
+	
+	protected function _validateTest($data)
+	{
+		// sleep(2);
+		
+		$errors = [
+			'messages' => [ ],
+			'questions' => [ ],
+			'test' => [ ],
+		];
+		
+		if(!@$data['title'] || strlen(trim($data['title'])) == 0)
+		{
+			$errors['messages'][] = "Kokeen otsikko puuttuu!";
+			$errors['test'][] = "Kokeen otsikko puuttuu!";
+		}
+		
+		if(!@$data['description'] || strlen(trim($data['description'])) == 0)
+		{
+			$errors['messages'][] = "Kokeen kuvaus puuttuu!";
+			$errors['test'][] = "Kokeen kuvaus puuttuu!";
+		}
+		
+		if(@$data['questions'] && count($data['questions']) > 0)
+		{
+			foreach($data['questions'] as $key => &$question)
+			{
+				if(strlen(trim($question['title'])) == 0)
+				{
+					$errors['messages'][] = "Kysymys " . ($key + 1) . ". puuttuu!";
+					$errors['questions'][$key][] = "Itse kysymyksen teksti puuttuu!";
+				}
+				
+				switch($question['type'])
+				{
+					case 'CHOICE':
+					case 'MULTI':
+					case 'MULTITEXT':
+						$non_empty_answers = 0;
+						
+						foreach($question['answers'] as $akey => &$answer)
+						{
+							if(strlen(trim($answer['text'])) == 0)
+							{
+								if(count($question['answers']) > 2)
+								{
+									if($question['type'] == 'CHOICE' && $question['correct_answer'] == $akey)
+									{
+										$question['correct_answer'] = 0;
+									}
+									
+									unset($question['answers'][$akey]);
+								}
+							}
+							else
+							{
+								$non_empty_answers++;
+							}
+						}
+						
+						$question['answers'] = array_values($question['answers']);
+						
+						if($non_empty_answers < 2)
+						{
+							if($question['type'] != 'MULTITEXT')
+							{
+								$errors['messages'][] = "Kysymyksellä " . ($key + 1) . ". pitää olla ainakin 2 vaihtoehtoa.";
+								$errors['questions'][$key][] = "Kysymyksellä pitää olla ainakin 2 vaihtoehtoa";
+							}
+							else
+							{
+								$errors['messages'][] = "Kysymyksellä " . ($key + 1) . ". pitää olla ainakin 2 vastausta.";
+								$errors['questions'][$key][] = "Kysymyksellä pitää olla ainakin 2 vastausta.";
+							}
+						}
+					break;
+					case 'TEXT':
+						if(strlen(trim($question['answers'][0]['text'])) == 0)
+						{
+							$errors['messages'][] = "Kysymyksen " . ($key + 1) . ". vastaus ei voi olla tyhjä.";
+							$errors['questions'][$key][] = "Kysymyksen vastaus ei voi olla tyhjä.";
+						}
+					break;
+					case 'TEXTAREA':
+						
+					break;
+					default:
+						$errors['messages'][] = "Hax! Kysymyksen tyyppiä " . $question['type'] . " ei ole olemassa!";
+					break;
+				}
+			}
+		}
+		else
+		{
+			$errors['messages'][] = "Kokeessa ei ole yhtäkään kysymystä!";
+			$errors['test'][] = "Kokeessa ei ole yhtäkään kysymystä!";
+		}
+		
+		return (object)[
+			'data' 		=> $data,
+			'errors' 	=> $errors,
 		];
 	}
 
