@@ -35,23 +35,43 @@ var popError = function(data)
 	console.log("ERROR", data);
 }
 
-app.controller('IndexController', function($scope, $window, $location, $routeParams, QuestionsModel)
+var convertToDate = function(timestamp)
 {
-	QuestionsModel.query(function(data)
+	var t = timestamp.split(/[- :]/);
+	return new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
+}
+
+// ----------------------------------------------------------------------------------------------------
+// Index controller
+
+app.controller('IndexController', function($scope, $window, $location, $routeParams, $http)
+{
+	$http.get('/ajax/recent')
+	.then(function success(response)
 	{
-		$scope.questions = data;
+		console.log(response);
+		$scope.recent = response.data;
 		
-		angular.forEach($scope.questions, function(value, key)
+		angular.forEach($scope.recent.tests, function(value, key)
 		{
-			$scope.questions[key].type = translate_type(value.type);
-			$scope.questions[key].subtitle = nl2br(value.subtitle);
+			value.updated_at = convertToDate(value.updated_at);
 		});
-	});
 		
-	$scope.sortableOptions = {
-		axis: 'y',
-	};
+		angular.forEach($scope.recent.courses, function(value, key)
+		{
+			value.updated_at = convertToDate(value.updated_at);
+		});
+		
+		$scope.loaded = true;
+	},
+	function error(response)
+	{
+		console.log("error", response);
+	});
 });
+
+// ----------------------------------------------------------------------------------------------------
+// Course controllers
 
 app.controller('CoursesController', function($scope, $window, $location, $routeParams, CoursesModel)
 {
@@ -66,7 +86,7 @@ app.controller('CoursesController', function($scope, $window, $location, $routeP
 	};
 });
 
-app.controller('CourseDisplayController', function($scope, $window, $location, $routeParams, CoursesModel)
+app.controller('CourseShowController', function($scope, $window, $location, $routeParams, CoursesModel)
 {
 	$scope.id = $routeParams.id;
 			
@@ -83,17 +103,13 @@ app.controller('CourseDisplayController', function($scope, $window, $location, $
 
 	CoursesModel.get({id: $scope.id}, function(data)
 	{
-		if(!data.error)
+		$scope.course = data;
+		$scope.loaded = true;
+	}, function(data)
+	{
+		if(data.status == 404)
 		{
-			$scope.course = data;
-			$scope.loaded = true;
-		}
-		else
-		{
-			if(data.status == 404)
-			{
-				// alert("NOT FOUNDS");
-			}
+			$location.path('/tests').search({error: 404});
 		}
 	});
 		
@@ -105,7 +121,98 @@ app.controller('CourseDisplayController', function($scope, $window, $location, $
 app.controller('CoursesFormController', function($scope, $window, $location, $routeParams, CoursesModel)
 {
 	$scope.id = $routeParams.id;
+	console.log($routeParams.id);
+	
+	if($scope.id)
+	{
+		CoursesModel.get({id: $scope.id}, function(data)
+		{
+			$scope.data.course = data;
+			$scope.loaded = true;
+		}, function(data)
+		{
+			if(data.status == 404)
+			{
+				$location.path('/tests').search({error: 404});
+			}
+		});
+	}
+	else
+	{
+		$scope.data = {
+			course: new CoursesModel(),
+		};
+		
+		$scope.loaded = true;
+	}
+	
+	$scope.submit = function(data)
+	{
+		$scope.processing = true;
+		
+		var do_submit = function()
+		{
+			$scope.edit_data = false;
+			$scope.save_success = false;
+			// $scope.data.errors = [];
+			
+			if($scope.id) // existing entry
+			{
+				$scope.data.test = TestsModel.update({id: $scope.id}, $scope.data.test, function(data, h)
+				{
+					$scope.processing = false;
+					$scope.data.errors = data.errors;
+					
+					if(data.test_edited !== undefined)
+					{
+						$scope.save_success = true;
+					}
+				}, function(data)
+				{
+					popError(data.data);
+					$scope.processing = false;
+				});
+			}
+			else // new entry
+			{
+				$scope.data.test.$save(function(data, h)
+				{
+					$scope.processing = false;
+					$scope.data.errors = data.errors;
+					
+					if(data.test_created)
+					{
+						$location.path('/tests/' + data.test_created + '/edit');
+					}
+				}, function(data)
+				{
+					popError(data.data);
+					$scope.processing = false;
+				});
+			}
+		}
+		
+		// Check authentication and show login form if not authenticated
+		$http.get('/ajax/auth')
+			.then(function success(response)
+			{
+				if(response.data.authenticated)
+				{
+					do_submit();
+				}
+				else
+				{
+					$rootScope.promptLogin(true, function()
+					{
+						do_submit();
+					});
+				}
+			});
+	}
 });
+
+// ----------------------------------------------------------------------------------------------------
+// Users controllers
 
 app.controller('UsersController', function($scope, $window, $location, $routeParams, UsersModel)
 {
@@ -126,6 +233,9 @@ app.controller('UsersFormController', function($scope, $window, $location, $rout
 		$scope.loaded = true;
 	});
 });
+
+// ----------------------------------------------------------------------------------------------------
+// Tests controllers
 
 app.controller('TestsController', function($scope, $window, $location, $routeParams, TestsModel)
 {
@@ -152,7 +262,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		'TEXTAREA',
 	];
 	
-	$scope.isSorting = true;
+	$scope.isSorting = false;
 	$scope.sortableOptions = {
 		axis: 'y',
 		start: function(e, ui)
@@ -187,8 +297,6 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 			{
 				$location.path('/tests').search({error: 404});
 			}
-			// popError(data.data);
-			// console.log(data);
 		});
 	}
 	else
@@ -215,6 +323,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		var do_submit = function()
 		{
 			$scope.edit_data = false;
+			$scope.save_success = false;
 			// $scope.data.errors = [];
 			
 			if($scope.id) // existing entry
@@ -223,7 +332,11 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 				{
 					$scope.processing = false;
 					$scope.data.errors = data.errors;
-					console.log("ASD", data, h);
+					
+					if(data.test_edited !== undefined)
+					{
+						$scope.save_success = true;
+					}
 				}, function(data)
 				{
 					popError(data.data);
@@ -234,21 +347,13 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 			{
 				$scope.data.test.$save(function(data, h)
 				{
-					if(data.plaintext)
-					{
-						popError("<pre>" + data.plaintext + "</pre>");
-					}
-					
 					$scope.processing = false;
 					$scope.data.errors = data.errors;
-					
-					console.log("GREAT SUCCESS", data, h);
 					
 					if(data.test_created)
 					{
 						$location.path('/tests/' + data.test_created + '/edit');
 					}
-					
 				}, function(data)
 				{
 					popError(data.data);
@@ -439,6 +544,8 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	}
 });
 
+// ----------------------------------------------------------------------------------------------------
+// Archive controllers
 
 app.controller('ArchiveController', function($rootScope, $scope, $window, $location, $routeParams, $http)
 {
@@ -450,6 +557,9 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 		}
 	})
 });
+
+// ----------------------------------------------------------------------------------------------------
+// Navbar controllers
 
 app.controller('NavbarController', function($rootScope, $scope, $window, $location, $routeParams, $http)
 {

@@ -73,6 +73,14 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 	{
 		return redirect('/');
 	});
+	
+	Route::get('/recent', function()
+	{
+		return [
+			'tests' => App\Test::with('questions')->orderBy('updated_at', 'DESC')->limit(10)->get(),
+			'courses' => App\Course::with('tests')->orderBy('updated_at', 'DESC')->limit(10)->get(),
+		];
+	});
 
 	Route::get('/questions', function ()
 	{

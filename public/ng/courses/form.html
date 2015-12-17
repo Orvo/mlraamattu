@@ -1,8 +1,66 @@
-<div id="content-sidebar">
-	<h2>Sivupalkki</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas eaque tempora possimus, nisi eveniet ex veritatis temporibus ratione quo eos.</p>
-	<p>Doloremque porro maxime reprehenderit sequi harum reiciendis incidunt soluta rem ipsam nulla non, distinctio molestiae dolorum alias, eaque quia. Dolor, voluptates temporibus nesciunt ullam sed veritatis, ratione tenetur quo, ipsum minima consectetur est quam obcaecati cumque, porro.</p>
-</div>
-<div id="content-main">
-	<h1>Jotain [[ id ]]</h1>
+<form ng-submit="submit(data)" ng-show="loaded">
+	<div id="content-sidebar" class="fixed">
+		<h2>Ohjeet</h2>
+		<p>
+			Kurssit ovat kokonaisuus eri kokeita.
+		</p>
+		<p>Doloremque porro maxime reprehenderit sequi harum reiciendis incidunt soluta rem ipsam nulla non, distinctio molestiae dolorum alias, eaque quia. Dolor, voluptates temporibus nesciunt ullam sed veritatis, ratione tenetur quo, ipsum minima consectetur est quam obcaecati cumque, porro.</p>
+
+		<h3>Toiminnot</h3>
+		<div ng-hide="processing">
+			<button type="submit" class="btn btn-primary btn-block btn-lg">
+				<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
+			</button>
+			<a href="#/courses/[[ data.course.course.id ]]" class="btn btn-default btn-block">
+				<span class="glyphicon glyphicon-chevron-left"></span> Palaa kurssiin
+			</a>
+		</div>
+		<div ng-show="processing" style="text-align: center">
+			<img src="/img/ajax-loader.gif" alt="">
+		</div>
+	</div>
+	<div id="content-main">
+		<div class="breadcrumbs">
+			<ol class="breadcrumb">
+				<li><a href="#/">Ylläpitopaneeli</a></li>
+				<li><a href="#/courses/">Kurssit</a></li>
+				<li>
+					<span ng-show="!id">Uusi kurssi</span>
+					<span ng-show="id">Muokataan kurssia</span>
+				</li>
+			</ol>
+		</div>
+		<h1>
+			<span ng-show="!id">Uusi kurssi</span>
+			<span ng-show="id">Muokataan kurssia</span>
+			<span ng-show="data.course.title">/ <b>[[ data.course.title ]]</b></span>
+		</h1>
+		<div class="alert-box errors" ng-show="data.errors.messages.length > 0">
+			<img src="/img/ajax-loader-error.gif" alt="" class="pull-right" ng-show="processing" style="height:40px">
+			<b>Tallennus epäonnistui!</b>
+			<ul>
+				<li ng-repeat="error in data.errors.messages">[[ error ]]</li>
+			</ul>
+		</div>
+		<div class="form-group">
+			<label class="control-label">Kurssin otsikko</label>
+			<input type="text" class="form-control input-lg input-block" id="course-title"
+				ng-model="data.course.title" ng-class="{'area-has-error': data.errors.fields.course_title}" placeholder="Kurssin otsikko">
+		</div>
+		<div class="form-group">
+			<label class="control-label">Kurssin kuvaus</label>
+			<textarea class="form-control vertical-textarea big" id="course-description"
+				ng-model="data.course.description" ng-class="{'area-has-error': data.errors.fields.course_description}" placeholder="Kurssin kuvaus"></textarea>
+		</div>
+		<hr>
+		<p>
+			Kurssin luonnin jälkeen edetään automaattisesti kurssin ensimmäisen kokeen lisäykseen.
+		</p>
+	</div>
+</form>
+
+<div class="load-placeholder" ng-show="!loaded">
+	<h3>
+		<img src="/img/ajax-loader.gif" alt=""> Ladataan...
+	</h3>
 </div>

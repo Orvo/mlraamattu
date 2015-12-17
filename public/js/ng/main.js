@@ -80,14 +80,14 @@ app.config(
 				templateUrl: '/ng/courses/list.html',
 				resolve: { factory: authProvider, },
 			})
-			.when('/courses/:id', {
-				controller: 'CourseDisplayController',
-				templateUrl: '/ng/courses/show.html',
-				resolve: { factory: authProvider, },
-			})
 			.when('/courses/new', {
 				controller: 'CoursesFormController',
 				templateUrl: '/ng/courses/form.html',
+				resolve: { factory: authProvider, },
+			})
+			.when('/courses/:id', {
+				controller: 'CourseShowController',
+				templateUrl: '/ng/courses/show.html',
 				resolve: { factory: authProvider, },
 			})
 			.when('/courses/:id/edit', {
@@ -101,14 +101,14 @@ app.config(
 				templateUrl: '/ng/tests/list.html',
 				resolve: { factory: authProvider, },
 			})
-			.when('/tests/:id', {
-				controller: 'TestsDisplayController',
-				templateUrl: '/ng/tests/show.html',
-				resolve: { factory: authProvider, },
-			})
 			.when('/tests/new/:course_id', {
 				controller: 'TestsFormController',
 				templateUrl: '/ng/tests/form.html',
+				resolve: { factory: authProvider, },
+			})
+			.when('/tests/:id', {
+				controller: 'TestsShowController',
+				templateUrl: '/ng/tests/show.html',
 				resolve: { factory: authProvider, },
 			})
 			.when('/tests/:id/edit', {

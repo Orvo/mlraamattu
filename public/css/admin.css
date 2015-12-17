@@ -240,39 +240,40 @@ nav.navbar .badge
 	background-color: #f3f3f3;
 }
 
-/*.breadcrumb
+/* ----------------------------------------------------------------
+ * Frontpage
+ */
+
+.recent-edits > div
 {
-	padding: 0 5px;
+	padding: 0 4px;
+	margin-bottom: 1em;
 }
 
-.breadcrumb > li a
+.recent-edits > div > div
 {
-	display: inline-block;
-	padding: 8px 15px;
+	background: #fafafa;
+	border: 1px solid #DBA820;
+	box-shadow: 0 2px 1px #FFDC7C;
+	margin: 0;
+	padding: 0;
+	border-radius: 3px;
+	overflow: hidden;
 }
 
-.breadcrumb > li a:hover
+.recent-edits > div h4
 {
-	display: inline-block;
-	background: #eaeaea;
-	text-decoration: none;
+	margin: 0;
+	padding: 12px;
+	background: #F7C53E;
+	font-weight: bold;
 }
 
-.breadcrumb > li + li::before
+.recent-edits table tr td:first-child
 {
-  position: relative;
-  top: 1px;
-  display: inline-block;
-  font-family: 'Glyphicons Halflings';
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1;
-
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  
-  content: "\e080";
-}*/
+	width: 60px;
+	padding-left: 10px !important;
+}
 
 .ng-html-output img
 {
@@ -832,9 +833,24 @@ td.list-actions .btn
 {
 	font-size: 11pt;
 	text-align: left;
-	padding: 8px 12px;
+	padding: 10px 14px;
 	border-radius: 4px;
 	margin-bottom: 1em;
+}
+
+.alert-box h4
+{
+	font-size: 11pt;
+	margin: 0;
+	padding: 0 0 0.175em 0;
+	font-weight: bold;
+}
+
+.alert-box.success
+{
+	background: #58A00B;
+	color: #fff;
+	border: 1px solid #407A02;
 }
 
 .alert-box.warning
@@ -871,15 +887,6 @@ td.list-actions .btn
 .edit .alert-box.errors li
 {
 	list-style: disc;
-}
-
-.alert-box.warning h4,
-.alert-box.error h4
-{
-	font-size: 11pt;
-	margin: 0;
-	padding: 0 0 0.175em 0;
-	font-weight: bold;
 }
 
 .area-has-error

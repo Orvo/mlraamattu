@@ -45,9 +45,12 @@
 			<span ng-show="id">Muokataan koetta</span>
 			<span ng-show="data.test.title">/ <b>[[ data.test.title ]]</b></span>
 		</h1>
+		<div class="alert-box success" ng-show="save_success">
+			<h4><span class="glyphicon glyphicon-ok"></span> Muutokset tallennettu!</h4>
+		</div>
 		<div class="alert-box errors" ng-show="data.errors.messages.length > 0">
 			<img src="/img/ajax-loader-error.gif" alt="" class="pull-right" ng-show="processing" style="height:40px">
-			<b>Tallennus epäonnistui!</b>
+			<h4>Tallennus epäonnistui!</h4>
 			<ul>
 				<li ng-repeat="error in data.errors.messages">[[ error ]]</li>
 			</ul>
