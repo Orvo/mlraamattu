@@ -17,7 +17,7 @@ class CreateTestsTable extends Migration
             $table->integer('course_id');
             $table->string('title');
             $table->text('description');
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 
