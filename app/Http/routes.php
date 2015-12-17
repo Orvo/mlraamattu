@@ -21,7 +21,15 @@ Route::get('/', function ()
 
 Route::get('potato', function ()
 {
-	echo App\Test::find(2)->isUnlocked();
+	try
+	{
+		return App\Test::findOrFail(3);
+	}
+	catch(Exception $e)
+	{
+		echo $e->getMessage();
+	}
+	
 });
 
 Route::get('make', function()

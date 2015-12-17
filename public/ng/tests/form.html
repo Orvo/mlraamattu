@@ -10,6 +10,10 @@
 		<div class="help-block center-text" ng-show="data.test.questions.length >= 15">
 			Maksimimäärä kysymyksiä saavutettu
 		</div>
+		
+		<button type="button" class="btn btn-default btn-block" ng-click="isSorting = true" style="margin-top:0.5em">
+			<span class="glyphicon glyphicon-sort"></span> Järjestä kysymykset
+		</button>
 
 		<hr>
 		<div ng-hide="processing">
@@ -41,7 +45,7 @@
 			<span ng-show="id">Muokataan koetta</span>
 			<span ng-show="data.test.title">/ <b>[[ data.test.title ]]</b></span>
 		</h1>
-		<div class="errors" ng-show="data.errors.messages.length > 0">
+		<div class="alert-box errors" ng-show="data.errors.messages.length > 0">
 			<img src="/img/ajax-loader-error.gif" alt="" class="pull-right" ng-show="processing" style="height:40px">
 			<b>Tallennus epäonnistui!</b>
 			<ul>
@@ -49,12 +53,14 @@
 			</ul>
 		</div>
 		<div class="form-group">
-			<input type="text" class="form-control input-lg input-block" id="test-title" ng-model="data.test.title" placeholder="Kokeen otsikko">
+			<input type="text" class="form-control input-lg input-block" id="test-title"
+				ng-model="data.test.title" ng-class="{'area-has-error': data.errors.fields.test_title}" placeholder="Kokeen otsikko">
 		</div>
 		<div class="form-group">
-			<textarea class="form-control" ng-model="data.test.description" placeholder="Kokeen kuvaus" style="resize:vertical;min-height:8em;"></textarea>
+			<textarea class="form-control vertical-textarea big" id="test-description"
+				ng-model="data.test.description" ng-class="{'area-has-error': data.errors.fields.test_description}" placeholder="Kokeen kuvaus"></textarea>
 		</div>
-		<ul class="questions" ui-sortables="sortableOptions" ng-model="data.test.questions">
+		<ul class="questions" ng-show="!isSorting">
 			<li class="question" ng-repeat="(qkey, question) in data.test.questions" id="question-[[ qkey ]]"
 				ng-class="{'active': edit_data.key == qkey, 'area-has-error': data.errors.questions[qkey] !== undefined}">
 				<div class="info">
@@ -73,9 +79,6 @@
 							</div>
 						</div>
 						<div class="left-aligned">
-							<!-- <div class="bulk-checkbox">
-								<input type="checkbox" ng-model="bulk_actions" ng-value="qkey">
-							</div> -->
 							<div class="number">[[ (qkey + 1) ]].</div>
 							<div class="title" ng-class="{'no-subtitle': question.subtitle.trim().length == 0, 'dimmed': question.title.trim().length == 0}">
 								[[ question.title || 'Kysymys puuttuu' ]]
@@ -87,7 +90,7 @@
 					</div>
 				</div>
 				<div class="edit">
-					<div class="errors" ng-show="data.errors.questions[qkey] !== undefined">
+					<div class="alert-box errors" ng-show="data.errors.questions[qkey] !== undefined">
 						<ul>
 							<li ng-repeat="error in data.errors.questions[qkey]">[[ error ]]</li>
 						</ul>
@@ -120,7 +123,7 @@
 						<ul class="question-type">
 							<li ng-repeat="type in question_types">
 								<label ng-class="{'active': question.type == type}">
-									<input type="radio" ng-model="question.type" ng-value="type"> [[ translate_type(type) ]]
+									<input type="radio" ng-model="question.type" ng-value="type" ng-click="changing_type(question, type)"> [[ translate_type(type) ]]
 								</label>
 							</li>
 						</ul>
@@ -265,13 +268,40 @@
 					<div class="clearfix"></div>
 				</div>
 			</li>
-			<li class="add-questions" ng-class="{'has-questions':data.test.questions.length > 0}">
+			<li class="add-questions" ng-class="{'has-questions':data.test.questions.length > 0, 'area-has-error': data.errors.fields.add_questions}">
 				<h4 ng-show="data.test.questions.length == 0">Aloita lisäämällä kysymys</h4>
 				<button type="button" class="btn btn-success" ng-click="add_question()">
 					<span class="glyphicon glyphicon-plus"></span> Lisää uusi kysymys
 				</button>
 			</li>
 		</ul>
+		<div ng-show="isSorting">
+			<ul class="questions sortable-questions" ui-sortable="sortableOptions" ng-model="data.test.questions" ng-show="isSorting">
+				<li class="question" ng-repeat="(qkey, question) in data.test.questions" id="question-sortable-[[ qkey ]]">
+					<div class="info">
+						<div class="title-row clearfix">
+							<div class="right-aligned">
+								<div class="type">
+									[[ translate_type(question.type) ]]
+								</div>
+							</div>
+							<div class="left-aligned">
+								<div class="number">[[ (qkey + 1) ]].</div>
+								<div class="title" ng-class="{'no-subtitle': question.subtitle.trim().length == 0, 'dimmed': question.title.trim().length == 0}">
+									[[ question.title || 'Kysymys puuttuu' ]]
+								</div>
+								<div class="subtitle">
+									[[ question.subtitle.split('\n')[0] ]]
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+			<button type="button" class="btn btn-primary btn-block" ng-click="isSorting = false">
+				<span class="glyphicon glyphicon-ok"></span> Valmis
+			</button>
+		</div>
 		<hr>
 		<div>
 			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit omnis explicabo a distinctio molestiae, sit, dignissimos iusto consequuntur nemo est atque quae perspiciatis, repellendus quisquam natus assumenda excepturi dolorum. Aut harum consequatur nostrum quam nemo assumenda ratione, qui, fugit, distinctio libero ut dolorem ipsam maxime sed aperiam, error mollitia deleniti!

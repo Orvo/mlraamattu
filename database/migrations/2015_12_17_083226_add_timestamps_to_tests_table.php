@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTestsTable extends Migration
+class AddTimestampsToTestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,7 @@ class CreateTestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tests', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('course_id');
-            $table->string('title');
-            $table->text('description');
+        Schema::table('tests', function (Blueprint $table) {
             $table->timestamps();
         });
     }
@@ -28,6 +24,9 @@ class CreateTestsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('tests');
+        Schema::table('tests', function (Blueprint $table) {
+            $table->dropColumn('created_at');
+            $table->dropColumn('updated_at');
+        });
     }
 }

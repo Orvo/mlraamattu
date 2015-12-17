@@ -8,6 +8,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Test;
+use App\Question;
+use App\Answer;
 
 class TestsController extends Controller
 {
@@ -45,7 +47,123 @@ class TestsController extends Controller
 		$data = $validation->data;
 		$data['errors'] = $validation->errors;
 		
+		$data['plaintext'] = print_r($data, true);
+		
+		// $data['plaintext'] = print_r($next_course_order, true);
+		
+		if($validation->passed)
+		{
+			$data['test_created'] = $this->_saveTest($data);
+		}
+		
 		return $data;
+	}
+	
+	protected function _saveTest($data)
+	{
+		$latest_test_on_course = Test::where([
+			'course_id' => $data['course']['id']
+		])->orderBy('order', 'DESC')->first();
+		
+		$next_course_order = ($latest_test_on_course ? $latest_test_on_course->order : 0) + 1;
+		
+		$isNewEntry = !array_key_exists('id', $data);
+		
+		if($isNewEntry)
+		{
+			$test = new Test();
+		}
+		else
+		{
+			$test = Test::find($data['id']);
+			
+			$submitted_questions = [];
+			foreach($data['questions'] as $qkey => $qdata)
+			{
+				if(array_key_exists('id', $qdata))
+				{
+					$submitted_questions[] = $qdata['id'];
+				}
+			}
+			
+			foreach($test->questions as $question)
+			{
+				if(!in_array($question->id, $submitted_questions))
+				{
+					$question->delete();
+				}
+			}
+		}
+		
+		$test->course_id 	= $data['course']['id'];
+		$test->order 		= $next_course_order;
+		
+		$test->title 		= $data['title'];
+		$test->description 	= $data['description'];
+		
+		$test->save();
+		
+		foreach($data['questions'] as $qkey => $qdata)
+		{
+			if(!array_key_exists('id', $qdata))
+			{
+				$question = new Question();
+			}
+			else
+			{
+				$question = Question::find($qdata['id']);
+				
+				$submitted_answers = [];
+				foreach($qdata['answers'] as $adata)
+				{
+					if(array_key_exists('id', $adata))
+					{
+						$submitted_answers[] = $adata['id'];
+					}
+				}
+				
+				foreach($question->answers as $akey => $answer)
+				{
+					if(!in_array($answer->id, $submitted_answers) ||
+					   ($qdata['type'] == "TEXT" && $akey > 0) || $qdata['type'] == "TEXTAREA")
+					{
+						$answer->delete();
+					}
+				}
+			}
+			
+			$question->test_id 	= $test->id;
+			
+			$question->type 	= $qdata['type'];
+			$question->title 	= $qdata['title'];
+			$question->subtitle = $qdata['subtitle'];
+			
+			$question->order 	= $qkey + 1;
+			
+			$question->save();
+			
+			foreach($qdata['answers'] as $akey => $adata)
+			{
+				if(!array_key_exists('id', $adata))
+				{
+					$answer = new Answer();
+				}
+				else
+				{
+					$answer = Answer::find($adata['id']);
+				}
+				
+				$answer->question_id 	= $question->id;
+				
+				$answer->text 			= $adata['text'];
+				$answer->is_correct 	= $adata['is_correct'];
+				$answer->error_margin 	= 10;
+				
+				$answer->save();
+			}
+		}
+		
+		return $test->id;
 	}
 
 	/**
@@ -56,22 +174,29 @@ class TestsController extends Controller
 	 */
 	public function show($id)
 	{
-		$test = Test::with('course', 'questions', 'questions.answers')->findOrFail($id);
-
-		foreach($test->questions as $question)
+		try
 		{
-			foreach($question->answers as $key => &$answer)
-			{
-				$answer->is_correct = $answer->is_correct ? true : false;
+			$test = Test::with('course', 'questions', 'questions.answers')->findOrFail($id);
 
-				if(!$question->correct_answer and $answer->is_correct)
+			foreach($test->questions as $question)
+			{
+				foreach($question->answers as $key => &$answer)
 				{
-					$question->correct_answer = $key;
+					$answer->is_correct = $answer->is_correct ? true : false;
+
+					if(!$question->correct_answer and $answer->is_correct)
+					{
+						$question->correct_answer = $key;
+					}
 				}
 			}
+			
+			return $test;
 		}
-		
-		return $test;
+		catch(Exception $e)
+		{
+			return false;
+		}
 	}
 
 	/**
@@ -117,6 +242,11 @@ class TestsController extends Controller
 			$data = $validation->data;
 			$data['errors'] = $validation->errors;
 			
+			if($validation->passed)
+			{
+				$data['test_edited'] = $this->_saveTest($data);
+			}
+			
 			return $data;
 		}
 		
@@ -131,21 +261,24 @@ class TestsController extends Controller
 		// sleep(2);
 		
 		$errors = [
-			'messages' => [ ],
-			'questions' => [ ],
-			'test' => [ ],
+			'messages' => [],
+			'questions' => [],
+			'test' => [],
+			'fieds' => [],
 		];
 		
 		if(!@$data['title'] || strlen(trim($data['title'])) == 0)
 		{
 			$errors['messages'][] = "Kokeen otsikko puuttuu!";
 			$errors['test'][] = "Kokeen otsikko puuttuu!";
+			$errors['fields']['test_title'] = true;
 		}
 		
 		if(!@$data['description'] || strlen(trim($data['description'])) == 0)
 		{
 			$errors['messages'][] = "Kokeen kuvaus puuttuu!";
 			$errors['test'][] = "Kokeen kuvaus puuttuu!";
+			$errors['fields']['test_description'] = true;
 		}
 		
 		if(@$data['questions'] && count($data['questions']) > 0)
@@ -221,11 +354,13 @@ class TestsController extends Controller
 		{
 			$errors['messages'][] = "Kokeessa ei ole yhtäkään kysymystä!";
 			$errors['test'][] = "Kokeessa ei ole yhtäkään kysymystä!";
+			$errors['fields']['add_questions'] = true;
 		}
 		
 		return (object)[
 			'data' 		=> $data,
 			'errors' 	=> $errors,
+			'passed'	=> count($errors['messages']) == 0,
 		];
 	}
 

@@ -403,7 +403,42 @@ ul.questions li.question div.info div.title-row .right-aligned
 	margin-right: 165px;
 }
 
-ul.questions li.question.active div.info div.title-row .right-aligned
+ul.questions.sortable-questions
+{
+	/*border: 1px solid #ddd;
+	border-radius: 4px;
+	background: #f7f7f7;
+	padding: 1px 8px;
+	margin-bottom: 5px;*/
+}
+
+ul.questions.sortable-questions li.question
+{
+	cursor: pointer;
+	border: 1px solid #ccc;
+	box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+ul.questions.sortable-questions .ui-sortable-placeholder
+{
+	visibility: visible !important;
+	border: none !important;
+	background: #f1f1f1 !important;
+	box-shadow: none !important;
+}
+
+ul.questions.sortable-questions li.question:hover
+{
+	cursor: grab;
+}
+
+ul.questions.sortable-questions li.question.ui-sortable-helper:hover
+{
+	cursor: grabbing !important;
+}
+
+ul.questions li.question.active div.info div.title-row .right-aligned,
+ul.questions.sortable-questions li.question div.info div.title-row .right-aligned
 {
 	float: right;
 	margin-right: 0px;
@@ -699,6 +734,12 @@ ul.questions div.choice .col.input-field
 	resize: vertical;
 }
 
+.vertical-textarea.big
+{
+	min-height: 8em;
+	max-height: 20em;
+}
+
 .ui-sortable-placeholder
 {
 	border-bottom: 1px solid #aaa;
@@ -787,44 +828,64 @@ td.list-actions .btn
 	padding-right: 0;
 }
 
-.errors
+.alert-box
 {
-	background: #910014;
-	color: #fff;
 	font-size: 11pt;
 	text-align: left;
-	padding: 7px;
-	border: 1px solid #6B0010;
+	padding: 8px 12px;
 	border-radius: 4px;
 	margin-bottom: 1em;
 }
 
-.errors ul
+.alert-box.warning
 {
-	margin: 0;
-	padding: 0 0 0 22px;
+	background: #E89F26;
+	color: #fff;
+	border: 1px solid #855413;
 }
 
-.errors ul li
+.alert-box.errors
+{
+	background: #910014;
+	color: #fff;
+	border: 1px solid #6B0010;
+}
+
+.alert-box.errors ul
+{
+	margin: 0;
+	padding: 0 0 0 16px;
+}
+
+.alert-box.errors ul li
 {
 	margin: 0;
 	padding: 0;
 }
 
-.edit .errors
+.edit .alert-box.errors
 {
 	background: #9B001B;
 }
 
-.edit .errors li
+.edit .alert-box.errors li
 {
 	list-style: disc;
 }
 
+.alert-box.warning h4,
+.alert-box.error h4
+{
+	font-size: 11pt;
+	margin: 0;
+	padding: 0 0 0.175em 0;
+	font-weight: bold;
+}
+
 .area-has-error
 {
-	border: 1px solid #A4000F !important;
-	box-shadow: 0 2px 2px #B70023 !important;
+	border: 1px solid #C3000F !important;
+	box-shadow: 0 0 2px 1px #D31F35 !important;
 }
 
 .modal

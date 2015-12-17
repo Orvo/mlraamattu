@@ -25,6 +25,15 @@ function nl2br (str, is_xhtml) {
     var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
     return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
 }
+	
+var popError = function(data)
+{
+	var pop = window.open('', 'Error', 'width=1280,height=720');
+	pop.document.write(data);
+	pop.document.close();
+	
+	console.log("ERROR", data);
+}
 
 app.controller('IndexController', function($scope, $window, $location, $routeParams, QuestionsModel)
 {
@@ -98,14 +107,6 @@ app.controller('CoursesFormController', function($scope, $window, $location, $ro
 	$scope.id = $routeParams.id;
 });
 
-app.controller('TestsController', function($scope, $window, $location, $routeParams, TestsModel)
-{
-	$scope.tests = TestsModel.query(function(data)
-	{
-		
-	});
-});
-
 app.controller('UsersController', function($scope, $window, $location, $routeParams, UsersModel)
 {
 	$scope.users = UsersModel.query(function(data)
@@ -126,6 +127,16 @@ app.controller('UsersFormController', function($scope, $window, $location, $rout
 	});
 });
 
+app.controller('TestsController', function($scope, $window, $location, $routeParams, TestsModel)
+{
+	$scope.routeError = $routeParams.error;
+	
+	$scope.tests = TestsModel.query(function(data)
+	{
+		
+	});
+});
+
 app.controller('TestsFormController', function($rootScope, $scope, $window, $location, $routeParams, $http, CoursesModel, TestsModel)
 {
 	$scope.id = $routeParams.id;
@@ -140,8 +151,62 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		'MULTITEXT',
 		'TEXTAREA',
 	];
+	
+	$scope.isSorting = true;
+	$scope.sortableOptions = {
+		axis: 'y',
+		start: function(e, ui)
+		{
+			console.log(e, ui);
+		},
+		update: function(e, ui)
+		{
+			console.log(e, ui);
+			if(ui.item.sortable.model)
+			{
+
+			}
+		},
+	};
 
 	$scope.translate_type = translate_type;
+
+	if($scope.id)
+	{
+		TestsModel.get({id: $scope.id}, function(data)
+		{
+			console.log(data);
+			$scope.data = {
+				test: data,
+			};
+
+			$scope.loaded = true;
+		}, function(data)
+		{
+			if(data.status == 404)
+			{
+				$location.path('/tests').search({error: 404});
+			}
+			// popError(data.data);
+			// console.log(data);
+		});
+	}
+	else
+	{
+		$scope.data = {
+			test: new TestsModel(),
+		};
+		
+		$scope.data.test.questions = [];
+
+		CoursesModel.get({id: $scope.course_id}, function(data)
+		{
+			$scope.data.test.course = data;
+			$scope.loaded = true;
+		});
+
+		$("#test-title").focus();
+	}
 	
 	$scope.submit = function(data)
 	{
@@ -161,25 +226,33 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 					console.log("ASD", data, h);
 				}, function(data)
 				{
-					var pop = window.open('', 'Error', 'width=1280,height=720');
-					pop.document.write(data.data);
-					pop.document.close();
-					console.log("AERRRRSD", data);
+					popError(data.data);
+					$scope.processing = false;
 				});
 			}
 			else // new entry
 			{
 				$scope.data.test.$save(function(data, h)
 				{
+					if(data.plaintext)
+					{
+						popError("<pre>" + data.plaintext + "</pre>");
+					}
+					
 					$scope.processing = false;
 					$scope.data.errors = data.errors;
-					console.log("asd", data, h);
+					
+					console.log("GREAT SUCCESS", data, h);
+					
+					if(data.test_created)
+					{
+						$location.path('/tests/' + data.test_created + '/edit');
+					}
+					
 				}, function(data)
 				{
-					var pop = window.open('', 'Error', 'width=1280,height=720');
-					pop.document.write(data.data);
-					pop.document.close();
-					console.log("AERRRRSD", data);
+					popError(data.data);
+					$scope.processing = false;
 				});
 			}
 		}
@@ -200,35 +273,6 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 					});
 				}
 			});
-	}
-
-	if($scope.id)
-	{
-		TestsModel.get({id: $scope.id}, function(data)
-		{
-			console.log(data);
-			$scope.data = {
-				test: data,
-			};
-
-			$scope.loaded = true;
-		});
-	}
-	else
-	{
-		$scope.data = {
-			test: new TestsModel(),
-		};
-		
-		$scope.data.test.questions = [];
-
-		CoursesModel.get({id: $scope.course_id}, function(data)
-		{
-			$scope.data.test.course = data;
-			$scope.loaded = true;
-		});
-
-		$("#test-title").focus();
 	}
 	
 	$scope.edit = function(key)
@@ -254,9 +298,6 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 			key: key,
 			copy: angular.copy($scope.data.test.questions[key]),
 		};
-
-		//$('.question.active').removeClass('active');
-		//$('#question-' + key).addClass('active');
 		
 		setTimeout(function()
 		{
@@ -343,13 +384,36 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		var key = $scope.data.test.questions.length-1;
 
 		$scope.data.test.questions[key].order = key+1;
-
-		console.log('#question-' + key, $('#question-' + key).html());
-		console.log($scope.data.test.questions, $scope.data.test.questions.length);
+		
+		if($scope.data.errors && $scope.data.errors.fields.add_questions)
+		{
+			$scope.data.errors.fields.add_questions = false;
+		}
 
 		$scope.edit(key);
 
 		$('#question-' + key).addClass('active');
+	}
+	
+	$scope.changing_type = function(question, newType)
+	{
+		// Add new blank answers if changing type to specific types
+		switch(newType)
+		{
+			case 'CHOICE':
+			case 'MULTI':
+			case 'MULTITEXT':
+				if(question.answers.length < 2)
+				{
+					for(var i=0; i < 2-question.answers.length; ++i)
+					{
+						question.answers.push({
+							text: '',
+						});
+					}
+				}
+			break;
+		}
 	}
 
 	$scope.add_answer = {
@@ -373,22 +437,6 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	{
 		$scope.data.test.questions[qkey].answers.splice(ckey, 1);
 	}
-
-	$scope.sortableOptions = {
-		axis: 'y',
-		start: function(e, ui)
-		{
-			console.log(e, ui);
-		},
-		update: function(e, ui)
-		{
-			console.log(e, ui);
-			if(ui.item.sortable.model)
-			{
-
-			}
-		},
-	};
 });
 
 
@@ -416,7 +464,7 @@ app.controller('NavbarController', function($rootScope, $scope, $window, $locati
 	setInterval(function()
 	{
 		$rootScope.update_archive_stats();
-	}, 5 * 60 * 1000);
+	}, 15 * 60 * 1000);
 	
 	$rootScope.update_archive_stats();
 });
