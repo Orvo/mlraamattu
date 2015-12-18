@@ -73,13 +73,16 @@ app.controller('IndexController', function($scope, $window, $location, $routePar
 // ----------------------------------------------------------------------------------------------------
 // Course controllers
 
-app.controller('CoursesController', function($scope, $window, $location, $routeParams, CoursesModel)
+app.controller('CoursesController', function($scope, $rootScope, $window, $location, $routeParams, CoursesModel)
 {
 	$scope.loaded = false;
 	$scope.courses = CoursesModel.query(function(data)
 	{
 		$scope.loaded = true;
 	});
+	
+	$rootScope.breadcrumbs.reset();
+	$rootScope.breadcrumbs.add('Kurssit');
 		
 	$scope.sortableOptions = {
 		axis: 'y',
