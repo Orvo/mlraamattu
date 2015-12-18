@@ -51,7 +51,7 @@ body
 #main-container
 {
 	height: 100%;
-	padding: 0 3%;
+	padding: 0px 3% 0 3%;
 	position: relative;
 }
 
@@ -60,19 +60,45 @@ body
 	min-height: 100%;
 	background: #fff;
 	margin: 0 auto;
-	padding: 20px 30px 150px 30px;
+	padding: 60px 15px 150px 30px;
 	position: relative;
 }
 
 #content-sidebar
 {
 	float: right;
-	width: 240px;
+	width: 280px;
+	height: 40%;
+}
+
+#content-sidebar .sidebar-actions
+{
+	padding-right: 15px;
+}
+
+#content-sidebar .sidebar-help
+{
+	overflow-y: auto;
+	padding-right: 15px;
 }
 
 #content-main
 {
-	margin-right: 260px;
+	margin-right: 300px;
+}
+
+@media screen and (max-width: 1700px) {
+	
+	#content-sidebar
+	{
+		float: right;
+		width: 240px;
+	}
+
+	#content-main
+	{
+		margin-right: 260px;
+	}
 }
 
 @media screen and (max-width: 1200px) {
@@ -197,6 +223,38 @@ nav.navbar .nav.navbar-nav > .open > a:hover
 	background: #F5C13F;
 	border-left: 1px solid #FEC140;
 	border-right: 1px solid #FEC140;
+}
+
+div.breadcrumbs
+{
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 50px;
+}
+
+div.breadcrumbs ol.breadcrumb
+{
+	background: rgba(0, 0, 0, 0.92);
+	border-radius: 0;
+	padding: 10px 60px;
+}
+
+div.breadcrumbs li
+{
+	color: #ddd;
+	font-size: 11pt;
+	padding-right: 4px;
+}
+
+div.breadcrumbs a:link, div.breadcrumbs a:visited
+{
+	color: #ED9F16;
+}
+
+div.breadcrumbs a:hover, div.breadcrumbs a:active
+{
+	color: #FEBB3A;
 }
 
 nav.navbar .badge
@@ -433,8 +491,11 @@ ul.questions.sortable-questions li.question:hover
 	cursor: grab;
 }
 
-ul.questions.sortable-questions li.question.ui-sortable-helper:hover
+ul.questions.sortable-questions li.question.ui-sortable-helper
 {
+	transition: margin-left 200ms ease-out, box-shadow 200ms ease-out;
+	margin-left: -10px;
+	box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.3);
 	cursor: grabbing !important;
 }
 

@@ -61,17 +61,18 @@ class TestsController extends Controller
 	
 	protected function _saveTest($data)
 	{
-		$latest_test_on_course = Test::where([
-			'course_id' => $data['course']['id']
-		])->orderBy('order', 'DESC')->first();
-		
-		$next_course_order = ($latest_test_on_course ? $latest_test_on_course->order : 0) + 1;
-		
 		$isNewEntry = !array_key_exists('id', $data);
 		
 		if($isNewEntry)
 		{
 			$test = new Test();
+			
+			$latest_test_on_course = Test::where([
+				'course_id' => $data['course']['id']
+			])->orderBy('order', 'DESC')->first();
+			
+			$next_course_order 	= ($latest_test_on_course ? $latest_test_on_course->order : 0) + 1;
+			$test->order 		= $next_course_order;
 		}
 		else
 		{
@@ -93,10 +94,19 @@ class TestsController extends Controller
 					$question->delete();
 				}
 			}
+			
+			if($test->course->id != $data['course']['id'])
+			{
+				$latest_test_on_course = Test::where([
+					'course_id' => $data['course']['id']
+				])->orderBy('order', 'DESC')->first();
+				
+				$next_course_order 	= ($latest_test_on_course ? $latest_test_on_course->order : 0) + 1;
+				$test->order 		= $next_course_order;
+			}
 		}
 		
 		$test->course_id 	= $data['course']['id'];
-		$test->order 		= $next_course_order;
 		
 		$test->title 		= $data['title'];
 		$test->description 	= $data['description'];
@@ -324,13 +334,13 @@ class TestsController extends Controller
 						{
 							if($question['type'] != 'MULTITEXT')
 							{
-								$errors['messages'][] = "Kysymyksellä " . ($key + 1) . ". pitää olla ainakin 2 vaihtoehtoa.";
-								$errors['questions'][$key][] = "Kysymyksellä pitää olla ainakin 2 vaihtoehtoa";
+								$errors['messages'][] = "Kysymyksellä " . ($key + 1) . ". pitää olla ainakin 2 vaihtoehtoa. Tyhjää riviä ei lasketa.";
+								$errors['questions'][$key][] = "Kysymyksellä pitää olla ainakin 2 vaihtoehtoa. Tyhjää riviä ei lasketa.";
 							}
 							else
 							{
-								$errors['messages'][] = "Kysymyksellä " . ($key + 1) . ". pitää olla ainakin 2 vastausta.";
-								$errors['questions'][$key][] = "Kysymyksellä pitää olla ainakin 2 vastausta.";
+								$errors['messages'][] = "Kysymyksellä " . ($key + 1) . ". pitää olla ainakin 2 vastausta. Tyhjää riviä ei lasketa.";
+								$errors['questions'][$key][] = "Kysymyksellä pitää olla ainakin 2 vastausta. Tyhjää riviä ei lasketa.";
 							}
 						}
 					break;

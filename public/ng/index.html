@@ -27,8 +27,8 @@
 							[[ test.updated_at | date:"dd.MM.yyyy 'klo' HH:mm" ]]
 						</td>
 						<td>
-							<a href="#/tests/[[ test.id ]]/edit" class="btn btn-primary">
-								Muokkaa
+							<a href="#/tests/[[ test.id ]]/edit" class="btn btn-success btn-sm">
+								<span class="glyphicon glyphicon-edit"></span> Muokkaa
 							</a>
 						</td>
 					</tr>
@@ -36,9 +36,15 @@
 						<td colspan="4" style="text-align:center;font-weight: bold;" ng-show="!loaded">
 							<img src="/img/ajax-loader.gif" alt="" style="height:38px;"> Ladataan...
 						</td>
+						<td colspan="4" style="text-align:center;font-weight: bold;" ng-show="loaded && recent.tests.length == 0">
+							<img src="/img/ajax-loader.gif" alt="" style="height:38px;"> Ladataan...
+						</td>
 					</tr>
 				</tbody>
 			</table>
+			<a href="#/tests/" class="btn btn-primary">
+				Uusi koe
+			</a>
 		</div>
 	</div>
 	<div class="col-lg-6">
@@ -65,8 +71,8 @@
 							[[ course.updated_at | date:"dd.MM.yyyy 'klo' HH:mm" ]]
 						</td>
 						<td>
-							<a href="#/course/[[ course.id ]]/edit" class="btn btn-primary">
-								Muokkaa
+							<a href="#/course/[[ course.id ]]/edit" class="btn btn-success btn-sm">
+								<span class="glyphicon glyphicon-edit"></span> Muokkaa
 							</a>
 						</td>
 					</tr>

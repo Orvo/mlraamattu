@@ -4,6 +4,66 @@
 		"selected_items":
 		[
 			[
+				"MULT",
+				"MULTITEXT"
+			],
+			[
+				"min",
+				"min-width"
+			],
+			[
+				"inlie",
+				"inline-block"
+			],
+			[
+				"ease",
+				"ease-out"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"ng-bind",
+				"ng-bind-html	AngularJS"
+			],
+			[
+				"tex",
+				"text-align: 〔property〕"
+			],
+			[
+				"empty",
+				"$empty_answer〔variable〕"
+			],
+			[
+				"border-ra",
+				"border-bottom-left-radius"
+			],
+			[
+				"givne",
+				"given_answers"
+			],
+			[
+				"given",
+				"$given_answers〔variable〕"
+			],
+			[
+				"_vali",
+				"_validateTestWithAnswers〔function〕"
+			],
+			[
+				"given_ans",
+				"given_answers"
+			],
+			[
+				"corre",
+				"$correct_rows〔variable〕"
+			],
+			[
+				"tab",
+				"table-cell"
+			],
+			[
 				"ques",
 				"questions"
 			],
@@ -44,51 +104,134 @@
 	"buffers":
 	[
 		{
-			"file": "public/js/ng/main.js",
+			"file": "app/Http/routes.php",
 			"settings":
 			{
-				"buffer_size": 5080,
-				"line_ending": "Windows"
+				"buffer_size": 3133,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/css/main.css",
+			"settings":
+			{
+				"buffer_size": 8873,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "public/css/admin.css",
 			"settings":
 			{
-				"buffer_size": 12154,
-				"line_ending": "Windows"
+				"buffer_size": 15065,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/js/ng/main.js",
+			"settings":
+			{
+				"buffer_size": 5944,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/js/admin.js",
+			"settings":
+			{
+				"buffer_size": 836,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "public/js/ng/controllers.js",
 			"settings":
 			{
-				"buffer_size": 8443,
-				"line_ending": "Windows"
+				"buffer_size": 11838,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app/Http/Controllers/Ajax/UsersController.php",
+			"file": "app/Http/Controllers/Ajax/TestsController.php",
 			"settings":
 			{
-				"buffer_size": 1612,
-				"line_ending": "Windows"
+				"buffer_size": 8605,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "<form ng-submit=\"submit(data)\" ng-show=\"loaded\">\n	<div id=\"content-sidebar\" class=\"fixed\">\n		<p>\n			Uuden kokeen luonti!\n		</p>\n		<p>\n			Voit muokata kysymyksiä painamalla sinistä \"Muokkaa\" painiketta joka aukaisee kysymyksen muokkauslomakkeen. Tehdyt muutokset tulevat voimaan vasta \n		</p>\n\n		<h2>Toiminnot</h2>\n		<div class=\"form-group\">\n			<label>Kurssi johon koe liitetään</label>\n			[[ course_id ]]\n			<select class=\"form-control\" ng-model=\"course_id\">\n				<option ng-repeat=\"course in data.courses\" ng-value=\"course.id\" ng-selected=\"course_id === course.id\" ng-show=\"courses_loaded\">\n					[[ course.title ]]\n				</option>\n				<option value=\"\" ng-show=\"!courses_loaded\">\n					Ladataan\n				</option>\n			</select>\n			<div ng-show=\"!courses_loaded\">\n				Odota...\n			</div>\n		</div>\n		\n		<div class=\"form-group\">\n			<button type=\"button\" class=\"btn btn-success btn-block\" ng-click=\"add_question()\" ng-disabled=\"data.test.questions.length >= num_max_questions\">\n				<span class=\"glyphicon glyphicon-plus\"></span> Lisää uusi kysymys\n			</button>\n			<div class=\"help-block center-text\" ng-show=\"data.test.questions.length >= num_max_questions\">\n				Maksimimäärä kysymyksiä saavutettu\n			</div>\n		</div>\n		\n		<div class=\"form-group\">\n			<button type=\"button\" class=\"btn btn-default btn-block\" ng-click=\"isSorting = true\">\n				<span class=\"glyphicon glyphicon-sort\"></span> Järjestä kysymykset\n			</button>\n		</div>\n\n		<hr>\n		<div class=\"form-group\">\n			<div ng-hide=\"processing\">\n				<button type=\"submit\" class=\"btn btn-primary btn-block btn-lg\">\n					<span class=\"glyphicon glyphicon-floppy-disk\"></span> Tallenna\n				</button>\n				<a href=\"#/courses/[[ data.test.course.id ]]\" class=\"btn btn-default btn-block\">\n					<span class=\"glyphicon glyphicon-chevron-left\"></span> Palaa kurssiin\n				</a>\n			</div>\n			<div ng-show=\"processing\" style=\"text-align: center\">\n				<img src=\"/img/ajax-loader.gif\" alt=\"\">\n			</div>\n		</div>\n	</div>\n	<div id=\"content-main\">\n		<div class=\"breadcrumbs\">\n			<ol class=\"breadcrumb\">\n				<li><a href=\"#/\">Ylläpitopaneeli</a></li>\n				<li><a href=\"#/courses/\">Kurssit</a></li>\n				<li><a href=\"#/courses/[[ data.test.course.id ]]\">Kurssi: [[ data.test.course.title || '-' ]]</a></li>\n				<li>\n					<span ng-show=\"!id\">Uusi koe</span>\n					<span ng-show=\"id\">Muokataan koetta</span>\n				</li>\n			</ol>\n		</div>\n		<h1>\n			<span ng-show=\"!id\">Uusi koe</span>\n			<span ng-show=\"id\">Muokataan koetta</span>\n			<span ng-show=\"data.test.title\">/ <b>[[ data.test.title ]]</b></span>\n		</h1>\n		<div class=\"alert-box success\" ng-show=\"save_success\">\n			<h4><span class=\"glyphicon glyphicon-ok\"></span> Muutokset tallennettu!</h4>\n		</div>\n		<div class=\"alert-box errors\" ng-show=\"data.errors.messages.length > 0\">\n			<img src=\"/img/ajax-loader-error.gif\" alt=\"\" class=\"pull-right\" ng-show=\"processing\" style=\"height:40px\">\n			<h4>Tallennus epäonnistui!</h4>\n			<ul>\n				<li ng-repeat=\"error in data.errors.messages\">[[ error ]]</li>\n			</ul>\n		</div>\n		<div class=\"form-group\">\n			<input type=\"text\" class=\"form-control input-lg input-block\" id=\"test-title\"\n				ng-model=\"data.test.title\" ng-class=\"{'area-has-error': data.errors.fields.test_title}\" placeholder=\"Kokeen otsikko\">\n		</div>\n		<div class=\"form-group\">\n			<textarea class=\"form-control vertical-textarea big\" id=\"test-description\"\n				ng-model=\"data.test.description\" ng-class=\"{'area-has-error': data.errors.fields.test_description}\" placeholder=\"Kokeen kuvaus\"></textarea>\n		</div>\n		<ul class=\"questions\" ng-show=\"!isSorting\">\n			<li class=\"question\" ng-repeat=\"(qkey, question) in data.test.questions\" id=\"question-[[ qkey ]]\"\n				ng-class=\"{'active': edit_data.key == qkey, 'area-has-error': data.errors.questions[qkey] !== undefined}\">\n				<div class=\"info\">\n					<div class=\"actions\">\n						<button type=\"button\" class=\"btn btn-primary btn-sm\" ng-click=\"edit(qkey, question.id)\">\n							<span class=\"glyphicon glyphicon-edit\"></span> Muokkaa\n						</button>\n						<button type=\"button\" class=\"btn btn-danger btn-sm\" ng-click=\"delete(qkey, question.id)\">\n							<span class=\"glyphicon glyphicon-trash\"></span> Poista\n						</button>\n					</div>\n					<div class=\"title-row clearfix\">\n						<div class=\"right-aligned\">\n							<div class=\"type\">\n								[[ translate_type(question.type) ]]\n							</div>\n						</div>\n						<div class=\"left-aligned\">\n							<div class=\"number\">[[ (qkey + 1) ]].</div>\n							<div class=\"title\" ng-class=\"{'no-subtitle': question.subtitle.trim().length == 0, 'dimmed': question.title.trim().length == 0}\">\n								[[ question.title || 'Kysymys puuttuu' ]]\n							</div>\n							<div class=\"subtitle\">\n								[[ question.subtitle.split('\\n')[0] ]]\n							</div>\n						</div>\n					</div>\n				</div>\n				<div class=\"edit\">\n					<div class=\"alert-box errors\" ng-show=\"data.errors.questions[qkey] !== undefined\">\n						<ul>\n							<li ng-repeat=\"error in data.errors.questions[qkey]\">[[ error ]]</li>\n						</ul>\n					</div>\n					<div class=\"form-group clearfix\">\n						<div class=\"col-xs-7\">\n							<div class=\"form-group\">\n								<label for=\"\">Kysymys</label>\n								<input type=\"text\" class=\"question-title form-control\" ng-model=\"question.title\" placeholder=\"Syötä kysymys\">\n							</div>\n							<div class=\"form-group\">\n								<label for=\"\">Kysymyksen tarkennus</label>\n								<textarea class=\"question-subtitle form-control vertical-textarea\" ng-model=\"question.subtitle\" placeholder=\"Syötä tarkentava kuvaus\"></textarea>\n							</div>\n						</div>\n						<div class=\"col-xs-5 help-sidepanel\">\n							<p>\n								Syötä kysymys viereiseen tekstikenttään.\n							</p>\n							<p>\n								Voit halutessassi myös tarkentaa kysymystä alempaan kenttään, vaikka syöttämällä esimerkkejä, lisämateriaalia tai jopa kuvia. Voit käyttää normaalia HTML-merkintäkoodia kentässä.\n							</p>\n							<p>\n								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga placeat omnis consequuntur adipisci, eligendi architecto nobis. Doloremque vero quibusdam pariatur repudiandae, magni impedit ab totam quasi molestiae.\n							</p>\n						</div>\n					</div>\n					\n					<div class=\"form-group question-details\">\n						<ul class=\"question-type\">\n							<li ng-repeat=\"type in question_types\">\n								<label ng-class=\"{'active': question.type == type}\">\n									<input type=\"radio\" ng-model=\"question.type\" ng-value=\"type\" ng-click=\"changing_type(question, type)\"> [[ translate_type(type) ]]\n								</label>\n							</li>\n						</ul>\n						<div class=\"question-answers\">\n							<div ng-show=\"question.type == 'MULTI'\">\n								<h3>Vaihtoehdot / Monivalinta usealla oikealla vastauksella</h3>\n								<p>\n									Käyttäjän tulee valita yksi tai useampi oikea vastaus monesta. Kysymyksellä pitää olla ainakin kaksi vaihtoehtoa.\n								</p>\n								<div class=\"form-group answer\" ng-repeat=\"(akey, answer) in question.answers\">\n									<label for=\"question-[[ qkey ]]-answer-[[ akey ]]\" class=\"answer-label\">[[ akey + 1 ]].</label>\n									<div class=\"col answer-text\">\n										<input type=\"text\" class=\"form-control\" id=\"question-[[ qkey ]]-answer-[[ akey ]]\" ng-model=\"answer.text\" placeholder=\"Vaihtoehdon teksti\">\n									</div>\n									<div class=\"col answer-is-correct\">\n										<div class=\"checkbox\">\n											<label>\n												<input type=\"checkbox\" ng-model=\"answer.is_correct\"> Oikea vaihtoehto\n											</label>\n										</div>\n									</div>\n									<div class=\"col answer-delete\" ng-hide=\"question.answers.length <= 2\">\n										<a class=\"cursor-pointer\" ng-click=\"remove_answer(qkey, akey)\">\n											<span class=\"glyphicon glyphicon-remove\"></span> Poista\n										</a>\n									</div>\n								</div>\n								<div class=\"form-group answer\">\n									<label for=\"question-[[ qkey ]]-answer-[[ akey ]]\" class=\"answer-label\">Lisää uusi</label>\n									<div class=\"col answer-text\">\n										<input type=\"text\" class=\"form-control\" ng-enter=\"add_answer.do(qkey, question.id)\" ng-model=\"add_answer.text\" placeholder=\"Syötä uusi vaihtoehto\">\n									</div>\n									<div class=\"help-block\" ng-show=\"add_answer.text != ''\">\n										Paina Enter varmistaaksesi lisäys\n									</div>\n								</div>\n							</div>\n							<!-- ================================================================== -->\n							<div ng-show=\"question.type == 'CHOICE'\">\n								<h3>Vaihtoehdot / Monivalinta yhdellä oikealla vastauksella</h3>\n								<p>\n									Käyttäjän tulee valita yksi oikea vastaus monesta. Kysymyksellä pitää olla ainakin kaksi vaihtoehtoa.\n								</p>\n								<div class=\"form-group answer\" ng-repeat=\"(akey, answer) in question.answers\">\n									<label for=\"question-[[ qkey ]]-answer-[[ akey ]]\" class=\"answer-label\">[[ akey + 1 ]].</label>\n									<div class=\"col answer-text\">\n										<input type=\"text\" class=\"form-control\" id=\"question-[[ qkey ]]-answer-[[ akey ]]\" ng-model=\"answer.text\" placeholder=\"Vaihtoehdon teksti\">\n									</div>\n									<div class=\"col answer-is-correct\">\n										<div class=\"radio\">\n											<label>\n												<input type=\"radio\" ng-model=\"question.correct_answer\" value=\"[[ akey ]]\"> Oikea vaihtoehto\n											</label>\n										</div>\n									</div>\n									<div class=\"col answer-delete\" ng-hide=\"question.answers.length <= 2\">\n										<a class=\"cursor-pointer\" ng-click=\"remove_answer(qkey, akey)\">\n											<span class=\"glyphicon glyphicon-remove\"></span> Poista\n										</a>\n									</div>\n								</div>\n								<div class=\"form-group answer\">\n									<label for=\"question-[[ qkey ]]-answer-[[ akey ]]\" class=\"answer-label\">Lisää uusi</label>\n									<div class=\"col answer-text\">\n										<input type=\"text\" class=\"form-control\" ng-enter=\"add_answer.do(qkey, question.id)\" ng-model=\"add_answer.text\" placeholder=\"Syötä uusi vaihtoehto\">\n									</div>\n									<div class=\"help-block\" ng-show=\"add_answer.text != ''\">\n										Paina Enter varmistaaksesi lisäys\n									</div>\n								</div>\n							</div>\n							<!-- ================================================================== -->\n							<div ng-show=\"question.type == 'MULTITEXT'\">\n								<h3>Vastaukset / Moniteksti</h3>\n								<p>\n									Käyttäjän tulee syöttää vastaukseksi kaikki alla olevat sanat tai lauseet. Kysymyksellä pitää olla ainakin kaksi vastausta.\n								</p>\n\n								<div class=\"form-group answer\" ng-repeat=\"(akey, answer) in question.answers\">\n									<label for=\"question-[[ qkey ]]-answer-[[ akey ]]\" class=\"answer-label\">[[ akey + 1 ]].</label>\n									<div class=\"col answer-text\">\n										<input type=\"text\" class=\"form-control\" id=\"question-[[ qkey ]]-answer-[[ akey ]]\" ng-model=\"answer.text\" placeholder=\"Vastaus\">\n									</div>\n									<div class=\"col answer-delete\" ng-hide=\"question.answers.length <= 2\">\n										<a class=\"cursor-pointer\" ng-click=\"remove_answer(qkey, akey)\">\n											<span class=\"glyphicon glyphicon-remove\"></span> Poista\n										</a>\n									</div>\n								</div>\n								<div class=\"form-group answer\">\n									<label for=\"question-[[ qkey ]]-answer-[[ akey ]]\" class=\"answer-label\">Lisää uusi</label>\n									<div class=\"col answer-text\">\n										<input type=\"text\" class=\"form-control\" ng-enter=\"add_answer.do(qkey, question.id)\" ng-model=\"add_answer.text\" placeholder=\"Kirjoita sana tai lause\">\n									</div>\n									<div class=\"help-block\" ng-show=\"add_answer.text != ''\">\n										Paina Enter varmistaaksesi lisäys\n									</div>\n								</div>\n							</div>\n							<!-- ================================================================== -->\n							<div ng-show=\"question.type == 'TEXT'\">\n								<h3>Vastaukset / Teksti</h3>\n								<p>\n									Käyttäjän tulee syöttää vastaukseksi alla oleva sana tai lause.\n								</p>\n								<div class=\"form-group answer\">\n									<div class=\"col answer-text wide\">\n										<input type=\"text\" class=\"form-control\" ng-model=\"question.answers[0].text\" placeholder=\"Vastaus\">\n									</div>\n								</div>\n							</div>\n							<!-- ================================================================== -->\n							<div ng-show=\"question.type == 'TEXTAREA'\">\n								<h3>Vastaukset / Pitkä teksti</h3>\n								<p>\n									Käyttäjän tulee syöttää vastaukseksi jotain tekstikenttään ja vastauksen voi tarkistaa myöhemmin ylläpitopaneelista.\n								</p>\n								<div class=\"form-group answer\">\n									<div class=\"col answer-text wide\">\n										<textarea class=\"form-control\" placeholder=\"Käyttäjä täyttää\" style=\"resize:none\" class=\"disabled\" disabled></textarea>\n									</div>\n								</div>\n							</div>\n						</div>\n					</div>\n					<div class=\"pull-left\">\n						<span ng-show=\"!hasChanged\"><b>Ei muutoksia</b></span>\n						<span ng-show=\"hasChanged\"><b>Tallentamattomia muutoksia</b></span>\n					</div>\n					<div class=\"pull-right\">\n						<button type=\"button\" class=\"btn btn-danger\" ng-click=\"delete(qkey, question.id)\">\n							<span class=\"glyphicon glyphicon-trash\"></span> Poista\n						</button>\n						<div style=\"display:inline-block;width:0.5em;\"></div>\n						<button type=\"button\" class=\"btn btn-default\" ng-click=\"cancel()\">\n							Peruuta\n						</button>\n						<button type=\"button\" class=\"btn btn-success\" ng-click=\"accept(qkey)\">\n							<span class=\"glyphicon glyphicon-ok\"></span>&nbsp;&nbsp;Valmis\n						</button>\n					</div>\n					<div class=\"clearfix\"></div>\n				</div>\n			</li>\n			<li class=\"add-questions\" ng-class=\"{'has-questions':data.test.questions.length > 0, 'area-has-error': data.errors.fields.add_questions}\">\n				<h4 ng-show=\"data.test.questions.length == 0\">Aloita lisäämällä kysymys</h4>\n				<button type=\"button\" class=\"btn btn-success\" ng-click=\"add_question()\">\n					<span class=\"glyphicon glyphicon-plus\"></span> Lisää uusi kysymys\n				</button>\n			</li>\n		</ul>\n		<div ng-show=\"isSorting\">\n			<ul class=\"questions sortable-questions\" ui-sortable=\"sortableOptions\" ng-model=\"data.test.questions\" ng-show=\"isSorting\">\n				<li class=\"question\" ng-repeat=\"(qkey, question) in data.test.questions\" id=\"question-sortable-[[ qkey ]]\">\n					<div class=\"info\">\n						<div class=\"title-row clearfix\">\n							<div class=\"right-aligned\">\n								<div class=\"type\">\n									[[ translate_type(question.type) ]]\n								</div>\n							</div>\n							<div class=\"left-aligned\">\n								<div class=\"number\">[[ (qkey + 1) ]].</div>\n								<div class=\"title\" ng-class=\"{'no-subtitle': question.subtitle.trim().length == 0, 'dimmed': question.title.trim().length == 0}\">\n									[[ question.title || 'Kysymys puuttuu' ]]\n								</div>\n								<div class=\"subtitle\">\n									[[ question.subtitle.split('\\n')[0] ]]\n								</div>\n							</div>\n						</div>\n					</div>\n				</li>\n			</ul>\n			<button type=\"button\" class=\"btn btn-primary btn-block\" ng-click=\"isSorting = false\">\n				<span class=\"glyphicon glyphicon-ok\"></span> Valmis\n			</button>\n		</div>\n		<hr>\n		<div>\n			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit omnis explicabo a distinctio molestiae, sit, dignissimos iusto consequuntur nemo est atque quae perspiciatis, repellendus quisquam natus assumenda excepturi dolorum. Aut harum consequatur nostrum quam nemo assumenda ratione, qui, fugit, distinctio libero ut dolorem ipsam maxime sed aperiam, error mollitia deleniti!\n		</div>\n	</div>\n</form>\n\n<div class=\"load-placeholder\" ng-show=\"!loaded\">\n	<h3>\n		<img src=\"/img/ajax-loader.gif\" alt=\"\"> Ladataan...\n	</h3>\n</div>\n\n<div class=\"modal fade\" id=\"modal-delete-confirmation\">\n	<div class=\"modal-dialog\">\n		<div class=\"modal-content\">\n			<div class=\"modal-header\">\n				<h4 class=\"modal-title\">Poiston varmistus</h4>\n			</div>\n			<div class=\"modal-body\" style=\"text-align:center;font-size:120%\">\n				<p>\n					Oletko varma, että haluat poistaa kysymyksen <b>\"[[ modal_info.key + 1 ]]. [[ modal_info.question.title ]]\"</b>?\n				</p>\n				<p>\n					Lopullinen poisto tapahtuu kokeen tallennuksen yhteydessä, jonka jälkeen toimintoa ei voi peruuttaa.\n				</p>\n			</div>\n			<div class=\"modal-footer\">\n				<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Peruuta</button>\n				<button type=\"button\" class=\"btn btn-danger\" ng-click=\"confirmed_delete()\">\n					<span class=\"glyphicon glyphicon-trash\"></span> Poista kysymys\n				</button>\n			</div>\n		</div>\n	</div>\n</div>\n\n<div class=\"modal\" id=\"modal-cancel-confirmation\">\n	<div class=\"modal-dialog\">\n		<div class=\"modal-content\">\n			<div class=\"modal-header\">\n				<h4 class=\"modal-title\">Poiston varmistus</h4>\n			</div>\n			<div class=\"modal-body\" style=\"text-align:center;font-size:120%\">\n				<p>\n					Kysymyksen <b>\"[[ modal_info.key + 1 ]]. [[ modal_info.question.title ]]\"</b> muokkaus on vielä kesken. Haluatko jatkaa tallentamatta?\n				</p>\n			</div>\n			<div class=\"modal-footer\">\n				<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Peruuta</button>\n				<button type=\"button\" class=\"btn btn-warning\" ng-click=\"confirmed_cancel()\">\n					<span class=\"glyphicon glyphicon-remove\"></span> Älä tallenna\n				</button>\n			</div>\n		</div>\n	</div>\n</div>\n",
+			"file": "public/ng/tests/form.html",
+			"file_size": 16873,
+			"file_write_time": 130949096810000000,
+			"settings":
+			{
+				"buffer_size": 16929,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/ng/index.html",
+			"settings":
+			{
+				"buffer_size": 2414,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/admin/layout.blade.php",
+			"settings":
+			{
+				"buffer_size": 5846,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/ng/archive/list.html",
+			"settings":
+			{
+				"buffer_size": 3170,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Http/Controllers/AuthController.php",
+			"settings":
+			{
+				"buffer_size": 2460,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Test.php",
+			"settings":
+			{
+				"buffer_size": 1583,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/ng/courses/list.html",
+			"settings":
+			{
+				"buffer_size": 2515,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "public/ng/courses/show.html",
 			"settings":
 			{
-				"buffer_size": 3794,
-				"line_ending": "Windows"
+				"buffer_size": 3776,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "public/ng/users/form.html",
+			"file": "public/ng/tests/list.html",
 			"settings":
 			{
-				"buffer_size": 3728,
-				"line_ending": "Windows"
+				"buffer_size": 2254,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -99,20 +242,52 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 87.0,
+		"height": 338.0,
 		"last_filter": "",
 		"selected_items":
 		[
 			[
-				"insta",
+				"instal",
 				"Package Control: Install Package"
+			],
+			[
+				"rever",
+				"Permute Lines: Reverse"
+			],
+			[
+				"revers",
+				"Permute Lines: Reverse"
+			],
+			[
+				"reverse",
+				"Permute Lines: Reverse"
 			],
 			[
 				"wrap",
 				"Word Wrap: Toggle"
 			],
 			[
+				"conv",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"convtab",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"co",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"convert to ",
+				"Indentation: Convert to Tabs"
+			],
+			[
 				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
 				"Package Control: Install Package"
 			],
 			[
@@ -122,10 +297,6 @@
 			[
 				"ssangu",
 				"Set Syntax: HTML (Angular.js)"
-			],
-			[
-				"instal",
-				"Package Control: Install Package"
 			],
 			[
 				"sid",
@@ -180,7 +351,7 @@
 				"View: Toggle Minimap"
 			]
 		],
-		"width": 530.0
+		"width": 538.0
 	},
 	"console":
 	{
@@ -201,13 +372,76 @@
 	},
 	"expanded_folders":
 	[
-		"/G/servu/mlraamattu"
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/database",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/database/migrations",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/courses",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/tests"
 	],
 	"file_history":
 	[
-		"/G/servu/mlraamattu/app/User.php",
-		"/G/servu/mlraamattu/public/js/main.js",
-		"/G/servu/mlraamattu/vendor/mockery/mockery/library/Mockery/Generator/StringManipulationGenerator.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/database/migrations/2015_11_10_100728_create_tests_table.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/test/show.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Test.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Question.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/database/migrations/2014_10_12_000000_create_users_table.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/database/migrations/2015_12_17_083226_add_timestamps_to_tests_table.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Answer.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/ng/models.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/User.php",
+		"/Users/media7/Desktop/Palvelimen asennus.txt",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/Ajax/TestsController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/admin/layout.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/AuthController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Archive.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/layout.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/auth/login.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/ng/main.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/Ajax/CoursesController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/css/main.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/main.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/admin.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/css/admin.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/TestsController.php",
+		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/553EDACD-09CF-4F60-9F60-E16A103D53BC/glyphicon.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/index.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/course/list.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/course/tests.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/CoursesController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Middleware/AdminAuthenticate.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/misc/codeignited/js/admin.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/potato.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/courses/form.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Middleware/AjaxAuthenticate.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Requests/LoginFormRequest.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/vendor/laravel/framework/src/Illuminate/Contracts/Auth/UserProvider.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/admin/index.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/tests/list.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Course.php",
+		"/Users/media7/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/media7/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/courses/list.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/ng/controllers.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/courses/show.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/config/app.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/tests/form.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/lang/fi/validation.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/Auth/AuthController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/misc/codeignited/application/controllers/Ajax_Controller.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/database/migrations/2015_11_13_082828_add_timestamps_to_users.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/lang/en/validation.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/misc/codeignited/application/views/login.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/.env",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/errors/401.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/vendor/illuminate/html/HtmlFacade.php",
+		"/Users/media7/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/courses/tests.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/mlraamattu_2015-11-11.sql",
+		"/Applications/XAMPP/xamppfiles/etc/extra/httpd-vhosts.conf",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Providers/RouteServiceProvider.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/vendor/mockery/mockery/library/Mockery/Generator/StringManipulationGenerator.php",
 		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/ml.sublime-project",
 		"/private/etc/hosts",
 		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/config/routes.php",
@@ -275,41 +509,7 @@
 		"/Users/media7/Documents/media7layout/layoutblue/css/normalize.min.css",
 		"/Users/media7/Documents/media7layout/netadventist teema/layouts/refresh.html.liquid",
 		"/Users/media7/Documents/media7layout/netadventist teema/layouts/f5player.html.liquid",
-		"/Users/media7/Documents/media7layout/netadventist teema/layouts/f5home.html.liquid",
-		"/Users/media7/Documents/media7layout/netadventist teema/layouts/no_containers.html.liquid",
-		"/Users/media7/Documents/media7layout/netadventist teema/layouts/home.html.liquid",
-		"/Users/media7/Documents/media7layout/netadventist teema/layouts/default.html.liquid",
-		"/Users/media7/Documents/media7layout/netadventist teema/layouts.yml",
-		"/Users/media7/Documents/media7layout/netadventist teema/about.yml",
-		"/Users/media7/Documents/media7layout/layout/css/main.css",
-		"/Users/media7/Documents/media7layout/layout/info.html",
-		"/Users/media7/Documents/media7layout/layout/index.html",
-		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/globals.js",
-		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/hammer.js",
-		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/myLogicSimple5.js",
-		"/Users/media7/Documents/mvtouch/streamaus/MVTouch5.html",
-		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/myLogicSimple.js",
-		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/hammer_003.js",
-		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/jquery.js",
-		"/Volumes/Projektit3/DVD-projekteja/missiodvd2015-4/bellet/Wk05_ShareThisLove.stp",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/458E7F5D-C7AF-489A-9746-8333E5BCE809/build.php",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/B3922C45-50E0-4A9F-952C-6A7C44472020/script.js",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/CFFAE254-9C0C-474A-915C-F4EE27F1D0E5/controller.php",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/3EA3EB9C-DCF6-4E68-9E2F-0C3D41867D7D/main.css",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/38D53517-5BB1-4873-B49F-739EF7BFDA45/index.php",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/D0E60613-804F-445A-912E-6A51294BE387/view_main.php",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/EB985576-6086-4820-A11E-2531BA19046D/database.php",
-		"/Users/media7/Documents/infobuild/oldbuild.php",
-		"/Users/media7/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-		"/Users/media7/Documents/infobuild/controller.php",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/621926AC-4EA1-42C3-B138-332E4C0B9D1D/view_form.php",
-		"/Users/media7/Documents/infobuild/script.js",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/50A5693F-5CDE-452B-9116-345D54C1AC91/form.php",
-		"/Users/media7/Documents/infobuild/index.php",
-		"/Users/media7/Documents/infobuild/form.php",
-		"/Users/media7/Documents/infobuild/main.css",
-		"/Users/media7/Documents/infobuild/database.php",
-		"/Users/media7/Documents/infobuild/build.php"
+		"/Users/media7/Documents/media7layout/netadventist teema/layouts/f5home.html.liquid"
 	],
 	"find":
 	{
@@ -327,134 +527,134 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"content-main",
-			"name",
-			"test",
-			"title",
-			"test",
-			"\n			<div class=\"row\">",
-			"row",
-			"vertical",
-			"choice",
-			"t\"]",
-			"[\"",
-			"indexed_choices[$question->id]",
-			"choice.title",
-			".title-row",
-			"choices",
-			"edit()",
-			".edit",
-			"\n								<div class=\"form-group\">\n									<input type=\"text\" class=\"form-control\" ng-model=\"question.answer\">\n								</div>",
-			"MULTITEXT",
-			"tab",
-			"tab-p",
-			"top",
-			"checkbox",
-			"div",
-			"h3",
-			"checkbox",
-			"style=\"width:50%;margin:0 0 5px 0\"",
-			"$scope.new_choice_text",
-			"elem",
-			"item.",
-			"useasta",
-			"choice",
-			"Text",
-			"text",
-			"Text",
-			"text",
-			"home",
-			"...",
-			"role=\"presentation\"",
-			"role=\"presentation\" ",
-			"30",
-			"30px",
-			",",
-			"30",
-			"logged_in",
-			"-5",
-			"form-group",
+			"15",
+			"tätä toimi",
+			"500ms",
+			"grab",
+			"handle",
+			"vaihtoehtoa",
+			"vaihto",
+			"sortableOptions",
+			"errors",
+			".errors",
+			".error",
+			"searchparam",
+			"pop",
+			"transla",
+			"translated",
+			"qdata",
+			"question",
 			"questions",
-			"str",
-			"vhost",
-			"h-nav",
-			"super-w",
-			"#main-cont",
-			"div#login",
-			"#content ifram",
-			"iframe",
-			"<iframe  ",
-			"<iframe width=\"640\"",
-			"</iframe>",
-			"--><",
-			"--><iframe",
-			"<iframe",
-			"</p>",
-			"<p>",
-			"twitter",
-			"<iframe",
-			"iframe",
-			"<!--",
-			"<p>",
-			"respons",
-			"respon",
-			"respons",
-			"&amp;",
+			"qdata",
+			"question",
+			"Question",
+			"question",
+			"Question",
+			"$location.",
+			"correct_",
+			"test_cre",
+			"window.",
+			"window.loc",
+			"is_correct",
+			"text",
+			"title",
+			"pop",
+			"data",
+			"add_q",
+			"vertical-",
+			"-",
+			"peruuta",
 			"img",
-			"respons",
-			"img",
-			"widget",
-			"overflow-x",
-			"widget",
-			"width: 100%",
-			"navigation-w",
-			"navigation",
-			"fonts/fonts",
-			"../",
-			"../fonts/",
-			"../fonts/glyphicons-halflings-regular.eot",
-			".eot",
-			"glyph",
-			"font",
-			"padding",
-			"display",
-			"b",
-			"navigat",
-			"active",
-			"expand",
-			"active",
-			"border 70ms",
-			" .menu_secondary",
-			"#navigation",
-			"tietoa toi",
-			"navig",
-			":focus",
-			"iframe",
-			"linear",
-			"ease-in",
-			"min-wid",
-			"col-md",
-			"<span class=\"hint\"></span>",
-			"class=\"\"",
-			"fieldset",
-			"content-column",
-			"md-",
-			"#main-col",
-			"border-rad",
-			"liity lista",
-			"search:hover",
-			"0e6f2f",
-			"8",
-			"009247",
-			"18bd4c",
-			"009247",
-			"fff",
-			"2",
+			"processing",
+			"Kokeella",
+			"$data['errors']",
+			"otsikko",
+			"title",
+			"parseInt",
+			"parseNumber",
+			"tallenna",
+			"vaihtoehtoa",
+			"has-error",
+			"errors",
+			"asd\"",
+			"error",
+			"prompt",
+			"wordpress",
+			"muokka",
+			"btn",
+			" btn-sm",
+			".number",
+			"span.",
+			"span.test-result",
+			"span",
+			"lt.",
+			"correct",
+			"data",
+			"xs",
+			"btn-xs",
+			"unsavedData",
+			"losingData",
+			"prompt",
+			"[type=\"text",
+			"prompt",
+			"do_Sub",
+			"prompt",
+			"modal-login",
+			"login",
+			"poiston",
+			"right-alig",
+			"xs",
+			".edit",
+			"no-questions",
+			"no-quest",
+			"ng-cl",
+			"12",
+			"0px",
+			"navbar",
+			"div",
+			"add_answer.do",
+			"add_answer",
+			"poista",
+			"userdata",
+			"tallenna",
+			"atllenna",
+			"modal",
+			"modal-login",
+			"slideUp",
+			"error",
+			" input-lg",
+			"modal-login",
+			"control",
+			"modal",
+			"submit",
+			"ref",
+			"200ms",
+			".question-type",
+			"Syötä uuden vaihtoehdon teksti",
+			"Kirjoita vaihtoehdon ",
+			"kirjoita vaih",
+			"add_",
+			"li",
+			" ng-cloak",
+			"chevron-right",
+			"4px 1",
+			"2px 2",
+			"2px 1px ",
+			"2px ",
+			"d7d7d7",
+			"2px",
+			"right",
+			"left",
 			"border",
-			"#ccc",
-			"1",
-			"1px",
-			"1"
+			".question",
+			"question-[[ question.id ]]-",
+			"8",
+			"not found",
+			"ref",
+			"quest->input('ref')",
+			"request",
+			"DBA420",
+			"E5B843"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -462,6 +662,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"<?",
 			"",
 			"\n"
 		],
@@ -474,54 +675,55 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/js/ng/main.js",
+					"file": "app/Http/routes.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5080,
+						"buffer_size": 3133,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3316,
-								3316
+								565,
+								564
 							]
 						],
 						"settings":
 						{
+							"auto_complete": false,
 							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1200.0,
+						"translation.y": 77.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 12,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "public/css/admin.css",
+					"file": "public/css/main.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12154,
+						"buffer_size": 8873,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1038,
-								1038
+								4795,
+								4795
 							]
 						],
 						"settings":
@@ -531,37 +733,37 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 762.0,
+						"translation.y": 4944.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "public/js/ng/controllers.js",
+					"file": "public/css/admin.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8443,
+						"buffer_size": 15065,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2210,
-								2210
+								6044,
+								6044
 							]
 						],
 						"settings":
 						{
 							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/CSS/CSS.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1536.0,
+						"translation.y": 6659.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -569,28 +771,125 @@
 				},
 				{
 					"buffer": 3,
-					"file": "app/Http/Controllers/Ajax/UsersController.php",
+					"file": "public/js/ng/main.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1612,
+						"buffer_size": 5944,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								671,
-								671
+								403,
+								403
 							]
 						],
 						"settings":
 						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "public/js/admin.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 836,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								195,
+								195
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/js/ng/controllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11838,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5380,
+								5397
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4045.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/Http/Controllers/Ajax/TestsController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8605,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7943,
+								7943
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
 							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": -0.0,
-						"translation.y": 0.0,
+						"translation.x": 4.0,
+						"translation.y": 5283.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
@@ -603,24 +902,87 @@
 			"sheets":
 			[
 				{
-					"buffer": 4,
-					"file": "public/ng/courses/show.html",
+					"buffer": 2,
+					"file": "public/css/admin.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3794,
+						"buffer_size": 15065,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								881,
-								833
+								292,
+								292
 							]
 						],
 						"settings":
 						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "public/ng/tests/form.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 16929,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								284,
+								284
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"word_wrap": false
+						},
+						"translation.x": 110.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "public/ng/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2414,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1598,
+								1598
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
 							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
 							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"translate_tabs_to_spaces": false
@@ -633,24 +995,157 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "public/ng/users/form.html",
+					"buffer": 9,
+					"file": "resources/views/admin/layout.blade.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3728,
+						"buffer_size": 5846,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								288,
-								288
+								3545,
+								3551
 							]
 						],
 						"settings":
 						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"history_list_is_closing": true,
+							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"word_wrap": false
+						},
+						"translation.x": 1.0,
+						"translation.y": 1070.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "public/ng/archive/list.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3170,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2570,
+								2570
+							],
+							[
+								2714,
+								2714
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 865.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "app/Http/Controllers/AuthController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2460,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2304,
+								2304
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"history_list_is_closing": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1004.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "app/Test.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1583,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								314,
+								314
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"history_list_is_closing": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 23.0,
+						"translation.y": 340.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 16,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "public/ng/courses/list.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2515,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								890,
+								890
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
 							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
 							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"translate_tabs_to_spaces": false
@@ -659,7 +1154,69 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "public/ng/courses/show.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3776,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2200,
+								2200
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 375.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "public/ng/tests/list.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2254,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								561,
+								551
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
 					"type": "text"
 				}
 			]
@@ -667,7 +1224,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 0.0
+		"height": 25.0
 	},
 	"input":
 	{
@@ -693,7 +1250,7 @@
 		"cols":
 		[
 			0.0,
-			0.308890787761,
+			0.346468098958,
 			1.0
 		],
 		"rows":
@@ -707,11 +1264,15 @@
 	{
 		"height": 0.0
 	},
+	"output.unsaved_changes":
+	{
+		"height": 110.0
+	},
 	"pinned_build_system": "",
 	"project": "ml.sublime-project",
 	"replace":
 	{
-		"height": 64.0
+		"height": 46.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -721,36 +1282,364 @@
 		"selected_items":
 		[
 			[
-				"ajaxuser",
-				"app\\Http\\Controllers\\Ajax\\UsersController.php"
+				"ngind",
+				"public/ng/index.html"
 			],
 			[
-				"user",
-				"app\\User.php"
+				"migratetest",
+				"database/migrations/2015_11_10_100728_create_tests_table.php"
 			],
 			[
-				"publuserform",
-				"public\\ng\\users\\form.html"
+				"ngtestslist",
+				"public/ng/tests/list.html"
 			],
 			[
-				"controlj",
-				"public\\js\\ng\\controllers.js"
+				"migrauser",
+				"database/migrations/2014_10_12_000000_create_users_table.php"
+			],
+			[
+				"migratest",
+				"database/migrations/2015_11_10_100728_create_tests_table.php"
+			],
+			[
+				"answer",
+				"app/Answer.php"
+			],
+			[
+				"appquest",
+				"app/Question.php"
+			],
+			[
+				"test",
+				"app/Test.php"
+			],
+			[
+				"admincss",
+				"public/css/admin.css"
+			],
+			[
+				"ajaxtest",
+				"app/Http/Controllers/Ajax/TestsController.php"
+			],
+			[
+				"courseshow",
+				"public/ng/courses/show.html"
+			],
+			[
+				"ngcourseli",
+				"public/ng/courses/list.html"
+			],
+			[
+				"adminjs",
+				"public/js/admin.js"
+			],
+			[
+				"maincss",
+				"public/css/main.css"
+			],
+			[
+				"ngachive",
+				"public/ng/archive/list.html"
+			],
+			[
+				"arch",
+				"app/Archive.php"
+			],
+			[
+				"adminlay",
+				"resources/views/admin/layout.blade.php"
 			],
 			[
 				"admin",
-				"public\\css\\admin.css"
+				"public/css/admin.css"
 			],
 			[
-				"publicngshow",
-				"public\\ng\\courses\\show.html"
+				"modeljs",
+				"public/js/ng/models.js"
 			],
 			[
-				"ngmainjs",
-				"public\\js\\ng\\main.js"
+				"layout",
+				"resources/views/layout.blade.php"
+			],
+			[
+				"ngcourse",
+				"public/ng/courses/show.html"
+			],
+			[
+				"authcontr",
+				"app/Http/Controllers/AuthController.php"
+			],
+			[
+				"authcontro",
+				"app/Http/Controllers/AuthController.php"
+			],
+			[
+				"loginblade",
+				"resources/views/auth/login.blade.php"
+			],
+			[
+				"showblade",
+				"resources/views/test/show.blade.php"
+			],
+			[
+				"ajaxtestsc",
+				"app/Http/Controllers/Ajax/TestsController.php"
 			],
 			[
 				"mainjs",
-				"public\\js\\main.js"
+				"public/js/ng/main.js"
+			],
+			[
+				"formhtml",
+				"public/ng/tests/form.html"
+			],
+			[
+				"ngcoursehtml",
+				"public/ng/courses/show.html"
+			],
+			[
+				"nglist",
+				"public/ng/courses/list.html"
+			],
+			[
+				"nginxe",
+				"public/ng/index.html"
+			],
+			[
+				"viewlogin",
+				"resources/views/auth/login.blade.php"
+			],
+			[
+				"adminauth",
+				"app/Http/Middleware/AdminAuthenticate.php"
+			],
+			[
+				"testscontr",
+				"app/Http/Controllers/TestsController.php"
+			],
+			[
+				"coursescontr",
+				"app/Http/Controllers/CoursesController.php"
+			],
+			[
+				"ajaxua",
+				"app/Http/Middleware/AjaxAuthenticate.php"
+			],
+			[
+				"uthcontr",
+				"app/Http/Controllers/AuthController.php"
+			],
+			[
+				"userphp",
+				"app/User.php"
+			],
+			[
+				"adminindex",
+				"resources/views/admin/index.blade.php"
+			],
+			[
+				"ajaxauth",
+				"app/Http/Middleware/AjaxAuthenticate.php"
+			],
+			[
+				"ngtestlist",
+				"public/ng/tests/list.html"
+			],
+			[
+				"ajscours",
+				"app/Http/Controllers/Ajax/CoursesController.php"
+			],
+			[
+				"courselist",
+				"public/ng/courses/list.html"
+			],
+			[
+				"adminla",
+				"resources/views/admin/layout.blade.php"
+			],
+			[
+				"ngtestform",
+				"public/ng/tests/form.html"
+			],
+			[
+				"ngshow",
+				"public/ng/courses/show.html"
+			],
+			[
+				"controjs",
+				"public/js/ng/controllers.js"
+			],
+			[
+				"ajaxcours",
+				"app/Http/Controllers/Ajax/CoursesController.php"
+			],
+			[
+				"test.php",
+				"app/Test.php"
+			],
+			[
+				"course.ph",
+				"app/Course.php"
+			],
+			[
+				"coursetest",
+				"resources/views/course/tests.blade.php"
+			],
+			[
+				"showblad",
+				"resources/views/test/show.blade.php"
+			],
+			[
+				"viewcourse",
+				"resources/views/course/tests.blade.php"
+			],
+			[
+				"apptest",
+				"app/Test.php"
+			],
+			[
+				"ajaxcon",
+				"misc/codeignited/application/controllers/Ajax_Controller.php"
+			],
+			[
+				"appuserphp",
+				"app/User.php"
+			],
+			[
+				"archive",
+				"app/Archive.php"
+			],
+			[
+				"authcon",
+				"app/Http/Controllers/AuthController.php"
+			],
+			[
+				"appuser.php",
+				"app/User.php"
+			],
+			[
+				"migratimestamp",
+				"database/migrations/2015_11_13_082828_add_timestamps_to_users.php"
+			],
+			[
+				"migrateuser",
+				"database/migrations/2014_10_12_000000_create_users_table.php"
+			],
+			[
+				"app.php",
+				"config/app.php"
+			],
+			[
+				"langvalid",
+				"resources/lang/en/validation.php"
+			],
+			[
+				"app",
+				"config/app.php"
+			],
+			[
+				"authcont",
+				"app/Http/Controllers/AuthController.php"
+			],
+			[
+				"authcontroll",
+				"app/Http/Controllers/AuthController.php"
+			],
+			[
+				"layoutblad",
+				"resources/views/layout.blade.php"
+			],
+			[
+				"testshow",
+				"resources/views/test/show.blade.php"
+			],
+			[
+				"testcontro",
+				"app/Http/Controllers/Ajax/TestsController.php"
+			],
+			[
+				"coursescont",
+				"app/Http/Controllers/Ajax/CoursesController.php"
+			],
+			[
+				"ajaxtestc",
+				"app/Http/Controllers/Ajax/TestsController.php"
+			],
+			[
+				"authauthcontr",
+				"app/Http/Controllers/Auth/AuthController.php"
+			],
+			[
+				"testscont",
+				"app/Http/Controllers/TestsController.php"
+			],
+			[
+				"illuminatehtml",
+				"vendor/illuminate/html/HtmlFacade.php"
+			],
+			[
+				".evn",
+				".env"
+			],
+			[
+				"configapp",
+				"config/app.php"
+			],
+			[
+				"adminaut",
+				"app/Http/Middleware/AdminAuthenticate.php"
+			],
+			[
+				"ngindex",
+				"public/ng/index.html"
+			],
+			[
+				"courseslist",
+				"public/ng/courses/list.html"
+			],
+			[
+				"coursescontro",
+				"app/Http/Controllers/CoursesController.php"
+			],
+			[
+				".env",
+				".env"
+			],
+			[
+				"coursesblad",
+				"resources/views/course/list.blade.php"
+			],
+			[
+				"ngcourseslist",
+				"public/ng/courses/list.html"
+			],
+			[
+				"adminlayou",
+				"resources/views/admin/layout.blade.php"
+			],
+			[
+				"admincs",
+				"public/css/admin.css"
+			],
+			[
+				"rout",
+				"app/Http/routes.php"
+			],
+			[
+				"routes",
+				"app/Providers/RouteServiceProvider.php"
+			],
+			[
+				"testformhtml",
+				"public/ng/tests/form.html"
+			],
+			[
+				"ngformhtml",
+				"public/ng/courses/form.html"
+			],
+			[
+				"contro",
+				"public/js/ng/controllers.js"
 			],
 			[
 				"ngmain",
@@ -797,16 +1686,8 @@
 				"ng/index.html"
 			],
 			[
-				"adminjs",
-				"js/admin.js"
-			],
-			[
 				"login",
 				"application/views/login.php"
-			],
-			[
-				"rout",
-				"application/config/routes.php"
 			],
 			[
 				"layoutma",
@@ -861,7 +1742,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -869,7 +1750,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": false,
-	"side_bar_width": 150.0,
+	"side_bar_width": 234.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

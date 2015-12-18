@@ -5,26 +5,39 @@ $(window).load(function()
 	{
 		if($('#content-sidebar').hasClass('fixed'))
 		{
-			$('#content-sidebar').css({'padding-top': $(document).scrollTop() + 'px'});
+			$('#content-sidebar').css({'margin-top': $(document).scrollTop() + 'px'});
 		}
 	});
 	
-	var doResize = function(width)
+	var doResize = function()
 	{
+		var width = $(window).width();
+		var height = $(window).height();
+		
 		if(width >= 1200)
 		{
-			$('#main-container').css('padding', '0 3%');	
+			$('#main-container').css({
+				'padding-left': '3%',
+				'padding-right': '3%',
+			});
 		}
 		else
 		{
-			$('#main-container').css('padding', '0 10px');
+			$('#main-container').css({
+				'padding-left': '10px',
+				'padding-right': '10px',
+			});
 		}
+		
+		$('#content-sidebar .sidebar-help').height(height - 120 - $('#content-sidebar .sidebar-actions').height());
 	}
-	doResize($(window).width());
+	
+	doResize();
+	doResize();
 	
 	$(window).resize(function()
 	{
-		doResize($(window).width());
+		doResize();
 	});
 	
 	$('.search-filter').focus(function()

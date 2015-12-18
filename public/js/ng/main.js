@@ -227,6 +227,49 @@ app.controller('AjaxLogin', function($rootScope, $scope, $window, $location, $ro
 	}
 });
 
+app.run(function($rootScope)
+{
+	var _list = [];
+	
+	$rootScope.breadcrumbs = {
+		get: function()
+		{
+			return _list;
+		},
+		reset: function()
+		{
+			_list = [];
+		},
+		add: function(title, link, loaded)
+		{
+			var item = { };
+			
+			if(title !== undefined)
+			{
+				Object.defineProperty(item, "title", {
+					get: function() { return typeof title == "function" ? title() : title; },
+				})
+			}
+			
+			if(link !== undefined)
+			{
+				Object.defineProperty(item, "link", {
+					get: function() { return typeof link == "function" ? link() : link; },
+				})
+			}
+			
+			if(loaded !== undefined)
+			{
+				Object.defineProperty(item, "loaded", {
+					get: function() { return typeof loaded == "function" ? loaded() : loaded; },
+				})
+			}
+			
+			_list.push(item);
+		},
+	};
+});
+
 app.directive('ngEnter', function()
 {
 	return function(scope, element, attrs)

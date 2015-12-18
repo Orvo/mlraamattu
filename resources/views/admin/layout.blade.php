@@ -60,6 +60,21 @@
 				@yield('content')
 			</div>
 			
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+					<li><a href="#/">Ylläpitopaneeli</a></li>
+					<li ng-repeat="item in breadcrumbs.get()">
+						<span ng-show="!item.hasOwnProperty('loaded') || item.loaded">
+							<a href="[[ item.link ]]" ng-show="item.link">[[ item.title ]]</a>
+							<span ng-show="!item.link">[[ item.title ]]</span>
+						</span>
+						<span ng-show="item.hasOwnProperty('loaded') && !item.loaded">
+							<img src="/img/ajax-loader-breadcrumb.gif" alt="">
+						</span>
+					</li>
+				</ol>
+			</div>
+			
 			<form ng-submit="do_login()" ng-controller="AjaxLogin" class="form-horizontal">
 				<div class="modal fade" id="modal-login">
 					<div class="modal-dialog">

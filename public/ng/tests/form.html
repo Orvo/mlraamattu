@@ -1,45 +1,68 @@
 <form ng-submit="submit(data)" ng-show="loaded">
 	<div id="content-sidebar" class="fixed">
-		<h2>Toiminnot</h2>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas eaque tempora possimus, nisi eveniet ex veritatis temporibus ratione quo eos.</p>
-		<p>Doloremque porro maxime reprehenderit sequi harum reiciendis incidunt soluta rem ipsam nulla non, distinctio molestiae dolorum alias, eaque quia. Dolor, voluptates temporibus nesciunt ullam sed veritatis, ratione tenetur quo, ipsum minima consectetur est quam obcaecati cumque, porro.</p>
+		<div class="sidebar-actions">
+			<div class="form-group">
+				<a href="#/courses/[[ data.test.course.id ]]" class="btn btn-default btn-block">
+					<span class="glyphicon glyphicon-chevron-left"></span> Palaa kurssiin
+				</a>
+			</div>
+			
+			<div class="form-group">
+				<label>Kurssi johon koe liitetään</label>
+				<select class="form-control" ng-model="course_id">
+					<option ng-repeat="course in data.courses" ng-value="course.id" ng-selected="course_id === course.id" ng-show="courses_loaded">
+						[[ course.title ]]
+					</option>
+					<option value="" ng-show="!courses_loaded">
+						Ladataan
+					</option>
+				</select>
+				<div ng-show="!courses_loaded">
+					Odota...
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<button type="button" class="btn btn-success btn-block" ng-click="add_question()" ng-disabled="data.test.questions.length >= num_max_questions">
+					<span class="glyphicon glyphicon-plus"></span> Lisää uusi kysymys
+				</button>
+				<div class="help-block center-text" ng-show="data.test.questions.length >= num_max_questions">
+					Maksimimäärä kysymyksiä saavutettu
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<button type="button" class="btn btn-default btn-block" ng-click="isSorting = true">
+					<span class="glyphicon glyphicon-sort"></span> Järjestä kysymykset
+				</button>
+			</div>
 
-		<button type="button" class="btn btn-success btn-block" ng-click="add_question()" ng-disabled="data.test.questions.length >= 15">
-			<span class="glyphicon glyphicon-plus"></span> Lisää uusi kysymys
-		</button>
-		<div class="help-block center-text" ng-show="data.test.questions.length >= 15">
-			Maksimimäärä kysymyksiä saavutettu
+			<hr>
+			<div class="form-group">
+				<div ng-hide="processing">
+					<button type="submit" class="btn btn-primary btn-block btn-lg">
+						<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
+					</button>
+				</div>
+				<div ng-show="processing" style="text-align: center">
+					<img src="/img/ajax-loader.gif" alt="">
+				</div>
+			</div>
 		</div>
 		
-		<button type="button" class="btn btn-default btn-block" ng-click="isSorting = true" style="margin-top:0.5em">
-			<span class="glyphicon glyphicon-sort"></span> Järjestä kysymykset
-		</button>
-
-		<hr>
-		<div ng-hide="processing">
-			<button type="submit" class="btn btn-primary btn-block btn-lg">
-				<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
-			</button>
-			<a href="#/courses/[[ data.test.course.id ]]" class="btn btn-default btn-block">
-				<span class="glyphicon glyphicon-chevron-left"></span> Palaa kurssiin
-			</a>
-		</div>
-		<div ng-show="processing" style="text-align: center">
-			<img src="/img/ajax-loader.gif" alt="">
+		<div class="sidebar-help">
+			<p>
+				Uuden kokeen luonti!
+			</p>
+			<p>
+				Kysymyksiin tehdyt muutokset tulevat voimaan vasta kun hyväksyt ne painamalla "Valmis" painiketta lomakkeen alareunassa. Jos haluat hylätä tekemäsi muutokset paina "Peruuta".
+			</p>
+			<p>
+				Kysymysten poistaminen onnistuu painamalla punaista "Poista" painiketta ja hyväksymällä annetun varoituksen. Kysymysten lopullinen poisto tapahtuu tallennuksen yhteydessä, jonka jälkeen toiminto on peruuttamaton.
+			</p>
 		</div>
 	</div>
 	<div id="content-main">
-		<div class="breadcrumbs">
-			<ol class="breadcrumb">
-				<li><a href="#/">Ylläpitopaneeli</a></li>
-				<li><a href="#/courses/">Kurssit</a></li>
-				<li><a href="#/courses/[[ data.test.course.id ]]">Kurssi: [[ data.test.course.title || '-' ]]</a></li>
-				<li>
-					<span ng-show="!id">Uusi koe</span>
-					<span ng-show="id">Muokataan koetta</span>
-				</li>
-			</ol>
-		</div>
 		<h1>
 			<span ng-show="!id">Uusi koe</span>
 			<span ng-show="id">Muokataan koetta</span>
@@ -132,7 +155,7 @@
 						</ul>
 						<div class="question-answers">
 							<div ng-show="question.type == 'MULTI'">
-								<h3>Vaihtoehdot / Monivalinta</h3>
+								<h3>Vaihtoehdot / Monivalinta usealla oikealla vastauksella</h3>
 								<p>
 									Käyttäjän tulee valita yksi tai useampi oikea vastaus monesta. Kysymyksellä pitää olla ainakin kaksi vaihtoehtoa.
 								</p>
@@ -166,7 +189,7 @@
 							</div>
 							<!-- ================================================================== -->
 							<div ng-show="question.type == 'CHOICE'">
-								<h3>Vaihtoehdot / Yksivalinta</h3>
+								<h3>Vaihtoehdot / Monivalinta yhdellä oikealla vastauksella</h3>
 								<p>
 									Käyttäjän tulee valita yksi oikea vastaus monesta. Kysymyksellä pitää olla ainakin kaksi vaihtoehtoa.
 								</p>
@@ -312,6 +335,18 @@
 	</div>
 </form>
 
+<div class="breadcrumbs">
+	<ol class="breadcrumb">
+		<li><a href="#/">Ylläpitopaneeli</a></li>
+		<li><a href="#/courses/">Kurssit</a></li>
+		<li><a href="#/courses/[[ data.test.course.id ]]">Kurssi: [[ data.test.course.title || '-' ]]</a></li>
+		<li>
+			<span ng-show="!id">Uusi koe</span>
+			<span ng-show="id">Muokataan koetta</span>
+		</li>
+	</ol>
+</div>
+
 <div class="load-placeholder" ng-show="!loaded">
 	<h3>
 		<img src="/img/ajax-loader.gif" alt=""> Ladataan...
@@ -329,7 +364,7 @@
 					Oletko varma, että haluat poistaa kysymyksen <b>"[[ modal_info.key + 1 ]]. [[ modal_info.question.title ]]"</b>?
 				</p>
 				<p>
-					Tätä toimintoa ei voi peruuttaa!
+					Lopullinen poisto tapahtuu kokeen tallennuksen yhteydessä, jonka jälkeen toimintoa ei voi peruuttaa.
 				</p>
 			</div>
 			<div class="modal-footer">

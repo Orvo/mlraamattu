@@ -249,8 +249,10 @@ app.controller('TestsController', function($scope, $window, $location, $routePar
 
 app.controller('TestsFormController', function($rootScope, $scope, $window, $location, $routeParams, $http, CoursesModel, TestsModel)
 {
+	$scope.num_max_questions = 20;
+	
 	$scope.id = $routeParams.id;
-	$scope.course_id = $routeParams.course_id;
+	$scope.course_id = -1;
 
 	$scope.edit_data = false;
 
@@ -262,36 +264,48 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		'TEXTAREA',
 	];
 	
+	$rootScope.breadcrumbs.reset();
+	$rootScope.breadcrumbs.add('Kurssit', '#/courses/');
+	$rootScope.breadcrumbs.add(
+		function title() 	{ return $scope.data.test ? 'Kurssi: ' + $scope.data.test.course.title : ''; },
+		function link()		{ return $scope.data.test ? '#/courses/' + $scope.data.test.course.id : ''; },
+		function loaded() 	{ return $scope.loaded; }
+	);
+	
+	////////////////////////////////////////////////////
+	
 	$scope.isSorting = false;
-	$scope.sortableOptions = {
-		axis: 'y',
-		start: function(e, ui)
-		{
-			console.log(e, ui);
-		},
-		update: function(e, ui)
-		{
-			console.log(e, ui);
-			if(ui.item.sortable.model)
-			{
-
-			}
-		},
-	};
+	$scope.sortableOptions = { axis: 'y', };
 
 	$scope.translate_type = translate_type;
-
+	
+	$scope.data = {};
+	
+	CoursesModel.query(function(data)
+	{
+		$scope.data.courses = data;
+		$scope.courses_loaded = true
+	
+		$scope.$watch('course_id', function(new_value, old_value)
+		{
+			if($scope.courses_loaded && new_value !== undefined && new_value > 0)
+			{
+				$scope.data.test.course = $scope.data.courses[new_value-1];
+			}
+		});
+	});
+	
 	if($scope.id)
 	{
 		TestsModel.get({id: $scope.id}, function(data)
 		{
-			console.log(data);
-			$scope.data = {
-				test: data,
-			};
-
+			$scope.data.test = data;
+			$scope.course_id = $scope.data.test.course.id;
+			
 			$scope.loaded = true;
-		}, function(data)
+			$rootScope.breadcrumbs.add('Muokataan koetta');
+		},
+		function(data)
 		{
 			if(data.status == 404)
 			{
@@ -301,18 +315,12 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	}
 	else
 	{
-		$scope.data = {
-			test: new TestsModel(),
-		};
-		
+		$scope.data.test = data;
 		$scope.data.test.questions = [];
-
-		CoursesModel.get({id: $scope.course_id}, function(data)
-		{
-			$scope.data.test.course = data;
-			$scope.loaded = true;
-		});
-
+		$scope.course_id = $routeParams.course_id;
+		
+		$rootScope.breadcrumbs.add('Uusi koe');
+		
 		$("#test-title").focus();
 	}
 	
