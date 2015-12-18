@@ -9,38 +9,10 @@
 	</a>
 </div>
 <div id="content-main" ng-show="loaded">
-	<div class="breadcrumbs">
-		<ol class="breadcrumb">
-			<li><a href="#/">Ylläpitopaneeli</a></li>
-			<li><a href="#/courses/">Kurssit</a></li>
-			<li>Kurssi: [[ course.title || '-' ]]</li>
-		</ol>
-	</div>
-	
-	<form ng-submit="saveCourseInfo()" class="form-horizontal">
-		<div class="pull-right" ng-show="!isEditing">
-			<button class="btn btn-primary" type="button" ng-click="startEditing()">
-				<span class="glyphicon glyphicon-edit"></span> Muokkaa kurssia
-			</button>
-		</div>
-		<div class="course-title">
-			<div ng-show="!isEditing">
-				<h1>Kurssi: [[ course.title ]]</h1>
-				<p>
-					[[ course.description ]]
-				</p>
-			</div>
-			<div ng-show="isEditing">
-				<h1>Kurssi: [[ course.title ]]</h1>
-				<input type="text" class="form-control input-lg" ng-model="course.title" placeholder="Kurssin otsikko"/>
-				<textarea class="form-control input-lg vertical-textarea" ng-model="course.description" placeholder="Kurssin kuvaus"></textarea>
-				<button class="btn btn-primary pull-right">
-					<span class="glyphicon glyphicon-save"></span> Tallenna
-				</button>
-			</div>
-		</div>
-		<div class="clearfix"></div>
-	</form>
+	<h1>Kurssi: [[ course.title ]]</h1>
+	<p>
+		[[ course.description ]]
+	</p>
 	<div class="actions-row">
 		<div class="pull-right" style="text-align: right">
 			<a href="#/tests/new/[[ course.id ]]" class="btn btn-success">
@@ -63,7 +35,7 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="(key, test) in course.tests | filter : searchFilter">
-				<td style="font-weight: bold;text-align: right;background:#fafafa">[[ key + 1 ]].</td>
+				<td style="font-weight: bold; text-align: right; background:#fafafa">[[ key + 1 ]].</td>
 				<td>
 					<a href="#/tests/[[ test.course.id ]]">
 						[[ test.title ]]

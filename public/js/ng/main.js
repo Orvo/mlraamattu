@@ -227,47 +227,60 @@ app.controller('AjaxLogin', function($rootScope, $scope, $window, $location, $ro
 	}
 });
 
-app.run(function($rootScope)
+app.factory('$breadcrumbs', function($rootScope)
 {
-	var _list = [];
+	var list = [];
 	
-	$rootScope.breadcrumbs = {
+	return {
 		get: function()
 		{
-			return _list;
+			return list;
 		},
 		reset: function()
 		{
-			_list = [];
+			list = [];
+			$rootScope.$broadcast('breadcrumb_change');
 		},
-		add: function(title, link, loaded)
+		segment: function(title, link, loaded)
 		{
-			var item = { };
+			var item = {
+				potato: 'hello',
+			};
 			
-			if(title !== undefined)
+			if(title !== undefined && title !== null)
 			{
 				Object.defineProperty(item, "title", {
 					get: function() { return typeof title == "function" ? title() : title; },
-				})
+				});
 			}
 			
-			if(link !== undefined)
+			if(link !== undefined && link !== null)
 			{
 				Object.defineProperty(item, "link", {
 					get: function() { return typeof link == "function" ? link() : link; },
-				})
+				});
 			}
 			
-			if(loaded !== undefined)
+			if(loaded !== undefined && loaded !== null)
 			{
 				Object.defineProperty(item, "loaded", {
 					get: function() { return typeof loaded == "function" ? loaded() : loaded; },
-				})
+				});
 			}
 			
-			_list.push(item);
+			list.push(item);
+			
+			$rootScope.$broadcast('breadcrumb_change');
 		},
 	};
+});
+
+app.controller('Breadcrumbs', function($rootScope, $scope, $breadcrumbs)
+{
+	$rootScope.$on('breadcrumb_change', function()
+	{
+		$scope.breadcrumbs = $breadcrumbs.get();
+	});
 });
 
 app.directive('ngEnter', function()

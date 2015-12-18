@@ -73,7 +73,7 @@ app.controller('IndexController', function($scope, $window, $location, $routePar
 // ----------------------------------------------------------------------------------------------------
 // Course controllers
 
-app.controller('CoursesController', function($scope, $rootScope, $window, $location, $routeParams, CoursesModel)
+app.controller('CoursesController', function($scope, $window, $location, $routeParams, $breadcrumbs, CoursesModel)
 {
 	$scope.loaded = false;
 	$scope.courses = CoursesModel.query(function(data)
@@ -81,18 +81,21 @@ app.controller('CoursesController', function($scope, $rootScope, $window, $locat
 		$scope.loaded = true;
 	});
 	
-	$rootScope.breadcrumbs.reset();
-	$rootScope.breadcrumbs.add('Kurssit');
+	$breadcrumbs.reset();
+	$breadcrumbs.segment('Kurssit');
 		
 	$scope.sortableOptions = {
 		axis: 'y',
 	};
 });
 
-app.controller('CourseShowController', function($scope, $window, $location, $routeParams, CoursesModel)
+app.controller('CourseShowController', function($scope, $window, $location, $routeParams, $breadcrumbs, CoursesModel)
 {
 	$scope.id = $routeParams.id;
-			
+	
+	$breadcrumbs.reset();
+	$breadcrumbs.segment('Kurssit', '#/courses/');
+	
 	$scope.isEditing = false;
 	$scope.startEditing = function()
 	{
@@ -108,7 +111,14 @@ app.controller('CourseShowController', function($scope, $window, $location, $rou
 	{
 		$scope.course = data;
 		$scope.loaded = true;
-	}, function(data)
+		
+		$breadcrumbs.segment(
+			function title() 	{ return 'Kurssi: ' + $scope.course.title; },
+			null,
+			function loaded() 	{ return $scope.loaded; }
+		);
+	},
+	function(data)
 	{
 		if(data.status == 404)
 		{
@@ -250,7 +260,7 @@ app.controller('TestsController', function($scope, $window, $location, $routePar
 	});
 });
 
-app.controller('TestsFormController', function($rootScope, $scope, $window, $location, $routeParams, $http, CoursesModel, TestsModel)
+app.controller('TestsFormController', function($rootScope, $scope, $window, $location, $routeParams, $http, $breadcrumbs, CoursesModel, TestsModel)
 {
 	$scope.num_max_questions = 20;
 	
@@ -267,13 +277,15 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		'TEXTAREA',
 	];
 	
-	$rootScope.breadcrumbs.reset();
-	$rootScope.breadcrumbs.add('Kurssit', '#/courses/');
-	$rootScope.breadcrumbs.add(
+	$breadcrumbs.reset();
+	$breadcrumbs.segment('Kurssit', '#/courses/');
+	$breadcrumbs.segment(
 		function title() 	{ return $scope.data.test ? 'Kurssi: ' + $scope.data.test.course.title : ''; },
 		function link()		{ return $scope.data.test ? '#/courses/' + $scope.data.test.course.id : ''; },
 		function loaded() 	{ return $scope.loaded; }
 	);
+	
+	console.log("$breadcrumbs", $breadcrumbs.get());
 	
 	////////////////////////////////////////////////////
 	
@@ -306,7 +318,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 			$scope.course_id = $scope.data.test.course.id;
 			
 			$scope.loaded = true;
-			$rootScope.breadcrumbs.add('Muokataan koetta');
+			$breadcrumbs.segment('Muokataan koetta');
 		},
 		function(data)
 		{
@@ -322,7 +334,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		$scope.data.test.questions = [];
 		$scope.course_id = $routeParams.course_id;
 		
-		$rootScope.breadcrumbs.add('Uusi koe');
+		$breadcrumbs.segment('Uusi koe');
 		
 		$("#test-title").focus();
 	}
