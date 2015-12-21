@@ -1,22 +1,31 @@
 <form ng-submit="submit(data)" ng-show="loaded">
 	<div id="content-sidebar" class="fixed">
-		<h2>Ohjeet</h2>
-		<p>
-			Kurssit ovat kokonaisuus eri kokeita.
-		</p>
-		<p>Doloremque porro maxime reprehenderit sequi harum reiciendis incidunt soluta rem ipsam nulla non, distinctio molestiae dolorum alias, eaque quia. Dolor, voluptates temporibus nesciunt ullam sed veritatis, ratione tenetur quo, ipsum minima consectetur est quam obcaecati cumque, porro.</p>
-
-		<h3>Toiminnot</h3>
-		<div ng-hide="processing">
-			<button type="submit" class="btn btn-primary btn-block btn-lg">
-				<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
-			</button>
-			<a href="#/courses/[[ data.course.course.id ]]" class="btn btn-default btn-block">
-				<span class="glyphicon glyphicon-chevron-left"></span> Palaa kurssiin
-			</a>
+		<div class="sidebar-actions">
+			<div class="form-group">
+				<a href="#/courses/" class="btn btn-default btn-block">
+					<span class="glyphicon glyphicon-chevron-left"></span> Palaa kursseihin
+				</a>
+			</div>
+			
+			<div class="form-group">
+				<div ng-hide="processing">
+					<button type="submit" class="btn btn-primary btn-block btn-lg">
+						<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
+					</button>
+				</div>
+				<div ng-show="processing" style="text-align: center">
+					<img src="/img/ajax-loader.gif" alt="">
+				</div>
+			</div>
 		</div>
-		<div ng-show="processing" style="text-align: center">
-			<img src="/img/ajax-loader.gif" alt="">
+		
+		<div class="sidebar-help">
+			<p>
+				Kurssit ovat kokonaisuus kokeita järjestetyssä sarjassa. Kurssin suorittaja voi edetä kurssilla vastaamalla oikein ainakin 50% kysymyksistä kokeessa.
+			</p>
+			<p>
+				
+			</p>
 		</div>
 	</div>
 	<div id="content-main">
@@ -35,6 +44,9 @@
 			<span ng-show="id">Muokataan kurssia</span>
 			<span ng-show="data.course.title">/ <b>[[ data.course.title ]]</b></span>
 		</h1>
+		<div class="alert-box success" ng-show="save_success">
+			<h4><span class="glyphicon glyphicon-ok"></span> Muutokset tallennettu!</h4>
+		</div>
 		<div class="alert-box errors" ng-show="data.errors.messages.length > 0">
 			<img src="/img/ajax-loader-error.gif" alt="" class="pull-right" ng-show="processing" style="height:40px">
 			<b>Tallennus epäonnistui!</b>
@@ -53,9 +65,35 @@
 				ng-model="data.course.description" ng-class="{'area-has-error': data.errors.fields.course_description}" placeholder="Kurssin kuvaus"></textarea>
 		</div>
 		<hr>
-		<p>
-			Kurssin luonnin jälkeen edetään automaattisesti kurssin ensimmäisen kokeen lisäykseen.
-		</p>
+		<div ng-if="!id">
+			<h3>Kurssin kokeet</h3>
+			<p>
+				Kurssin luonnin jälkeen edetään automaattisesti kurssin ensimmäisen kokeen lisäykseen.
+			</p>
+		</div>
+		<div class="test-sorting" ng-if="id && data.course.tests.length > 0">
+			<h3>Järjestä kokeet</h3>
+			<p>
+				Voit uudelleenjärjestää kokeita kurssilla haluaamaasi järjestykseen.
+			</p>
+			<ul class="questions sortable-questions" ui-sortable="sortableOptions" ng-model="data.course.tests">
+				<li class="question" ng-repeat="(key, test) in data.course.tests" id="question-sortable-[[ key ]]">
+					<div class="info">
+						<div class="title-row clearfix">
+							<div class="left-aligned">
+								<div class="number">[[ (key + 1) ]].</div>
+								<div class="title" ng-class="{'no-subtitle': test.description.trim().length == 0}">
+									[[ test.title ]]
+								</div>
+								<div class="subtitle">
+									[[ test.description.split('\n')[0] ]]
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
 	</div>
 </form>
 

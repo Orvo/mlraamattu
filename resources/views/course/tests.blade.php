@@ -18,6 +18,7 @@
 	
 	<div class="list">
 		@foreach($course->tests as $test)
+			<?php if($test->questions->count() == 0): continue; endif;?>
 			<div class="test list-item">
 				<div class="title">
 					@if($test->isUnlocked())

@@ -9,21 +9,18 @@
 			
 			<div class="form-group">
 				<label>Kurssi johon koe liitetään</label>
-				<select class="form-control" ng-model="course_id">
-					<option ng-repeat="course in data.courses" ng-value="course.id" ng-selected="course_id === course.id" ng-show="courses_loaded">
+				<select class="form-control" ng-model="course_id" ng-show="courses_loaded">
+					<option ng-repeat="course in data.courses" ng-value="course.id" ng-selected="course_id === course.id">
 						[[ course.title ]]
 					</option>
-					<option value="" ng-show="!courses_loaded">
-						Ladataan
-					</option>
 				</select>
-				<div ng-show="!courses_loaded">
-					Odota...
+				<div ng-show="!courses_loaded" style="text-align: center;">
+					<img src="/img/ajax-loader.gif" alt="" style="width: 34px">
 				</div>
 			</div>
 			
 			<div class="form-group">
-				<button type="button" class="btn btn-success btn-block" ng-click="add_question()" ng-disabled="data.test.questions.length >= num_max_questions">
+				<button type="button" class="btn btn-success btn-block" ng-click="add_question()" ng-disabled="data.test.questions.length >= num_max_questions || isSorting">
 					<span class="glyphicon glyphicon-plus"></span> Lisää uusi kysymys
 				</button>
 				<div class="help-block center-text" ng-show="data.test.questions.length >= num_max_questions">
@@ -32,7 +29,7 @@
 			</div>
 			
 			<div class="form-group">
-				<button type="button" class="btn btn-default btn-block" ng-click="isSorting = true">
+				<button type="button" class="btn btn-default btn-block" ng-click="startSorting()" ng-disabled="data.test.questions.length <= 1">
 					<span class="glyphicon glyphicon-sort"></span> Järjestä kysymykset
 				</button>
 			</div>
@@ -329,9 +326,6 @@
 			</button>
 		</div>
 		<hr>
-		<div>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit omnis explicabo a distinctio molestiae, sit, dignissimos iusto consequuntur nemo est atque quae perspiciatis, repellendus quisquam natus assumenda excepturi dolorum. Aut harum consequatur nostrum quam nemo assumenda ratione, qui, fugit, distinctio libero ut dolorem ipsam maxime sed aperiam, error mollitia deleniti!
-		</div>
 	</div>
 </form>
 

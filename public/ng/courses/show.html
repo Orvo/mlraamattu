@@ -1,7 +1,7 @@
 <div id="content-sidebar" ng-show="loaded">
 	<h2>Toiminnot</h2>
 	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas eaque tempora possimus, nisi eveniet ex veritatis temporibus ratione quo eos.</p>
-	<a href="#/course/[[ course.id ]]/edit" class="btn btn-primary btn-block btn-lg">
+	<a href="#/courses/[[ course.id ]]/edit" class="btn btn-primary btn-block btn-lg">
 		<span class="glyphicon glyphicon-edit"></span> Muokkaa kurssia
 	</a>
 	<a href="#/tests/new/[[ course.id ]]" class="btn btn-success btn-block btn-lg">
@@ -15,9 +15,9 @@
 	</p>
 	<div class="actions-row">
 		<div class="pull-right" style="text-align: right">
-			<a href="#/tests/new/[[ course.id ]]" class="btn btn-success">
+			<!-- <a href="#/tests/new/[[ course.id ]]" class="btn btn-success">
 				<span class="glyphicon glyphicon-plus"></span> Lisää uusi koe
-			</a>
+			</a> -->
 		</div>
 		<div>
 			<input type="text" ng-model="searchFilter" placeholder="Hae kursseja" class="form-control search-filter">
@@ -27,9 +27,9 @@
 		<thead>
 			<tr>
 				<td style="width:40px"></td>
-				<td style="width:160px">Kokeen otsikko</td>
+				<td style="min-width:160px;max-width:260px;">Kokeen otsikko</td>
 				<td>Kuvaus</td>
-				<td>Kysymykset</td>
+				<td style="min-width:200px;">Kysymykset</td>
 				<td style="width:160px">Toiminnot</td>
 			</tr>
 		</thead>
@@ -42,31 +42,37 @@
 					</a>
 				</td>
 				<td>[[ test.description ]]</td>
-				<td>
+				<td class="list-no-padding">
 					<ol>
 						<li ng-repeat="question in test.questions">[[ question.title ]]</li>
 					</ol>
 					<span ng-show="test.questions.length == 0">Ei kysymyksiä</span>
 				</td>
 				<td>
-					<a href="#/tests/[[ test.id ]]/edit" class="btn btn-primary btn-xs btn-block">
+					<a href="#/tests/[[ test.id ]]/edit" class="btn btn-primary btn-xs">
 						<span class="glyphicon glyphicon-edit"></span> Muokkaa
 					</a>
-					<a href="#/tests/[[ test.id ]]/delete" class="btn btn-danger btn-xs btn-block">
+					<a href="#/tests/[[ test.id ]]/delete" class="btn btn-danger btn-xs">
 						<span class="glyphicon glyphicon-trash"></span> Poista
 					</a>
 				</td>
 			</tr>
 			<tr ng-hide="(course.tests | filter : searchFilter).length > 0">
 				<td colspan="5" style="text-align: center;">
-					<b>Ei tuloksia.</b>
+					<span ng-if="course.tests.length == 0">
+						<span style="font-weight: bold; color: #BC2020;display:inline-block;margin-right:1em">Ei kokeita!</span>
+						<a href="#/tests/new/[[ course.id ]]" class="btn btn-success btn-sm shadowed">
+							<span class="glyphicon glyphicon-plus"></span> Lisää uusi
+						</a>
+					</span>
+					<span style="font-weight: bold;" ng-if="course.tests.length > 0">
+						Ei tuloksia.
+					</span>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo vel maiores temporibus distinctio laborum asperiores odio ratione expedita reprehenderit rerum quos recusandae quae facilis necessitatibus ducimus minus exercitationem, atque dolorem omnis unde, ad, consectetur sed! Doloremque id distinctio perferendis, vel.
-	</p>
+	<hr>
 </div>
 
 <div class="load-placeholder" ng-show="!loaded">

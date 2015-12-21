@@ -47,10 +47,6 @@ class TestsController extends Controller
 		$data = $validation->data;
 		$data['errors'] = $validation->errors;
 		
-		$data['plaintext'] = print_r($data, true);
-		
-		// $data['plaintext'] = print_r($next_course_order, true);
-		
 		if($validation->passed)
 		{
 			$data['test_created'] = $this->_saveTest($data);

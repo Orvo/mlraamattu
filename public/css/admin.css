@@ -386,18 +386,24 @@ ul.questions li.add-questions h4
 	padding: 0 0 6px 0;
 }
 
-ul.questions li.add-questions button
+ul.questions li.add-questions button,
+.btn.btn-success.shadowed
 {
-	width: 250px;
 	box-shadow: 0 2px 0 #2E6428;
 	margin-bottom: 2px;
 }
 
-ul.questions li.add-questions button:active
+ul.questions li.add-questions button:active,
+.btn.btn-success.shadowed:active
 {
 	margin-top: 2px;
 	margin-bottom: 0px;
 	box-shadow: none;
+}
+
+ul.questions li.add-questions button
+{
+	width: 250px;
 }
 
 ul.questions li.question
@@ -871,6 +877,18 @@ td.list-actions
 td.list-actions .btn
 {
 	width: 80px;
+}
+
+.list-no-padding ul, .list-no-padding ol
+{
+	padding: 0 0 0 1em;
+	margin: 0;
+}
+
+.list-no-padding ul > li, .list-no-padding ol > li
+{
+	margin: 0;
+	padding: 0 0 0 0.2em;
 }
 
 #modal-login .modal-body > p

@@ -1,16 +1,18 @@
 <div id="content-sidebar" class="fixed" ng-show="loaded">
-	<h2>Toiminnot</h2>
-	<p>
-		Tällä hetkellä olevat kurssit.
-	</p>
+	<div class="sidebar-actions">
+		<div class="form-group">
+			<a href="#/courses/new" class="btn btn-success btn-block">
+				<span class="glyphicon glyphicon-plus"></span> Lisää uusi kurssi
+			</a>
+		</div>
+	</div>
+	<div class="sidebar-help">
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit at a eveniet optio, delectus qui consequuntur, dolor cumque debitis fuga recusandae repudiandae sed blanditiis in magni vitae obcaecati. Voluptate, totam optio facere obcaecati in. Debitis nesciunt obcaecati aspernatur quas quos dolor eum eos deleniti! Facilis voluptatum expedita aperiam corrupti tempora.
+		</p>
+	</div>
 </div>
 <div id="content-main" ng-show="loaded">
-	<div class="breadcrumbs">
-		<ol class="breadcrumb">
-			<li><a href="#/">Ylläpitopaneeli</a></li>
-			<li>Kurssit</li>
-		</ol>
-	</div>
 	<h1>Kurssit</h1>
 	<div class="actions-row">
 		<div class="pull-right" style="text-align: right">
@@ -26,10 +28,10 @@
 		<thead>
 			<tr>
 				<td style="width:40px">ID</td>
-				<td style="width:160px">Kurssin otsikko</td>
+				<td style="min-width:160px;max-width:260px;">Kurssin otsikko</td>
 				<td>Kuvaus</td>
-				<td>Kurssin kokeet</td>
-				<td>Toiminnot</td>
+				<td style="min-width:160px;">Kurssin kokeet</td>
+				<td style="width:210px">Toiminnot</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -41,19 +43,22 @@
 					</a>
 				</td>
 				<td>[[ course.description ]]</td>
-				<td>
+				<td class="list-no-padding">
 					<ol>
 						<li ng-repeat="test in course.tests">
 							<a href="#/tests/[[ test.id ]]">[[ test.title ]]</a>
 						</li>
 					</ol>
-					<span ng-show="course.tests.length == 0">Ei kokeita</span>
+					<span ng-show="course.tests.length == 0">
+						<span style="font-weight: bold;color: #BC2020">Ei kokeita!</span><br>
+						<span style="color: #545454">Kurssia ei näytetä.</span>
+					</span>
 				</td>
 				<td>
-					<a href="#/courses/[[ course.id ]]" class="btn btn-success btn-xs">
+					<a href="#/courses/[[ course.id ]]" class="btn btn-primary btn-xs">
 						<span class="glyphicon glyphicon-search"></span> Näytä
 					</a>
-					<a href="#/courses/[[ course.id ]]/edit" class="btn btn-primary btn-xs">
+					<a href="#/courses/[[ course.id ]]/edit" class="btn btn-success btn-xs">
 						<span class="glyphicon glyphicon-edit"></span> Muokkaa
 					</a>
 					<a href="#/courses/delete/[[ course.id ]]" class="btn btn-danger btn-xs">

@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Course;
 use App\Test;
 
+use \DB;
+
 class CoursesController extends Controller
 {
 	/**
@@ -19,8 +21,10 @@ class CoursesController extends Controller
 	 */
 	public function index()
 	{
+		$courses = Course::with('tests')->get();
+		
 		return view('course.list', [
-			'courses' => Course::all(),
+			'courses' => $courses,
 		]);
 	}
 
