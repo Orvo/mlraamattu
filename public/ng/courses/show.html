@@ -1,24 +1,43 @@
 <div id="content-sidebar" ng-show="loaded">
-	<h2>Toiminnot</h2>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas eaque tempora possimus, nisi eveniet ex veritatis temporibus ratione quo eos.</p>
-	<a href="#/courses/[[ course.id ]]/edit" class="btn btn-primary btn-block btn-lg">
-		<span class="glyphicon glyphicon-edit"></span> Muokkaa kurssia
-	</a>
-	<a href="#/tests/new/[[ course.id ]]" class="btn btn-success btn-block btn-lg">
-		<span class="glyphicon glyphicon-plus"></span> Lisää uusi koe
-	</a>
+	<div class="sidebar-actions">
+		<div class="form-group">
+			<a href="#/courses/" class="btn btn-default btn-block">
+				<span class="glyphicon glyphicon-chevron-left"></span> Palaa kurssilistaukseen
+			</a>
+		</div>
+		
+		<div class="form-group">
+			<p>
+				Muokkaa kurssin tietoja, julkaisutilaa ja kokeiden järjestystä.
+			</p>
+			<a href="#/courses/[[ course.id ]]/edit" class="btn btn-primary btn-block btn-lg">
+				<span class="glyphicon glyphicon-edit"></span> Muokkaa kurssia
+			</a>
+		</div>
+		
+		<div class="form-group">
+			<p>
+				Luo uusi koe tälle kurssille.
+			</p>
+			<a href="#/tests/new/[[ course.id ]]" class="btn btn-success btn-block btn-lg">
+				<span class="glyphicon glyphicon-plus"></span> Lisää uusi koe
+			</a>
+		</div>
+	</div>
+	<hr>
+	<div class="sidebar-help">
+		
+	</div>
 </div>
 <div id="content-main" ng-show="loaded">
-	<h1>Kurssi: [[ course.title ]]</h1>
+	<h1><b>Kurssi</b> / [[ course.title ]]</h1>
 	<p>
 		[[ course.description ]]
 	</p>
+	<div class="alert alert-warning" ng-if="!course.published">
+		<b>Huom!</b> Tämä kurssi on tällä hetkellä piilotettu. <a href="#/courses/[[ course.id ]]/edit">Muokkaa</a> kurssia jos haluat julkaista sen.
+	</div>
 	<div class="actions-row">
-		<div class="pull-right" style="text-align: right">
-			<!-- <a href="#/tests/new/[[ course.id ]]" class="btn btn-success">
-				<span class="glyphicon glyphicon-plus"></span> Lisää uusi koe
-			</a> -->
-		</div>
 		<div>
 			<input type="text" ng-model="searchFilter" placeholder="Hae kursseja" class="form-control search-filter">
 		</div>
@@ -36,7 +55,7 @@
 		<tbody>
 			<tr ng-repeat="(key, test) in course.tests | filter : searchFilter">
 				<td style="font-weight: bold; text-align: right; background:#fafafa">[[ key + 1 ]].</td>
-				<td>
+				<td class="block-level-links">
 					<a href="#/tests/[[ test.course.id ]]">
 						[[ test.title ]]
 					</a>

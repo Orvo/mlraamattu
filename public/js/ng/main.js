@@ -243,9 +243,7 @@ app.factory('$breadcrumbs', function($rootScope)
 		},
 		segment: function(title, link, loaded)
 		{
-			var item = {
-				potato: 'hello',
-			};
+			var item = {};
 			
 			if(title !== undefined && title !== null)
 			{

@@ -135,6 +135,8 @@ class CoursesController extends Controller
 		$course->title = $data['title'];
 		$course->description = $data['description'];
 		
+		$course->published = $data['published'];
+		
 		$course->save();
 		
 		if(!$isNewEntry)

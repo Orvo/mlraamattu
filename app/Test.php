@@ -21,6 +21,11 @@ class Test extends Model
 		return $this->hasMany('App\Question')->orderBy('order');
 	}
 	
+	public function isPublished()
+	{
+		return $this->course->isPublished();
+	}
+	
 	public function isCompleted($requireFullCompletion = false, $user = false)
 	{
 		if(Auth::check() || $user !== false)

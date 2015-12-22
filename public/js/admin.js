@@ -24,8 +24,8 @@ $(window).load(function()
 		else
 		{
 			$('#main-container').css({
-				'padding-left': '10px',
-				'padding-right': '10px',
+				'padding-left': '3%',
+				'padding-right': '3%',
 			});
 		}
 		

@@ -9,7 +9,6 @@
 	
 	<div class="list">
 		@foreach($courses as $course)
-			<?php if($course->tests->count() == 0): continue; endif;?>
 			<div class="course list-item">
 				<div class="title">
 					<a href="/course/{{ $course->id }}" class="title-anchor">

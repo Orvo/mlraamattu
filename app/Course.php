@@ -49,4 +49,9 @@ class Course extends Model
     	return $this->courseProgress;
     }
     
+    public function isPublished()
+    {
+        return $this->published == 1;
+    }
+    
 }

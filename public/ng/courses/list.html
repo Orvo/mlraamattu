@@ -1,7 +1,7 @@
 <div id="content-sidebar" class="fixed" ng-show="loaded">
 	<div class="sidebar-actions">
 		<div class="form-group">
-			<a href="#/courses/new" class="btn btn-success btn-block">
+			<a href="#/courses/new" class="btn btn-success btn-lg btn-block">
 				<span class="glyphicon glyphicon-plus"></span> Lisää uusi kurssi
 			</a>
 		</div>
@@ -13,13 +13,8 @@
 	</div>
 </div>
 <div id="content-main" ng-show="loaded">
-	<h1>Kurssit</h1>
+	<h1><b>Kurssit</b></h1>
 	<div class="actions-row">
-		<div class="pull-right" style="text-align: right">
-			<a href="#/courses/new" class="btn btn-success">
-				<span class="glyphicon glyphicon-plus"></span> Lisää uusi kurssi
-			</a>
-		</div>
 		<div>
 			<input type="text" ng-model="searchFilter" placeholder="Hae kursseja" class="form-control search-filter">
 		</div>
@@ -28,25 +23,38 @@
 		<thead>
 			<tr>
 				<td style="width:40px">ID</td>
-				<td style="min-width:160px;max-width:260px;">Kurssin otsikko</td>
+				<td style="min-width:160px;max-width:230px;">Kurssin otsikko</td>
+				<td style="width:100px;"></td>
 				<td>Kuvaus</td>
 				<td style="min-width:160px;">Kurssin kokeet</td>
 				<td style="width:210px">Toiminnot</td>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="course in courses | filter : searchFilter">
+			<tr ng-repeat="course in courses | filter : searchFilter" class="min-height">
 				<td style="font-weight: bold;background:#fafafa">[[ course.id ]]</td>
-				<td>
+				<td class="block-level-links">
 					<a href="#/courses/[[ course.id ]]">
 						[[ course.title ]]
 					</a>
+					<span class="clearfix"></span>
+				</td>
+				<td class="status-labels">
+					<div class="label label-success" ng-if="course.published == 1">
+						Julkaistu
+					</div>
+					<div class="label label-warning" ng-if="course.published == 0">
+						Piilotettu
+					</div>
+					<div class="label label-danger" ng-if="course.tests.length == 0">
+						Ei kokeita
+					</div>
 				</td>
 				<td>[[ course.description ]]</td>
 				<td class="list-no-padding">
 					<ol>
 						<li ng-repeat="test in course.tests">
-							<a href="#/tests/[[ test.id ]]">[[ test.title ]]</a>
+							<a href="#/tests/[[ test.id ]]/edit">[[ test.title ]]</a>
 						</li>
 					</ol>
 					<span ng-show="course.tests.length == 0">
@@ -67,15 +75,13 @@
 				</td>
 			</tr>
 			<tr ng-hide="(courses | filter : searchFilter).length > 0">
-				<td colspan="5" style="text-align: center;">
+				<td colspan="6" style="text-align: center;">
 					<b>Ei tuloksia.</b>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo vel maiores temporibus distinctio laborum asperiores odio ratione expedita reprehenderit rerum quos recusandae quae facilis necessitatibus ducimus minus exercitationem, atque dolorem omnis unde, ad, consectetur sed! Doloremque id distinctio perferendis, vel.
-	</p>
+	<hr>
 </div>
 
 <div class="load-placeholder" ng-show="!loaded">

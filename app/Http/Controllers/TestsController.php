@@ -19,7 +19,9 @@ class TestsController extends Controller
 	
 	public function show($id)
 	{
-		$test = Test::findOrFail($id);
+		$test = Test::with('course')->findOrFail($id);
+		if(!$test->isPublished()) abort(404);
+		
 		if(!$test->isUnlocked())
 		{
 			return redirect('course/' . $test->course->id)->with([
@@ -38,9 +40,6 @@ class TestsController extends Controller
 				$validation = $this->_validateTestWithAnswers($test, $data->given_answers);
 			}
 		}
-		
-		// print_r($data);die;
-		// dd($data);
 		
 		return view('test.show')
 			->with([

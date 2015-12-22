@@ -115,6 +115,34 @@ body
 	}
 }
 
+#content-sidebar .radio label,
+#content-sidebar .checkbox label
+{
+	display: block;
+	font-weight: bold;
+	padding: 6px 6px 6px 30px;
+	border-radius: 4px;
+	background: #f4f4f4;
+	border: 1px solid #E3E3E3;
+	transition: background 150ms ease-out, border 150ms ease-out;
+	box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+#content-sidebar .radio.active label,
+#content-sidebar .checkbox.active label
+{
+	background: #ABD9FF;
+	border: 1px solid #8BB9E3;
+}
+
+#content-sidebar .radio label:hover,
+#content-sidebar .checkbox label:hover
+{
+	background: #FED081;
+	border: 1px solid #EDBA68;
+	box-shadow: 0 2px 3px #FFE5B7;
+}
+
 form
 {
 	position: relative;
@@ -296,6 +324,46 @@ nav.navbar .badge
 {
 	margin: 5px 0;
 	background-color: #f3f3f3;
+}
+
+td.status-labels div.label
+{
+	display: inline-block;
+	margin: 0 0 0 5px;
+}
+
+table.table
+{
+	height: 100%;
+}
+
+tr.min-height
+{
+	min-height: 50px !important;
+	height: 50px !important;
+}
+
+td.block-level-links
+{
+	position: relative;
+	padding: 0 !important;
+}
+
+td.block-level-links a
+{
+	display: block;
+	padding: 6px 6px 10px 10px;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	font-weight: bold;
+}
+
+td.block-level-links a:hover
+{
+	text-decoration: none;
 }
 
 /* ----------------------------------------------------------------

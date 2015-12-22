@@ -21,7 +21,15 @@ class CoursesController extends Controller
 	 */
 	public function index()
 	{
-		$courses = Course::with('tests')->get();
+		$courses = Course::with('tests')->where('published', 1)->get();
+		
+		foreach($courses as $key => $course)
+		{
+			if($course->tests->count() == 0)
+			{
+				unset($courses[$key]);
+			}
+		}
 		
 		return view('course.list', [
 			'courses' => $courses,
@@ -45,7 +53,10 @@ class CoursesController extends Controller
 			}
 		}
 		
-		$course = Course::with('tests')->findOrFail($id);
+		$course = Course::with('tests')->where([
+			'id' => $id,
+			'published' => 1,
+		])->firstOrFail();
 
 		return view('course.tests', [
 			'course' => $course,

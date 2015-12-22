@@ -1,4 +1,4 @@
-<form ng-submit="submit(data)" ng-show="loaded">
+<form ng-submit="submit(data)" ng-if="loaded">
 	<div id="content-sidebar" class="fixed">
 		<div class="sidebar-actions">
 			<div class="form-group">
@@ -8,13 +8,12 @@
 			</div>
 			
 			<div class="form-group">
-				<label>Kurssi johon koe liitetään</label>
-				<select class="form-control" ng-model="course_id" ng-show="courses_loaded">
-					<option ng-repeat="course in data.courses" ng-value="course.id" ng-selected="course_id === course.id">
-						[[ course.title ]]
-					</option>
+				<label>Kurssi johon koe liitetään</label><br>
+				<select class="form-control" ng-model="selected_course" ng-if="courses_loaded"
+					ng-options="course as course.title for course in data.courses track by course.id"
+					ng-change="update_course_selection(selected_course)">
 				</select>
-				<div ng-show="!courses_loaded" style="text-align: center;">
+				<div ng-if="!courses_loaded" style="text-align: center;">
 					<img src="/img/ajax-loader.gif" alt="" style="width: 34px">
 				</div>
 			</div>
@@ -83,7 +82,7 @@
 			<textarea class="form-control vertical-textarea big" id="test-description"
 				ng-model="data.test.description" ng-class="{'area-has-error': data.errors.fields.test_description}" placeholder="Kokeen kuvaus"></textarea>
 		</div>
-		<ul class="questions" ng-show="!isSorting">
+		<ul class="questions" ng-if="!isSorting">
 			<li class="question" ng-repeat="(qkey, question) in data.test.questions" id="question-[[ qkey ]]"
 				ng-class="{'active': edit_data.key == qkey, 'area-has-error': data.errors.questions[qkey] !== undefined}">
 				<div class="info">
@@ -272,10 +271,6 @@
 							</div>
 						</div>
 					</div>
-					<div class="pull-left">
-						<span ng-show="!hasChanged"><b>Ei muutoksia</b></span>
-						<span ng-show="hasChanged"><b>Tallentamattomia muutoksia</b></span>
-					</div>
 					<div class="pull-right">
 						<button type="button" class="btn btn-danger" ng-click="delete(qkey, question.id)">
 							<span class="glyphicon glyphicon-trash"></span> Poista
@@ -298,8 +293,8 @@
 				</button>
 			</li>
 		</ul>
-		<div ng-show="isSorting">
-			<ul class="questions sortable-questions" ui-sortable="sortableOptions" ng-model="data.test.questions" ng-show="isSorting">
+		<div ng-if="isSorting">
+			<ul class="questions sortable-questions" ui-sortable="sortableOptions" ng-model="data.test.questions">
 				<li class="question" ng-repeat="(qkey, question) in data.test.questions" id="question-sortable-[[ qkey ]]">
 					<div class="info">
 						<div class="title-row clearfix">
@@ -321,7 +316,7 @@
 					</div>
 				</li>
 			</ul>
-			<button type="button" class="btn btn-primary btn-block" ng-click="isSorting = false">
+			<button type="button" class="btn btn-primary btn-block" ng-click="stopSorting()">
 				<span class="glyphicon glyphicon-ok"></span> Valmis
 			</button>
 		</div>
@@ -329,19 +324,7 @@
 	</div>
 </form>
 
-<div class="breadcrumbs">
-	<ol class="breadcrumb">
-		<li><a href="#/">Ylläpitopaneeli</a></li>
-		<li><a href="#/courses/">Kurssit</a></li>
-		<li><a href="#/courses/[[ data.test.course.id ]]">Kurssi: [[ data.test.course.title || '-' ]]</a></li>
-		<li>
-			<span ng-show="!id">Uusi koe</span>
-			<span ng-show="id">Muokataan koetta</span>
-		</li>
-	</ol>
-</div>
-
-<div class="load-placeholder" ng-show="!loaded">
+<div class="load-placeholder" ng-if="!loaded">
 	<h3>
 		<img src="/img/ajax-loader.gif" alt=""> Ladataan...
 	</h3>
