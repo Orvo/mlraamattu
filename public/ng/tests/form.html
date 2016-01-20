@@ -28,15 +28,18 @@
 			</div>
 			
 			<div class="form-group">
-				<button type="button" class="btn btn-default btn-block" ng-click="startSorting()" ng-disabled="data.test.questions.length <= 1">
+				<button type="button" class="btn btn-default btn-block" ng-click="startSorting()" ng-if="!isSorting" ng-disabled="data.test.questions.length <= 1">
 					<span class="glyphicon glyphicon-sort"></span> Järjestä kysymykset
+				</button>
+				<button type="button" class="btn btn-default btn-block" ng-click="stopSorting()" ng-if="isSorting">
+					<span class="glyphicon glyphicon-sort"></span> Tallenna järjestys
 				</button>
 			</div>
 
 			<hr>
 			<div class="form-group">
 				<div ng-hide="processing">
-					<button type="submit" class="btn btn-primary btn-block btn-lg">
+					<button type="submit" class="btn btn-primary btn-block btn-lg" ng-disabled="isSorting">
 						<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
 					</button>
 				</div>
@@ -317,7 +320,7 @@
 				</li>
 			</ul>
 			<button type="button" class="btn btn-primary btn-block" ng-click="stopSorting()">
-				<span class="glyphicon glyphicon-ok"></span> Valmis
+				<span class="glyphicon glyphicon-ok"></span> Tallenna järjestys
 			</button>
 		</div>
 		<hr>
