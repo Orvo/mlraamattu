@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>M7 Laravel</title>
 		<link rel="shortcut icon" type="image/png" href="/favicon.png">
+        <link rel="stylesheet" href="/css/normalize.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 		<link rel="stylesheet" href="/css/main.css">
 	</head>
@@ -21,9 +22,31 @@
 				<a href="/auth/login">Kirjaudu sisään</a>
 			@endif
 		</div>
-		<div class="content">
-			@yield('content')
+		
+		<div id="main-wrapper">
+			<header>
+				<div class="inner">
+					<div class="title">
+						<h1>Raamattu avautuu</h1>
+						<h3>Media7 Raamattuopisto</h3>
+					</div>
+				</div>
+				<nav>
+					<div class="inner">
+						<ul>
+							<li><a href="/">Etusivu</a></li>
+							<li><a href="/">Kurssit</a></li>
+							<li><a href="/">Blabla</a></li>
+						</ul>
+					</div>
+				</nav>
+			</header>
+			<div id="main-content">
+				@yield('content')
+			</div>
 		</div>
+		
+		
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<script src="/js/main.js"></script>
