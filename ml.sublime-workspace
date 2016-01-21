@@ -44,135 +44,95 @@
 	"buffers":
 	[
 		{
-			"file": "public/css/admin.css",
+			"file": "/G/CPP11/ivi2/Ivie/workdir/gaussian.frag",
 			"settings":
 			{
-				"buffer_size": 15772,
+				"buffer_size": 963,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/js/ng/models.js",
+			"file": "/G/wanhaservu/OLDSERVU/bender/bender.php",
 			"settings":
 			{
-				"buffer_size": 981,
+				"buffer_size": 885,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/Http/routes.php",
+			"file": "/G/wanhaservu/OLDSERVU/close/close.php",
 			"settings":
 			{
-				"buffer_size": 3133,
+				"buffer_size": 2473,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/js/ng/main.js",
+			"file": "/G/CPP11/ivi2/Ivie/workdir/background.frag",
 			"settings":
 			{
-				"buffer_size": 7079,
+				"buffer_size": 908,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/G/CPP11/ivi2/Ivie/.gitignore",
+			"file": "/D/Dropbox/gaussian.py",
 			"settings":
 			{
-				"buffer_size": 1047,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/js/ng/controllers.js",
-			"settings":
-			{
-				"buffer_size": 12589,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/Http/Controllers/Ajax/CoursesController.php",
-			"settings":
-			{
-				"buffer_size": 1265,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/ng/courses/show.html",
-			"settings":
-			{
-				"buffer_size": 2723,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/ng/tests/form.html",
-			"settings":
-			{
-				"buffer_size": 17296,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "resources/views/admin/layout.blade.php",
-			"settings":
-			{
-				"buffer_size": 6446,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/ng/courses/list.html",
-			"settings":
-			{
-				"buffer_size": 2515,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/ng/courses/form.html",
-			"settings":
-			{
-				"buffer_size": 2612,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/ng/index.html",
-			"settings":
-			{
-				"buffer_size": 2414,
+				"buffer_size": 624,
 				"line_ending": "Windows"
 			}
 		}
 	],
-	"build_system": "",
+	"build_system": "Packages/Python/Python.sublime-build",
 	"build_system_choices":
 	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
 	],
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 89.0,
-		"last_filter": "c++",
+		"height": 400.0,
+		"last_filter": "install",
 		"selected_items":
 		[
 			[
-				"c++",
-				"Set Syntax: C++"
+				"install",
+				"Package Control: Install Package"
 			],
 			[
-				"insta",
+				"instal",
 				"Package Control: Install Package"
+			],
+			[
+				"gist",
+				"Gist: Create Private Gist"
+			],
+			[
+				"c++",
+				"Set Syntax: C++"
 			],
 			[
 				"wrap",
 				"Word Wrap: Toggle"
 			],
 			[
-				"install",
+				"insta",
 				"Package Control: Install Package"
 			],
 			[
@@ -182,10 +142,6 @@
 			[
 				"ssangu",
 				"Set Syntax: HTML (Angular.js)"
-			],
-			[
-				"instal",
-				"Package Control: Install Package"
 			],
 			[
 				"sid",
@@ -247,6 +203,7 @@
 		"height": 125.0,
 		"history":
 		[
+			"2+4",
 			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
 		]
 	},
@@ -265,10 +222,53 @@
 	],
 	"file_history":
 	[
+		"/G/CPP11/ivi2/Ivie/README.md",
+		"/D/DAI/new/nit_readme_3_00.txt",
+		"/D/DAI/new/seraredhead/readme.txt",
+		"/G/projektit/gu.cca",
+		"/G/projektit/temzb/code.tb",
+		"/G/projektit/gaussian.CB",
+		"/G/projektit/bgs/0040.tpc",
+		"/G/CPP11/ivi2/Ivie/Ivie/thirdparty/README.md",
+		"/G/CPP11/ivi2/boost_1_60_0/boost/filesystem/path.hpp",
+		"/G/wanhaservu/OLDSERVU/ahdasruutu/ahdasruutu.php",
+		"/G/wanhaservu/OLDSERVU/close/asd.php",
+		"/G/wanhaservu/OLDSERVU/autoupdate/plusser.php",
+		"/G/wanhaservu/OLDSERVU/autoupdate/laddar.php",
+		"/C/World of Warcraft/BlizzInterface/wow-ui-source-live/FrameXML/GlobalStrings.lua",
+		"/G/Downloads/Contig/Eula.txt",
+		"/C/Users/Sonaza/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/G/servu/post.php",
+		"/G/CPP11/ivi2/Ivie/workdir/display.frag",
+		"/G/CPP11/ivi2/Ivie/workdir/display_2.frag",
+		"/C/World of Warcraft/Interface/!FakeParty/core.lua",
+		"/C/Users/Sonaza/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/G/CSharp/WebServer/WebServer/Program.cs",
+		"/G/CSharp/MyWebServer/MyWebServer.exe",
+		"/G/CSharp/MyWebServer/MyWebServer.cs",
+		"/G/servu/mlraamattu/public/ng/index.html",
+		"/G/servu/mlraamattu/app/Http/routes.php",
+		"/G/servu/mlraamattu/public/js/ng/models.js",
+		"/G/servu/mlraamattu/public/css/admin.css",
+		"/G/servu/mlraamattu/app/Http/Controllers/Ajax/CoursesController.php",
+		"/G/servu/mlraamattu/public/js/ng/controllers.js",
+		"/G/CPP11/ivi2/Ivie/.gitignore",
+		"/G/servu/mlraamattu/public/js/ng/main.js",
+		"/G/servu/mlraamattu/app/Http/Controllers/Ajax/TestsController.php",
+		"/G/servu/mlraamattu/public/ng/courses/list.html",
+		"/G/servu/mlraamattu/public/ng/courses/show.html",
+		"/G/servu/mlraamattu/public/ng/tests/form.html",
+		"/G/servu/mlraamattu/app/Http/Controllers/CoursesController.php",
+		"/G/servu/mlraamattu/resources/views/course/list.blade.php",
+		"/G/servu/mlraamattu/resources/views/course/tests.blade.php",
+		"/G/servu/mlraamattu/public/ng/courses/form.html",
+		"/D/torrent/VS2013_RTM_PRO_ENU/KEY.txt",
+		"/G/servu/mlraamattu/public/ng/tests/list.html",
+		"/G/servu/mlraamattu/resources/views/admin/layout.blade.php",
+		"/G/servu/mlraamattu/app/Http/Controllers/TestsController.php",
 		"/G/CPP11/ivi2/FreeImage3170/FreeImage/Examples/Generic/BatchLoad.cpp",
 		"/G/CPP11/imageviewer/FreeImage3170/FreeImage/Source/FreeImage/GetType.cpp",
 		"/G/CPP11/imageviewer/FreeImage3170/FreeImage/Examples/OpenGL/TextureManager/TextureManager.cpp",
-		"/G/CPP11/ivi2/Ivie/.gitignore",
 		"/G/CPP11/ivi2/FreeImage3170/FreeImage/Win32/Debug/FreeImage.2013.log",
 		"/G/CPP11/ivi2/Ivie/Ivie.v12.suo",
 		"/G/CPP11/ivi2/FreeImage3170/FreeImage/Wrapper/FreeImagePlus/src/fipMultiPage.cpp",
@@ -280,11 +280,9 @@
 		"/G/CPP11/imageviewer/FreeImage3170/FreeImage/Source/FreeImage/Conversion.cpp",
 		"/G/CPP11/ivi2/Ivie/Ivie/thirdparty/FreeImage/FreeImage.h",
 		"/G/servu/mlraamattu/resources/views/layout.blade.php",
-		"/G/servu/mlraamattu/public/ng/index.html",
 		"/G/servu/mlraamattu/database/migrations/2015_11_13_082828_add_timestamps_to_users.php",
 		"/G/servu/mlraamattu/database/migrations/2015_12_17_162411_add_timestamps_to_courses_table.php",
 		"/C/xampp/php/php.ini",
-		"/G/servu/mlraamattu/resources/views/admin/layout.blade.php",
 		"/G/servu/mlraamattu/public/ng/users/form.html",
 		"/G/servu/mlraamattu/app/Http/Controllers/Ajax/UsersController.php",
 		"/G/servu/mlraamattu/app/User.php",
@@ -351,47 +349,7 @@
 		"/Users/media7/Documents/media7layout/bluetheme_5.47/layouts/no_containers.html.liquid",
 		"/Users/media7/Documents/media7layout/bluetheme_5.47/layouts/refresh.html.liquid",
 		"/Users/media7/Documents/media7layout/bluetheme_5.47/layouts/f5home.html.liquid",
-		"/Users/media7/Documents/media7layout/layoutblue/info.html",
-		"/Users/media7/Documents/media7layout/netadventist teema/containers.yml",
-		"/Users/media7/Documents/media7layout/netadventist teema/public/assets/css/oldmain.css",
-		"/Users/media7/Documents/media7layout/layoutblue/css/normalize.min.css",
-		"/Users/media7/Documents/media7layout/netadventist teema/layouts/refresh.html.liquid",
-		"/Users/media7/Documents/media7layout/netadventist teema/layouts/f5player.html.liquid",
-		"/Users/media7/Documents/media7layout/netadventist teema/layouts/f5home.html.liquid",
-		"/Users/media7/Documents/media7layout/netadventist teema/layouts/no_containers.html.liquid",
-		"/Users/media7/Documents/media7layout/netadventist teema/layouts/home.html.liquid",
-		"/Users/media7/Documents/media7layout/netadventist teema/layouts/default.html.liquid",
-		"/Users/media7/Documents/media7layout/netadventist teema/layouts.yml",
-		"/Users/media7/Documents/media7layout/netadventist teema/about.yml",
-		"/Users/media7/Documents/media7layout/layout/css/main.css",
-		"/Users/media7/Documents/media7layout/layout/info.html",
-		"/Users/media7/Documents/media7layout/layout/index.html",
-		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/globals.js",
-		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/hammer.js",
-		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/myLogicSimple5.js",
-		"/Users/media7/Documents/mvtouch/streamaus/MVTouch5.html",
-		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/myLogicSimple.js",
-		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/hammer_003.js",
-		"/Users/media7/Documents/mvtouch/streamaus/multitouch_tiedostot/jquery.js",
-		"/Volumes/Projektit3/DVD-projekteja/missiodvd2015-4/bellet/Wk05_ShareThisLove.stp",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/458E7F5D-C7AF-489A-9746-8333E5BCE809/build.php",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/B3922C45-50E0-4A9F-952C-6A7C44472020/script.js",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/CFFAE254-9C0C-474A-915C-F4EE27F1D0E5/controller.php",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/3EA3EB9C-DCF6-4E68-9E2F-0C3D41867D7D/main.css",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/38D53517-5BB1-4873-B49F-739EF7BFDA45/index.php",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/D0E60613-804F-445A-912E-6A51294BE387/view_main.php",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/EB985576-6086-4820-A11E-2531BA19046D/database.php",
-		"/Users/media7/Documents/infobuild/oldbuild.php",
-		"/Users/media7/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-		"/Users/media7/Documents/infobuild/controller.php",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/621926AC-4EA1-42C3-B138-332E4C0B9D1D/view_form.php",
-		"/Users/media7/Documents/infobuild/script.js",
-		"/Users/media7/Library/Caches/Cleanup At Startup/Transmit/50A5693F-5CDE-452B-9116-345D54C1AC91/form.php",
-		"/Users/media7/Documents/infobuild/index.php",
-		"/Users/media7/Documents/infobuild/form.php",
-		"/Users/media7/Documents/infobuild/main.css",
-		"/Users/media7/Documents/infobuild/database.php",
-		"/Users/media7/Documents/infobuild/build.php"
+		"/Users/media7/Documents/media7layout/layoutblue/info.html"
 	],
 	"find":
 	{
@@ -409,6 +367,54 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"receive loot",
+			"offset",
+			".y",
+			"3.14152",
+			"[",
+			"::White",
+			"position",
+			"size.y",
+			"size.x",
+			"15",
+			"10",
+			"05",
+			".1",
+			"0.1",
+			": ",
+			":",
+			"i",
+			"V",
+			"U",
+			"Y",
+			"y",
+			"Y",
+			"vpx_image->planes[VPX_PLANE_U]",
+			"vpx_image->planes[VPX_PLANE_V]",
+			"vpx_image->planes[VPX_PLANE_Y]",
+			"+",
+			"]+(",
+			"+",
+			"tests",
+			"archive",
+			" btn-block",
+			"btn-xs",
+			"btn",
+			"success",
+			"num_max_questions",
+			"odota",
+			"course_id",
+			"$scope.data.test",
+			"save_s",
+			"save_succ",
+			"title",
+			"Kokeen",
+			"title",
+			"test",
+			"test_edited",
+			"question",
+			"qkey",
+			"question",
 			"SolutionDir",
 			"FreeImage_GetFileTypeFromMemory",
 			"FreeImage_GetFileTypeU",
@@ -488,55 +494,7 @@
 			"text",
 			"home",
 			"...",
-			"role=\"presentation\"",
-			"role=\"presentation\" ",
-			"30",
-			"30px",
-			",",
-			"30",
-			"logged_in",
-			"-5",
-			"form-group",
-			"questions",
-			"str",
-			"vhost",
-			"h-nav",
-			"super-w",
-			"#main-cont",
-			"div#login",
-			"#content ifram",
-			"iframe",
-			"<iframe  ",
-			"<iframe width=\"640\"",
-			"</iframe>",
-			"--><",
-			"--><iframe",
-			"<iframe",
-			"</p>",
-			"<p>",
-			"twitter",
-			"<iframe",
-			"iframe",
-			"<!--",
-			"<p>",
-			"respons",
-			"respon",
-			"respons",
-			"&amp;",
-			"img",
-			"respons",
-			"img",
-			"widget",
-			"overflow-x",
-			"widget",
-			"width: 100%",
-			"navigation-w",
-			"navigation",
-			"fonts/fonts",
-			"../",
-			"../fonts/",
-			"../fonts/glyphicons-halflings-regular.eot",
-			".eot"
+			"role=\"presentation\""
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -557,150 +515,59 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/css/admin.css",
+					"file": "/G/CPP11/ivi2/Ivie/workdir/gaussian.frag",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15772,
+						"buffer_size": 963,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3923,
-								3923
+								854,
+								854
 							]
 						],
 						"settings":
 						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"history_list_is_closing": true,
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3696.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 10,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "public/js/ng/models.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 981,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/OpenGL Shading Language (GLSL)/GLSL.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "app/Http/routes.php",
+					"buffer": 1,
+					"file": "/G/wanhaservu/OLDSERVU/bender/bender.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3133,
+						"buffer_size": 885,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1976,
-								1976
+								134,
+								134
 							]
 						],
 						"settings":
 						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
 							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"translate_tabs_to_spaces": false
-						},
-						"translation.x": -0.0,
-						"translation.y": 816.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 12,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/js/ng/main.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7079,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4938,
-								4938
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2394.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/G/CPP11/ivi2/Ivie/.gitignore",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1047,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								358,
-								358
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -710,61 +577,29 @@
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "public/js/ng/controllers.js",
+					"buffer": 2,
+					"file": "/G/wanhaservu/OLDSERVU/close/close.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12589,
+						"buffer_size": 2473,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2626,
-								2626
+								1320,
+								1320
 							]
 						],
 						"settings":
 						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"history_list_is_closing": true,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1112.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "app/Http/Controllers/Ajax/CoursesController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1265,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								863,
-								863
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
 							"syntax": "Packages/PHP/PHP.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 135.0,
+						"translation.y": 1008.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -777,27 +612,26 @@
 			"sheets":
 			[
 				{
-					"buffer": 7,
-					"file": "public/ng/courses/show.html",
+					"buffer": 3,
+					"file": "/G/CPP11/ivi2/Ivie/workdir/background.frag",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2723,
+						"buffer_size": 908,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1380,
-								1380
+								73,
+								73
 							]
 						],
 						"settings":
 						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"auto_name": "",
+							"syntax": "Packages/OpenGL Shading Language (GLSL)/GLSL.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -807,152 +641,31 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "public/ng/tests/form.html",
+					"buffer": 4,
+					"file": "/D/Dropbox/gaussian.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 17296,
+						"buffer_size": 624,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3599,
-								3599
+								603,
+								603
 							]
 						],
 						"settings":
 						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 912.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "resources/views/admin/layout.blade.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6446,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2577,
-								2577
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 528.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 10,
-					"file": "public/ng/courses/list.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2515,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1026,
-								981
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "public/ng/courses/form.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2612,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2374,
-								2374
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"history_list_is_closing": true,
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 362.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 12,
-					"file": "public/ng/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2414,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								516,
-								516
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -986,7 +699,7 @@
 		"cols":
 		[
 			0.0,
-			0.450036621094,
+			0.358854166666,
 			1.0
 		],
 		"rows":
@@ -996,6 +709,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 533.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
@@ -1016,6 +733,30 @@
 			[
 				"courseshow",
 				"public\\ng\\courses\\show.html"
+			],
+			[
+				"nglist",
+				"public\\ng\\tests\\list.html"
+			],
+			[
+				"resourceview",
+				"resources\\views\\course\\tests.blade.php"
+			],
+			[
+				"viewcourse",
+				"resources\\views\\course\\list.blade.php"
+			],
+			[
+				"coursecontr",
+				"app\\Http\\Controllers\\CoursesController.php"
+			],
+			[
+				"ajaxtest",
+				"app\\Http\\Controllers\\Ajax\\TestsController.php"
+			],
+			[
+				"testcontro",
+				"app\\Http\\Controllers\\TestsController.php"
 			],
 			[
 				"adminlay",
@@ -1210,7 +951,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": false,
-	"side_bar_width": 150.0,
+	"side_bar_width": 180.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

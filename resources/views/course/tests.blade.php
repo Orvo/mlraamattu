@@ -16,6 +16,17 @@
 		</div>
 	@endif
 	
+	@if(!Auth::check())
+		<div class="alert alert-info login-note">
+			<p>
+				Jos olet jo rekisteröitynyt, <a href="/auth/login">kirjaudu sisään</a> jatkaaksesi siitä mihin jäit.
+			</p>
+			<p>
+				Rekisteröityminen tapahtuu ensimmäisen kokeen vastaamisen yhteydessä.
+			</p>
+		</div>
+	@endif
+	
 	<div class="list">
 		@foreach($course->tests as $test)
 			<?php if($test->questions->count() == 0): continue; endif;?>
