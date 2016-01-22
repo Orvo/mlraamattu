@@ -648,8 +648,45 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 		{
 			$scope.archive = response.data;
 		}
+	});
+	
+	$scope.archiveFilter = {
+		replied_to: 0,
+		discarded: 0,	
+	};
+	
+	$scope.discard = function(id)
+	{
+		
+	}
+});
+
+app.controller('ArchiveFormController', function($rootScope, $scope, $window, $location, $routeParams, $http, $breadcrumbs)
+{
+	$breadcrumbs.reset();
+	$breadcrumbs.segment('Koesuoritukset', '#/archive/');
+	
+	$http.get('/ajax/archive/' + $routeParams.id).then(function success(response)
+	{
+		if(response)
+		{
+			$scope.data = {
+				//archive: response.data,
+				archive: response.data.data,
+				user: response.data.user,
+				test: response.data.test,
+				course: response.data.test.course,
+			};
+			
+			$breadcrumbs.segment('Koepalautteen lähetys');
+			
+			$scope.feedback = {};
+			
+			$scope.loaded = true;
+		}
 	})
 });
+
 
 // ----------------------------------------------------------------------------------------------------
 // Navbar controllers

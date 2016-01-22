@@ -947,6 +947,21 @@ td.list-actions .btn
 	width: 80px;
 }
 
+tr.missing-test
+{
+	background: #FFE0E0;
+}
+
+tbody > tr > td:first-child
+{
+	background: #fafafa;
+}
+
+tbody > tr.missing-test > td:first-child
+{
+	background: #EBC6C6;
+}
+
 .list-no-padding ul, .list-no-padding ol
 {
 	padding: 0 0 0 1em;
@@ -1041,6 +1056,35 @@ td.list-actions .btn
 	border: 1px solid #C3000F !important;
 	box-shadow: 0 0 2px 1px #D31F35 !important;
 }
+
+/**************************************************/
+
+.test-result-box
+{
+	background: #fafafa;
+	border: 1px solid #ddd;
+	box-shadow: 0 2px 2px #eee;
+	border-radius: 5px;
+	padding: 12px 16px;
+}
+
+.test-result-box > span
+{
+	font-weight: bold;
+}
+
+.test-feedback-list .test-answer
+{
+	font-size: 11pt;
+	padding-bottom: 1em;
+}
+
+.test-feedback-list .test-answer span
+{
+	font-weight: bold;
+}
+
+/*************************************************/
 
 .modal
 {

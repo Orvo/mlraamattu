@@ -100,17 +100,27 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 	
 	Route::get('archive', function()
 	{
-		$archive = App\Archive::with('user', 'test', 'test.course')->get();
+		$archive = App\Archive::with('user', 'test', 'test.course')->has('test')->has('user')->get();
 		
 		foreach($archive as &$row)
 		{
 			$row->data = json_decode($row->data);
 			
-			// $row->search_info = $row->data->num_correct . " oikein";
+			$row->search_info = '';
 			
 			if($row->data->all_correct)
 			{
-				$row->search_info = "kaikki oikein";
+				$row->search_info .= "kaikki oikein\n";
+			}
+			
+			if($row->replied_to)
+			{
+				$row->search_info .= "vastattu\n";
+			}
+			
+			if($row->discarded)
+			{
+				$row->search_info .= "hylätty\n";
 			}
 		}
 		
@@ -119,15 +129,31 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 	
 	Route::get('archive/stats', function()
 	{
-		$archive = App\Archive::all();
+		$archive = App\Archive::has('test')->get();
 		
 		return [
-			'new' 		=> $archive->where('replied_to', 0)->count(),
+			'new' 		=> $archive->where('replied_to', 0)->where('discarded', 0)->count(),
 			'total' 	=> $archive->count(),
 			// 'archive'	=> $archive->,
 		];
 	});
-	// Route::get('login', 'AuthController@ajax_login');
+	
+	Route::get('archive/{id}', function($id)
+	{
+		$archive = App\Archive::with('user', 'test', 'test.questions', 'test.course')->where('id', $id)->firstOrFail();
+		
+		if($archive)
+		{
+			$archive->data = json_decode($archive->data);
+			
+			if($archive->data->all_correct)
+			{
+				$archive->search_info = "kaikki oikein";
+			}
+		}
+		
+		return $archive;
+	});
 
 });
 

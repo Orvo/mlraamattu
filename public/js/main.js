@@ -20,4 +20,25 @@ $(function(){
 		$(this).parent().parent().removeClass('has-success has-error');
 	});
 	
+	////////////////////////////////////
+	
+	var updateScroll = function()
+	{
+		if($(document).scrollTop() >= 110)
+		{
+			$('header').addClass('fixed');
+		}
+		else
+		{
+			$('header').removeClass('fixed');
+		}
+	}
+	
+	$(document).scroll(function()
+	{
+		updateScroll();
+	});
+	
+	updateScroll();
+	
 });

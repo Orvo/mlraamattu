@@ -1,0 +1,143 @@
+<form ng-submit="submit(data)" ng-if="loaded">
+	<div id="content-sidebar" class="fixed">
+		<div class="sidebar-actions">
+			<div class="form-group">
+				<a href="#/archive/" class="btn btn-default btn-block">
+					<span class="glyphicon glyphicon-chevron-left"></span> Palaa koesuorituksiin
+				</a>
+			</div>
+
+			<hr>
+			<div class="form-group">
+				<div ng-hide="processing">
+					<button type="submit" class="btn btn-primary btn-block btn-lg">
+						<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
+					</button>
+				</div>
+				<div ng-show="processing" style="text-align: center">
+					<img src="/img/ajax-loader.gif" alt="">
+				</div>
+			</div>
+		</div>
+		
+		<div class="sidebar-help">
+			<p>
+				Uuden kokeen luonti!
+			</p>
+			<p>
+				Kysymyksiin tehdyt muutokset tulevat voimaan vasta kun hyväksyt ne painamalla "Valmis" painiketta lomakkeen alareunassa. Jos haluat hylätä tekemäsi muutokset paina "Peruuta".
+			</p>
+			<p>
+				Kysymysten poistaminen onnistuu painamalla punaista "Poista" painiketta ja hyväksymällä annetun varoituksen. Kysymysten lopullinen poisto tapahtuu tallennuksen yhteydessä, jonka jälkeen toiminto on peruuttamaton.
+			</p>
+		</div>
+	</div>
+	<div id="content-main">
+		<h1>
+			Koepalautteen lähetys / <b>[[ data.user.name ]] - [[ data.test.title ]]</b></span>
+		</h1>
+		<div class="alert-box success" ng-show="save_success">
+			<h4><span class="glyphicon glyphicon-ok"></span> Muutokset tallennettu!</h4>
+		</div>
+		<div class="alert-box errors" ng-show="data.errors.messages.length > 0">
+			<img src="/img/ajax-loader-error.gif" alt="" class="pull-right" ng-show="processing" style="height:40px">
+			<h4>Tallennus epäonnistui!</h4>
+			<ul>
+				<li ng-repeat="error in data.errors.messages">[[ error ]]</li>
+			</ul>
+		</div>
+		<h3 class="test-result-box">
+			Kokeen tulos:
+			<span ng-if="data.answers.all_correct" style="color:#47B11D;">Kaikki oikein</span>
+			<span ng-if="!data.answers.all_correct && data.answers.num_correct > 0" style="color:#F4D81C;">Osittain oikein</span>
+			<span ng-if="!data.answers.all_correct && data.answers.num_correct == 0" style="color:#D52C16;">Kaikki väärin</span>
+		</h3>
+		<fieldset>
+			<legend>Kysymyskohtainen palaute</legend>
+			<ul class="test-feedback-list questions">
+				<li class="question active" ng-repeat="(qkey, question) in data.test.questions">
+					<div class="info">
+						<div class="title-row clearfix">
+							<div class="right-aligned">
+								<div class="type">
+									[[ translate_type(question.type) ]]
+								</div>
+							</div>
+							<div class="left-aligned">
+								<div class="number">[[ (qkey + 1) ]].</div>
+								<div class="title" ng-class="{'no-subtitle': question.subtitle.trim().length == 0, 'dimmed': question.title.trim().length == 0}">
+									[[ question.title || 'Kysymys puuttuu' ]]
+								</div>
+								<div class="subtitle">
+									[[ question.subtitle.split('\n')[0] ]]
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="edit">
+						<div class="test-answer">
+							<span>Annettu vastaus:</span>
+							[[ data.archive.given_answers[question.id] ]]
+						</div>
+						<div class="form-group">
+							<textarea class="form-control" ng-model="feedback[question.id]" placeholder="Kirjoita palautetta tai jätä tyhjäksi"></textarea>
+						</div>
+						
+						<div class="clearfix"></div>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
+	</div>
+</form>
+
+<div class="load-placeholder" ng-if="!loaded">
+	<h3>
+		<img src="/img/ajax-loader.gif" alt=""> Ladataan...
+	</h3>
+</div>
+
+<div class="modal fade" id="modal-delete-confirmation">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Poiston varmistus</h4>
+			</div>
+			<div class="modal-body" style="text-align:center;font-size:120%">
+				<p>
+					Oletko varma, että haluat poistaa kysymyksen <b>"[[ modal_info.key + 1 ]]. [[ modal_info.question.title ]]"</b>?
+				</p>
+				<p>
+					Lopullinen poisto tapahtuu kokeen tallennuksen yhteydessä, jonka jälkeen toimintoa ei voi peruuttaa.
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Peruuta</button>
+				<button type="button" class="btn btn-danger" ng-click="confirmed_delete()">
+					<span class="glyphicon glyphicon-trash"></span> Poista kysymys
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal" id="modal-cancel-confirmation">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Poiston varmistus</h4>
+			</div>
+			<div class="modal-body" style="text-align:center;font-size:120%">
+				<p>
+					Kysymyksen <b>"[[ modal_info.key + 1 ]]. [[ modal_info.question.title ]]"</b> muokkaus on vielä kesken. Haluatko jatkaa tallentamatta?
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Peruuta</button>
+				<button type="button" class="btn btn-warning" ng-click="confirmed_cancel()">
+					<span class="glyphicon glyphicon-remove"></span> Älä tallenna
+				</button>
+			</div>
+		</div>
+	</div>
+</div>

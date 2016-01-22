@@ -144,6 +144,11 @@ app.config(
 				templateUrl: '/ng/archive/list.html',
 				resolve: { factory: authProvider, },
 			})
+			.when('/archive/:id/reply', {
+				controller: 'ArchiveFormController',
+				templateUrl: '/ng/archive/form.html',
+				resolve: { factory: authProvider, },
+			})
 			
 			////////////////////////////////////////////////
 			// Misc

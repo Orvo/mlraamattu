@@ -37,15 +37,25 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="(key, item) in archive | filter : searchFilter | filter : archiveFilter">
-				<td style="font-weight: bold;text-align: right;background:#fafafa">[[ key + 1 ]].</td>
+			<tr ng-repeat="(key, item) in archive | filter : searchFilter | filter : archiveFilter" ng-class="{'missing-test':!item.test}">
+				<td style="font-weight: bold;text-align: right;">[[ key + 1 ]].</td>
 				<td>
 					[[ item.user.name ]]
 				</td>
 				<td>
-					<a href="#/tests/[[ item.test.id ]]">
-						[[ item.test.title ]]
-					</a>
+					<div ng-if="item.test">
+						<a href="#/tests/[[ item.test.id ]]">
+							[[ item.test.title ]]
+						</a>
+						<div class="labels pull-right">
+							<span class="label label-primary" ng-if="item.replied_to">Vastattu</span>
+							<span class="label label-warning" ng-if="item.discarded">Hylätty</span>
+						</div>
+					</div>
+					
+					<span ng-if="!item.test" style="color:#c22;font-weight: bold;">
+						Koe on poistettu
+					</span>
 				</td>
 				<td>
 					<a href="#/courses/[[ item.test.course.id ]]">
@@ -64,12 +74,12 @@
 					</div>
 				</td>
 				<td class="list-actions">
-					<a href="#/tests/[[ test.id ]]/edit" class="btn btn-success btn-sm">
+					<a href="#/archive/[[ item.id ]]/reply" class="btn btn-success btn-sm" ng-disabled="!item.test">
 						<span class="glyphicon glyphicon-ok"></span> Vastaa
 					</a>
-					<a href="#/tests/[[ test.id ]]/delete" class="btn btn-warning btn-sm">
+					<button type="button" class="btn btn-warning btn-sm" ng-click="discard(item.id)">
 						<span class="glyphicon glyphicon-remove"></span> Hylkää
-					</a>
+					</button>
 				</td>
 			</tr>
 		</tbody>
