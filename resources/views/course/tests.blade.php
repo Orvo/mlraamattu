@@ -1,8 +1,6 @@
 @extends('layout')
 
 @section('content')
-
-	<a href="/" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Takaisin pääsivulle</a>
 	
 	<h1>Kurssi: {{ $course->title }}</h1>
 	<div class="course-description">

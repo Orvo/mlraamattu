@@ -140,7 +140,7 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 	
 	Route::get('archive/{id}', function($id)
 	{
-		$archive = App\Archive::with('user', 'test', 'test.questions', 'test.course')->where('id', $id)->firstOrFail();
+		$archive = App\Archive::with('user', 'test', 'test.questions', 'test.questions.answers', 'test.course')->where('id', $id)->firstOrFail();
 		
 		if($archive)
 		{
@@ -150,9 +150,32 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 			{
 				$archive->search_info = "kaikki oikein";
 			}
+			
+			$indexed_answers = [];
+			
+			foreach($archive->test->questions as &$question)
+			{
+				foreach($question->answers as $answer)
+				{
+					$indexed_answers[$answer->id] = $answer;
+				}
+				
+			}
 		}
 		
+		$archive->indexed_answers = $indexed_answers;
+		
 		return $archive;
+	});
+	
+	Route::post('archive/{id}/discard', function($id)
+	{
+		$archive = App\Archive::findOrFail($id);
+		
+		$archive->discarded = 1;
+		$archive->save();
+		
+		return true;
 	});
 
 });

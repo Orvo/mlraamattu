@@ -48,9 +48,9 @@
 		</div>
 		<h3 class="test-result-box">
 			Kokeen tulos:
-			<span ng-if="data.answers.all_correct" style="color:#47B11D;">Kaikki oikein</span>
-			<span ng-if="!data.answers.all_correct && data.answers.num_correct > 0" style="color:#F4D81C;">Osittain oikein</span>
-			<span ng-if="!data.answers.all_correct && data.answers.num_correct == 0" style="color:#D52C16;">Kaikki väärin</span>
+			<span ng-if="data.archive.all_correct" style="color:#47B11D;">Kaikki oikein</span>
+			<span ng-if="!data.archive.all_correct && data.archive.num_correct > 0" style="color:#BCA400;">Osittain oikein</span>
+			<span ng-if="!data.archive.all_correct && data.archive.num_correct == 0" style="color:#D52C16;">Kaikki väärin</span>
 		</h3>
 		<fieldset>
 			<legend>Kysymyskohtainen palaute</legend>
@@ -77,10 +77,42 @@
 					<div class="edit">
 						<div class="test-answer">
 							<span>Annettu vastaus:</span>
-							[[ data.archive.given_answers[question.id] ]]
+							<div ng-if="question.type == 'MULTI' || question.type == 'CHOICE'">
+								<ul>
+									<li ng-repeat="answer in data.archive.given_answers[question.id]">
+										[[ data.indexed_answers[answer].text ]]
+										<span ng-if="!data.indexed_answers[answer].is_correct" style="color:#A80505">
+											<span class="glyphicon glyphicon-remove"></span>
+										</span>
+									</li>
+								</ul>
+							</div>
+							<div ng-if="question.type == 'MULTITEXT'">
+								<ul>
+									<li ng-repeat="answer in data.archive.given_answers[question.id]">
+										[[ answer ]]
+									</li>
+								</ul>
+							</div>
+							<div>
+								[[ data.archive.given_answers[question.id] ]]
+							</div>
+						</div>
+						<div class="test-answer">
+							<span>Oikea vastaus:</span>
+							<div ng-if="question.type != 'TEXTAREA'">
+								<ul>
+									<li ng-repeat="answer in question.answers | filter : {is_correct:1}">
+										[[ answer.text ]]
+									</li>
+								</ul>
+							</div>
+							<div ng-if="question.type == 'TEXTAREA'">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam eveniet voluptates mollitia quia, exercitationem est, iusto minima harum autem reiciendis repellat iste expedita omnis obcaecati doloribus recusandae. Similique dolor sapiente ut magni, cum explicabo assumenda alias deserunt qui neque tempore ex in harum quibusdam corrupti totam ea mollitia, doloribus eveniet.
+							</div>
 						</div>
 						<div class="form-group">
-							<textarea class="form-control" ng-model="feedback[question.id]" placeholder="Kirjoita palautetta tai jätä tyhjäksi"></textarea>
+							<textarea class="form-control vertical-textarea" ng-model="feedback[question.id]" placeholder="Kirjoita palautetta tai jätä tyhjäksi"></textarea>
 						</div>
 						
 						<div class="clearfix"></div>

@@ -36,7 +36,7 @@
 						<ul>
 							<li><a href="/">Etusivu</a></li>
 							<li><a href="/">Kurssit</a></li>
-							<li><a href="/">Blabla</a></li>
+							@yield('extra_navigation')
 						</ul>
 					</div>
 				</nav>

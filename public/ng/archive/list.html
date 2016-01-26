@@ -8,19 +8,33 @@
 	<div class="actions-row">
 		<div>
 			<input type="text" ng-model="searchFilter" placeholder="Hae koesuorituksia" class="form-control search-filter">
+		</div>
+		<div class="replied-to-toggles">
 			<div class="radio">
-				<label>
-					<input type="radio" ng-model="replyFilter.replied_to" value="-1"> Näytä kaikki
+				<label class="btn" ng-class="{'btn-warning': archiveFilter.replied_to == 0, 'btn-default': archiveFilter.replied_to != 0}">
+					<input type="radio" ng-model="archiveFilter.replied_to" value="0"> Näytä vastaamattomat
 				</label>
 			</div>
 			<div class="radio">
-				<label>
-					<input type="radio" ng-model="replyFilter.replied_to" value="1"> Näytä vastatut
+				<label class="btn" ng-class="{'btn-warning': archiveFilter.replied_to == 1, 'btn-default': archiveFilter.replied_to != 1}">
+					<input type="radio" ng-model="archiveFilter.replied_to" value="1"> Näytä vastatut
 				</label>
 			</div>
 			<div class="radio">
-				<label>
-					<input type="radio" ng-model="replyFilter.replied_to" value="0"> Näytä vastaamattomat
+				<label class="btn" ng-class="{'btn-warning': archiveFilter.replied_to === undefined, 'btn-default': archiveFilter.replied_to !== undefined}">
+					<input type="radio" ng-model="archiveFilter.replied_to" ng-value="undefined"> Näytä kaikki
+				</label>
+			</div>
+		</div>
+		<div class="discarded-toggles">
+			<div class="radio">
+				<label class="btn" ng-class="{'btn-info': archiveFilter.discarded == 0, 'btn-default': archiveFilter.discarded != 0}">
+					<input type="radio" ng-model="archiveFilter.discarded" value="0"> Piilota hylätyt
+				</label>
+			</div>
+			<div class="radio">
+				<label class="btn" ng-class="{'btn-info': archiveFilter.discarded === undefined, 'btn-default': archiveFilter.discarded !== undefined}">
+					<input type="radio" ng-model="archiveFilter.discarded" ng-value="undefined"> Näytä hylätyt
 				</label>
 			</div>
 		</div>
@@ -74,10 +88,10 @@
 					</div>
 				</td>
 				<td class="list-actions">
-					<a href="#/archive/[[ item.id ]]/reply" class="btn btn-success btn-sm" ng-disabled="!item.test">
+					<a href="#/archive/[[ item.id ]]/reply" class="btn btn-success btn-sm" ng-disabled="!item.test || item.replied_to">
 						<span class="glyphicon glyphicon-ok"></span> Vastaa
 					</a>
-					<button type="button" class="btn btn-warning btn-sm" ng-click="discard(item.id)">
+					<button type="button" class="btn btn-warning btn-sm" ng-click="discard(item)">
 						<span class="glyphicon glyphicon-remove"></span> Hylkää
 					</button>
 				</td>

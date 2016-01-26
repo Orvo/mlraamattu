@@ -655,9 +655,15 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 		discarded: 0,	
 	};
 	
-	$scope.discard = function(id)
+	$scope.discard = function(item)
 	{
-		
+		$http.post('/ajax/archive/' + item.id + '/discard').then(function success(response)
+		{
+			if(response && response.data == true)
+			{
+				item.discarded = 1;
+			}
+		});
 	}
 });
 
@@ -676,6 +682,7 @@ app.controller('ArchiveFormController', function($rootScope, $scope, $window, $l
 				user: response.data.user,
 				test: response.data.test,
 				course: response.data.test.course,
+				indexed_answers: response.data.indexed_answers,
 			};
 			
 			$breadcrumbs.segment('Koepalautteen lähetys');

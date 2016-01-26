@@ -185,6 +185,33 @@ div.actions-row input.search-filter.focused
 	width: 300px;
 }
 
+div.actions-row > div
+{
+	float: left;
+	margin: 0;
+	padding: 0 1em 1em 0;
+}
+
+div.actions-row div.radio
+{
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+div.actions-row div.radio label
+{
+	display: inline-block;
+	margin: 0;
+	padding: 6px 14px 6px 30px;
+	outline: none;
+}
+
+div.actions-row div.radio label input
+{
+	outline: none;
+}
+
 .navbar
 {
 	padding: 0 40px;
@@ -1076,12 +1103,34 @@ tbody > tr.missing-test > td:first-child
 .test-feedback-list .test-answer
 {
 	font-size: 11pt;
-	padding-bottom: 1em;
+	padding: 1em;
+	border: 1px solid #eee;
+	margin-bottom: 1em;
+	border-radius: 3px;
 }
 
-.test-feedback-list .test-answer span
+.test-feedback-list .test-answer > span
 {
+	display: block;
 	font-weight: bold;
+}
+
+.test-feedback-list .test-answer > div
+{
+	max-width: 800px;
+}
+
+.test-answer ul
+{
+	margin: 0;
+	padding: 0 0 0 1.2em;
+}
+
+.test-answer ul li
+{
+	margin: 0;
+	padding: 0;
+	list-style: disc;
 }
 
 /*************************************************/

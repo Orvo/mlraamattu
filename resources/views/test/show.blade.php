@@ -46,8 +46,16 @@
 	</fieldset>
 @endsection
 
+@section('extra_navigation')
+	<li>
+		<a href="/course/{{ $test->course->id }}">
+			{{ $test->course->title }}
+		</a>
+	</li>
+@endsection
+
 @section('content')
-	<a href="/course/{{ $test->course->id }}" class="btn btn-default"><span class="glyphicon glyphicon-chevron-left"></span> Takaisin pääsivulle</a>
+	
 
 	<form action="/test/{{ $test->id }}" method="post" class="test-form form-horizontal">
 		{!! csrf_field() !!}
