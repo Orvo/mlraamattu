@@ -172,10 +172,19 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 	{
 		$archive = App\Archive::findOrFail($id);
 		
+		if(!$archive)
+		{
+			return [
+				'success' => false,
+			];
+		}
+		
 		$archive->discarded = 1;
 		$archive->save();
 		
-		return true;
+		return [
+			'success' => true,
+		];
 	});
 
 });

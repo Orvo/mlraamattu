@@ -33,8 +33,8 @@
 			<tr>
 				<td style="width:40px">ID</td>
 				<td>Käyttäjän tiedot</td>
-				<td style="width:200px">Koesuoritukset</td>
-				<td>Toiminnot</td>
+				<td style="width:32%">Koesuoritukset</td>
+				<td style="width:180px">Toiminnot</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -42,7 +42,8 @@
 				<td style="font-weight: bold; background:#fafafa">[[ user.id ]]</td>
 				<td>
 					<div class="pull-right">
-						<div ng-show="user.access_level == 1" class="label label-primary">Ylläpitäjä</div>
+						<div ng-if="user.id == userData.user.id" class="label label-info">Sinä</div>
+						<div ng-if="user.access_level == 1" class="label label-primary">Ylläpitäjä</div>
 					</div>
 					<div class="info">
 						<a href="#/users/[[ user.id ]]">
@@ -52,16 +53,13 @@
 					</div>
 				</td>
 				<td style="text-align: left">
-					-
+					<b>[[ user.tests_completed ]] oikein</b> / [[ user.archives.length ]] kokeesta
 				</td>
 				<td>
-					<a href="#/users/[[ user.id ]]" class="btn btn-success btn-xs">
-						<span class="glyphicon glyphicon-search"></span> Näytä
-					</a>
-					<a href="#/users/[[ user.id ]]/edit" class="btn btn-primary btn-xs">
+					<a href="#/users/[[ user.id ]]/edit" class="btn btn-primary btn-sm">
 						<span class="glyphicon glyphicon-edit"></span> Muokkaa
 					</a>
-					<a href="#/users/delete/[[ user.id ]]" class="btn btn-danger btn-xs">
+					<a href="#/users/delete/[[ user.id ]]" class="btn btn-danger btn-sm" ng-if="user.id != userData.user.id">
 						<span class="glyphicon glyphicon-trash"></span> Poista
 					</a>
 				</td>

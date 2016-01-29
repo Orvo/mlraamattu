@@ -11,6 +11,19 @@ var app = angular.module('adminpanel', ['ngResource', 'ngRoute', 'ngSanitize', '
 	}
 );
 
+app.run(function($rootScope, $http)
+{
+	$rootScope.updateUserData = function()
+	{
+		$http.get('/ajax/auth')
+			.then(function success(response)
+			{
+				$rootScope.userData = response.data;
+				$rootScope.userData.lastCheck = Date.now();
+			});
+	}
+});
+
 app.config(
 	function($routeProvider)
 	{
@@ -20,50 +33,37 @@ app.config(
 		{
 			var deferred = $q.defer();
 			
-			// if($rootScope.userData && $rootScope.userData.authenticated && Date.now()-$rootScope.userData.lastCheck < 30000)
-			// {
-			// 	deferred.resolve($rootScope.userData);
-			// }
-			// else
-			// {
-				$http.get('/ajax/auth')
-					.then(function success(response)
+			$http.get('/ajax/auth')
+				.then(function success(response)
+				{
+					if(!response.data.authenticated)
 					{
-						if(!response.data.authenticated)
-						{
-							// deferred.reject(false);
-							
-							// var hash = $window.location.hash.substr(1);
-							// $window.location.hash = '';
-							// $window.location = "/auth/login/?ref=admin&route=" + hash;
-							
-							$rootScope.promptLogin({
-								unsavedData: false,
-								redirectURL: '/auth/login/?ref=admin&route=' + $window.location.hash.substr(1),
-								callback: function()
-								{
-									deferred.resolve(response.data);
-									
-									$rootScope.userData = response.data;
-									$rootScope.userData.lastCheck = Date.now();
-								}
-							});
-						}
-						else
-						{
-							deferred.resolve(response.data);
-							$rootScope.userData = response.data;
-							$rootScope.userData.lastCheck = Date.now();
-						}
-					}, function error(response)
+						$rootScope.promptLogin({
+							unsavedData: false,
+							redirectURL: '/auth/login/?ref=admin&route=' + $window.location.hash.substr(1),
+							callback: function()
+							{
+								deferred.resolve(response.data);
+								
+								$rootScope.userData = response.data;
+								$rootScope.userData.lastCheck = Date.now();
+							}
+						});
+					}
+					else
 					{
-						deferred.reject(false);
-						
-						var hash = $window.location.hash.substr(1);
-						$window.location.hash = '';
-						$window.location = "/auth/login/?ref=admin&route=" + hash;
-					});
-			// }
+						deferred.resolve(response.data);
+						$rootScope.userData = response.data;
+						$rootScope.userData.lastCheck = Date.now();
+					}
+				}, function error(response)
+				{
+					deferred.reject(false);
+					
+					var hash = $window.location.hash.substr(1);
+					$window.location.hash = '';
+					$window.location = "/auth/login/?ref=admin&route=" + hash;
+				});
 			
 			return deferred.promise;
 		}
@@ -96,11 +96,11 @@ app.config(
 				resolve: { factory: authProvider, },
 			})
 			
-			.when('/tests', {
-				controller: 'TestsController',
-				templateUrl: '/ng/tests/list.html',
-				resolve: { factory: authProvider, },
-			})
+			// .when('/tests', {
+			// 	controller: 'TestsController',
+			// 	templateUrl: '/ng/tests/list.html',
+			// 	resolve: { factory: authProvider, },
+			// })
 			.when('/tests/new/:course_id', {
 				controller: 'TestsFormController',
 				templateUrl: '/ng/tests/form.html',
@@ -122,16 +122,11 @@ app.config(
 				templateUrl: '/ng/users/list.html',
 				resolve: { factory: authProvider, },
 			})
-			// .when('/users/:id', {
-			// 	controller: 'TestsDisplayController',
-			// 	templateUrl: '/ng/users/show.html',
-			// 	resolve: { factory: authProvider, },
-			// })
-			// .when('/users/new/:course_id', {
-			// 	controller: 'TestsFormController',
-			// 	templateUrl: '/ng/users/form.html',
-			// 	resolve: { factory: authProvider, },
-			// })
+			.when('/users/new/', {
+				controller: 'UsersFormController',
+				templateUrl: '/ng/users/form.html',
+				resolve: { factory: authProvider, },
+			})
 			.when('/users/:id/edit', {
 				controller: 'UsersFormController',
 				templateUrl: '/ng/users/form.html',

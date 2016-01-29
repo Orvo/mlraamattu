@@ -264,13 +264,11 @@ class TestsController extends Controller
 	
 	protected function _validateTest($data)
 	{
-		// sleep(2);
-		
 		$errors = [
 			'messages' => [],
 			'questions' => [],
 			'test' => [],
-			'fieds' => [],
+			'fields' => [],
 		];
 		
 		if(!@$data['title'] || strlen(trim($data['title'])) == 0)

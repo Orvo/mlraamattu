@@ -43,10 +43,10 @@
 		<thead>
 			<tr>
 				<td style="width:40px;"></td>
-				<td style="width:160px">Kokeen suorittaja</td>
-				<td>Koe</td>
-				<td>Kurssi</td>
-				<td>Tulos</td>
+				<td style="width:180px">Kokeen suorittaja</td>
+				<td style="min-width:200px">Koe</td>
+				<td style="width:24%">Kurssi</td>
+				<td style="width:20%">Tulos</td>
 				<td class="list-actions" style="width:200px">Toiminnot</td>
 			</tr>
 		</thead>
@@ -96,9 +96,11 @@
 					</button>
 				</td>
 			</tr>
+			<tr ng-if="(archive | filter : searchFilter | filter : archiveFilter).length == 0">
+				<td colspan="6" style="text-align: center;font-weight: bold;">
+					Ei suorituksia annetuilla hakuehdoilla
+				</td>
+			</tr>
 		</tbody>
 	</table>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo vel maiores temporibus distinctio laborum asperiores odio ratione expedita reprehenderit rerum quos recusandae quae facilis necessitatibus ducimus minus exercitationem, atque dolorem omnis unde, ad, consectetur sed! Doloremque id distinctio perferendis, vel.
-	</p>
 </div>

@@ -252,21 +252,119 @@ app.controller('UsersController', function($scope, $window, $location, $routePar
 	});
 });
 
-app.controller('UsersFormController', function($scope, $window, $location, $routeParams, $breadcrumbs, UsersModel)
+app.controller('UsersFormController', function($rootScope, $scope, $window, $location, $routeParams, $breadcrumbs, $http, UsersModel)
 {
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Käyttäjät', '#/users/');
+	$breadcrumbs.segment('Muokataan käyttäjää', undefined, function()
+		{
+			return $scope.loaded;
+		});
 	
 	$scope.id = $routeParams.id;
 	$scope.data = {};
 	
-	UsersModel.get({id: $routeParams.id}, function(data)
+	$scope.access_levels = {
+		0: {
+			level: 0,
+			description: 'Tavallinen käyttäjä (voi vastata kokeisiin)',
+		},
+		1: {
+			level: 1,
+			description: 'Ylläpitäjä (voi luoda ja muokata kokeita, hallita käyttäjiä)',
+		},
+	};
+	
+	$scope.access_level_change = function()
 	{
-		$scope.data.user = data;
+		$scope.data.user.access_level = $scope.access_level.level;
+	}
+	
+	if(!$scope.id)
+	{
+		$scope.data.user = new UsersModel;
 		$scope.loaded = true;
 		
-		$breadcrumbs.segment('Muokataan käyttäjää');
-	});
+		$scope.access_level = $scope.access_levels[0];
+	}
+	else
+	{
+		UsersModel.get({id: $routeParams.id}, function(data)
+		{
+			$scope.data.user = data;
+			$scope.loaded = true;
+		
+			$scope.access_level = $scope.access_levels[$scope.data.user.access_level];
+		});
+	}
+	
+	$scope.submit = function(data)
+	{
+		$scope.processing = true;
+		
+		var do_submit = function()
+		{
+			$scope.save_success = false;
+			// $scope.data.errors = [];
+			
+			if($scope.id) // existing entry
+			{
+				$scope.data.user = UsersModel.update({id: $scope.id}, $scope.data.user, function(data, h)
+				{
+					$scope.processing = false;
+					$scope.data.errors = data.errors;
+					
+					if($scope.data.user.id == $rootScope.userData.user.id)
+					{
+						$rootScope.updateUserData();
+					}
+					
+					if(data.user_edited !== undefined)
+					{
+						$scope.save_success = true;
+					}
+				}, function(data)
+				{
+					popError(data.data);
+					$scope.processing = false;
+				});
+			}
+			else // new entry
+			{
+				$scope.data.user.$save(function(data, h)
+				{
+					$scope.processing = false;
+					$scope.data.errors = data.errors;
+					
+					if(data.user_created)
+					{
+						$location.path('/users/');
+					}
+				}, function(data)
+				{
+					popError(data.data);
+					$scope.processing = false;
+				});
+			}
+		}
+		
+		// Check authentication and show login form if not authenticated
+		$http.get('/ajax/auth')
+			.then(function success(response)
+			{
+				if(response.data.authenticated)
+				{
+					do_submit();
+				}
+				else
+				{
+					$rootScope.promptLogin(true, function()
+					{
+						do_submit();
+					});
+				}
+			});
+	}
 });
 
 // ----------------------------------------------------------------------------------------------------
@@ -659,9 +757,11 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 	{
 		$http.post('/ajax/archive/' + item.id + '/discard').then(function success(response)
 		{
-			if(response && response.data == true)
+			if(response && response.data.success == true)
 			{
+				//$scope.archive[$scope.archive.indexOf(item)].discarded = true;
 				item.discarded = 1;
+				$rootScope.update_archive_stats();
 			}
 		});
 	}
@@ -711,7 +811,7 @@ app.controller('NavbarController', function($rootScope, $scope, $window, $locati
 	setInterval(function()
 	{
 		$rootScope.update_archive_stats();
-	}, 15 * 60 * 1000);
+	}, 5 * 60 * 1000);
 	
 	$rootScope.update_archive_stats();
 });

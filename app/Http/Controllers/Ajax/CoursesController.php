@@ -86,7 +86,7 @@ class CoursesController extends Controller
 	{
 		$errors = [
 			'messages' => [],
-			'fieds' => [],
+			'fields' => [],
 		];
 		
 		$isNewEntry = !array_key_exists('id', $data);
