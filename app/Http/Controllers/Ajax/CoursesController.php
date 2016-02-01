@@ -53,11 +53,6 @@ class CoursesController extends Controller
 	{
 		$course = Course::with('tests', 'tests.questions')->findOrFail($id);
 		return $course;
-		
-		// return [
-		// 	'error' => true,
-		// 	'status' => 404,
-		// ];
 	}
 
 	/**
@@ -161,6 +156,23 @@ class CoursesController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		$course = Course::with('tests', 'tests.questions', 'tests.questions.answers')->findOrFail($id);
+			
+		foreach($course->tests as $test)
+		{
+			foreach($test->questions as $question)
+			{
+				foreach($question->answers as $answer)
+				{
+					$answer->delete();
+				}
+				
+				$question->delete();
+			}
+			
+			$test->delete();
+		}
+		
+		$course->delete();
 	}
 }

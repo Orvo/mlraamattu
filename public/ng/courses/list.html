@@ -69,9 +69,9 @@
 					<a href="#/courses/[[ course.id ]]/edit" class="btn btn-success btn-xs">
 						<span class="glyphicon glyphicon-edit"></span> Muokkaa
 					</a>
-					<a href="#/courses/delete/[[ course.id ]]" class="btn btn-danger btn-xs">
+					<button type="button" class="btn btn-danger btn-xs" ng-click="delete(course)">
 						<span class="glyphicon glyphicon-trash"></span> Poista
-					</a>
+					</button>
 				</td>
 			</tr>
 			<tr ng-hide="(courses | filter : searchFilter).length > 0">
@@ -88,4 +88,33 @@
 	<h3>
 		<img src="/img/ajax-loader.gif" alt=""> Ladataan...
 	</h3>
+</div>
+
+<div class="modal fade" id="modal-delete-confirmation">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Poiston varmistus</h4>
+			</div>
+			<div class="modal-body" style="text-align:center;font-size:120%">
+				<p>
+					Oletko varma, että haluat poistaa kurssin <b>"[[ modal_info.course.title ]]"</b>?
+				</p>
+				<p>
+					Toimintoa ei voi peruuttaa.
+				</p>
+			</div>
+			<div class="modal-footer">
+				<div ng-if="!processing">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Peruuta</button>
+					<button type="button" class="btn btn-danger" ng-click="confirmed_delete()">
+						<span class="glyphicon glyphicon-trash"></span> Poista kurssi
+					</button>
+				</div>
+				<div ng-if="processing">
+					<img src="/img/ajax-loader.gif" alt="" style="width: 36px">
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

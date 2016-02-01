@@ -80,6 +80,36 @@ app.controller('CoursesController', function($scope, $window, $location, $routeP
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Kurssit');
 	
+	$scope.modal_info = false;
+	
+	$scope.delete = function(course)
+	{
+		$scope.modal_info = {
+			course: course,
+		}
+		
+		$('#modal-delete-confirmation').modal('show');
+	}
+	
+	$scope.confirmed_delete = function()
+	{
+		if($scope.modal_info === false) return;
+		
+		CoursesModel.delete({id: $scope.modal_info.course.id});
+		
+		$scope.processing = true;
+		
+		CoursesModel.query(function(data)
+		{
+			$scope.courses = data;
+			$scope.processing = false;
+			
+			$('#modal-delete-confirmation').modal('hide');
+		
+			$scope.modal_info = false;
+		});
+	}
+	
 	$scope.loaded = false;
 	$scope.courses = CoursesModel.query(function(data)
 	{
@@ -91,22 +121,41 @@ app.controller('CoursesController', function($scope, $window, $location, $routeP
 	};
 });
 
-app.controller('CourseShowController', function($scope, $window, $location, $routeParams, $breadcrumbs, CoursesModel)
+app.controller('CourseShowController', function($scope, $window, $location, $routeParams, $http, $breadcrumbs, CoursesModel, TestsModel)
 {
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Kurssit', '#/courses/');
 	
 	$scope.id = $routeParams.id;
 	
-	$scope.isEditing = false;
-	$scope.startEditing = function()
+	$scope.modal_info = false;
+	
+	$scope.delete = function(test)
 	{
-		$scope.isEditing = true;
+		$scope.modal_info = {
+			test: test,
+		}
+		
+		$('#modal-delete-confirmation').modal('show');
 	}
 	
-	$scope.saveCourseInfo = function()
+	$scope.confirmed_delete = function()
 	{
-		$scope.isEditing = false;
+		if($scope.modal_info === false) return;
+		
+		TestsModel.delete({id: $scope.modal_info.test.id});
+		
+		$scope.processing = true;
+		
+		CoursesModel.get({id: $scope.id}, function(data)
+		{
+			$scope.course = data;
+			$scope.processing = false;
+			
+			$('#modal-delete-confirmation').modal('hide');
+		
+			$scope.modal_info = false;
+		});
 	}
 
 	CoursesModel.get({id: $scope.id}, function(data)
@@ -245,6 +294,10 @@ app.controller('UsersController', function($scope, $window, $location, $routePar
 {
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Käyttäjät');
+	
+	$scope.usersFilter = {
+		accessLevel: undefined,
+	};
 	
 	$scope.users = UsersModel.query(function(data)
 	{

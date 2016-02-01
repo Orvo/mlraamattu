@@ -39,6 +39,9 @@ app.factory('TestsModel', function($resource)
 		'update': {
 			method: 'PUT'
 		},
+		'delete': {
+			method: 'DELETE'
+		},
 	});
 });
 

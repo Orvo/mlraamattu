@@ -376,6 +376,18 @@ class TestsController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		$test = Test::with('questions', 'questions.answers')->findOrFail($id);
+		
+		foreach($test->questions as $question)
+		{
+			foreach($question->answers as $answer)
+			{
+				$answer->delete();
+			}
+			
+			$question->delete();
+		}
+		
+		$test->delete();
 	}
 }

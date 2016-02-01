@@ -49,14 +49,14 @@
 				<td style="min-width:160px;max-width:260px;">Kokeen otsikko</td>
 				<td>Kuvaus</td>
 				<td style="min-width:200px;">Kysymykset</td>
-				<td style="width:160px">Toiminnot</td>
+				<td style="width:180px">Toiminnot</td>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="(key, test) in course.tests | filter : searchFilter">
 				<td style="font-weight: bold; text-align: right; background:#fafafa">[[ key + 1 ]].</td>
 				<td class="block-level-links">
-					<a href="#/tests/[[ test.course.id ]]">
+					<a href="#/tests/[[ test.id ]]/edit">
 						[[ test.title ]]
 					</a>
 				</td>
@@ -68,12 +68,12 @@
 					<span ng-show="test.questions.length == 0">Ei kysymyksiä</span>
 				</td>
 				<td>
-					<a href="#/tests/[[ test.id ]]/edit" class="btn btn-primary btn-xs">
+					<a href="#/tests/[[ test.id ]]/edit" class="btn btn-primary btn-sm">
 						<span class="glyphicon glyphicon-edit"></span> Muokkaa
 					</a>
-					<a href="#/tests/[[ test.id ]]/delete" class="btn btn-danger btn-xs">
+					<button type="button" class="btn btn-danger btn-sm" ng-click="delete(test)">
 						<span class="glyphicon glyphicon-trash"></span> Poista
-					</a>
+					</button>
 				</td>
 			</tr>
 			<tr ng-hide="(course.tests | filter : searchFilter).length > 0">
@@ -98,4 +98,33 @@
 	<h3>
 		<img src="/img/ajax-loader.gif" alt=""> Ladataan...
 	</h3>
+</div>
+
+<div class="modal fade" id="modal-delete-confirmation">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Poiston varmistus</h4>
+			</div>
+			<div class="modal-body" style="text-align:center;font-size:120%">
+				<p>
+					Oletko varma, että haluat poistaa kokeen <b>"[[ modal_info.test.title ]]"</b>?
+				</p>
+				<p>
+					Toimintoa ei voi peruuttaa.
+				</p>
+			</div>
+			<div class="modal-footer">
+				<div ng-if="!processing">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Peruuta</button>
+					<button type="button" class="btn btn-danger" ng-click="confirmed_delete()">
+						<span class="glyphicon glyphicon-trash"></span> Poista koe
+					</button>
+				</div>
+				<div ng-if="processing">
+					<img src="/img/ajax-loader.gif" alt="" style="width: 36px">
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

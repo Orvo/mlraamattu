@@ -18,14 +18,25 @@
 				<span class="glyphicon glyphicon-plus"></span> Lisää uusi käyttäjä
 			</a>
 		</div>
-		<div class="list-actions">
+		<div>
 			<input type="text" ng-model="searchFilter" placeholder="Hae käyttäjiä" class="form-control search-filter">
-			<button type="button" class="btn btn-default" ng-click="searchFilter='ylläpitäjä'">
-				Hae ylläpitäjiä
-			</button>
-			<button type="button" class="btn btn-default" ng-click="searchFilter='käyttäjä'">
-				Hae käyttäjiä
-			</button>
+		</div>
+		<div class="user-toggles">
+			<div class="radio">
+				<label class="btn" ng-class="{'btn-warning': usersFilter.access_level == undefined, 'btn-default': usersFilter.access_level != undefined}">
+					<input type="radio" ng-model="usersFilter.access_level" ng-value="undefined"> Näytä kaikki
+				</label>
+			</div>
+			<div class="radio">
+				<label class="btn" ng-class="{'btn-warning': usersFilter.access_level == 0, 'btn-default': usersFilter.access_level != 0}">
+					<input type="radio" ng-model="usersFilter.access_level" ng-value="0"> Näytä käyttäjät
+				</label>
+			</div>
+			<div class="radio">
+				<label class="btn" ng-class="{'btn-warning': usersFilter.access_level === 1, 'btn-default': usersFilter.access_level !== 1}">
+					<input type="radio" ng-model="usersFilter.access_level" ng-value="1"> Näytä ylläpitäjät
+				</label>
+			</div>
 		</div>
 	</div>
 	<table class="table table-hover">
@@ -38,7 +49,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="user in users | filter : searchFilter">
+			<tr ng-repeat="user in users | filter : searchFilter | filter : usersFilter">
 				<td style="font-weight: bold; background:#fafafa">[[ user.id ]]</td>
 				<td>
 					<div class="pull-right">
@@ -64,7 +75,7 @@
 					</a>
 				</td>
 			</tr>
-			<tr ng-hide="(users | filter : searchFilter).length > 0">
+			<tr ng-hide="(users | filter : searchFilter | filter : usersFilter).length > 0">
 				<td colspan="5" style="text-align: center;">
 					<b>Ei tuloksia.</b>
 				</td>
