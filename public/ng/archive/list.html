@@ -5,6 +5,9 @@
 </div>
 <div id="content-main">
 	<h1>Koesuoritukset</h1>
+	<div class="alert-box success" ng-show="save_success">
+		<h4><span class="glyphicon glyphicon-ok"></span> Palautteen lähetys onnistui!</h4>
+	</div>
 	<div class="actions-row">
 		<div>
 			<input type="text" ng-model="searchFilter" placeholder="Hae koesuorituksia" class="form-control search-filter">
@@ -62,7 +65,7 @@
 							[[ item.test.title ]]
 						</a>
 						<div class="labels pull-right">
-							<span class="label label-primary" ng-if="item.replied_to">Vastattu</span>
+							<span class="label label-success" ng-if="item.replied_to">Vastattu</span>
 							<span class="label label-warning" ng-if="item.discarded">Hylätty</span>
 						</div>
 					</div>
@@ -88,12 +91,14 @@
 					</div>
 				</td>
 				<td class="list-actions">
-					<a href="#/archive/[[ item.id ]]/reply" class="btn btn-success btn-sm" ng-disabled="!item.test || item.replied_to">
-						<span class="glyphicon glyphicon-ok"></span> Vastaa
-					</a>
-					<button type="button" class="btn btn-warning btn-sm" ng-click="discard(item)">
-						<span class="glyphicon glyphicon-remove"></span> Hylkää
-					</button>
+					<div ng-if="!item.replied_to">
+						<a href="#/archive/[[ item.id ]]/reply" class="btn btn-success btn-sm">
+							<span class="glyphicon glyphicon-ok"></span> Vastaa
+						</a>
+						<button type="button" class="btn btn-warning btn-sm" ng-click="discard(item)" ng-if="!item.discarded">
+							<span class="glyphicon glyphicon-remove"></span> Hylkää
+						</button>
+					</div>
 				</td>
 			</tr>
 			<tr ng-if="(archive | filter : searchFilter | filter : archiveFilter).length == 0">

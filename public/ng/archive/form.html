@@ -1,4 +1,4 @@
-<form ng-submit="submit(data)" ng-if="loaded">
+<form ng-submit="submit()" ng-if="loaded">
 	<div id="content-sidebar" class="fixed">
 		<div class="sidebar-actions">
 			<div class="form-group">
@@ -11,24 +11,26 @@
 			<div class="form-group">
 				<div ng-hide="processing">
 					<button type="submit" class="btn btn-primary btn-block btn-lg">
-						<span class="glyphicon glyphicon-floppy-disk"></span> Tallenna
+						<span class="glyphicon glyphicon-send"></span> Lähetä palautetta
 					</button>
 				</div>
 				<div ng-show="processing" style="text-align: center">
 					<img src="/img/ajax-loader.gif" alt="">
 				</div>
 			</div>
+			<div class="form-group" ng-if="save_success === false">
+				<div class="alert alert-danger">
+					Tallennus epäonnistui! Yritä uudelleen.
+				</div>
+			</div>
 		</div>
 		
 		<div class="sidebar-help">
 			<p>
-				Uuden kokeen luonti!
+				Koepalautteen antaminen auttaa kokeiden suorittajia oppimaan paremmin. Vaikka järjestelmä tarkistaakin useimmat koevastaukset automaattisesti, kirjallisen vastauksen tarkistus ja palautteen anto tulee suorittaa koepalautteen antamisen kautta.
 			</p>
 			<p>
-				Kysymyksiin tehdyt muutokset tulevat voimaan vasta kun hyväksyt ne painamalla "Valmis" painiketta lomakkeen alareunassa. Jos haluat hylätä tekemäsi muutokset paina "Peruuta".
-			</p>
-			<p>
-				Kysymysten poistaminen onnistuu painamalla punaista "Poista" painiketta ja hyväksymällä annetun varoituksen. Kysymysten lopullinen poisto tapahtuu tallennuksen yhteydessä, jonka jälkeen toiminto on peruuttamaton.
+				Palautteen lähetyksen yhteydessä kokeen suorittajalle lähetetään sähköpostihuomautus annetusta palautteesta.
 			</p>
 		</div>
 	</div>
@@ -36,21 +38,14 @@
 		<h1>
 			Koepalautteen lähetys / <b>[[ data.user.name ]] - [[ data.test.title ]]</b></span>
 		</h1>
-		<div class="alert-box success" ng-show="save_success">
-			<h4><span class="glyphicon glyphicon-ok"></span> Muutokset tallennettu!</h4>
-		</div>
-		<div class="alert-box errors" ng-show="data.errors.messages.length > 0">
-			<img src="/img/ajax-loader-error.gif" alt="" class="pull-right" ng-show="processing" style="height:40px">
-			<h4>Tallennus epäonnistui!</h4>
-			<ul>
-				<li ng-repeat="error in data.errors.messages">[[ error ]]</li>
-			</ul>
-		</div>
 		<h3 class="test-result-box">
 			Kokeen tulos:
-			<span ng-if="data.archive.all_correct" style="color:#47B11D;">Kaikki oikein</span>
-			<span ng-if="!data.archive.all_correct && data.archive.num_correct > 0" style="color:#BCA400;">Osittain oikein</span>
-			<span ng-if="!data.archive.all_correct && data.archive.num_correct == 0" style="color:#D52C16;">Kaikki väärin</span>
+			<span ng-if="data.archive.all_correct" style="color:#379315;">Kaikki oikein</span>
+			<span ng-if="!data.archive.all_correct && data.archive.num_correct > 0" style="color:#E19C28;">Osittain oikein</span>
+			<span ng-if="!data.archive.all_correct && data.archive.num_correct == 0" style="color:#A70014;">Kaikki väärin</span>
+			<span>
+				[[ data.archive.num_correct ]] / [[ data.archive.total ]]
+			</span>
 		</h3>
 		<fieldset>
 			<legend>Kysymyskohtainen palaute</legend>
@@ -59,8 +54,14 @@
 					<div class="info">
 						<div class="title-row clearfix">
 							<div class="right-aligned">
-								<div class="type">
-									[[ translate_type(question.type) ]]
+								<div class="result-badge correct" ng-if="data.validation.validation[question.id].correct">
+									Oikein
+								</div>
+								<div class="result-badge partially-correct" ng-if="!data.validation.validation[question.id].correct && data.validation.validation[question.id].partial > 0">
+									Osittain oikein
+								</div>
+								<div class="result-badge incorrect" ng-if="!data.validation.validation[question.id].correct && (data.validation.validation[question.id].partial === 0 || data.validation.validation[question.id].partial === undefined)">
+									Väärin
 								</div>
 							</div>
 							<div class="left-aligned">
@@ -75,41 +76,44 @@
 						</div>
 					</div>
 					<div class="edit">
-						<div class="test-answer">
-							<span>Annettu vastaus:</span>
-							<div ng-if="question.type == 'MULTI' || question.type == 'CHOICE'">
-								<ul>
-									<li ng-repeat="answer in data.archive.given_answers[question.id]">
-										[[ data.indexed_answers[answer].text ]]
-										<span ng-if="!data.indexed_answers[answer].is_correct" style="color:#A80505">
-											<span class="glyphicon glyphicon-remove"></span>
-										</span>
-									</li>
-								</ul>
+						<div class="answers-wrapper clearfix">
+							<div class="col-lg-6 test-answer">
+								<span>Annettu vastaus:</span>
+								<div ng-if="question.type == 'MULTI' || question.type == 'CHOICE'">
+									<ul>
+										<li ng-repeat="answer in data.archive.given_answers[question.id]">
+											[[ data.indexed_answers[answer].text ]]
+											<span ng-if="!data.indexed_answers[answer].is_correct" style="color:#A80505">
+												<span class="glyphicon glyphicon-remove"></span>
+											</span>
+										</li>
+									</ul>
+								</div>
+								<div ng-if="question.type == 'MULTITEXT'">
+									<ul>
+										<li ng-repeat="answer in data.archive.given_answers[question.id]">
+											[[ answer ]]
+										</li>
+									</ul>
+								</div>
+								<div>
+									[[ data.archive.given_answers[question.id] ]]
+								</div>
 							</div>
-							<div ng-if="question.type == 'MULTITEXT'">
-								<ul>
-									<li ng-repeat="answer in data.archive.given_answers[question.id]">
-										[[ answer ]]
-									</li>
-								</ul>
-							</div>
-							<div>
-								[[ data.archive.given_answers[question.id] ]]
+							<div class="col-lg-6 test-answer" ng-if="question.type != 'TEXTAREA'">
+								<span>Oikea vastaus:</span>
+								<div>
+									<ul>
+										<li ng-repeat="answer in question.answers | filter : {is_correct:1}">
+											[[ answer.text ]]
+										</li>
+									</ul>
+								</div>
 							</div>
 						</div>
-						<div class="test-answer" ng-if="question.type != 'TEXTAREA'">
-							<span>Oikea vastaus:</span>
-							<div>
-								<ul>
-									<li ng-repeat="answer in question.answers | filter : {is_correct:1}">
-										[[ answer.text ]]
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="form-group">
-							<textarea class="form-control vertical-textarea" ng-model="feedback[question.id]" placeholder="Kirjoita palautetta tai jätä tyhjäksi"></textarea>
+						<div class="form-group feedback-field">
+							<label class="control-label">Vastauspalaute:</label>
+							<textarea class="form-control" elastic ng-model="feedback[question.id]" placeholder="Kirjoita palautetta tai jätä tyhjäksi"></textarea>
 						</div>
 						
 						<div class="clearfix"></div>

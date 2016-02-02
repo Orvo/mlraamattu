@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use \Validator;
+
 use \Auth;
+use \Hash;
 
 class AuthController extends Controller
 {
@@ -74,7 +77,7 @@ class AuthController extends Controller
 			];
 		}
 		
-		$validation = \Validator::make($request->all(), [
+		$validation = Validator::make($request->all(), [
 			'email' => 'required',
 			'password' => 'required',
 		], [
@@ -123,4 +126,64 @@ class AuthController extends Controller
 		return redirect('/');
 	}
 
+    public function edit()
+    {
+    	$user = Auth::user();
+    	
+    	return view('auth.edit', [
+    		'user' => [
+	    		'name' => $user->name,
+	    		'email' => $user->email,
+    		],
+    	]);
+    }
+    
+    public function save(Request $request)
+    {
+    	$user = Auth::user();
+    	
+		$validation = Validator::make($request->all(), [
+			'name'				=> 'required',
+			'email'				=> 'required|email|unique:users,email,' . $user->id,
+			'current_password'	=> 'required_with:new_password|match_password',
+			'new_password'		=> 'required_with:current_password|min:8|confirmed'
+		],
+		[
+			'name.required'						=> 'Nimi on pakollinen.',
+			'email.required'					=> 'Sähköpostiosoite on pakollinen.',
+			'email.email'						=> 'Annettu sähköpostiosoite ei ole pätevä.',
+			'email.unique'						=> 'Sähköpostiosoite on jo käytössä.',
+			'current_password.match_password'	=> 'Nykyinen salasana ei täsmää.',
+			'current_password.required_with'	=> 'Syötä nykyinen salasana.',
+			'new_password.required_with'		=> 'Syötä uusi salasana.',
+			'new_password.min'					=> 'Uuden salasanan pitää olla ainakin :min merkkiä pitkä.',
+			'new_password.confirmed'			=> 'Uudet salasanat eivät täsmää.',
+		]);
+		
+		if(!$validation->passes())
+		{
+	    	return view('auth.edit', [
+	    		'user' => $request->only('name', 'email'),
+	    	])
+	    	->withErrors($validation);
+		}
+		else
+		{
+			$user->name = $request->get('name');
+			$user->email = $request->get('email');
+			
+			if($request->has('new_password'))
+			{
+				$user->password = Hash::make($request->get('new_password'));
+			}
+			
+			$user->save();
+			
+	    	return view('auth.edit', [
+	    		'user' => $request->only('name', 'email'),
+	    		'success' => true,
+	    	]);
+		}
+    }
+    
 }

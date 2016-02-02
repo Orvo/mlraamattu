@@ -167,7 +167,7 @@
 									<?php if(@$validation && @$validation[$question->id]['correct_answers']): ?>
 										<div class="correct-answers">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>
-											<p>Oikeat vastaukset:</p>
+											<h4>Oikeat vastaukset:</h4>
 											<ul>
 												<?php foreach($validation[$question->id]['correct_answers'] as $answer): ?>
 													<li>{{ $answer['text'] }}</li>
@@ -203,7 +203,7 @@
 									<?php if(@$validation && @$validation[$question->id]['correct_answers']): ?>
 										<div class="correct-answers">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>
-											<p>Oikea vastaus:</p>
+											<h4>Oikea vastaus:</h4>
 											<ul>
 												<li>{{ $validation[$question->id]['correct_answers']['text'] }}</li>
 											</ul>
@@ -238,7 +238,7 @@
 									@if(@$validation && @$validation[$question->id]['correct_answers'])
 										<div class="correct-answers">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>
-											<p>Oikea vastaus:</p>
+											<h4>Oikea vastaus:</h4>
 											<ul>
 												<li>{{ $validation[$question->id]['correct_answers']['text'] }}</li>
 											</ul>
@@ -278,7 +278,7 @@
 										<?php if(@$validation && @$validation[$question->id]['correct_answers']): ?>
 											<div class="correct-answers">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>
-												<p>Oikeat vastaukset:</p>
+												<h4>Oikeat vastaukset:</h4>
 												<ul>
 													<?php foreach($validation[$question->id]['correct_answers'] as $answer): ?>
 														<li>{{ $answer['text'] }}</li>
@@ -300,7 +300,7 @@
 									<?php if(@$validation): ?>
 										<div class="correct-answers">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>
-											<p>Oikea vastaus:</p>
+											<h4>Oikea vastaus:</h4>
 											<ul>
 												<li>Syöttämäsi vastaus tarkistetaan erikseen, mutta vastauksen ei tule olla tyhjä.</li>
 											</ul>
@@ -310,6 +310,15 @@
 									break;
 								?>
 							<?php endswitch; ?>
+							@if(@$feedback[$question->id])
+								<div class="answer-feedback">
+									<span class="glyphicon glyphicon-ok"></span>
+									<h4>Vastauspalaute:</h4>
+									<p>
+										{!! nl2br($feedback[$question->id]) !!}
+									</p>
+								</div>
+							@endif
 						</div>
 					</div>
 

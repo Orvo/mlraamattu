@@ -806,6 +806,9 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 		discarded: 0,	
 	};
 	
+	$scope.save_success = $rootScope.archiveFeedbackSent;
+	$rootScope.archiveFeedbackSent = false;
+	
 	$scope.discard = function(item)
 	{
 		$http.post('/ajax/archive/' + item.id + '/discard').then(function success(response)
@@ -830,8 +833,8 @@ app.controller('ArchiveFormController', function($rootScope, $scope, $window, $l
 		if(response)
 		{
 			$scope.data = {
-				//archive: response.data,
 				archive: response.data.data,
+				validation: response.data.validation,
 				user: response.data.user,
 				test: response.data.test,
 				course: response.data.test.course,
@@ -840,11 +843,37 @@ app.controller('ArchiveFormController', function($rootScope, $scope, $window, $l
 			
 			$breadcrumbs.segment('Koepalautteen lähetys');
 			
-			$scope.feedback = {};
+			$scope.feedback = $scope.data.archive.feedback;
+			console.log($scope.feedback);
 			
 			$scope.loaded = true;
 		}
-	})
+	});
+	
+	$scope.submit = function()
+	{
+		$scope.processing = true;
+		
+		$http.put('/ajax/archive/' + $routeParams.id, {
+			feedback: $scope.feedback,
+		}).then(function success(response)
+		{
+			$scope.processing = false;
+			
+			if(response.data.success == 1)
+			{
+				$rootScope.archiveFeedbackSent = true;
+				$location.path('/archive/');
+			}
+			else if(response.data.success == 1)
+			{
+				$scope.save_success = false;
+			}
+		}, function error(response)
+		{
+			$scope.save_success = false;
+		});
+	}
 });
 
 

@@ -630,13 +630,6 @@ div.question div.correct-answers span.glyphicon
 	color: #096FA4;
 }
 
-div.question div.correct-answers p
-{
-	font-weight: bold;
-	margin: 0 0 0 45px;
-	padding: 0;
-}
-
 div.question div.correct-answers ul
 {
 	padding: 0 0 0 45px;
@@ -658,6 +651,43 @@ div.question div.correct-answers li:after
 div.question div.correct-answers li:last-child:after
 {
 	content: '';
+}
+
+div.question div.answer-feedback
+{
+	background: #fff;
+	border: 1px solid #57B10C;
+	box-shadow: inset 0 1px 1px #B2E381;
+	padding: 7px 12px 9px 12px;
+	margin-top: 10px;
+	border-radius: 4px;
+	line-height: 1.3;
+}
+
+div.question div.answer-feedback span.glyphicon
+{
+	float: left;
+	display: block;
+	font-size: 35px;
+	color: #43820D;
+}
+
+div.question div.correct-answers h4,
+div.question div.answer-feedback h4
+{
+	font-family: 'Source Sans Pro';
+	font-weight: bold;
+	margin: 0 0 0 45px;
+	padding: 2px 0 3px 0;
+	font-size: 11pt;
+}
+
+div.question div.correct-answers p,
+div.question div.answer-feedback p
+{
+	margin: 0 0 0 45px;
+	padding: 0;
+	font-size: 10pt;
 }
 
 div.question div.checkbox,

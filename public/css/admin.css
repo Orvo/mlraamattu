@@ -1116,9 +1116,16 @@ tbody > tr.missing-test > td:first-child
 {
 	font-size: 11pt;
 	padding: 1em;
-	border: 1px solid #eee;
 	margin-bottom: 1em;
 	border-radius: 3px;
+	height: 100% !important;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.test-feedback-list .test-answer:first-child
+{
+	border-right: 1px solid #eee;
 }
 
 .test-feedback-list .test-answer > span
@@ -1143,6 +1150,45 @@ tbody > tr.missing-test > td:first-child
 	margin: 0;
 	padding: 0;
 	list-style: disc;
+}
+
+div.result-badge
+{
+	background: #fff;
+	font-weight: bold;
+	font-size: 15pt;
+	padding: 4px 14px 2px 14px;
+	border-radius: 4px;
+	box-shadow: 0 2px 1px rgba(0, 0, 0, 0.15)
+}
+
+div.result-badge.correct
+{
+	color: #379315;
+}
+
+div.result-badge.partially-correct
+{
+	color: #E19C28;
+}
+
+div.result-badge.incorrect
+{
+	color: #A70014;
+}
+
+.test-feedback-list .feedback-field
+{
+	padding: 0 1em;
+}
+
+.test-feedback-list .feedback-field textarea
+{
+	max-width: 800px;
+	min-height: 12em;
+	max-height: 35em;
+	resize: none !important;
+	line-height: 1.4;
 }
 
 /*************************************************/

@@ -14,9 +14,13 @@
 		<div id="login-status">
 			@if(Auth::check())
 				Terve, {{ Auth::user()->name }}!
-				@if(Auth::user()->access_level == 1)
+				@if(Auth::user()->isAdmin())
+					<a href="/admin#/users/{{ Auth::user()->id }}/edit" target="_blank">Muokkaa tietoja</a>
 					<a href="/admin">Ylläpito</a>
+				@else
+					<a href="/auth/edit">Muokkaa tietoja</a>
 				@endif
+					<a href="/auth/edit">Muokkaa tietojas</a>
 				<a href="/auth/logout">Kirjaudu ulos!</a>
 			@else
 				<a href="/auth/login">Kirjaudu sisään</a>
@@ -46,8 +50,6 @@
 			</div>
 		</div>
 		
-		
-
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<script src="/js/main.js"></script>
 	</body>
