@@ -71,6 +71,7 @@
 					<div class="col-xs-6">
 						<select class="form-control" ng-model="access_level"
 							ng-change="access_level_change()"
+							ng-disabled="userData.user.id == data.user.id"
 							ng-options="level as level.description for level in access_levels track by level.level">
 						</select>
 					</div>

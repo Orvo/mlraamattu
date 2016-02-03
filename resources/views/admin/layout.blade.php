@@ -43,7 +43,6 @@
 								<b>[[ userData.user.name ]]</b> <span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Action</a></li>
 								<li>
 									<a href="#/users/[[ userData.user.id ]]/edit">Muokkaa tietoja</a>
 								</li>
