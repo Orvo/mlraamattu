@@ -45,6 +45,10 @@
 				</button>
 			</div>
 		</div>
+		
+		<div class="form-group pull-right">
+			<a href="/auth/reset">Unohtunut salasana?</a>
+		</div>
 	
 	{!! Form::close() !!}
 

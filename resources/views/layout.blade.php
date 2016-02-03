@@ -20,7 +20,6 @@
 				@else
 					<a href="/auth/edit">Muokkaa tietoja</a>
 				@endif
-					<a href="/auth/edit">Muokkaa tietojas</a>
 				<a href="/auth/logout">Kirjaudu ulos!</a>
 			@else
 				<a href="/auth/login">Kirjaudu sisään</a>

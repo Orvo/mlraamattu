@@ -186,4 +186,36 @@ class AuthController extends Controller
 		}
     }
     
+    public function reset()
+    {
+		if(Auth::check()) return redirect('/');
+		
+    	return view('auth.reset');
+    }
+    
+    public function send_reset(Request $request)
+    {
+		if(Auth::check()) return redirect('/');
+		
+		$validation = Validator::make($request->all(), [
+			'email'				=> 'required|email',
+		],
+		[
+			'email.required'			=> 'Anna sähköpostiosoite.',
+			'email.email'				=> 'Annettu sähköpostiosoite ei ole pätevä.',
+			'email.email_exists'		=> 'Annettu sähköpostiosoite ei ole pätevä.',
+		]);
+		
+		if(!$validation->passes())
+		{
+			return view('auth.reset',
+				[
+					'email' => $request->get('email'),
+				])
+				->withErrors($validation);
+		}
+		
+    	return view('auth.reset_sent');
+    }
+    
 }
