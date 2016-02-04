@@ -180,15 +180,27 @@ div.actions-row
 	padding: 12px 0;
 }
 
-div.actions-row input.search-filter
+div.actions-row input.search-filter,
+div.actions-row select.form-control
 {
 	width: 220px;
-	transition: width 250ms ease-out;
 }
 
-div.actions-row input.search-filter.focused
+div.actions-row .archive-select-filters
 {
-	width: 300px;
+	clear: left;
+}
+
+div.actions-row .archive-select-filters > div
+{
+	display: inline-block;
+}
+
+div.actions-row .archive-select-filters > div select,
+div.actions-row .archive-select-filters > div button
+{
+	display: inline-block;
+	margin-left: 1em;
 }
 
 div.actions-row > div
@@ -983,7 +995,7 @@ td.list-actions
 
 td.list-actions .btn
 {
-	width: 80px;
+	min-width: 80px;
 }
 
 tr.missing-test

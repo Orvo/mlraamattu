@@ -788,23 +788,98 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 // ----------------------------------------------------------------------------------------------------
 // Archive controllers
 
-app.controller('ArchiveController', function($rootScope, $scope, $window, $location, $routeParams, $http, $breadcrumbs)
+app.controller('ArchiveController', function($rootScope, $scope, $window, $location, $routeParams, $http, $breadcrumbs, $filter, TestsModel, CoursesModel)
 {
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Koesuoritukset');
+	
+	$scope.tests = [{ id: undefined, title: 'Rajaa kokeen mukaan', }];
+ 	$scope.courses = [{ id: undefined, title: 'Rajaa kurssin mukaan', }];
 	
 	$http.get('/ajax/archive').then(function success(response)
 	{
 		if(response)
 		{
 			$scope.archive = response.data;
+			
+			angular.forEach($scope.archive, function(item, key)
+			{
+				item.created_at = convertToDate(item.created_at);
+				
+				console.log(item.test);
+				console.log(item.test.course);
+				
+				if($scope.tests.indexOf(item.test) === -1)
+				{
+					$scope.tests.push(item.test);
+				}
+				
+				if($scope.courses.indexOf(item.test.course) === -1)
+				{
+					$scope.courses.push(item.test.course);
+				}
+			});
+			
+			console.log($scope.tests);
 		}
 	});
 	
 	$scope.archiveFilter = {
 		replied_to: 0,
-		discarded: 0,	
+		discarded: 0,
 	};
+	
+	$scope.reset_select_filter = function()
+	{
+		$scope.select_filters = {
+			test: undefined,
+			course: undefined,
+		};
+		
+		$scope.archiveFilter.course = undefined;
+		$scope.archiveFilter.test = undefined;
+	}
+	
+	/*$scope.reset_select_filter();
+	
+	$scope.tests = TestsModel.query();
+	CoursesModel.query(function(data)
+	{
+		$scope.courses = $filter('filter')(data, function(value)
+		{
+			console.log(value);
+			return value.tests.length > 0;
+		});
+	});*/
+	
+	
+	
+	$scope.course_filter_changed = function()
+	{
+		$scope.archiveFilter.course = {
+			//id: $scope.select_filters.course.id,
+			title: $scope.select_filters.course.title,
+		};
+		
+		//$scope.select_tests_filter = $scope.archiveFilter.course;
+		
+		$scope.select_filters.test = undefined;
+		$scope.archiveFilter.test = undefined;
+	}
+	
+	$scope.test_filter_changed = function()
+	{
+		$scope.archiveFilter.test = {
+			//id: $scope.select_filters.test.id,
+			title: $scope.select_filters.test.title,
+		};
+		
+		$scope.select_filters.course = $scope.select_filters.test.course;
+		$scope.archiveFilter.course = {
+			//id: $scope.select_filters.test.course.id,
+			title: $scope.select_filters.test.course.title,
+		};
+	}
 	
 	$scope.save_success = $rootScope.archiveFeedbackSent;
 	$rootScope.archiveFeedbackSent = false;
@@ -872,6 +947,10 @@ app.controller('ArchiveFormController', function($rootScope, $scope, $window, $l
 		}, function error(response)
 		{
 			$scope.save_success = false;
+			$scope.error_response = response;
+			console.log(response);
+			
+			$scope.processing = false;
 		});
 	}
 });

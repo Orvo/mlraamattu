@@ -102,18 +102,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function()
 	});
 });
 
-// Route::get('password/email', 'Auth\PasswordController@getEmail');
-// Route::post('password/email', 'Auth\PasswordController@postEmail');
-
 Route::group(['prefix' => 'auth'], function()
 {
 	Route::get('login', 'AuthController@index');
 	Route::post('login', 'AuthController@login');
 	Route::get('logout', 'AuthController@logout');
-	
-	// Route::get('reset', 'AuthController@reset');
-	// Route::post('reset', 'AuthController@send_reset');
-	// Route::get('reset/{token}', 'AuthController@check_reset');
 	
 	Route::get('reset/{token}', 'Auth\PasswordController@getReset');
 	Route::post('reset/done', 	'Auth\PasswordController@postReset');

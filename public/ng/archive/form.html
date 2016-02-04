@@ -20,6 +20,9 @@
 			</div>
 			<div class="form-group" ng-if="save_success === false">
 				<div class="alert alert-danger">
+					<p>
+						<b>[[ error_response.status ]]</b> [[ error_response.statusText ]]
+					</p>
 					Tallennus epäonnistui! Yritä uudelleen.
 				</div>
 			</div>

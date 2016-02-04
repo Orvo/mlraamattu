@@ -41,16 +41,42 @@
 				</label>
 			</div>
 		</div>
+		<div class="archive-select-filters">
+			<label>Rajaa suorituksia</label>
+			<div>
+				<select class="form-control"
+					ng-model="select_filters.course"
+					ng-change="course_filter_changed()"
+					ng-options="course as course.title for course in courses track by course.title">
+					<option ng-value="undefined">Rajaa kurssin mukaan</option>
+				</select>
+				<select class="form-control"
+					ng-model="archiveFilter.test"
+					ytchange="test_filter_changed()"
+					ng-options="test as test.title for test in tests">
+					<option ng-value="undefined">Rajaa kokeen mukaan</option>
+				</select>
+				<button type="button" class="btn btn-primary"
+					ng-if="select_filters.course !== undefined || select_filters.test !== undefined"
+					ng-click="reset_select_filter()">
+					<span class="glyphicon glyphicon-remove-sign"></span> Nollaa rajaus
+				</button>
+			</div>
+			[[ select_filters.test ]]
+			<hr>
+			[[ select_filters.course ]]
+		</div>
 	</div>
 	<table class="table table-hover">
 		<thead>
 			<tr>
 				<td style="width:40px;"></td>
-				<td style="width:180px">Kokeen suorittaja</td>
-				<td style="min-width:200px">Koe</td>
+				<td style="width:170px">Kokeen suorittaja</td>
+				<td style="width:180px">Suoritusaika</td>
+				<td style="min-width:150px">Koe</td>
 				<td style="width:24%">Kurssi</td>
 				<td style="width:20%">Tulos</td>
-				<td class="list-actions" style="width:200px">Toiminnot</td>
+				<td class="list-actions" style="width:180px">Toiminnot</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -58,6 +84,9 @@
 				<td style="font-weight: bold;text-align: right;">[[ key + 1 ]].</td>
 				<td>
 					[[ item.user.name ]]
+				</td>
+				<td>
+					[[ item.created_at | date:  "dd.MM.yyyy 'klo' HH:mm" ]]
 				</td>
 				<td>
 					<div ng-if="item.test">
@@ -96,7 +125,7 @@
 							<span class="glyphicon glyphicon-ok"></span> Vastaa
 						</a>
 						<button type="button" class="btn btn-warning btn-sm" ng-click="discard(item)" ng-if="!item.discarded">
-							<span class="glyphicon glyphicon-remove"></span> Hylkää
+							<span class="glyphicon glyphicon-remove"></span> Kuittaa
 						</button>
 					</div>
 				</td>

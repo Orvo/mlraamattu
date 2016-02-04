@@ -10,13 +10,17 @@ use App\Http\Controllers\Controller;
 use App\Archive;
 
 use App\Repositories\TestValidator;
+use Mail;
 
 class ArchiveController extends Controller
 {
 	
 	public function index()
 	{
-		$archive = Archive::with('user', 'test', 'test.course')->has('test')->has('user')->get();
+		$archive = Archive::with('user', 'test', 'test.course')
+			->has('test')->has('user')
+			->orderBy('created_at', 'DESC')
+			->get();
 		
 		foreach($archive as &$row)
 		{
@@ -56,7 +60,8 @@ class ArchiveController extends Controller
 	
 	function show($id, TestValidator $testvalidator)
 	{
-		$archive = Archive::with('user', 'test', 'test.questions', 'test.questions.answers', 'test.course')->where('id', $id)->firstOrFail();
+		$archive = Archive::with('user', 'test', 'test.questions', 'test.questions.answers', 'test.course')
+			->where('id', $id)->firstOrFail();
 		
 		if($archive)
 		{
@@ -86,13 +91,15 @@ class ArchiveController extends Controller
 		return $archive;
 	}
 	
-	function store($id, Request $request)
+	function store($id, Request $request, TestValidator $testvalidator)
 	{
-		$archive = Archive::findOrFail($id);
+		$archive = Archive::with('user', 'test', 'test.questions', 'test.course')
+			->has('user')->has('test')
+			->findOrFail($id);
 		
 		if($archive)
 		{
-			$archive->data = json_decode($archive->data);
+			$archive->data = json_decode($archive->data, true);
 			
 			$feedback = $request->get('feedback');
 			foreach($feedback as &$item)
@@ -100,10 +107,31 @@ class ArchiveController extends Controller
 				$item = htmlspecialchars(trim($item));
 			}
 			
-			$archive->data->feedback = $feedback;
+			if($archive->replied_to == 0)
+			{
+				$validation = $testvalidator->WithAnswers($archive->test, $archive->data['given_answers']);
+				
+				$data = [
+					'user' 			=> $archive->user,
+					'test' 			=> $archive->test,
+					'feedback'		=> $feedback,
+					'validation'	=> $validation,
+				];
+				
+				return \View::make('email.feedback_notification', $data);
+				
+				// Email notification
+				/*Mail::send('email.feedback_notification', $data, function($m) use ($archive)
+				{
+					$m->to($archive->user->email, $archive->user->name)->subject('Koepalautetta Media7 raamattuopistolta');
+				});*/
+			}
+			
+			$archive->data['feedback'] = $feedback;
 			$archive->data = json_encode($archive->data);
 			
 			$archive->replied_to = 1;
+			$archive->discarded = 0;
 			
 			$archive->save();
 			
