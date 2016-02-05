@@ -793,8 +793,8 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Koesuoritukset');
 	
-	$scope.tests = [{ id: undefined, title: 'Rajaa kokeen mukaan', }];
- 	$scope.courses = [{ id: undefined, title: 'Rajaa kurssin mukaan', }];
+	$scope.tests = { 0: { id: undefined, title: 'Rajaa kokeen mukaan', }};
+ 	$scope.courses = { 0: { id: undefined, title: 'Rajaa kurssin mukaan', }};
 	
 	$http.get('/ajax/archive').then(function success(response)
 	{
@@ -806,17 +806,20 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 			{
 				item.created_at = convertToDate(item.created_at);
 				
-				console.log(item.test);
-				console.log(item.test.course);
+				item.test_id = parseInt(item.test.id);
+				item.course_id = parseInt(item.test.course.id);
 				
-				if($scope.tests.indexOf(item.test) === -1)
+				item.replied_to = parseInt(item.replied_to);
+				item.discarded = parseInt(item.discarded);
+				
+				if($scope.tests[item.test.id] === undefined)
 				{
-					$scope.tests.push(item.test);
+					$scope.tests[item.test.id] = item.test;
 				}
 				
-				if($scope.courses.indexOf(item.test.course) === -1)
+				if($scope.courses[item.test.course.id] === undefined)
 				{
-					$scope.courses.push(item.test.course);
+					$scope.courses[item.test.course.id] = item.test.course;
 				}
 			});
 			
@@ -832,53 +835,38 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 	$scope.reset_select_filter = function()
 	{
 		$scope.select_filters = {
-			test: undefined,
-			course: undefined,
+			test: $scope.tests[0],
+			course: $scope.courses[0],
 		};
 		
-		$scope.archiveFilter.course = undefined;
-		$scope.archiveFilter.test = undefined;
+		$scope.archiveFilter.course_id = undefined;
+		$scope.archiveFilter.test_id = undefined;
 	}
 	
-	/*$scope.reset_select_filter();
-	
-	$scope.tests = TestsModel.query();
-	CoursesModel.query(function(data)
-	{
-		$scope.courses = $filter('filter')(data, function(value)
-		{
-			console.log(value);
-			return value.tests.length > 0;
-		});
-	});*/
-	
-	
+	$scope.reset_select_filter();
 	
 	$scope.course_filter_changed = function()
 	{
-		$scope.archiveFilter.course = {
-			//id: $scope.select_filters.course.id,
-			title: $scope.select_filters.course.title,
-		};
+		$scope.archiveFilter.course_id = $scope.select_filters.course.id;
 		
-		//$scope.select_tests_filter = $scope.archiveFilter.course;
-		
-		$scope.select_filters.test = undefined;
-		$scope.archiveFilter.test = undefined;
+		$scope.select_filters.test = $scope.tests[0];
+		$scope.archiveFilter.test_id = undefined;
 	}
 	
 	$scope.test_filter_changed = function()
 	{
-		$scope.archiveFilter.test = {
-			//id: $scope.select_filters.test.id,
-			title: $scope.select_filters.test.title,
-		};
+		$scope.archiveFilter.test_id = $scope.select_filters.test.id;
 		
-		$scope.select_filters.course = $scope.select_filters.test.course;
-		$scope.archiveFilter.course = {
-			//id: $scope.select_filters.test.course.id,
-			title: $scope.select_filters.test.course.title,
-		};
+		if($scope.archiveFilter.test_id)
+		{
+			$scope.select_filters.course = $scope.select_filters.test.course;
+			$scope.archiveFilter.course_id = $scope.select_filters.test.course.id;
+		}
+		else
+		{
+			$scope.select_filters.course = $scope.courses[0];
+			$scope.archiveFilter.course_id = undefined;
+		}
 	}
 	
 	$scope.save_success = $rootScope.archiveFeedbackSent;
@@ -895,6 +883,12 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 				$rootScope.update_archive_stats();
 			}
 		});
+	}
+	
+	$scope.show_feedback = function(item)
+	{
+		$scope.modal_info = item;
+		$('#modal-display-feedback').modal('show');
 	}
 });
 
@@ -918,7 +912,7 @@ app.controller('ArchiveFormController', function($rootScope, $scope, $window, $l
 			
 			$breadcrumbs.segment('Koepalautteen lähetys');
 			
-			$scope.feedback = $scope.data.archive.feedback;
+			$scope.feedback = $scope.data.archive.feedback || {};
 			console.log($scope.feedback);
 			
 			$scope.loaded = true;

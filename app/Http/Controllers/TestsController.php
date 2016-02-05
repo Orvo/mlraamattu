@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -94,15 +93,23 @@ class TestsController extends Controller
 		{
 			$archive = Auth::user()->archives()->where('test_id', $id)->first();
 			
+			$data = $validation;
+			
 			if(!$archive)
 			{
 				$archive = new Archive;
 				$archive->user_id = Auth::user()->id;
 				$archive->test_id = $test->id;
 			}
-			
-			$data = $validation;
-			unset($data['validation']);
+			else
+			{
+				$old_data = json_decode($archive->data, true);
+				
+				if(@$old_data['feedback'])
+				{
+					$data['feedback'] = $old_data['feedback'];
+				}
+			}
 			
 			$archive->data = json_encode($data);
 			$archive->save();
@@ -112,7 +119,8 @@ class TestsController extends Controller
 
 		return view('test.show')
 			->with(array_merge($validation, [
-				'test' => $test
+				'test' 		=> $test,
+				'feedback' 	=> @$data['feedback'],
 			]))
 			->withErrors(@$v);
 	}

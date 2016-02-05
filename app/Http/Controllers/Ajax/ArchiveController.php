@@ -17,9 +17,9 @@ class ArchiveController extends Controller
 	
 	public function index()
 	{
-		$archive = Archive::with('user', 'test', 'test.course')
+		$archive = Archive::with('user', 'test', 'test.course', 'test.questions')
 			->has('test')->has('user')
-			->orderBy('created_at', 'DESC')
+			->orderBy('created_at', 'ASC')
 			->get();
 		
 		foreach($archive as &$row)
@@ -114,9 +114,12 @@ class ArchiveController extends Controller
 				$data = [
 					'user' 			=> $archive->user,
 					'test' 			=> $archive->test,
+					'data'			=> $archive->data,
 					'feedback'		=> $feedback,
 					'validation'	=> $validation,
 				];
+				
+				// print_r($validation['validation']); die;
 				
 				return \View::make('email.feedback_notification', $data);
 				

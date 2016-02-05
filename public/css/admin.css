@@ -1042,6 +1042,29 @@ tbody > tr.missing-test > td:first-child
 	padding-right: 0;
 }
 
+#modal-display-feedback .modal-dialog
+{
+	width: 720px;
+}
+
+#modal-display-feedback ol
+{
+	margin: 0;
+	padding: 0 0 0 1em;
+}
+
+#modal-display-feedback ol li
+{
+	margin: 0;
+	padding: 0.8em 0.5em 0.8em 0.5em;
+	border-bottom: 1px solid #eee;
+}
+
+#modal-display-feedback ol li:last-child
+{
+	border-bottom: none;
+}
+
 .alert-box
 {
 	font-size: 11pt;

@@ -15,12 +15,12 @@
 		<div class="replied-to-toggles">
 			<div class="radio">
 				<label class="btn" ng-class="{'btn-warning': archiveFilter.replied_to == 0, 'btn-default': archiveFilter.replied_to != 0}">
-					<input type="radio" ng-model="archiveFilter.replied_to" value="0"> Näytä vastaamattomat
+					<input type="radio" ng-model="archiveFilter.replied_to" ng-value="0"> Näytä vastaamattomat
 				</label>
 			</div>
 			<div class="radio">
 				<label class="btn" ng-class="{'btn-warning': archiveFilter.replied_to == 1, 'btn-default': archiveFilter.replied_to != 1}">
-					<input type="radio" ng-model="archiveFilter.replied_to" value="1"> Näytä vastatut
+					<input type="radio" ng-model="archiveFilter.replied_to" ng-value="1"> Näytä vastatut
 				</label>
 			</div>
 			<div class="radio">
@@ -32,12 +32,12 @@
 		<div class="discarded-toggles">
 			<div class="radio">
 				<label class="btn" ng-class="{'btn-info': archiveFilter.discarded == 0, 'btn-default': archiveFilter.discarded != 0}">
-					<input type="radio" ng-model="archiveFilter.discarded" value="0"> Piilota hylätyt
+					<input type="radio" ng-model="archiveFilter.discarded" ng-value="0"> Piilota kuitatut
 				</label>
 			</div>
 			<div class="radio">
 				<label class="btn" ng-class="{'btn-info': archiveFilter.discarded === undefined, 'btn-default': archiveFilter.discarded !== undefined}">
-					<input type="radio" ng-model="archiveFilter.discarded" ng-value="undefined"> Näytä hylätyt
+					<input type="radio" ng-model="archiveFilter.discarded" ng-value="undefined"> Näytä kuitatut
 				</label>
 			</div>
 		</div>
@@ -51,20 +51,17 @@
 					<option ng-value="undefined">Rajaa kurssin mukaan</option>
 				</select>
 				<select class="form-control"
-					ng-model="archiveFilter.test"
-					ytchange="test_filter_changed()"
+					ng-model="select_filters.test"
+					ng-change="test_filter_changed()"
 					ng-options="test as test.title for test in tests">
 					<option ng-value="undefined">Rajaa kokeen mukaan</option>
 				</select>
 				<button type="button" class="btn btn-primary"
-					ng-if="select_filters.course !== undefined || select_filters.test !== undefined"
+					ng-if="select_filters.course.id !== undefined || select_filters.test.id !== undefined"
 					ng-click="reset_select_filter()">
 					<span class="glyphicon glyphicon-remove-sign"></span> Nollaa rajaus
 				</button>
 			</div>
-			[[ select_filters.test ]]
-			<hr>
-			[[ select_filters.course ]]
 		</div>
 	</div>
 	<table class="table table-hover">
@@ -73,14 +70,14 @@
 				<td style="width:40px;"></td>
 				<td style="width:170px">Kokeen suorittaja</td>
 				<td style="width:180px">Suoritusaika</td>
-				<td style="min-width:150px">Koe</td>
-				<td style="width:24%">Kurssi</td>
+				<td style="min-width:150px">Kurssi</td>
+				<td style="width:24%">Koe</td>
 				<td style="width:20%">Tulos</td>
 				<td class="list-actions" style="width:180px">Toiminnot</td>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="(key, item) in archive | filter : searchFilter | filter : archiveFilter" ng-class="{'missing-test':!item.test}">
+			<tr ng-repeat="(key, item) in archive | filter : searchFilter | filter : archiveFilter : true" ng-class="{'missing-test':!item.test}">
 				<td style="font-weight: bold;text-align: right;">[[ key + 1 ]].</td>
 				<td>
 					[[ item.user.name ]]
@@ -89,24 +86,24 @@
 					[[ item.created_at | date:  "dd.MM.yyyy 'klo' HH:mm" ]]
 				</td>
 				<td>
+					<a href="#/courses/[[ item.test.course.id ]]">
+						[[ item.test.course.title ]]
+					</a><br>
+				</td>
+				<td>
 					<div ng-if="item.test">
 						<a href="#/tests/[[ item.test.id ]]">
 							[[ item.test.title ]]
 						</a>
 						<div class="labels pull-right">
 							<span class="label label-success" ng-if="item.replied_to">Vastattu</span>
-							<span class="label label-warning" ng-if="item.discarded">Hylätty</span>
+							<span class="label label-warning" ng-if="item.discarded">Kuitattu</span>
 						</div>
 					</div>
 					
 					<span ng-if="!item.test" style="color:#c22;font-weight: bold;">
 						Koe on poistettu
 					</span>
-				</td>
-				<td>
-					<a href="#/courses/[[ item.test.course.id ]]">
-						[[ item.test.course.title ]]
-					</a><br>
 				</td>
 				<td class="test-result">
 					<div class="clearfix">
@@ -128,13 +125,52 @@
 							<span class="glyphicon glyphicon-remove"></span> Kuittaa
 						</button>
 					</div>
+					<div ng-if="item.replied_to">
+						<button class="btn btn-primary btn-sm" ng-click="show_feedback(item)">
+							<span class="glyphicon glyphicon-search"></span> Näytä
+						</button>
+					</div>
 				</td>
 			</tr>
-			<tr ng-if="(archive | filter : searchFilter | filter : archiveFilter).length == 0">
+			<tr ng-if="(archive | filter : searchFilter | filter : archiveFilter : true).length == 0">
 				<td colspan="6" style="text-align: center;font-weight: bold;">
 					Ei suorituksia annetuilla hakuehdoilla
 				</td>
 			</tr>
 		</tbody>
 	</table>
+</div>
+
+<div class="modal fade" id="modal-display-feedback">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Koepalaute / [[ modal_info.user.name ]] / [[ modal_info.test.title ]]</h4>
+			</div>
+			<div class="modal-body">
+				<ol>
+					<li ng-repeat="question in modal_info.test.questions" ng-if="modal_info.data.feedback[question.id]">
+						<div class="pull-right">
+							<div class="label label-success" ng-if="modal_info.data.validation[question.id].correct">
+								Oikein
+							</div>
+							<div class="label label-warning" ng-if="!modal_info.data.validation[question.id].correct && modal_info.data.validation[question.id].partial > 0">
+								Osittain oikein
+							</div>
+							<div class="label label-danger" ng-if="!modal_info.data.validation[question.id].correct && (modal_info.data.validation[question.id].partial === 0 || modal_info.data.validation[question.id].partial === undefined)">
+								Väärin
+							</div>
+						</div>
+						<div style="font-weight: bold;font-size: 110%;padding-bottom:0.25em">[[ question.title ]]</div>
+						<div>
+							[[ modal_info.data.feedback[question.id] ]]
+						</div>
+					</li>
+				</ol>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal">Sulje</button>
+			</div>
+		</div>
+	</div>
 </div>
