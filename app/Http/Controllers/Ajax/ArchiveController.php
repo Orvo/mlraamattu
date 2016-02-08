@@ -97,15 +97,19 @@ class ArchiveController extends Controller
 			->has('user')->has('test')
 			->findOrFail($id);
 		
-		if($archive)
+		$feedback = [];
+		foreach($request->get('feedback') as $key => $item)
+		{
+			$temp = htmlspecialchars(trim($item));
+			if(strlen($temp) > 0)
+			{
+				$feedback[$key] = $temp;
+			}
+		}
+		
+		if($archive && count($feedback) > 0)
 		{
 			$archive->data = json_decode($archive->data, true);
-			
-			$feedback = $request->get('feedback');
-			foreach($feedback as &$item)
-			{
-				$item = htmlspecialchars(trim($item));
-			}
 			
 			if($archive->replied_to == 0)
 			{
@@ -114,12 +118,15 @@ class ArchiveController extends Controller
 				$data = [
 					'user' 			=> $archive->user,
 					'test' 			=> $archive->test,
+					'course' 		=> $archive->test->course,
 					'data'			=> $archive->data,
 					'feedback'		=> $feedback,
-					'validation'	=> $validation,
+					'validation'	=> $validation['validation'],
 				];
 				
 				// print_r($validation['validation']); die;
+				//print_r(); die;
+				//$archive->test->course;
 				
 				return \View::make('email.feedback_notification', $data);
 				
@@ -142,9 +149,15 @@ class ArchiveController extends Controller
 				'success' => 1,
 			];
 		}
+		elseif(count($feedback) == 0)
+		{
+			$errors[] = "Anna edes jotain palautetta!";
+		}
 		
 		return [
-			'success' => 0,
+			'success'	=> 0,
+			'feedback'	=> $feedback,
+			'errors'	=> $errors,
 		];
 	}
 	

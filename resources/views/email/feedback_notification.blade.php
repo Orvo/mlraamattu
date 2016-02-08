@@ -9,15 +9,15 @@
 		Hei, {{ $user->name }}!
 	</p>
 	<p>
-		Olet saanut koepalautetta suorittamaasi kokeeseen <a href="{{ url('/test/' . $test->id) }}">{{ $test->title }}</a> kurssilla {f{ $course->title }f}.
+		Olet saanut koepalautetta suorittamaasi kokeeseen <a href="{{ url('/test/' . $test->id) }}">{{ $test->title }}</a> kurssilla {s{ $course->title }s}.
 	</p>
 	<h3>Kysymyskohtainen palaute</h3>
 	@foreach($test->questions as $key => $question)
 		@if(strlen(@$feedback[$question->id]) > 0)
 			<div style="border-bottom: 1px solid #eee;padding-bottom:1em;margin-bottom:1em">
-				<h3>{{ $key+1 }}. {{ $question->title }}</h3>
+				<h3 style="margin-bottom:0.2em;">{{ $key+1 }}. {{ $question->title }}</h3>
 				<p>
-					{{ $question->subtitle }}
+					{!! nl2br(strip_tags($question->subtitle)) !!}
 				</p>
 				<h4>Vastauksesi</h4>
 				<p>

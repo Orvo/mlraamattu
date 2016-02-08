@@ -928,20 +928,25 @@ app.controller('ArchiveFormController', function($rootScope, $scope, $window, $l
 		}).then(function success(response)
 		{
 			$scope.processing = false;
+			$scope.save_success = true;
 			
 			if(response.data.success == 1)
 			{
 				$rootScope.archiveFeedbackSent = true;
 				$location.path('/archive/');
 			}
-			else if(response.data.success == 1)
+			else if(response.data.success == 0)
 			{
 				$scope.save_success = false;
+				$scope.errors = response.data.errors;
 			}
+
 		}, function error(response)
 		{
 			$scope.save_success = false;
-			$scope.error_response = response;
+			$scope.errors = [
+				"<b>" + response.status + "</b> " + response.statusText,
+			];
 			console.log(response);
 			
 			$scope.processing = false;

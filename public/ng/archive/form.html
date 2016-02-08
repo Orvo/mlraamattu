@@ -20,9 +20,8 @@
 			</div>
 			<div class="form-group" ng-if="save_success === false">
 				<div class="alert alert-danger">
-					<p>
-						<b>[[ error_response.status ]]</b> [[ error_response.statusText ]]
-					</p>
+					<div ng-repeat="error in errors" ng-bind-html="error"></div>
+					<hr style="margin: 0.4em 0 0.52em 0">
 					Tallennus epäonnistui! Yritä uudelleen.
 				</div>
 			</div>
