@@ -10,6 +10,7 @@ use App\Archive;
 class Test extends Model
 {
 	private $unlockStatus = null;
+	private $hasFeedbackStatus = null;
 	
 	public function course()
 	{
@@ -19,6 +20,26 @@ class Test extends Model
 	public function questions()
 	{
 		return $this->hasMany('App\Question')->orderBy('order');
+	}
+	
+	public function hasFeedback()
+	{
+		if(is_null($this->hasFeedbackStatus))
+		{
+			if(Auth::check())
+			{
+				$this->hasFeedbackStatus = Auth::user()->archives()->where([
+					'test_id' => $this->id,
+					'replied_to' => 1,
+				])->exists();
+			}
+			else
+			{
+				$this->hasFeedbackStatus = false;
+			}
+		}
+		
+		return $this->hasFeedbackStatus;
 	}
 	
 	public function isPublished()
@@ -38,7 +59,8 @@ class Test extends Model
 			if($archive)
 			{
 				$data = json_decode($archive->data, true);
-				return $data['all_correct'] || (!$requireFullCompletion && ($data['num_correct'] >= $data['total'] * 0.5));
+				return $data['all_correct'] || $archive->replied_to || $archive->discarded ||
+						(!$requireFullCompletion && ($data['num_correct'] >= $data['total'] * 0.5));
 			}
 		}
 		
@@ -61,7 +83,7 @@ class Test extends Model
 		}
 		else
 		{
-			if(Auth::user()->archives->where('test_id', $this->id)->count() > 0)
+			if(Auth::user()->archives()->where('test_id', $this->id)->exists())
 			{
 				$this->unlockStatus = true;
 			}

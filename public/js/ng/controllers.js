@@ -806,7 +806,7 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 			{
 				item.created_at = convertToDate(item.created_at);
 				
-				item.test_id = parseInt(item.test.id);
+				// item.test_id = parseInt(item.test.id);
 				item.course_id = parseInt(item.test.course.id);
 				
 				item.replied_to = parseInt(item.replied_to);
@@ -933,6 +933,8 @@ app.controller('ArchiveFormController', function($rootScope, $scope, $window, $l
 			if(response.data.success == 1)
 			{
 				$rootScope.archiveFeedbackSent = true;
+				$rootScope.update_archive_stats();
+				
 				$location.path('/archive/');
 			}
 			else if(response.data.success == 0)

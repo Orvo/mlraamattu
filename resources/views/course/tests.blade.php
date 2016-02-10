@@ -68,6 +68,15 @@
 				</div>
 				<div class="description">
 					{!! nl2br($test->description) !!}
+					@if($test->hasFeedback())
+						<div class="alert alert-success alert-icon alert-icon-small">
+							<span class="glyphicon glyphicon-ok-sign"></span>
+							<div>
+								Olet vastaanottanut koepalautetta tämän kokeen suorittamisesta.
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					@endif
 				</div>
 			</div>
 		@endforeach

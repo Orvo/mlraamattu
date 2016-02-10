@@ -12,9 +12,9 @@
 				<b>Hupsis!</b> Rekisteröinnissä tapahtui virhe eikä vastauksiasi ole vielä tallennettu!
 				<hr>
 				<ul>
-					<?php foreach($errors->all() as $error): ?>
+					@foreach($errors->all() as $error)
 						<li>{{ $error }}</li>
-					<?php endforeach; ?>
+					@endforeach
 				</ul>
 			</div>
 		@endif
@@ -61,11 +61,11 @@
 		{!! csrf_field() !!}
 
 		<div class="form-group">
-			<h1 class="test-title"><?php echo $test->title; ?></h1>
-			<?php if($test->description && strlen($test->description) > 0): ?>
-				<div class="test-description"><?php echo $test->description; ?></div>
-			<?php endif; ?>
-			<input type="hidden" name="test_id" value="<?php echo $test->id; ?>">
+			<h1 class="test-title">{{ $test->title }}</h1>
+			@if($test->description && strlen($test->description) > 0)
+				<div class="test-description">{{ $test->description }}</div>
+			@endif
+			<input type="hidden" name="test_id" value="{{ $test->id }}">
 		</div>
 		
 		@if(!Auth::check() && $errors->any())
@@ -82,9 +82,26 @@
 			<hr>
 		@endif
 		
+		@if(!$test->hasFeedback() && $validation && !$hasPassed)
+			<div class="alert alert-warning alert-icon">
+				<span class="glyphicon glyphicon-remove-circle"></span>
+				<div>
+					<p>
+						Sinun pitää vastata oikein vähintään {{ $minimumToPass }} kysymykseen. Et ole saavuttanut vaadittua vähimmäismäärää, joten et voi jatkaa kurssilla eteenpäin ennen sitä. Voit tehdä korjauksia tai odottaa kunnes koe on tarkistettu.
+					</p>
+					<p id="top-spoiler-warning">
+						<a class="spoiler-warning">
+							<span class="glyphicon glyphicon-eye-open"></span> Oikeat vastaukset piilotettu. Klikkaa tästä nähdäksesi.
+						</a>
+					</p>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		@endif
+		
 		<fieldset class="questions">
 			<legend>Kysymykset</legend>
-			<?php foreach($test->questions as $qkey => $question): ?>
+			@foreach($test->questions as $qkey => $question)
 				<div class="question {{
 					css([
 						'correct'			=> @$validation && @$validation[$question->id]['correct'],
@@ -121,16 +138,21 @@
 					
 					@if(@$validation[$question->id]['correct'])
 						<div class="validation correct">
-							<span class="glyphicon glyphicon-ok"></span> Oikein!
+							<span class="glyphicon glyphicon-ok"></span>
+							@if($question->type == 'TEXTAREA')
+								Hyväksytty!
+							@else
+								Oikein!
+							@endif
 						</div>
 					@elseif(!@$validation[$question->id]['correct'] && @$validation[$question->id]['partial'] > 0)
 						<div class="validation partially-correct">
 							<span class="glyphicon glyphicon-remove"></span>
-							<?php if($question->type == "MULTITEXT"): ?>
-								<?php echo $validation[$question->id]['partial'] ?> oikein!
-							<?php else: ?>
+							@if($question->type == "MULTITEXT")
+								{{ $validation[$question->id]['partial'] }} oikein!
+							@else
 								Osittain oikein!
-							<?php endif; ?>
+							@endif
 						</div>
 					@elseif(@$validation[$question->id] && !@$validation[$question->id]['correct'])
 						<div class="validation incorrect">
@@ -144,7 +166,7 @@
 								switch($question->type): 
 									case 'MULTI':
 								?>
-									<?php foreach($question->answers as $answer): ?>
+									@foreach($question->answers as $answer)
 										<div class="checkbox {{
 											css([
 												'has-answer' => @in_array($answer->id, @$given_answers[$question->id]),
@@ -152,35 +174,43 @@
 										}}">
 											<label>
 												{!! Form::checkbox('answer-' . $question->id . '[]', $answer->id, @in_array($answer->id, @$given_answers[$question->id])) !!}
-												<?php echo $answer->text; ?>
-												<?php if(@$validation && @in_array($answer->id, @$given_answers[$question->id])): ?>
-													<?php if($answer->is_correct): ?>
+												{{ $answer->text }}
+												@if(@$validation && @in_array($answer->id, @$given_answers[$question->id]))
+													@if($answer->is_correct)
 														<span class="glyphicon glyphicon-ok" style="color:#329f07"></span>
-													<?php else: ?>
+													@else
 														<span class="glyphicon glyphicon-remove" style="color:#af000d"></span>
-													<?php endif; ?>
-												<?php endif; ?>
+													@endif
+												@endif
 											</label>
 										</div>
-									<?php endforeach; ?>
+									@endforeach
 
-									<?php if(@$validation && @$validation[$question->id]['correct_answers']): ?>
-										<div class="correct-answers">
+									@if(@$validation && @$validation[$question->id]['correct_answers'])
+										<hr>
+										<div class="correct-answers {{
+												css([
+													'spoiled' => $test->hasFeedback() || @$hasPassed || @$validation[$question->id]['correct'],
+												])
+											}}">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>
 											<h4>Oikeat vastaukset:</h4>
 											<ul>
-												<?php foreach($validation[$question->id]['correct_answers'] as $answer): ?>
+												@foreach($validation[$question->id]['correct_answers'] as $answer)
 													<li>{{ $answer['text'] }}</li>
-												<?php endforeach; ?>
+												@endforeach
 											</ul>
+											<a class="spoiler-warning">
+												Oikeat vastaukset piilotettu. Klikkaa tästä nähdäksesi.
+											</a>
 										</div>
-									<?php endif; ?>
+									@endif
 								<?php
 									break;
 									//--------------------------------------------------------------------------
 									case 'CHOICE':
 								?>
-									<?php foreach($question->answers as $answer): ?>
+									@foreach($question->answers as $answer)
 										<div class="radio {{
 											css([
 												'has-answer' => (@$given_answers[$question->id] == $answer->id),
@@ -188,27 +218,35 @@
 										}}">
 											<label>
 												{!! Form::radio('answer-' . $question->id, $answer->id, @$given_answers[$question->id] == $answer->id) !!}
-												<?php echo $answer->text; ?>
-												<?php if(@$validation && @$given_answers[$question->id] == $answer->id): ?>
-													<?php if($answer->is_correct): ?>
+												{{ $answer->text }}
+												@if(@$validation && @$given_answers[$question->id] == $answer->id)
+													@if($answer->is_correct)
 														<span class="glyphicon glyphicon-ok" style="color:#329f07"></span>
-													<?php else: ?>
+													@else
 														<span class="glyphicon glyphicon-remove" style="color:#af000d"></span>
-													<?php endif; ?>
-												<?php endif; ?>
+													@endif
+												@endif
 											</label>
 										</div>
-									<?php endforeach; ?>
+									@endforeach
 
-									<?php if(@$validation && @$validation[$question->id]['correct_answers']): ?>
-										<div class="correct-answers">
+									@if(@$validation && @$validation[$question->id]['correct_answers'])
+										<hr>
+										<div class="correct-answers {{
+												css([
+													'spoiled' => $test->hasFeedback() || @$hasPassed || @$validation[$question->id]['correct'],
+												])
+											}}">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>
 											<h4>Oikea vastaus:</h4>
 											<ul>
 												<li>{{ $validation[$question->id]['correct_answers']['text'] }}</li>
 											</ul>
+											<a class="spoiler-warning">
+												Oikeat vastaukset piilotettu. Klikkaa tästä nähdäksesi.
+											</a>
 										</div>
-									<?php endif; ?>
+									@endif
 								<?php
 									break;
 									//--------------------------------------------------------------------------
@@ -231,17 +269,25 @@
 												@else
 													<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
 												@endif
-											<?php endif; ?>
+											@endif
 										</div>
 									</div>
 									
 									@if(@$validation && @$validation[$question->id]['correct_answers'])
-										<div class="correct-answers">
+										<hr>
+										<div class="correct-answers {{
+												css([
+													'spoiled' => $test->hasFeedback() || @$hasPassed || @$validation[$question->id]['correct'],
+												])
+											}}">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>
 											<h4>Oikea vastaus:</h4>
 											<ul>
 												<li>{{ $validation[$question->id]['correct_answers']['text'] }}</li>
 											</ul>
+											<a class="spoiler-warning">
+												Oikeat vastaukset piilotettu. Klikkaa tästä nähdäksesi.
+											</a>
 										</div>
 									@endif
 								<?php
@@ -250,6 +296,9 @@
 									case 'MULTITEXT':
 								?>
 									<div class="multitext">
+										<div class="tip alert alert-info">
+											<span class="glyphicon glyphicon-exclamation-sign"></span> Vastauksien järjestyksellä ei ole väliä.
+										</div>
 										@for($i=0; $i < $question->answers->count(); ++$i)
 											<div class="row {{
 												css([
@@ -257,7 +306,7 @@
 													'has-error'		=> (@$validation && !@$validation[$question->id]['correct_rows'][$i]),
 												])
 											}}">
-												<label for="answer-{{ $question->id .'-'. $i }}" class="col-xs-1 control-label"><?php echo $i+1; ?>.</label>
+												<label for="answer-{{ $question->id .'-'. $i }}" class="col-xs-1 control-label">{{ $i+1 }}.</label>
 												<div class="col-xs-11">
 													{!! Form::text('answer-' . $question->id . '[]', @$given_answers[$question->id][$i], [
 														'class' => 'form-control',
@@ -275,17 +324,25 @@
 											</div>
 										@endfor
 
-										<?php if(@$validation && @$validation[$question->id]['correct_answers']): ?>
-											<div class="correct-answers">
+										@if(@$validation && @$validation[$question->id]['correct_answers'])
+											<hr>
+											<div class="correct-answers {{
+												css([
+													'spoiled' => $test->hasFeedback() || @$hasPassed || @$validation[$question->id]['correct'],
+												])
+											}}">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>
 												<h4>Oikeat vastaukset:</h4>
 												<ul>
-													<?php foreach($validation[$question->id]['correct_answers'] as $answer): ?>
+													@foreach($validation[$question->id]['correct_answers'] as $answer)
 														<li>{{ $answer['text'] }}</li>
-													<?php endforeach; ?>
+													@endforeach
 												</ul>
+												<a class="spoiler-warning">
+													Oikeat vastaukset piilotettu. Klikkaa tästä nähdäksesi.
+												</a>
 											</div>
-										<?php endif; ?>
+										@endif
 									</div>
 								<?php
 									break;
@@ -297,15 +354,16 @@
 								    	'placeholder' => 'Vastaus tähän'
 								    ]) !!}
 
-									<?php if(@$validation): ?>
-										<div class="correct-answers">
+									@if(@$validation)
+										<hr>
+										<div class="correct-answers spoiled">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>
-											<h4>Oikea vastaus:</h4>
+											<h4>Hyväksytty kirjallinen vastaus:</h4>
 											<ul>
-												<li>Syöttämäsi vastaus tarkistetaan erikseen, mutta vastauksen ei tule olla tyhjä.</li>
+												<li>Antamasi vastaus tarkistetaan erikseen, mutta sen ei tule olla tyhjä.</li>
 											</ul>
 										</div>
-									<?php endif; ?>
+									@endif
 								<?php
 									break;
 								?>
@@ -323,7 +381,7 @@
 					</div>
 
 				</div>
-			<?php endforeach; ?>
+			@endforeach
 		</fieldset>
 		
 		@if(!Auth::check() && !$errors->any())

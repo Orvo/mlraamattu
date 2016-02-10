@@ -40,6 +40,9 @@ class TestsController extends Controller
 			{
 				$data = (object)json_decode($archive->data, true);
 				$validation = $testvalidator->WithAnswers($test, $data->given_answers);
+				
+				$passed = ($validation['num_correct'] / $validation['total']) >= 0.5;
+				$minimumToPass 	= ceil($validation['total'] * 0.5);
 			}
 		}
 		
@@ -48,17 +51,19 @@ class TestsController extends Controller
 				'test' 			=> $test,
 				'given_answers' => @$data->given_answers,
 				'feedback' 		=> @$data->feedback,
+				'hasPassed'		=> @$passed,
 				'validation' 	=> @$validation['validation'],
+				'minimumToPass'	=> @$minimumToPass,
 			]);
 	}
 	
 	public function check($id, Request $request, TestValidator $testvalidator)
 	{
-		// dd($request->all());
-		
 		$test = Test::findOrFail($id);
 		
 		$validation = $testvalidator->WithRequest($test, $request);
+		$passed 		= ($validation['num_correct'] / $validation['total']) >= 0.5;
+		$minimumToPass 	= ceil($validation['total'] * 0.5);
 		
 		if(!Auth::check())
 		{
@@ -121,6 +126,8 @@ class TestsController extends Controller
 			->with(array_merge($validation, [
 				'test' 		=> $test,
 				'feedback' 	=> @$data['feedback'],
+				'hasPassed'		=> @$passed,
+				'minimumToPass'	=> @$minimumToPass,
 			]))
 			->withErrors(@$v);
 	}

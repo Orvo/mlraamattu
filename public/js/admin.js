@@ -29,7 +29,7 @@ $(window).load(function()
 			});
 		}
 		
-		$('#content-sidebar .sidebar-help').height(height - 120 - $('#content-sidebar .sidebar-actions').height());
+		//$('#content-sidebar .sidebar-help').height(height - 120 - $('#content-sidebar .sidebar-actions').height());
 	}
 	
 	doResize();

@@ -27,6 +27,13 @@ Route::get('make', function()
 	// $user->save();
 });
 
+Route::get('potato', function ()
+{
+	$question = \App\Question::with('answers')->find(1);
+	
+	return findByProperty($question->answers, 'id', 2);
+});
+
 Route::get('test/{id}', 'TestsController@show');
 Route::post('test/{id}', 'TestsController@check');
 

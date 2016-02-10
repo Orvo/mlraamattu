@@ -416,7 +416,19 @@ div.list div.list-item .description
 	padding: 12px;
 	margin: 0;
 	color: #555;
-	background: #fcfcfc
+	background: #fcfcfc;
+}
+
+div.list div.list-item .description .alert
+{
+	margin: 1em 0 0 0;
+	padding: 8px 10px;
+}
+
+div.list div.list-item .description .alert div
+{
+	padding: 4px 0 1px 0;
+	font-weight: bold;
 }
 
 form.test-form .test-title
@@ -611,6 +623,11 @@ div.question div.answer
 	padding: 1em 0 0 0;
 }
 
+div.question div.answer .tip
+{
+	padding: 8px 10px;
+}
+
 div.question div.correct-answers
 {
 	background: #fff;
@@ -620,6 +637,12 @@ div.question div.correct-answers
 	margin-top: 10px;
 	border-radius: 4px;
 	line-height: 1.3;
+	transition: all 150ms ease-in-out;
+}
+
+div.question div.correct-answers:not(.spoiled)
+{
+	background-image: url('/img/stripes.png');
 }
 
 div.question div.correct-answers span.glyphicon
@@ -634,6 +657,29 @@ div.question div.correct-answers ul
 {
 	padding: 0 0 0 45px;
 	margin: 0;
+	display: none;
+}
+
+div.question div.correct-answers.spoiled ul
+{
+	display: block;
+}
+
+a.spoiler-warning
+{
+	cursor: pointer;
+	text-decoration: none;
+}
+
+div.question div.correct-answers .spoiler-warning
+{
+	display: block;
+	padding: 0 0 0 45px;
+}
+
+div.question div.correct-answers.spoiled .spoiler-warning
+{
+	display: none;
 }
 
 div.question div.correct-answers li
@@ -830,6 +876,38 @@ div.alert.alert-danger hr
 {
 	margin-top: 8px;
 	margin-bottom: 10px;
+}
+
+div.alert-icon
+{
+	padding-bottom: 5px;
+}
+
+div.alert-icon > .glyphicon
+{
+	float: left;
+	font-size: 38px;
+}
+
+div.alert-icon.alert-icon-small > .glyphicon
+{
+	font-size: 28px;
+}
+
+div.alert-icon > div
+{
+	margin: 0 0 0 50px;
+}
+
+div.alert-icon.alert-icon-small > div
+{
+	margin: 0 0 0 40px;
+}
+
+div.alert-icon > div.clearfix
+{
+	margin: 0;
+	padding: 0;
 }
 
 /* ==========================================================================

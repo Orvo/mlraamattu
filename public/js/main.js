@@ -20,6 +20,12 @@ $(function(){
 		$(this).parent().parent().removeClass('has-success has-error');
 	});
 	
+	$('a.spoiler-warning').click(function()
+	{
+		$('.correct-answers').addClass('spoiled');
+		$('#top-spoiler-warning').slideUp(400);
+	});
+	
 	////////////////////////////////////
 	
 	var updateScroll = function()

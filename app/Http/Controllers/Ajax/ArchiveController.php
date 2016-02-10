@@ -115,10 +115,10 @@ class ArchiveController extends Controller
 			{
 				$validation = $testvalidator->WithAnswers($archive->test, $archive->data['given_answers']);
 				
-				$data = [
+				
+				$mail_data = [
 					'user' 			=> $archive->user,
 					'test' 			=> $archive->test,
-					'course' 		=> $archive->test->course,
 					'data'			=> $archive->data,
 					'feedback'		=> $feedback,
 					'validation'	=> $validation['validation'],
@@ -128,17 +128,19 @@ class ArchiveController extends Controller
 				//print_r(); die;
 				//$archive->test->course;
 				
-				return \View::make('email.feedback_notification', $data);
+				//return \View::make('email.feedback_notification', $mail_data);
 				
 				// Email notification
-				/*Mail::send('email.feedback_notification', $data, function($m) use ($archive)
+				Mail::send('email.feedback_notification', $mail_data, function($m) use ($archive)
 				{
 					$m->to($archive->user->email, $archive->user->name)->subject('Koepalautetta Media7 raamattuopistolta');
-				});*/
+				});
 			}
 			
-			$archive->data['feedback'] = $feedback;
-			$archive->data = json_encode($archive->data);
+			$data = $archive->data;
+			$data['feedback'] = $feedback;
+			
+			$archive->data = json_encode($data);
 			
 			$archive->replied_to = 1;
 			$archive->discarded = 0;
