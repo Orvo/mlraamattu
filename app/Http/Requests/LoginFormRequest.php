@@ -13,7 +13,7 @@ class LoginFormRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        return !\Auth::check();
     }
 
     /**
@@ -26,6 +26,15 @@ class LoginFormRequest extends Request
         return [
             'email'         => 'required',
             'password'      => 'required',
+        ];
+    }
+    
+    public function messages()
+    {
+        return [
+            'email.required'    => 'Sähköpostiosoite on pakollinen.',
+            'email.email'       => 'Annettu sähköpostiosoite ei ole pätevä.',
+            'password.required' => 'Salasana on pakollinen.',
         ];
     }
 }

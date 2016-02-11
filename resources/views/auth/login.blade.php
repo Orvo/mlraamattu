@@ -14,12 +14,18 @@
 		@endif
 
 		@if($errors->any())
-			<div class="alert alert-danger">
-				<ul>
-					@foreach($errors->all() as $error)
-						<li>{{ $error }}</li>
-					@endforeach
-				</ul>
+			<div class="alert alert-danger alert-icon">
+				<span class="glyphicon glyphicon-remove-sign"></span>
+				<div>
+					<b>Hupis!</b> Kirjautuminen epäonnistui.
+					<hr>
+					<ul>
+						@foreach($errors->all() as $error)
+							<li>{{ $error }}</li>
+						@endforeach
+					</ul>
+				</div>
+				<div class="clearfix"></div>
 			</div>
 		@endif
 

@@ -1,15 +1,12 @@
 @extends('layout')
 
-@section('register_form')
-	<fieldset>
-		<legend>Kirjaudu sisään / Rekisteröidy</legend>
-		<p style="padding-bottom:1em">
-			Jatkaaksesi sinun tulee rekisteröityä, jotta järjestelmä voi pitää kirjaa vastauksistasi ja sinulle voidaan antaa palautetta.
-		</p>
-		
-		@if($errors->any())
-			<div class="alert alert-danger" role="alert">
-				<b>Hupsis!</b> Rekisteröinnissä tapahtui virhe eikä vastauksiasi ole vielä tallennettu!
+@section('authentication_form')
+	
+	@if($errors->any())
+		<div class="alert alert-danger alert-icon" role="alert">
+			<span class="glyphicon glyphicon-remove-sign"></span>
+			<div>
+				<b>Hupsis!</b> {{ @$authentication_type == 0 ? 'Rekisteröinnissä' : 'Kirjautumisessa' }} tapahtui virhe eikä vastauksiasi ole vielä tallennettu!
 				<hr>
 				<ul>
 					@foreach($errors->all() as $error)
@@ -17,33 +14,103 @@
 					@endforeach
 				</ul>
 			</div>
-		@endif
-		
-		<div class="form-group">
-			<label for="user-name" class="control-label col-xs-3">Nimi</label>
-			<div class="col-xs-6">
-				<input type="text" class="form-control" id="user-name" name="user-name" value="">
+			<div class="clearfix"></div>
+		</div>
+	@endif
+	
+	<div class="tabs">
+		<div class="col-xs-6 tab {{ css(['active' => @$authentication_type == 0]) }}" id="tab-register">
+			<a>
+				Rekisteröidy <span class="glyphicon glyphicon-lock"></span>
+			</a>
+		</div>
+		<div class="col-xs-6 tab {{ css(['active' => @$authentication_type == 1]) }}" id="tab-login">
+			<a>
+				Kirjaudu sisään <span class="glyphicon glyphicon-log-in"></span>
+			</a>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	
+	<input type="hidden" id="authentication_type" name="authentication_type" value="{{ $authentication_type }}">
+	
+	<div id="authentication-form" class="{{ css([
+			'form-register' => @$authentication_type == 0,
+			'form-login' 	=> @$authentication_type == 1,
+		]) }}">
+		<div class="tab-content-wrapper">
+			<div class="tab-content-row">
+				<div class="tab-panel">
+					<p class="form-help form-help-register">
+						Jatkaaksesi sinun tulee rekisteröityä, jotta järjestelmä voi pitää
+						kirjaa vastauksistasi ja sinulle voidaan antaa palautetta.
+					</p>
+					
+					<div class="form-group field-name">
+						<label for="user-name" class="control-label col-xs-3">Nimi</label>
+						<div class="col-xs-6">
+							<input type="text" class="form-control" id="user-name" name="user-name" value="">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="user-email" class="control-label col-xs-3">Sähköpostiosoite</label>
+						<div class="col-xs-6">
+							<input type="text" class="form-control" id="user-email" name="user-email" value="">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="user-password" class="control-label col-xs-3">Salasana</label>
+						<div class="col-xs-6">
+							<input type="password" class="form-control" id="user-password" name="user-password">
+						</div>
+					</div>
+					<div class="form-group field-password-confirmation">
+						<label for="user-password_confirmation" class="control-label col-xs-3">Salasana uudestaan</label>
+						<div class="col-xs-6">
+							<input type="password" class="form-control" id="user-password_confirmation" name="user-password_confirmation">
+						</div>
+					</div>
+				</div>
+				<div class="tab-panel">
+					<div class="form-help">
+						<p>
+							Kirjaudu sisään syöttämällä sähköpostiosoitteesi ja salasanasi.
+							Jos olet jo suorittanut tämän kokeen ennen, uusia vastauksiasi ei tallenneta.
+						</p>
+					</div>
+					
+					<div class="form-group">
+						<label for="user-login-email" class="control-label col-xs-3">Sähköpostiosoite</label>
+						<div class="col-xs-6">
+							<input type="text" class="form-control" id="user-login-email" name="user-login-email" value="">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="user-login-password" class="control-label col-xs-3">Salasana</label>
+						<div class="col-xs-6">
+							<input type="password" class="form-control" id="user-login-password" name="user-login-password">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-3 col-xs-offset-3">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="remember_me"> Muista kirjautuminen
+								</label>
+							</div>
+						</div>
+						<div class="col-xs-3">
+							<p style="text-align: right; padding: 0.45em 0">
+								<a href="/auth/reset">Unohtunut salasana?</a>
+							</p>
+						</div>
+					</div>
+				</div>
+				
+				<div class="clearfix"></div>
 			</div>
 		</div>
-		<div class="form-group">
-			<label for="user-email" class="control-label col-xs-3">Sähköpostiosoite</label>
-			<div class="col-xs-6">
-				<input type="text" class="form-control" id="user-email" name="user-email" value="">
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="user-password" class="control-label col-xs-3">Salasana</label>
-			<div class="col-xs-6">
-				<input type="password" class="form-control" id="user-password" name="user-password">
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="user-password_confirmation" class="control-label col-xs-3">Salasana uudestaan</label>
-			<div class="col-xs-6">
-				<input type="password" class="form-control" id="user-password_confirmation" name="user-password_confirmation">
-			</div>
-		</div>
-	</fieldset>
+	</div>
 @endsection
 
 @section('extra_navigation')
@@ -69,13 +136,16 @@
 		</div>
 		
 		@if(!Auth::check() && $errors->any())
-			@yield('register_form')
+			@yield('authentication_form')
 			
 			<div class="form-group">
 				<button class="btn btn-primary btn-block">
-					Tarkista vastaukset
-					@if(!Auth::check())
-						ja rekisteröidy
+					@if(Auth::check())
+						Tarkista vastaukset
+					@elseif(!Auth::check())
+						<span class="button-text button-text-register">Rekisteröidy</span>
+						<span class="button-text button-text-login">Kirjaudu sisään</span>
+						ja tarkista vastaukset
 					@endif
 				</button>
 			</div>
@@ -87,7 +157,7 @@
 				<span class="glyphicon glyphicon-remove-circle"></span>
 				<div>
 					<p>
-						Sinun pitää vastata oikein vähintään {{ $minimumToPass }} kysymykseen. Et ole saavuttanut vaadittua vähimmäismäärää, joten et voi jatkaa kurssilla eteenpäin ennen sitä. Voit tehdä korjauksia tai odottaa kunnes koe on tarkistettu.
+						Sinun pitää vastata oikein vähintään {{ $minimumToPass }} kysymykseen. Et ole saavuttanut vaadittua vähimmäismäärää, joten et voi jatkaa kurssilla eteenpäin ennen sitä. Voit tehdä korjauksia nyt tai odottaa kunnes koe on tarkistettu ja vastaanotat palautetta.
 					</p>
 					<p id="top-spoiler-warning">
 						<a class="spoiler-warning">
@@ -104,6 +174,7 @@
 			@foreach($test->questions as $qkey => $question)
 				<div class="question {{
 					css([
+						'no-validation'		=> !@$validation,
 						'correct'			=> @$validation && @$validation[$question->id]['correct'],
 						'partially-correct'	=> @$validation && !@$validation[$question->id]['correct'] && @$validation[$question->id]['partial'] > 0,
 						'incorrect'			=> @$validation && !@$validation[$question->id]['correct'] && !@$validation[$question->id]['partial']
@@ -385,15 +456,18 @@
 		</fieldset>
 		
 		@if(!Auth::check() && !$errors->any())
-			@yield('register_form')
+			@yield('authentication_form')
 		@endif
 		
 		<hr>
 		<div class="form-group">
 			<button class="btn btn-primary btn-block">
-				Tarkista vastaukset
-				@if(!Auth::check())
-					ja rekisteröidy
+				@if(Auth::check())
+					Tarkista vastaukset
+				@elseif(!Auth::check())
+					<span class="button-text button-text-register">Rekisteröidy</span>
+					<span class="button-text button-text-login">Kirjaudu sisään</span>
+					ja tarkista vastaukset
 				@endif
 			</button>
 		</div>

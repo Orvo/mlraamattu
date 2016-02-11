@@ -8,20 +8,28 @@
 	</div>
 	
 	@if(session('error'))
-		<div class="error-block">
-			<p>{!! session('error') !!}</p>
-			Jos olet jo edennyt kurssissa, <a href="/auth/login">kirjaudu sisään</a> ja yritä uudelleen!
+		<div class="alert alert-danger alert-icon">
+			<span class="glyphicon glyphicon-remove-sign"></span>
+			<div>
+				<p>{!! session('error') !!}</p>
+				<p>Jos olet jo edennyt kurssissa, <a href="/auth/login"><span class="ul">kirjaudu sisään</span> <span class="glyphicon glyphicon-log-in"></span></a> ja yritä uudelleen!</p>
+			</div>
+			<div class="clearfix"></div>
 		</div>
 	@endif
 	
 	@if(!Auth::check())
-		<div class="alert alert-info login-note">
-			<p>
-				Jos olet jo rekisteröitynyt, <a href="/auth/login">kirjaudu sisään</a> jatkaaksesi siitä mihin jäit.
-			</p>
-			<p>
-				Rekisteröityminen tapahtuu ensimmäisen kokeen vastaamisen yhteydessä.
-			</p>
+		<div class="alert alert-info alert-icon login-note">
+			<span class="glyphicon glyphicon-info-sign"></span>
+			<div>
+				<p>
+					Jatkaaksesi siitä mihin jäit, <a href="/auth/login"><span class="ul">kirjaudu sisään</span> <span class="glyphicon glyphicon-log-in"></span></a>
+				</p>
+				<p>
+					Jos et ole vielä rekisteröitynyt voit tehdä sen vastatessasi ensimmäiseen kokeeseen.
+				</p>
+			</div>
+			<div class="clearfix"></div>
 		</div>
 	@endif
 	

@@ -321,6 +321,38 @@ div.error-block b
 	font-style: oblique;
 }
 
+div.alert a
+{
+	text-decoration: none;
+	display: inline-block;
+	padding-right: 5px;
+}
+
+div.alert a:link > span.ul,
+div.alert a:visited > span.ul
+{
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+div.alert a:hover > span.ul,
+div.alert a:active > span.ul
+{
+	text-decoration: none;
+}
+
+div.alert.alert-danger a:link,
+div.alert.alert-danger a:visited
+{
+	color: #fff;
+}
+
+div.alert.alert-danger a:hover,
+div.alert.alert-danger a:active
+{
+	color: #FED4D5;
+}
+
 div.list div.list-item
 {
 	border: 1px solid #f1f1f1;
@@ -450,6 +482,126 @@ form.test-form div.test-description
 	margin-right: 0;
 }
 
+div.tabs
+{
+	height: 44px;
+	/*background: #f00;*/
+	border-bottom: 1px solid #ddd;
+}
+
+div.tabs .tab
+{
+	margin: 0 !important;
+	padding: 0 4px;
+}
+
+div.tabs .tab a
+{
+	float: left;
+	display: block;
+	width: 100%;
+	height: 43px;
+	padding: 9px 0 0 0;
+	text-align: center;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border: 1px solid #ddd;
+	border-bottom: none;
+	background: #eee;
+	cursor: pointer;
+	text-decoration: none;
+	font-size: 13pt;
+	font-family: 'Lato';
+	font-weight: bold;
+	transition: all 150ms ease-out;
+	outline: none !important;
+}
+
+div.tabs .tab.active a
+{
+	color: #F43313;
+}
+
+div.tabs .tab a:hover,
+div.tabs .tab a:active
+{
+	color: #D33F13;
+}
+
+div.tabs .tab a .glyphicon
+{
+	display: inline-block;
+	margin-left: 5px;
+}
+
+div.tabs .tab:not(.active) a
+{
+	box-shadow: inset 0 -2px 4px #ddd;
+}
+
+div.tabs .tab:not(.active) a:hover
+{
+	box-shadow: inset 0 -2px 4px #d0d0d0;
+	background: #e2e2e2;
+}
+
+div.tabs .tab.active a
+{
+	height: 44px;
+	background: #fff;
+}
+
+#authentication-form .form-help
+{
+	max-width: 66%;
+	margin: 0 auto;
+	padding: 1.5em 0 1em 0;
+	text-align: center;
+}
+
+div.tab-content-wrapper
+{
+	overflow: hidden !important;
+	transition: height 350ms ease-out;
+}
+
+#authentication-form.form-register div.tab-content-wrapper
+{
+	height: 285px;
+}
+
+#authentication-form.form-login div.tab-content-wrapper
+{
+	height: 232px !important;
+}
+
+.button-text
+{
+	display: none;
+}
+
+div.tab-content-row
+{
+	width: 300%;
+}
+
+div.tab-content-row > div.tab-panel
+{
+	display: inline-block;
+	width: 760px;
+	transition: margin 350ms ease-out;
+}
+
+#authentication-form.form-register div.tab-panel:first-child
+{
+	margin-left: 0px;
+}
+
+#authentication-form.form-login div.tab-panel:first-child
+{
+	margin-left: -760px;
+}
+
 fieldset legend
 {
 	padding-left: 0.4em;
@@ -468,34 +620,6 @@ div.question
 	transition: border 200ms ease-out, box-shadow 200ms ease-out;
 }
 
-/*div.question:hover
-{
-	border-top: 1px solid #d2d2d2;
-	border-bottom: 1px solid #d2d2d2;
-	box-shadow: 0 2px 4px 2px #d2d2d2;
-}
-
-div.question.correct:hover
-{
-	border-top: 1px solid #347F15;
-	border-bottom: 1px solid #347F15;
-	box-shadow: 0 2px 4px 2px #3DA217;
-}
-
-div.question.partially-correct:hover
-{
-	border-top: 1px solid #B1720F;
-	border-bottom: 1px solid #B1720F;
-	box-shadow: 0 2px 4px 2px #D57D11;
-}
-
-div.question.incorrect:hover
-{
-	border-top: 1px solid #77000F;
-	border-bottom: 1px solid #77000F;
-	box-shadow: 0 2px 4px 2px #9C0013;
-}*/
-
 div.question .form-group
 {
 	padding: 3px 15px;
@@ -511,6 +635,11 @@ div.question div.header
 	border-left: 4px solid #e4e4e4;
 	position: relative;
 	overflow: hidden;
+}
+
+div.question.no-validation div.header
+{
+	border-left: 4px solid #DB690D;	
 }
 
 div.question div.header .number

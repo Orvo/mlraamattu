@@ -54,6 +54,7 @@ class TestsController extends Controller
 				'hasPassed'		=> @$passed,
 				'validation' 	=> @$validation['validation'],
 				'minimumToPass'	=> @$minimumToPass,
+				'authentication_type' => 0,
 			]);
 	}
 	
@@ -61,36 +62,80 @@ class TestsController extends Controller
 	{
 		$test = Test::findOrFail($id);
 		
-		$validation = $testvalidator->WithRequest($test, $request);
+		$validation 	= $testvalidator->WithRequest($test, $request);
 		$passed 		= ($validation['num_correct'] / $validation['total']) >= 0.5;
 		$minimumToPass 	= ceil($validation['total'] * 0.5);
 		
+		$submit_login = false;
+		
 		if(!Auth::check())
 		{
-			$v = \Validator::make($request->all(), [
-				'user-name'		=> 'required',
-				'user-email'	=> 'required|email|unique:users,email',
-				'user-password'	=> 'required|min:8|confirmed'
-			],
-			[
-				'user-name.required'		=> 'Nimi on pakollinen.',
-				'user-email.required'		=> 'Sähköpostiosoite on pakollinen.',
-				'user-email.email'			=> 'Annettu sähköpostiosoite ei ole pätevä.',
-				'user-email.unique'			=> 'Tunnus samalla sähköpostiosoitteella on jo olemassa.',
-				'user-password.required'	=> 'Salasana on pakollinen.',
-				'user-password.min'			=> 'Salasanan pitää olla ainakin :min merkkiä pitkä.',
-				'user-password.confirmed'	=> 'Salasanat eivät täsmää.',
-			]);
+			$authenticationType = $request->input('authentication_type');
 			
-			if($v->passes())
+			switch($authenticationType)
 			{
-				$user = new User;
-				$user->name = $request->input('user-name');
-				$user->email = $request->input('user-email');
-				$user->password = Hash::make($request->input('user-password'));
-				$user->save();
-				
-				Auth::login($user);
+				case 0:
+					$validator = \Validator::make($request->all(),
+					[
+						'user-name'		=> 'required',
+						'user-email'	=> 'required|email|unique:users,email',
+						'user-password'	=> 'required|min:8|confirmed'
+					],
+					[
+						'user-name.required'		=> 'Nimi on pakollinen.',
+						'user-email.required'		=> 'Sähköpostiosoite on pakollinen.',
+						'user-email.email'			=> 'Annettu sähköpostiosoite ei ole pätevä.',
+						'user-email.unique'			=> 'Tunnus samalla sähköpostiosoitteella on jo olemassa.',
+						'user-password.required'	=> 'Salasana on pakollinen.',
+						'user-password.min'			=> 'Salasanan pitää olla ainakin :min merkkiä pitkä.',
+						'user-password.confirmed'	=> 'Salasanat eivät täsmää.',
+					]);
+				break;
+				case 1:
+					$validator = \Validator::make($request->all(),
+					[
+						'user-login-email'		=> 'required|email',
+						'user-login-password'	=> 'required'
+					],
+					[
+						'user-login-email.required'		=> 'Sähköpostiosoite on pakollinen.',
+						'user-login-email.email'		=> 'Annettu sähköpostiosoite ei ole pätevä.',
+						'user-login-password.required'	=> 'Salasana on pakollinen.',
+					]);
+				break;
+			}
+			
+			if($validator->passes())
+			{
+				switch($authenticationType)
+				{
+					case 0:
+						$user = new User;
+						$user->name = $request->input('user-name');
+						$user->email = $request->input('user-email');
+						$user->password = Hash::make($request->input('user-password'));
+						$user->save();
+						
+						Auth::login($user);
+					break;
+					case 1:
+						$credentials = [
+							'email' 	=> $request->input('user-login-email'),
+							'password' 	=> $request->input('user-login-password'),
+						];
+						
+						$remember = $request->input('remember_me');
+						
+						if(!Auth::attempt($credentials, $remember))
+						{
+							$validator->getMessageBag()->add('user-login-email', 'Kirjautuminen annetuilla tunnuksilla ei onnistunut!');
+						}
+						else
+						{
+							return redirect('/test/' . $test->id);
+						}
+					break;
+				}
 			}
 		}
 		
@@ -120,16 +165,15 @@ class TestsController extends Controller
 			$archive->save();
 		}
 		
-		// return response(json_encode($validation, JSON_PRETTY_PRINT))->header("Content-Type", "text/plain");
-
 		return view('test.show')
 			->with(array_merge($validation, [
-				'test' 		=> $test,
-				'feedback' 	=> @$data['feedback'],
-				'hasPassed'		=> @$passed,
-				'minimumToPass'	=> @$minimumToPass,
+				'test' 					=> $test,
+				'feedback' 				=> @$data['feedback'],
+				'hasPassed'				=> @$passed,
+				'minimumToPass'			=> @$minimumToPass,
+				'authentication_type'	=> @$authenticationType,
 			]))
-			->withErrors(@$v);
+			->withErrors(@$validator);
 	}
 	
 	

@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Http\Requests\LoginFormRequest;
+
 use App\Http\Controllers\Controller;
 
 use \Validator;
 
 use \Auth;
 use \Hash;
+
 
 class AuthController extends Controller
 {
@@ -29,7 +32,7 @@ class AuthController extends Controller
 				]);
 	}
 	
-	public function login(Requests\LoginFormRequest $request)
+	public function login(LoginFormRequest $request)
 	{
 		if(Auth::check())
 		{
@@ -56,14 +59,10 @@ class AuthController extends Controller
 		}
 
 		return redirect('/auth/login')
-					// ->with([
-					// 	'referer' => $request->input('ref'),	
-					// 	'route' => $request->input('route'),	
-					// ])
-			  		->withInput($request->only('email', 'remember_me'))
-			  		->withErrors([
-			  			'Kirjautuminen annetuilla tunnuksilla ei onnistunut!'
-			  		]);
+	  		->withInput($request->only('email', 'remember_me'))
+	  		->withErrors([
+	  			'Kirjautuminen annetuilla tunnuksilla ei onnistunut!'
+	  		]);
 	}
 	
 	public function ajax_login(Request $request)

@@ -26,6 +26,55 @@ $(function(){
 		$('#top-spoiler-warning').slideUp(400);
 	});
 	
+	var getAuthenticationTypeByActiveTab = function()
+	{
+		if($('#tab-register').hasClass('active'))
+		{
+			return 0;
+		}
+		else if($('#tab-login').hasClass('active'))
+		{
+			return 1;
+		}
+		
+		$('#tab-register').addClass('active');
+		return 0;
+	}
+	
+	var authentication_type = getAuthenticationTypeByActiveTab();
+	
+	$('#tab-register a').click(function(e)
+	{
+		$('#authentication-form').removeClass().addClass('form-register');
+		
+		authentication_type = 0;
+		$('#authentication_type').val(authentication_type);
+		
+		$('div.tabs .tab.active').removeClass('active');
+		$(this).parent().addClass('active');
+		
+		$('span.button-text-register').show();
+		$('span.button-text-login').hide();
+		
+		e.preventDefault();
+	});
+	
+	$('#tab-login a').click(function(e)
+	{
+		$('#authentication-form').removeClass().addClass('form-login');
+		
+		authentication_type = 1;
+		$('#authentication_type').val(authentication_type);
+		
+		$('div.tabs .tab.active').removeClass('active');
+		$(this).parent().addClass('active');
+		
+		$('span.button-text-register').hide();
+		$('span.button-text-login').show();
+		
+		e.preventDefault();
+	});
+	
 	////////////////////////////////////
 	
 	var updateScroll = function()
