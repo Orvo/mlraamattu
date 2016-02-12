@@ -12,46 +12,109 @@ class Course extends Model
 {
 	private $courseProgress = null;
 	
-    public function tests()
-    {
-    	return $this->hasMany('App\Test')->orderBy('order');
-    }
-    
-    public function courseProgress()
-    {
-    	if(!Auth::check()) return (object)[
-    		'completed' => false,
-    		'num_completed' => 0,
-    	];
-    	
-    	if($this->courseProgress !== null)
-    	{
-    		return $this->courseProgress;
-    	}
-    	
-    	$archive = Auth::user()->archives;
-    	
-    	$num_completed = 0;
-    	foreach($this->tests as $test)
-    	{
-    		if($test->isCompleted(true))
-    		{
-    			$num_completed++;
-    		}
-    	}
-    	
-    	$this->courseProgress = (object)[
-    		'completed'		=> $num_completed == $this->tests->count(),
-    		'num_completed' => $num_completed,
-    		'total' 		=> $this->tests->count(),
-    	];
-    	
-    	return $this->courseProgress;
-    }
-    
-    public function isPublished()
-    {
-        return $this->published == 1;
-    }
-    
+	const UNSTARTED		= 1;
+	const STARTED 		= 2;
+	const IN_PROGRESS	= 3;
+	const COMPLETED 	= 4;
+		
+	public function tests()
+	{
+		return $this->hasMany('App\Test')->orderBy('order');
+	}
+	
+	public function scopePublished()
+	{
+		return $this->where('published', 1);
+	}
+	
+	public function getNextTestAttribute()
+	{
+		if(!Auth::check())
+		{
+			return $this->tests()->first();
+		}
+		
+		foreach($this->tests as $test)
+		{
+			if(!$test->isCompleted(false))
+			{
+				return $test;
+			}
+		}
+		
+		return false;
+	}
+	
+	public function getCourseProgressAttribute()
+	{
+		if(!Auth::check())
+		{
+			return (object)[
+				'completed' 		=> false,
+				'num_completed' 	=> 0,
+				'status'			=> Course::UNSTARTED,
+			];
+		}
+		
+		if($this->courseProgress !== null)
+		{
+			return $this->courseProgress;
+		}
+		
+		$courseStarted = false;
+		
+		$num_completed = 0;
+		$num_partially_completed = 0;
+		foreach($this->tests as $test)
+		{
+			if(!$courseStarted && $test->userHasArchive())
+			{
+				$courseStarted = true;
+			}
+			
+			if($test->isCompleted(true))
+			{
+				$num_completed++;
+				$num_partially_completed++;
+			}
+			elseif($test->isCompleted(false))
+			{
+				$num_partially_completed++;
+			}
+		}
+		
+		$status = Course::UNSTARTED;
+		
+		if($num_completed == $this->tests->count())
+		{
+			$status = Course::COMPLETED;
+		}
+		elseif($num_completed > 0 || $num_partially_completed > 0)
+		{
+			$status = Course::IN_PROGRESS;
+		}
+		elseif($courseStarted)
+		{
+			$status = Course::STARTED;
+		}
+		
+		$this->courseProgress = (object)[
+			'status'					=> $status,
+			
+			'isCourseStarted'			=> $courseStarted,
+			'isCompleted'				=> $num_completed == $this->tests->count(),
+			
+			'numCompleted' 				=> $num_completed,
+			'numPartiallyCompleted' 	=> $num_partially_completed,
+			'numTotal' 					=> $this->tests->count(),
+		];
+		
+		return $this->courseProgress;
+	}
+	
+	public function isPublished()
+	{
+		return $this->published == 1;
+	}
+	
 }

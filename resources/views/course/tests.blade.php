@@ -63,7 +63,7 @@
 							<span class="glyphicon glyphicon-lock"></span>
 							<p>Lukittu</p>
 						@else
-							<span class="glyphicon glyphicon-star"></span>
+							<span class="glyphicon glyphicon-star-empty"></span>
 							<p>Suorittamaton</p>
 						@endif
 					</div>

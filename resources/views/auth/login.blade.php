@@ -2,9 +2,8 @@
 
 @section('content')
 	
-	<h1>Kirjaudu sisään</h1>
 
-	{!! Form::open(['method' => 'POST', 'action' => 'AuthController@login', 'style' => 'width:75%;margin:2em auto 0 auto']) !!}
+	{!! Form::open(['method' => 'POST', 'action' => 'AuthController@login', 'class' => 'centered-form']) !!}
 
 		{!! csrf_field() !!}
 		
@@ -12,12 +11,14 @@
 			<input type="hidden" name="ref" value="{{ $referer }}">
 			<input type="hidden" name="route" value="{{ $route }}">
 		@endif
+		
+		<h1>Kirjaudu sisään</h1>
 
 		@if($errors->any())
 			<div class="alert alert-danger alert-icon">
 				<span class="glyphicon glyphicon-remove-sign"></span>
 				<div>
-					<b>Hupis!</b> Kirjautuminen epäonnistui.
+					<b>Hupsis!</b> Kirjautuminen epäonnistui.
 					<hr>
 					<ul>
 						@foreach($errors->all() as $error)
@@ -57,5 +58,18 @@
 		</div>
 	
 	{!! Form::close() !!}
-
+	
+	<div class="clearfix"></div>
+	
+	<div class="centered-form">
+		<hr>
+		<div>
+			<h4>Ei tunnusta? Ei hätää!</h4>
+			<p>
+				Voit rekisteröidä itsellesi tunnuksen samalla kun suoritat koetta. 
+				Aloita kurssin suorittaminen <a href="/course">täällä</a>. Kokeen lopusta voit löytää rekisteröitymislomakkeen.
+			</p>
+		</div>
+	</div>
+	
 @endsection

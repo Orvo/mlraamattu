@@ -213,7 +213,7 @@ nav li a
 {
 	display: block;
 	padding: 9px 18px;
-	color: #fff;§
+	color: #fff;
 	font-family: 'Lato', sans-serif;
 	font-weight: 700;
 }
@@ -245,6 +245,12 @@ nav li a:hover
 #main-content h1:first-child
 {
 	padding-top: 0;
+}
+
+.centered-form
+{
+	width: 75%;
+	margin: 2em auto 0 auto;
 }
 
 div#login-status
@@ -397,6 +403,11 @@ div.list div.list-item .title div.status.in-progress
 	color: #FEA43E;
 }
 
+div.list div.list-item .title div.status.started
+{
+	color: #FFD030;
+}
+
 div.list div.list-item .title div.status.locked
 {
 	color: #aaa;
@@ -404,7 +415,7 @@ div.list div.list-item .title div.status.locked
 
 div.list div.list-item .title div.status.new-test
 {
-	color: #00B4FF;
+	color: #28AAFF;
 }
 
 div.list div.list-item .title div.status.locked .glyphicon
@@ -565,12 +576,12 @@ div.tab-content-wrapper
 	transition: height 350ms ease-out;
 }
 
-#authentication-form.form-register div.tab-content-wrapper
+.form-register div.tab-content-wrapper
 {
 	height: 285px;
 }
 
-#authentication-form.form-login div.tab-content-wrapper
+.form-login div.tab-content-wrapper
 {
 	height: 232px !important;
 }
@@ -578,6 +589,16 @@ div.tab-content-wrapper
 .button-text
 {
 	display: none;
+}
+
+.form-register .button-text.button-text-register
+{
+	display: inline-block;
+}
+
+.form-login .button-text.button-text-login
+{
+	display: inline-block;
 }
 
 div.tab-content-row
@@ -589,15 +610,16 @@ div.tab-content-row > div.tab-panel
 {
 	display: inline-block;
 	width: 760px;
+	margin: 0 auto;
 	transition: margin 350ms ease-out;
 }
 
-#authentication-form.form-register div.tab-panel:first-child
+.form-register div.tab-panel:first-child
 {
 	margin-left: 0px;
 }
 
-#authentication-form.form-login div.tab-panel:first-child
+.form-login div.tab-panel:first-child
 {
 	margin-left: -760px;
 }
@@ -1028,6 +1050,11 @@ div.alert-icon > div
 	margin: 0 0 0 50px;
 }
 
+div.alert-icon > div .btn
+{
+	margin-top: 8px;
+}
+
 div.alert-icon.alert-icon-small > div
 {
 	margin: 0 0 0 40px;
@@ -1111,23 +1138,6 @@ div.alert-icon > div.clearfix
 
 .clearfix:after {
     clear: both;
-}
-
-/* ==========================================================================
-   EXAMPLE Media Queries for Responsive Design.
-   These examples override the primary ('mobile first') styles.
-   Modify as content requires.
-   ========================================================================== */
-
-@media only screen and (min-width: 35em) {
-    /* Style adjustments for viewports that meet the condition */
-}
-
-@media print,
-       (-webkit-min-device-pixel-ratio: 1.25),
-       (min-resolution: 1.25dppx),
-       (min-resolution: 120dpi) {
-    /* Style adjustments for high resolution devices */
 }
 
 /* ==========================================================================

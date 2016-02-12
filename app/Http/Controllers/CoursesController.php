@@ -21,13 +21,21 @@ class CoursesController extends Controller
 	 */
 	public function index()
 	{
-		$courses = Course::with('tests')->where('published', 1)->get();
+		$courses = Course::with('tests')->published()->get();
 		
 		foreach($courses as $key => $course)
 		{
 			if($course->tests->count() == 0)
 			{
 				unset($courses[$key]);
+			}
+			else
+			{
+				$progress = $course->courseProgress;
+				$course->progressStatus = $progress->status;
+				
+				//dd($progress);
+				//dd($course->nextTest->id);
 			}
 		}
 		

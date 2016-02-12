@@ -158,6 +158,19 @@ class TestValidator
 			$response['empty_answer'] = true;
 		}
 		
+		$status = Question::INCORRECT;
+		
+		if($response['correct'])
+		{
+			$status = Question::CORRECT;
+		}
+		elseif(!$response['correct'] && @$response['partial'] > 0)
+		{
+			$status = Question::PARTIALLY_CORRECT;
+		}
+		
+		$response['status'] = $status;
+		
 		return $response;
 	}
 	

@@ -12,6 +12,10 @@ class Test extends Model
 	private $unlockStatus = null;
 	private $hasFeedbackStatus = null;
 	
+	const UNSTARTED		= 1;
+	const IN_PROGRESS	= 2;
+	const COMPLETED 	= 3;
+	
 	public function course()
 	{
 		return $this->belongsTo('App\Course');
@@ -65,6 +69,16 @@ class Test extends Model
 		}
 		
 		return false;
+	}
+	
+	public function userHasArchive()
+	{
+		if(!Auth::check())
+		{
+			return false;
+		}
+		
+		return Auth::user()->archives()->where('test_id', $this->id)->exists();
 	}
 	
 	public function isUnlocked()

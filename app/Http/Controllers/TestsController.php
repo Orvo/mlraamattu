@@ -42,6 +42,7 @@ class TestsController extends Controller
 				$validation = $testvalidator->WithAnswers($test, $data->given_answers);
 				
 				$passed = ($validation['num_correct'] / $validation['total']) >= 0.5;
+				$passedFull = $validation['num_correct'] == $validation['total'];
 				$minimumToPass 	= ceil($validation['total'] * 0.5);
 			}
 		}
@@ -52,6 +53,7 @@ class TestsController extends Controller
 				'given_answers' => @$data->given_answers,
 				'feedback' 		=> @$data->feedback,
 				'hasPassed'		=> @$passed,
+				'hasPassedFull'	=> @$passedFull,
 				'validation' 	=> @$validation['validation'],
 				'minimumToPass'	=> @$minimumToPass,
 				'authentication_type' => 0,
@@ -64,6 +66,7 @@ class TestsController extends Controller
 		
 		$validation 	= $testvalidator->WithRequest($test, $request);
 		$passed 		= ($validation['num_correct'] / $validation['total']) >= 0.5;
+		$passedFull		= $validation['num_correct'] == $validation['total'];
 		$minimumToPass 	= ceil($validation['total'] * 0.5);
 		
 		$submit_login = false;
@@ -170,10 +173,12 @@ class TestsController extends Controller
 				'test' 					=> $test,
 				'feedback' 				=> @$data['feedback'],
 				'hasPassed'				=> @$passed,
+				'hasPassedFull'			=> @$passedFull,
 				'minimumToPass'			=> @$minimumToPass,
 				'authentication_type'	=> @$authenticationType,
 			]))
-			->withErrors(@$validator);
+			->withErrors(@$validator)
+			->withInput($request);
 	}
 	
 	

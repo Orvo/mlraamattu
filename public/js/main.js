@@ -45,7 +45,7 @@ $(function(){
 	
 	$('#tab-register a').click(function(e)
 	{
-		$('#authentication-form').removeClass().addClass('form-register');
+		$('form').removeClass('form-login').addClass('form-register');
 		
 		authentication_type = 0;
 		$('#authentication_type').val(authentication_type);
@@ -53,24 +53,18 @@ $(function(){
 		$('div.tabs .tab.active').removeClass('active');
 		$(this).parent().addClass('active');
 		
-		$('span.button-text-register').show();
-		$('span.button-text-login').hide();
-		
 		e.preventDefault();
 	});
 	
 	$('#tab-login a').click(function(e)
 	{
-		$('#authentication-form').removeClass().addClass('form-login');
+		$('form').removeClass('form-register').addClass('form-login');
 		
 		authentication_type = 1;
 		$('#authentication_type').val(authentication_type);
 		
 		$('div.tabs .tab.active').removeClass('active');
 		$(this).parent().addClass('active');
-		
-		$('span.button-text-register').hide();
-		$('span.button-text-login').show();
 		
 		e.preventDefault();
 	});
