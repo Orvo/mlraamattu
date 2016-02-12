@@ -223,6 +223,36 @@
 				</div>
 				<div class="clearfix"></div>
 			</div>
+		@elseif($hasPassed)
+			<div class="alert alert-success alert-icon">
+				<span class="glyphicon glyphicon-ok-circle"></span>
+				<div>
+					<h4>Koe läpäisty!</h4>
+					@if($test->course->nextTest)
+						<p>
+							Olet vastannut oikein läpäisyyn vaadittuun vähimmäismäärään kysymyksistä ja voit nyt jatkaa seuraavaan kokeeseen jos niin tahdot.
+						</p>
+						<p class="pull-right">
+							<a href="/test/{{ $test->course->nextTest->id }}" class="btn btn-success">
+								Seuraavaan kokeeseen! <span class="glyphicon glyphicon-chevron-right"></span>
+							</a>
+						</p>
+						<p>
+							Halutessasi voit vielä korjata vastauksia.
+						</p>
+					@else
+						<p class="pull-right">
+							<a href="/" class="btn btn-success">
+								Palaa etusivulle <span class="glyphicon glyphicon-chevron-right"></span>
+							</a>
+						</p>
+						<p>
+							Olet vastannut oikein läpäisyyn vaadittuun vähimmäismäärään kysymyksistä. Halutessasi voit vielä korjata vastauksia.
+						</p>
+					@endif
+				</div>
+				<div class="clearfix"></div>
+			</div>
 		@endif
 		
 		<fieldset class="questions">

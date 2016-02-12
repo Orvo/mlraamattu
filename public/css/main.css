@@ -359,6 +359,11 @@ div.alert.alert-danger a:active
 	color: #FED4D5;
 }
 
+div.list
+{
+	padding-top: 1.2em;
+}
+
 div.list div.list-item
 {
 	border: 1px solid #f1f1f1;

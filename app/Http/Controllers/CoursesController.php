@@ -23,24 +23,30 @@ class CoursesController extends Controller
 	{
 		$courses = Course::with('tests')->published()->get();
 		
+		$my_courses = [];
+		$available_courses = [];
+		
 		foreach($courses as $key => $course)
 		{
-			if($course->tests->count() == 0)
-			{
-				unset($courses[$key]);
-			}
-			else
+			if($course->tests->count() > 0)
 			{
 				$progress = $course->courseProgress;
 				$course->progressStatus = $progress->status;
 				
-				//dd($progress);
-				//dd($course->nextTest->id);
+				if($progress->status == Course::UNSTARTED)
+				{
+					$available_courses[] = $course;
+				}
+				else
+				{
+					$my_courses[] = $course;
+				}
 			}
 		}
 		
 		return view('course.list', [
-			'courses' => $courses,
+			'my_courses' 		=> $my_courses,
+			'available_courses' => $available_courses,
 		]);
 	}
 
