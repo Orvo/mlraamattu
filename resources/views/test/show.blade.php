@@ -98,7 +98,7 @@
 						</div>
 						<div class="col-xs-4">
 							<p style="text-align: right; padding: 0.45em 0">
-								<a href="/auth/reset">Unohtunut salasana?</a>
+								<a href="/auth/reset" target="_blank">Unohtunut salasana?</a>
 							</p>
 						</div>
 					</div>
