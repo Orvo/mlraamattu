@@ -139,6 +139,7 @@
 			
 			<div class="form-group">
 				<button class="btn btn-primary btn-block">
+					<span class="glyphicon glyphicon-ok"></span>
 					@if(Auth::check())
 						Tarkista vastaukset
 					@elseif(!Auth::check())
@@ -173,7 +174,7 @@
 					<h4><b>Hurraa!</b> Koe läpäisty!</h4>
 					@if($test->course->nextTest)
 						<p class="pull-right">
-							<a href="/test/{{ $test->course->nextTest->id }}" class="btn btn-success">
+							<a href="/test/{{ $test->course->nextTest->id }}/{{ $test->course->nextTest->goToMaterial ? 'material' : '' }}" class="btn btn-success">
 								Seuraavaan kokeeseen! <span class="glyphicon glyphicon-chevron-right"></span>
 							</a>
 						</p>
@@ -203,7 +204,7 @@
 					</p>
 					@if($test->course->nextTest)
 						<p class="pull-right">
-							<a href="/test/{{ $test->course->nextTest->id }}" class="btn btn-success">
+							<a href="/test/{{ $test->course->nextTest->id }}/{{ $test->course->nextTest->goToMaterial ? 'material' : '' }}" class="btn btn-success">
 								Seuraavaan kokeeseen! <span class="glyphicon glyphicon-chevron-right"></span>
 							</a>
 						</p>
@@ -233,7 +234,7 @@
 							Olet vastannut oikein läpäisyyn vaadittuun vähimmäismäärään kysymyksistä ja voit nyt jatkaa seuraavaan kokeeseen jos niin tahdot.
 						</p>
 						<p class="pull-right">
-							<a href="/test/{{ $test->course->nextTest->id }}" class="btn btn-success">
+							<a href="/test/{{ $test->course->nextTest->id }}/{{ $test->course->nextTest->goToMaterial ? 'material' : '' }}" class="btn btn-success">
 								Seuraavaan kokeeseen! <span class="glyphicon glyphicon-chevron-right"></span>
 							</a>
 						</p>
@@ -250,6 +251,18 @@
 							Olet vastannut oikein läpäisyyn vaadittuun vähimmäismäärään kysymyksistä. Halutessasi voit vielä korjata vastauksia.
 						</p>
 					@endif
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		@endif
+		
+		@if(@$validation && !$hasPassed && $test->page()->exists())
+			<div class="alert alert-info alert-icon alert-icon-small">
+				<i class="fa fa-exclamation"></i>
+				<div>
+					<p>
+						<b>Eikö suju?</b> Halutessasi voit kerrata koemateriaalia <a href="/test/{{ $test->id }}/material"><span class="ul">täällä</span></a>.
+					</p>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -551,6 +564,7 @@
 		<hr>
 		<div class="form-group">
 			<button class="btn btn-primary btn-block">
+				<span class="glyphicon glyphicon-ok"></span>
 				@if(Auth::check())
 					Tarkista vastaukset
 				@elseif(!Auth::check())

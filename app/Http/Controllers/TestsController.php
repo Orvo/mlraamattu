@@ -49,15 +49,31 @@ class TestsController extends Controller
 		
 		return view('test.show')
 			->with([
-				'test' 			=> $test,
-				'given_answers' => @$data->given_answers,
-				'feedback' 		=> @$data->feedback,
-				'hasPassed'		=> @$passed,
-				'hasPassedFull'	=> @$passedFull,
-				'validation' 	=> @$validation['validation'],
-				'minimumToPass'	=> @$minimumToPass,
-				'authentication_type' => 0,
+				'test' 					=> $test,
+				'given_answers' 		=> @$data->given_answers,
+				'feedback' 				=> @$data->feedback,
+				'hasPassed'				=> @$passed,
+				'hasPassedFull'			=> @$passedFull,
+				'validation' 			=> @$validation['validation'],
+				'minimumToPass'			=> @$minimumToPass,
+				'authentication_type' 	=> 0,
 			]);
+	}
+	
+	public function material($id)
+	{
+		$test = Test::with('page')->has('page')->find($id);
+		
+		if($test)
+		{
+			return view('test.material')->with([
+				'test' => $test,
+			]);
+		}
+		else
+		{
+			return redirect('/test/' . $id);
+		}
 	}
 	
 	public function check($id, Request $request, TestValidator $testvalidator)

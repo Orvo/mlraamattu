@@ -35,40 +35,63 @@
 	
 	<div class="list">
 		@foreach($course->tests as $test)
-			<?php if($test->questions->count() == 0): continue; endif;?>
+			<?php if(!$test->hasQuestions()): continue; endif;?>
+			@if($test->page()->exists())
+				<div class="test list-item list-item-flat">
+					<div class="title">
+						<span class="title-anchor">
+							<i class="fa fa-book"></i> Koemateriaali: {{ $test->title }}
+						</span>
+					</div>
+					<div class="description">
+						{{ $test->page->description }}
+						<div class="read-more">
+							@if($test->progress->status != \App\Test::LOCKED)
+								<a href="/test/{{ $test->id }}/material">
+									Lue lisää <span class="glyphicon glyphicon-chevron-right"></span>
+								</a>
+							@else
+								Suorita edellinen koe ensin.
+							@endif
+						</div>
+					</div>
+				</div>
+			@endif
+			
 			<div class="test list-item">
 				<div class="title">
-					@if($test->isUnlocked())
+					@if($test->progress->status != \App\Test::LOCKED)
 						<a href="/test/{{ $test->id }}" class="title-anchor">
 					@else
 						<span class="title-anchor">
 					@endif
-					
+					<i class="fa fa-list"></i>
 					{{ $test->title }}
+					
 					<div class="status {{
 						css([
-							'locked' 		=> !$test->isUnlocked(),
-							'completed'		=> (@$user_completed[$test->id] && $user_completed[$test->id]->all_correct),
-							'in-progress'	=> (@$user_completed[$test->id] && !$user_completed[$test->id]->all_correct),
-							'new-test'		=> ($test->isUnlocked() && !@$user_completed[$test->id]),
+							'locked' 		=> $test->progress->status == \App\Test::LOCKED,
+							'new-test'		=> $test->progress->status == \App\Test::UNSTARTED,
+							'in-progress'	=> $test->progress->status == \App\Test::IN_PROGRESS,
+							'completed'		=> $test->progress->status == \App\Test::COMPLETED,
 						])
 					}}">
-						@if(@$user_completed[$test->id] && $user_completed[$test->id]->all_correct)
+						@if($test->progress->status == \App\Test::COMPLETED)
 							<span class="glyphicon glyphicon-ok-circle"></span>
 							<p>Suoritettu</p>
-						@elseif(@$user_completed[$test->id])
+						@elseif($test->progress->status == \App\Test::IN_PROGRESS)
 							<span class="glyphicon glyphicon-remove-circle"></span>
-							<p>Kesken ({{ @$user_completed[$test->id]->num_correct }}/{{ @$user_completed[$test->id]->total }} oikein)</p>
-						@elseif(!$test->isUnlocked())
-							<span class="glyphicon glyphicon-lock"></span>
-							<p>Lukittu</p>
-						@else
+							<p>Kesken ({{ $test->progress->data->num_correct }}/{{ $test->progress->data->total }} oikein)</p>
+						@elseif($test->progress->status == \App\Test::UNSTARTED)
 							<span class="glyphicon glyphicon-star-empty"></span>
 							<p>Suorittamaton</p>
+						@elseif($test->progress->status == \App\Test::LOCKED)
+							<span class="glyphicon glyphicon-lock"></span>
+							<p>Lukittu</p>
 						@endif
 					</div>
 						
-					@if($test->isUnlocked())
+					@if($test->progress->status != \App\Test::LOCKED)
 						</a>
 					@else
 						</span>

@@ -32,7 +32,7 @@
 		</p>
 		@if($course->progressStatus != \App\Course::COMPLETED && $course->nextTest)
 			<div class="pull-right">
-				<a href="test/{{ $course->nextTest->id }}" class="btn btn-default quick-start-course">
+				<a href="test/{{ $course->nextTest->id }}/{{ $course->nextTest->goToMaterial ? 'material' : '' }}" class="btn btn-default quick-start-course">
 					@if($course->progressStatus == \App\Course::IN_PROGRESS || $course->progressStatus == \App\Course::STARTED)
 						Jatka kurssia
 					@elseif($course->progressStatus == \App\Course::UNSTARTED)

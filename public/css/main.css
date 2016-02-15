@@ -331,7 +331,12 @@ div.alert a
 {
 	text-decoration: none;
 	display: inline-block;
-	padding-right: 5px;
+}
+
+div.alert a .glyphicon
+{
+	display: inline-block;
+	padding-left: 5px;
 }
 
 div.alert a:link > span.ul,
@@ -372,6 +377,13 @@ div.list div.list-item
 	border-radius: 6px;
 	overflow: hidden;
 	margin: 0 0 1em 0;
+}
+
+div.list div.list-item.list-item-flat
+{
+	border: none;
+	border-bottom: none;
+	box-shadow: none;
 }
 
 div.list div.list-item .title
@@ -423,12 +435,6 @@ div.list div.list-item .title div.status.new-test
 	color: #28AAFF;
 }
 
-div.list div.list-item .title div.status.locked .glyphicon
-{
-	/*padding: 12px 10px 0 0;
-	font-size: 30pt;*/
-}
-
 div.list div.list-item .title div.status p
 {
 	float: right;
@@ -451,11 +457,23 @@ div.list div.list-item .title .title-anchor
 	outline: none !important;
 }
 
+div.list div.list-item.list-item-flat .title .title-anchor
+{
+	background: none;
+}
+
 div.list div.list-item .title a:hover,
 div.list div.list-item .title a:active
 {
 	background: #f2f2f2;
 	color: #DFA508;
+}
+
+div.list div.list-item .title .title-anchor i.fa
+{
+	display: inline-block;
+	padding-right: 5px;
+	color: #444;
 }
 
 div.list div.list-item .description
@@ -465,6 +483,22 @@ div.list div.list-item .description
 	margin: 0;
 	color: #555;
 	background: #fcfcfc;
+}
+
+div.list div.list-item.list-item-flat .description
+{
+	background: none;
+}
+
+div.list div.list-item .description .read-more
+{
+	text-align: right;
+	margin: 12px 0 0 0;
+	padding: 8px 0 0 0;
+	border-top: 1px solid #eee;
+	font-size: 14pt;
+	font-weight: bold;
+	font-family: 'Lato', sans-serif;
 }
 
 div.list div.list-item .description .alert
@@ -477,6 +511,17 @@ div.list div.list-item .description .alert div
 {
 	padding: 4px 0 1px 0;
 	font-weight: bold;
+}
+
+div.test-material-body
+{
+	text-align: justify;
+}
+
+div.test-material-body img
+{
+	border: 0;
+	margin: 1em;
 }
 
 form.test-form .test-title
@@ -1037,17 +1082,29 @@ div.alert.alert-danger hr
 div.alert-icon
 {
 	padding-bottom: 5px;
+	min-height: 4.8em;
 }
 
-div.alert-icon > .glyphicon
+div.alert-icon > .glyphicon,
+div.alert-icon > i.fa
 {
 	float: left;
+	display: block;
 	font-size: 38px;
+	width: 38px;
+	text-align: center;
 }
 
-div.alert-icon.alert-icon-small > .glyphicon
+div.alert-icon.alert-icon-small
 {
-	font-size: 28px;
+	min-height: 4.1em;
+}
+
+div.alert-icon.alert-icon-small > .glyphicon,
+div.alert-icon.alert-icon-small > i.fa
+{
+	font-size: 28px !important;
+	width: 28px;
 }
 
 div.alert-icon > div

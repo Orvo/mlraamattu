@@ -58,23 +58,10 @@ class CoursesController extends Controller
 	 */
 	public function show($id)
 	{
-		$user_completed = [];
-		if(\Auth::check())
-		{
-			foreach(\Auth::user()->archives as $item)
-			{
-				$user_completed[$item->test_id] = json_decode($item->data);
-			}
-		}
-		
-		$course = Course::with('tests')->where([
-			'id' => $id,
-			'published' => 1,
-		])->firstOrFail();
+		$course = Course::with('tests', 'tests.questions')->has('tests.questions', '>', 0)->published()->findOrFail($id);
 
 		return view('course.tests', [
 			'course' => $course,
-			'user_completed' => $user_completed,
 		]);
 	}
 	

@@ -12,9 +12,10 @@ class Test extends Model
 	private $unlockStatus = null;
 	private $hasFeedbackStatus = null;
 	
-	const UNSTARTED		= 1;
-	const IN_PROGRESS	= 2;
-	const COMPLETED 	= 3;
+	const LOCKED			= 1;
+	const UNSTARTED			= 2;
+	const IN_PROGRESS		= 3;
+	const COMPLETED 		= 4;
 	
 	public function course()
 	{
@@ -24,6 +25,11 @@ class Test extends Model
 	public function questions()
 	{
 		return $this->hasMany('App\Question')->orderBy('order');
+	}
+	
+	public function page()
+	{
+		return $this->hasOne('App\Page');
 	}
 	
 	public function hasFeedback()
@@ -44,6 +50,11 @@ class Test extends Model
 		}
 		
 		return $this->hasFeedbackStatus;
+	}
+	
+	public function hasQuestions()
+	{
+		return $this->questions()->exists();
 	}
 	
 	public function isPublished()
@@ -118,5 +129,48 @@ class Test extends Model
 		}
 		
 		return $this->unlockStatus;
+	}
+	
+	protected $progress = null;
+	public function getProgressAttribute()
+	{
+		if(!Auth::check())
+		{
+			return (object)[
+				'status' 	=> $this->isUnlocked() ? Test::UNSTARTED : Test::LOCKED,
+				'data'		=> false,
+			];
+		}
+		
+		if(!is_null($this->progress))
+		{
+			return $this->progress;
+		}
+		
+		$data = false;
+		
+		$status = $this->isUnlocked() ? Test::UNSTARTED : Test::LOCKED;
+		
+		if($status != Test::LOCKED && $this->userHasArchive())
+		{
+			$archive = Auth::user()->archives()->where('test_id', $this->id)->first();
+			$data = json_decode($archive->data);
+			
+			if($data->all_correct)
+			{
+				$status = Test::COMPLETED;
+			}
+			else
+			{
+				$status = Test::IN_PROGRESS;
+			}
+		}
+		
+		$this->progress = (object)[
+			'status' 	=> $status,
+			'data'		=> $data,
+		];
+		
+		return $this->progress;
 	}
 }

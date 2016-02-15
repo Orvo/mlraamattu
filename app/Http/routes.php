@@ -35,6 +35,7 @@ Route::get('potato', function ()
 });
 
 Route::get('test/{id}', 'TestsController@show');
+Route::get('test/{id}/material', 'TestsController@material');
 Route::post('test/{id}', 'TestsController@check');
 
 Route::get('course', 'CoursesController@index');

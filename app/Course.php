@@ -29,20 +29,29 @@ class Course extends Model
 	
 	public function getNextTestAttribute()
 	{
+		$result = false;
+		
 		if(!Auth::check())
 		{
-			return $this->tests()->first();
+			$result = $this->tests()->first();
 		}
-		
-		foreach($this->tests as $test)
+		else
 		{
-			if(!$test->isCompleted(false))
+			foreach($this->tests as $test)
 			{
-				return $test;
-			}
+				if($test->hasQuestions() && !$test->isCompleted(false))
+				{
+			 		$result = $test;
+				}
+			}	
 		}
 		
-		return false;
+		if($result)
+		{
+			$result->goToMaterial = $result->page()->exists() && $result->progress->status == \App\Test::UNSTARTED;
+		}
+		
+		return $result;
 	}
 	
 	public function getCourseProgressAttribute()
@@ -62,6 +71,8 @@ class Course extends Model
 		}
 		
 		$courseStarted = false;
+		
+		$numTestsTotal = $this->tests()->has('questions')->count();
 		
 		$num_completed = 0;
 		$num_partially_completed = 0;
@@ -85,7 +96,7 @@ class Course extends Model
 		
 		$status = Course::UNSTARTED;
 		
-		if($num_completed == $this->tests->count())
+		if($num_completed == $numTestsTotal)
 		{
 			$status = Course::COMPLETED;
 		}
@@ -102,11 +113,11 @@ class Course extends Model
 			'status'					=> $status,
 			
 			'isCourseStarted'			=> $courseStarted,
-			'isCompleted'				=> $num_completed == $this->tests->count(),
+			'isCompleted'				=> $num_completed == $numTestsTotal,
 			
 			'numCompleted' 				=> $num_completed,
 			'numPartiallyCompleted' 	=> $num_partially_completed,
-			'numTotal' 					=> $this->tests->count(),
+			'numTotal' 					=> $numTestsTotal,
 		];
 		
 		return $this->courseProgress;

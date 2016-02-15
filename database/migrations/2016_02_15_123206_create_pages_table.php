@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddReplyDataColumnToArchive extends Migration
+class CreatePagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,11 @@ class AddReplyDataColumnToArchive extends Migration
      */
     public function up()
     {
-        Schema::table('archive', function (Blueprint $table) {
-            $table->text('reply_data')->after('replied_to');
+        Schema::create('pages', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('test_id');
+            $table->text('body');
+            $table->timestamps();
         });
     }
 
@@ -24,8 +27,6 @@ class AddReplyDataColumnToArchive extends Migration
      */
     public function down()
     {
-        Schema::table('archive', function (Blueprint $table) {
-            $table->dropColumn('reply_data');
-        });
+        Schema::drop('pages');
     }
 }
