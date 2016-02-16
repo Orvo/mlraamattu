@@ -45,9 +45,52 @@
 					</div>
 				</nav>
 			</header>
-			<div id="main-content">
-				@yield('content')
+			<div id="content-wrapper">
+				<div id="sidebar-content">
+					<p>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta totam dignissimos rerum ab cum deserunt perspiciatis illum minus ad, nam dolorem error asperiores ea amet voluptatibus voluptatem id porro, iusto nisi pariatur magnam ut laborum sapiente quod? Sint quisquam, animi ut deleniti fuga facilis, voluptas veritatis doloribus sunt possimus aut.
+					</p>
+				</div>
+				<div id="main-content">
+					@yield('content')
+				</div>
 			</div>
+			<footer>
+				<div class="inner-dark">
+					<div class="inner row">
+						<div class="col-xs-5">
+							<h3>&copy; Media7 Raamattuopisto</h3>
+						</div>
+						<div class="col-xs-7">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt illo magni consequuntur esse, corrupti similique nam. Laudantium sit possimus dolores!
+						</div>
+					</div>
+				</div>
+				<div class="inner row">
+					<div class="col-xs-2">
+						<ul>
+							<li><a href="#">Linkki 1</a></li>
+							<li><a href="#">Linkki 2</a></li>
+							<li><a href="#">Linkki 3</a></li>
+						</ul>
+					</div>
+					<div class="col-xs-2">
+						<ul>
+							<li><a href="#">Linkki 4</a></li>
+							<li><a href="#">Linkki 5</a></li>
+							<li><a href="#">Linkki 6</a></li>
+						</ul>
+					</div>
+					<div class="col-xs-8">
+						<p>
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt illo magni consequuntur esse, corrupti similique nam. Laudantium sit possimus dolores!
+						</p>
+						<p>
+							Voluptates deleniti qui nihil a officia consectetur accusamus fugit perferendis corporis eos. Dolore, libero, nesciunt!
+						</p>
+					</div>
+				</div>
+			</footer>
 		</div>
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

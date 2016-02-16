@@ -17,12 +17,26 @@ class Page extends Model
 		return $this->getFirstParagraph($this->body);
 	}
 	
-	protected function getFirstParagraph($string)
+	protected function getFirstParagraph($string, $offset = 0)
 	{
-		$start = stripos($string, '<p');
-		$end = stripos($string, '</p>');
+		$start = stripos($string, '<p', $offset);
+		$end = stripos($string, '</p>', $offset);
 		
-		return trim(strip_tags(substr($string, $start, $end-$start)));
+		if($start === false)
+		{
+			return '';
+		}
+		
+		$result = trim(strip_tags(substr($string, $start, $end-$start)));
+		
+		if(strlen($result) > 0)
+		{
+			return $result;
+		}
+		else
+		{
+			return $this->getFirstParagraph($string, $end+4);
+		}
 	}
 	
 }

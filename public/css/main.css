@@ -162,13 +162,6 @@ header .title h3
 	border: none;
 }
 
-header.fixed .title h1,
-header.fixed .title h3
-{
-	/*display: inline-block;
-	padding-right: 0.5em;*/
-}
-
 header .title h1
 {
 	font-weight: 900;
@@ -179,15 +172,10 @@ nav
 {
 	margin-top: 18px;
 	padding: 4px 0 4px 0;
-	background: #CF5E03;
+	background: #E45A0D;
 	/*box-shadow: 0 15px 15px rgba(230, 230, 230, 0.7);*/
 	z-index: 999;
 	transition: all 500ms ease-in-out;
-}
-
-header.fixed nav
-{
-	background: #F3730D;
 }
 
 nav .inner
@@ -218,7 +206,8 @@ nav li a
 	font-weight: 700;
 }
 
-nav li a:hover
+nav li a:hover,
+nav li a:active
 {
 	text-decoration: none;
 	background: #fff;
@@ -231,20 +220,93 @@ nav li a:hover
 	height: 100%;
 }
 
-#main-content
+#content-wrapper
 {
-	width: 800px;
-	min-height: 100%;
+	width: 950px;
 	margin: -2px auto 0 auto;
-	padding: 180px 25px 70px 25px;
+	padding: 180px 25px 110px 25px;
 	background: #fff;
 	box-shadow: 0 15px 15px #ddd;
 	z-index: 0;
+	min-height: 100%;
+}
+
+#sidebar-content
+{
+	float: left;
+	width: 190px;
+	margin: 0;
+	padding: 0;
+	clear: none;
+}
+
+#main-content
+{
+	min-height: 100%;
+	margin: 0 0 0 230px;
+	padding: 0;
+	clear: none;
 }
 
 #main-content h1:first-child
 {
 	padding-top: 0;
+}
+
+footer
+{
+	min-height: 200px;
+	color: #fff;
+	background: #fe7e17 url('/img/background.png') repeat-x center bottom;
+	border-top: 4px solid #CE3F0D;
+	padding: 0 0 40px 0;
+}
+
+footer .inner-dark
+{
+	background: #E45A0D;
+}
+
+footer .inner
+{
+	width: 950px;
+	margin: 0 auto;
+	padding: 26px 0 20px 0;
+	text-align: justify;
+}
+
+footer .inner h3
+{
+	margin: 0;
+	padding: 0;
+	font-weight: 900;
+	text-shadow: 2px 3px 1px #D1400E;
+}
+
+footer .inner ul,
+footer .inner ul li
+{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+footer .inner a:link,
+footer .inner a:visited
+{
+	display: inline-block;
+	color: #fff;
+	font-weight: bold;
+	padding: 3px 8px;
+}
+
+footer .inner a:hover,
+footer .inner a:active
+{
+	color: #B1370C;
+	background: #fff;
+	text-decoration: none;
+	border-radius: 4px
 }
 
 .centered-form
@@ -546,7 +608,6 @@ form.test-form div.test-description
 div.tabs
 {
 	height: 44px;
-	/*background: #f00;*/
 	border-bottom: 1px solid #ddd;
 }
 

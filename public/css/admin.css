@@ -1133,6 +1133,87 @@ tbody > tr.missing-test > td:first-child
 
 /**************************************************/
 
+.form-group.ckeditor
+{
+	
+}
+
+ul.tabs,
+ul.tabs li
+{
+	list-style: none;
+}
+
+ul.tabs
+{
+	height: 40px;
+	border-bottom: 1px solid #ddd;
+}
+
+ul.tabs li
+{
+	display: inline-block;
+	margin: 0 !important;
+	padding: 0 4px;
+}
+
+ul.tabs li a
+{
+	display: block;
+	min-width: 120px;
+	height: 39px;
+	padding: 8px 34px 0 34px;
+	text-align: center;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border: 1px solid #ddd;
+	border-bottom: none;
+	background: #eee;
+	cursor: pointer;
+	text-decoration: none;
+	font-size: 11pt;
+	font-family: 'Lato';
+	font-weight: bold;
+	transition: all 150ms ease-out;
+	outline: none !important;
+}
+
+ul.tabs li.active a
+{
+	color: #F43313;
+}
+
+ul.tabs li a:hover,
+ul.tabs li a:active
+{
+	color: #D33F13;
+}
+
+ul.tabs li a .glyphicon
+{
+	display: inline-block;
+	margin-left: 5px;
+}
+
+ul.tabs li:not(.active) a
+{
+	box-shadow: inset 0 -2px 4px #ddd;
+}
+
+ul.tabs li:not(.active) a:hover
+{
+	box-shadow: inset 0 -2px 4px #d0d0d0;
+	background: #e2e2e2;
+}
+
+ul.tabs li.active a
+{
+	height: 40px;
+	background: #fff;
+}
+
+/**************************************************/
+
 .test-result-box
 {
 	background: #fafafa;

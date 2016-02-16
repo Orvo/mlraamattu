@@ -3,7 +3,7 @@
  * Application
  */
  
-var app = angular.module('adminpanel', ['ngResource', 'ngRoute', 'ngSanitize', 'ui.sortable'],
+var app = angular.module('adminpanel', ['ngResource', 'ngRoute', 'ngSanitize', 'ui.sortable', 'ckeditor'],
 	function($interpolateProvider)
 	{
 		$interpolateProvider.startSymbol('[[');

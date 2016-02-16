@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Test;
+use App\Page;
 use App\Question;
 use App\Answer;
 
@@ -20,7 +21,7 @@ class TestsController extends Controller
 	 */
 	public function index()
 	{
-		$tests = Test::with('questions', 'course')->get();
+		$tests = Test::with('questions', 'page', 'course')->get();
 		return $tests;
 	}
 
@@ -109,18 +110,39 @@ class TestsController extends Controller
 		
 		$test->save();
 		
-		foreach($data['questions'] as $qkey => $qdata)
+		///////////////////////
+		
+		$isNewPage = !array_key_exists('id', $data['page']);
+		$pageBody = trim($data['page']['body']);
+		$shouldCreateNew = strlen($pageBody) > 0;
+		
+		if($isNewPage)
 		{
-			if(!array_key_exists('id', $qdata))
+			$page = new Page();
+		}
+		else
+		{
+			$page = $test->page;
+		}
+		
+		$page->test_id = $test->id;
+		$page->body = trim($data['page']['body']);
+		$page->save();
+		
+		/////////////////////////
+		
+		foreach($data['questions'] as $qkey => $question_data)
+		{
+			if(!array_key_exists('id', $question_data))
 			{
 				$question = new Question();
 			}
 			else
 			{
-				$question = Question::find($qdata['id']);
+				$question = Question::find($question_data['id']);
 				
 				$submitted_answers = [];
-				foreach($qdata['answers'] as $adata)
+				foreach($question_data['answers'] as $adata)
 				{
 					if(array_key_exists('id', $adata))
 					{
@@ -131,7 +153,7 @@ class TestsController extends Controller
 				foreach($question->answers as $akey => $answer)
 				{
 					if(!in_array($answer->id, $submitted_answers) ||
-					   ($qdata['type'] == "TEXT" && $akey > 0) || $qdata['type'] == "TEXTAREA")
+					   ($question_data['type'] == "TEXT" && $akey > 0) || $question_data['type'] == "TEXTAREA")
 					{
 						$answer->delete();
 					}
@@ -140,29 +162,29 @@ class TestsController extends Controller
 			
 			$question->test_id 	= $test->id;
 			
-			$question->type 	= $qdata['type'];
-			$question->title 	= $qdata['title'];
-			$question->subtitle = $qdata['subtitle'];
+			$question->type 	= $question_data['type'];
+			$question->title 	= $question_data['title'];
+			$question->subtitle = $question_data['subtitle'];
 			
 			$question->order 	= $qkey + 1;
 			
 			$question->save();
 			
-			foreach($qdata['answers'] as $akey => $adata)
+			foreach($question_data['answers'] as $akey => $answer_data)
 			{
-				if(!array_key_exists('id', $adata))
+				if(!array_key_exists('id', $answer_data))
 				{
 					$answer = new Answer();
 				}
 				else
 				{
-					$answer = Answer::find($adata['id']);
+					$answer = Answer::find($answer_data['id']);
 				}
 				
 				$answer->question_id 	= $question->id;
 				
-				$answer->text 			= $adata['text'];
-				$answer->is_correct 	= $adata['is_correct'];
+				$answer->text 			= $answer_data['text'];
+				$answer->is_correct 	= @$answer_data['is_correct'] ? true : false;
 				$answer->error_margin 	= 10;
 				
 				$answer->save();
@@ -180,29 +202,22 @@ class TestsController extends Controller
 	 */
 	public function show($id)
 	{
-		try
+		$test = Test::with('course', 'page', 'questions', 'questions.answers')->findOrFail($id);
+
+		foreach($test->questions as $question)
 		{
-			$test = Test::with('course', 'questions', 'questions.answers')->findOrFail($id);
-
-			foreach($test->questions as $question)
+			foreach($question->answers as $key => &$answer)
 			{
-				foreach($question->answers as $key => &$answer)
-				{
-					$answer->is_correct = $answer->is_correct ? true : false;
+				$answer->is_correct = $answer->is_correct ? true : false;
 
-					if(!$question->correct_answer and $answer->is_correct)
-					{
-						$question->correct_answer = $key;
-					}
+				if(!$question->correct_answer and $answer->is_correct)
+				{
+					$question->correct_answer = $key;
 				}
 			}
-			
-			return $test;
 		}
-		catch(Exception $e)
-		{
-			return false;
-		}
+		
+		return $test;
 	}
 
 	/**
@@ -213,7 +228,7 @@ class TestsController extends Controller
 	 */
 	public function edit($id)
 	{
-		$test = Test::with('course', 'questions')->findOrFail($id);
+		$test = Test::with('course', 'page', 'questions')->findOrFail($id);
 
 		foreach($test->questions as $question)
 		{
@@ -240,7 +255,8 @@ class TestsController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		$test = Test::with('course', 'questions')->find($id);
+		$test = Test::find($id);
+		
 		if($test)
 		{
 			$validation = $this->_validateTest($request->all());

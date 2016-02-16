@@ -459,6 +459,24 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		function link()		{ return $scope.loaded && $scope.data.test.course ? '#/courses/' + $scope.data.test.course.id : ''; },
 		function loaded() 	{ return $scope.loaded && $scope.courses_loaded; }
 	);
+	
+	////////////////////////////////////////////////////
+	
+	$scope.activeTab = 1;
+	$scope.setActiveTab = function(index)
+	{
+		$scope.activeTab = index;
+		
+		if(index == 2)
+		{
+			setTimeout(function()
+			{
+				$("html, body").stop().delay(10).animate({
+					scrollTop: $('div.tab-wrapper').position().top
+				}, 700);
+			}, 150);
+		}
+	}
 		
 	////////////////////////////////////////////////////
 	
@@ -468,6 +486,8 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	{
 		$scope.isSorting = true;
 		$scope.edit_data = false;
+		
+		$scope.setActiveTab(1);
 	}
 	
 	$scope.stopSorting = function()
@@ -477,6 +497,17 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	}
 	
 	$scope.sortableOptions = { axis: 'y', };
+	
+	//////////////
+	
+	$scope.editor_options = {
+		language: 'fi',
+		autoGrow_minHeight: 500,
+		autoGrow_maxHeight: 650,
+		autoGrow_bottomSpace: 50,
+	};
+	
+	$scope.test_material = '';
 
 	$scope.translate_type = translate_type;
 	
