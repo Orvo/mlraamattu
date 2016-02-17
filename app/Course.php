@@ -39,11 +39,15 @@ class Course extends Model
 		{
 			foreach($this->tests as $test)
 			{
-				if($test->hasQuestions() && !$test->isCompleted(false))
+				if(!$test->hasQuestions()) continue;
+				if($test->hasFeedback(true)) continue;
+				
+				if($test->progress->status == \App\Test::UNSTARTED || $test->progress->status == \App\Test::IN_PROGRESS)
 				{
 			 		$result = $test;
+			 		break;
 				}
-			}	
+			}
 		}
 		
 		if($result)

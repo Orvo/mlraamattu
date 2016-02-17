@@ -466,16 +466,6 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	$scope.setActiveTab = function(index)
 	{
 		$scope.activeTab = index;
-		
-		if(index == 2)
-		{
-			setTimeout(function()
-			{
-				$("html, body").stop().delay(10).animate({
-					scrollTop: $('div.tab-wrapper').position().top
-				}, 700);
-			}, 150);
-		}
 	}
 		
 	////////////////////////////////////////////////////

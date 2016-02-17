@@ -113,8 +113,9 @@ class TestsController extends Controller
 		///////////////////////
 		
 		$isNewPage = !array_key_exists('id', $data['page']);
+		
 		$pageBody = trim($data['page']['body']);
-		$shouldCreateNew = strlen($pageBody) > 0;
+		$savePage = strlen($pageBody) > 0;
 		
 		if($isNewPage)
 		{
@@ -127,7 +128,15 @@ class TestsController extends Controller
 		
 		$page->test_id = $test->id;
 		$page->body = trim($data['page']['body']);
-		$page->save();
+		
+		if($savePage)
+		{
+			$page->save();
+		}
+		elseif(!$isNewPage)
+		{
+			$page->delete();
+		}
 		
 		/////////////////////////
 		

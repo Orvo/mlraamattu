@@ -105,6 +105,7 @@ html, body
 body
 {
 	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 11pt;
 	background: #fdfdfd;
 	overflow-y: scroll;
 }
@@ -519,6 +520,21 @@ div.list div.list-item .title .title-anchor
 	outline: none !important;
 }
 
+div.list div.list-item .title.title-dual-row .small-title
+{
+	font-size: 10pt;
+	display: block;
+}
+
+div.list div.list-item .title.title-dual-row i.fa
+{
+	float: left;
+	display: block;
+	padding-top: 25px;
+	margin: 0 8px 0 0;
+	/*width: 31px;*/
+}
+
 div.list div.list-item.list-item-flat .title .title-anchor
 {
 	background: none;
@@ -534,8 +550,18 @@ div.list div.list-item .title a:active
 div.list div.list-item .title .title-anchor i.fa
 {
 	display: inline-block;
-	padding-right: 5px;
+	padding-right: 8px;
 	color: #444;
+}
+
+div.list div.list-item .title .title-anchor i.fa.material-icon
+{
+	color: #f44;
+}
+
+div.list div.list-item .title .title-anchor i.fa.test-icon
+{
+	color: #126491;
 }
 
 div.list div.list-item .description
@@ -566,13 +592,13 @@ div.list div.list-item .description .read-more
 div.list div.list-item .description .alert
 {
 	margin: 1em 0 0 0;
-	padding: 8px 10px;
+	padding: 8px 10px 2px 10px;
+	min-height: auto;
 }
 
 div.list div.list-item .description .alert div
 {
-	padding: 4px 0 1px 0;
-	font-weight: bold;
+	padding: 6px 0 1px 0;
 }
 
 div.test-material-body

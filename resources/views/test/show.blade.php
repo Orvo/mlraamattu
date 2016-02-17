@@ -224,6 +224,36 @@
 				</div>
 				<div class="clearfix"></div>
 			</div>
+		@elseif($test->hasFeedback(true))
+			<div class="alert alert-success alert-icon">
+				<span class="glyphicon glyphicon-ok-circle"></span>
+				<div>
+					<h4>Koe on kuitattu!</h4>
+					<p>
+						Kokeesi on merkitty hyväksytyksi riippumatta siitä, saitko kaikkia vastauksia oikein.
+					</p>
+					@if($test->course->nextTest)
+						<p class="pull-right">
+							<a href="/test/{{ $test->course->nextTest->id }}/{{ $test->course->nextTest->goToMaterial ? 'material' : '' }}" class="btn btn-success">
+								Seuraavaan kokeeseen! <span class="glyphicon glyphicon-chevron-right"></span>
+							</a>
+						</p>
+						<p>
+							Voit nyt jatkaa kurssilla eteenpäin. Halutessasi voit vielä korjata vastauksia.
+						</p>
+					@else
+						<p class="pull-right">
+							<a href="/" class="btn btn-success">
+								Palaa etusivulle <span class="glyphicon glyphicon-chevron-right"></span>
+							</a>
+						</p>
+						<p>
+							Olet suorittanut koko kurssin. Halutessasi voit vielä korjata vastauksia.
+						</p>
+					@endif
+				</div>
+				<div class="clearfix"></div>
+			</div>
 		@elseif($hasPassed)
 			<div class="alert alert-success alert-icon">
 				<span class="glyphicon glyphicon-ok-circle"></span>

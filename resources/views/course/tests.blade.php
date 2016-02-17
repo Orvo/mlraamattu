@@ -36,12 +36,17 @@
 	<div class="list">
 		@foreach($course->tests as $test)
 			<?php if(!$test->hasQuestions()): continue; endif;?>
+			
 			@if($test->page()->exists())
 				<div class="test list-item list-item-flat">
-					<div class="title">
-						<span class="title-anchor">
-							<i class="fa fa-book"></i> Koemateriaali: {{ $test->title }}
-						</span>
+					<div class="title title-dual-row">
+						<div class="title-anchor">
+							<i class="fa fa-bookmark material-icon"></i>
+							<div>
+								<span class="small-title">Koemateriaali</span>
+								{{ $test->title }}
+							</div>
+						</div>
 					</div>
 					<div class="description">
 						{{ $test->page->description }}
@@ -63,9 +68,9 @@
 					@if($test->progress->status != \App\Test::LOCKED)
 						<a href="/test/{{ $test->id }}" class="title-anchor">
 					@else
-						<span class="title-anchor">
+						<div class="title-anchor">
 					@endif
-					<i class="fa fa-list"></i>
+					<i class="fa fa-file-text-o test-icon"></i>
 					{{ $test->title }}
 					
 					<div class="status {{
@@ -94,7 +99,7 @@
 					@if($test->progress->status != \App\Test::LOCKED)
 						</a>
 					@else
-						</span>
+						</div>
 					@endif
 				</div>
 				<div class="description">

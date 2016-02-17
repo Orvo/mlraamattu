@@ -59,7 +59,8 @@
 				<div class="inner-dark">
 					<div class="inner row">
 						<div class="col-xs-5">
-							<h3>&copy; Media7 Raamattuopisto</h3>
+							<h3>Media7 Raamattuopisto &copy; 2016</h3>
+							<p>Suomen Adventtikirkko</p>
 						</div>
 						<div class="col-xs-7">
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt illo magni consequuntur esse, corrupti similique nam. Laudantium sit possimus dolores!

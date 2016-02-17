@@ -1,13 +1,31 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url(https://fonts.googleapis.com/css?family=Lato:100,400,700,900);
+@import url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css);
+
 /*
 Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
 For licensing, see LICENSE.md or http://ckeditor.com/license
 */
 
+html
+{
+	background: #fdfdfd;
+	margin: 0;
+	padding: 0;
+	min-height: 100%;
+}
+
 body
 {
+	width: 720px;
+	min-height: 100%;
+	
+	border-left: 1px dashed #ccc;
+	border-right: 1px dashed #ccc;
+	
 	/* Font */
-	font-family: sans-serif, Arial, Verdana, "Trebuchet MS";
-	font-size: 12px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 11pt;
 
 	/* Text color */
 	color: #333;
@@ -15,15 +33,25 @@ body
 	/* Remove the background color to make it transparent */
 	background-color: #fff;
 
-	margin: 20px;
+	padding: 25px 25px 100px 25px;
+	margin: 0 auto;
+	text-align: justify;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+	font-weight: 700;
+	font-family: 'Lato', sans-serif;
+	margin: 0 0 0.4em 0;
+	padding: 0.3em 0 0.15em 0;
 }
 
 .cke_editable
 {
-	font-size: 13px;
+	font-size: 11pt;
 	line-height: 1.6;
 }
-
+/*
 blockquote
 {
 	font-style: italic;
@@ -46,7 +74,7 @@ blockquote
 	padding-left: 8px;
 	padding-right: 20px;
 	border-right-width: 5px;
-}
+}*/
 
 a
 {
@@ -59,12 +87,6 @@ ol,ul,dl
 	*margin-right: 0px;
 	/* preserved spaces for list items with text direction other than the list. (#6249,#8049)*/
 	padding: 0 40px;
-}
-
-h1,h2,h3,h4,h5,h6
-{
-	font-weight: normal;
-	line-height: 1.2;
 }
 
 hr

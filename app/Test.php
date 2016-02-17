@@ -17,6 +17,10 @@ class Test extends Model
 	const IN_PROGRESS		= 3;
 	const COMPLETED 		= 4;
 	
+	const NO_FEEDBACK		= 1;
+	const HAS_FEEDBACK		= 2;
+	const IS_DISCARDED		= 3;
+	
 	public function course()
 	{
 		return $this->belongsTo('App\Course');
@@ -32,24 +36,46 @@ class Test extends Model
 		return $this->hasOne('App\Page');
 	}
 	
-	public function hasFeedback()
+	private $_feedbackStatus = null;
+	
+	public function getFeedbackStatusAttribute()
 	{
-		if(is_null($this->hasFeedbackStatus))
+		if(!Auth::check())
 		{
-			if(Auth::check())
+			return Test::NO_FEEDBACK;
+		}
+		
+		if(!is_null($this->_feedbackStatus))
+		{
+			return $this->_feedbackStatus;
+		}
+		
+		$status = Test::NO_FEEDBACK;
+		
+		$archive = Auth::user()->archives()->where([
+			'test_id' => $this->id,
+		])->first();
+		
+		if($archive)
+		{
+			if($archive->replied_to)
 			{
-				$this->hasFeedbackStatus = Auth::user()->archives()->where([
-					'test_id' => $this->id,
-					'replied_to' => 1,
-				])->exists();
+				$status = Test::HAS_FEEDBACK;
 			}
-			else
+			elseif($archive->discarded)
 			{
-				$this->hasFeedbackStatus = false;
+				$status = Test::IS_DISCARDED;
 			}
 		}
 		
-		return $this->hasFeedbackStatus;
+		$this->_feedbackStatus = $status;
+		
+		return $this->_feedbackStatus;
+	}
+	
+	public function hasFeedback()
+	{
+		return $this->feedbackStatus == Test::HAS_FEEDBACK;
 	}
 	
 	public function hasQuestions()
