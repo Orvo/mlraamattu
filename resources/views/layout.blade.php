@@ -47,9 +47,7 @@
 			</header>
 			<div id="content-wrapper">
 				<div id="sidebar-content">
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta totam dignissimos rerum ab cum deserunt perspiciatis illum minus ad, nam dolorem error asperiores ea amet voluptatibus voluptatem id porro, iusto nisi pariatur magnam ut laborum sapiente quod? Sint quisquam, animi ut deleniti fuga facilis, voluptas veritatis doloribus sunt possimus aut.
-					</p>
+					@yield('sidebar_content', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur ipsa rem facere aliquam illo nesciunt, vel commodi autem harum impedit corrupti blanditiis, ab tenetur doloribus sunt mollitia neque necessitatibus! Quaerat vero molestias praesentium minus cupiditate. Necessitatibus temporibus, suscipit. Dicta similique, molestiae rem, perspiciatis commodi voluptas nihil non veritatis fugiat repellendus.')
 				</div>
 				<div id="main-content">
 					@yield('content')

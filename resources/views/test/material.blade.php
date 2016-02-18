@@ -8,6 +8,10 @@
 	</li>
 @endsection
 
+@section('sidebar_content')
+	@include('course.test-progress-sidebar')
+@endsection
+
 @section('content')
 	<h1>Koemateriaali: {{ $test->title }}</h1>
 	<div class="test-material-body">

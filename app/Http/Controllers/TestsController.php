@@ -67,7 +67,8 @@ class TestsController extends Controller
 		if($test)
 		{
 			return view('test.material')->with([
-				'test' => $test,
+				'test' 				=> $test,
+				'isMaterialPage' 	=> true,
 			]);
 		}
 		else

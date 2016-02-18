@@ -110,7 +110,7 @@ body
 	overflow-y: scroll;
 }
 
-h1, h2, h3, h4
+h1, h2, h3, h4, h5, h6
 {
 	margin: 0 0 0.4em 0;
 	padding: 0.3em 0 0.15em 0;
@@ -234,24 +234,30 @@ nav li a:active
 
 #sidebar-content
 {
-	float: left;
-	width: 190px;
+	display: table-cell;
+	vertical-align: top;
+	width: 220px;
 	margin: 0;
 	padding: 0;
-	clear: none;
 }
 
 #main-content
 {
+	display: table-cell;
+	vertical-align: top;
+	width: 710px;
 	min-height: 100%;
-	margin: 0 0 0 230px;
-	padding: 0;
+	margin: 0;
+	padding: 0 0 0 20px;
 	clear: none;
 }
 
-#main-content h1:first-child
+#main-content > h1:first-child,
+#main-content > h2:first-child,
+#main-content > h3:first-child,
 {
 	padding-top: 0;
+	margin-top: 0;
 }
 
 footer
@@ -310,6 +316,166 @@ footer .inner a:active
 	border-radius: 4px
 }
 
+/**************************************************************/
+
+ul.sidebar-course-progress,
+ul.sidebar-course-progress li
+{
+	margin: 0;
+	padding: 0;
+}
+
+ul.sidebar-course-progress
+{
+	border-left: 3px solid #eee;
+}
+
+ul.sidebar-course-progress li
+{
+	list-style: none;
+}
+
+ul.sidebar-course-progress li.test-title h5
+{
+	background: #fff;
+	padding: 4px 0 7px 0;
+	margin: 0 0 0 -4px;
+}
+
+ul.sidebar-course-progress li.test-progress div
+{
+	background: #fff;
+	padding: 10px 0 7px 12px;
+	margin: 0 0 0 -10px;
+	border-bottom: 2px solid #eee;
+	font-family: 'Lato', sans-serif;
+	font-weight: 900;
+}
+
+
+ul.sidebar-course-progress li.test-progress div.status.locked
+{
+	color: #6C6C6C;
+}
+
+ul.sidebar-course-progress li.test-progress div.status.new-test
+{
+	color: #197CBB;
+}
+
+ul.sidebar-course-progress li.test-progress div.status.in-progress
+{
+	color: #E18A07;
+}
+
+ul.sidebar-course-progress li.test-progress div.status.completed
+{
+	color: #467E0F;
+}
+
+ul.sidebar-course-progress li.spacer
+{
+	margin-bottom: 12px;
+}
+
+ul.sidebar-course-progress li a:link,
+ul.sidebar-course-progress li a:visited
+{
+	display: block;
+	font-family: 'Lato', sans-serif;
+	font-weight: bold;
+	padding: 8px 6px 6px 31px;
+	margin-left: -29px;
+	background: #f4f4f4;
+	transition: all 100ms ease-out;
+	outline: none !important;
+}
+
+ul.sidebar-course-progress li.test a:link,
+ul.sidebar-course-progress li.test a:visited
+{
+	background: #e8e8e8;
+}
+
+ul.sidebar-course-progress li a:hover,
+ul.sidebar-course-progress li a:active,
+ul.sidebar-course-progress li.test a:hover,
+ul.sidebar-course-progress li.test a:active
+{
+	background: #f44;
+	color: #fff;
+	text-decoration: none;
+}
+
+ul.sidebar-course-progress li.test a
+{
+	border-bottom-right-radius: 5px;
+}
+
+ul.sidebar-course-progress li.material a,
+ul.sidebar-course-progress li.test.no-material a
+{
+	border-top-right-radius: 5px;
+}
+
+ul.sidebar-course-progress li.material a
+{
+	border-bottom: 1px solid #e1e1e1;
+}
+
+ul.sidebar-course-progress li.material.active a
+{
+	border-bottom: 1px solid #FA9148;
+}
+
+ul.sidebar-course-progress li.active a:link,
+ul.sidebar-course-progress li.active a:visited
+{
+	background: #FD8B2E;
+	color: #fff;
+}
+
+ul.sidebar-course-progress li.active a:hover,
+ul.sidebar-course-progress li.active a:active
+{
+	background: #F95423;
+	/*background: #F60035;*/
+	color: #fff;
+}
+
+ul.sidebar-course-progress li a i.fa
+{
+	float: left;
+	padding: 2px 6px 0 0;
+	margin: 0 0 0 -2px;
+	transition: all 100ms ease-out;
+}
+
+ul.sidebar-course-progress li.material a i.fa
+{
+	color: #f44;
+	text-shadow: 1px 2px 0 #A30C1F;
+}
+
+ul.sidebar-course-progress li.test a i.fa
+{
+	color: #126491;
+}
+
+ul.sidebar-course-progress li a:hover i.fa
+{
+	color: #fff;
+	text-shadow: none;
+}
+
+ul.sidebar-course-progress li a span
+{
+	display: block;
+	margin-left: 17px;
+}
+
+/**************************************************************/
+
 .centered-form
 {
 	width: 75%;
@@ -336,9 +502,10 @@ div#login-status a
 	padding: 0 6px;
 }
 
-h1, h2, h3, h4
+h1, h2, h3, h4, h5, h6
 {
 	font-family: 'Lato', sans-serif;
+	font-weight: 700;
 }
 
 .btn
@@ -557,6 +724,7 @@ div.list div.list-item .title .title-anchor i.fa
 div.list div.list-item .title .title-anchor i.fa.material-icon
 {
 	color: #f44;
+	text-shadow: 1px 2px 0 #A30C1F;
 }
 
 div.list div.list-item .title .title-anchor i.fa.test-icon

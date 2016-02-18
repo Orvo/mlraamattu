@@ -118,6 +118,10 @@
 	</li>
 @endsection
 
+@section('sidebar_content')
+	@include('course.test-progress-sidebar')
+@endsection
+
 @section('content')
 	
 	<form action="/test/{{ $test->id }}" method="post" class="test-form form-horizontal {{ css([
