@@ -234,23 +234,24 @@ nav li a:active
 
 #sidebar-content
 {
-	display: table-cell;
-	vertical-align: top;
-	width: 220px;
+	/*display: table-cell;
+	vertical-align: top;*/
+	float: left;
+	width: 220px !important;
 	margin: 0;
 	padding: 0;
 }
 
 #main-content
 {
-	display: table-cell;
-	vertical-align: top;
-	width: 710px;
+	/*display: table-cell;
+	vertical-align: top;*/
+	/*width: 710px !important;*/
 	min-height: 100%;
-	margin: 0;
+	margin: 0 0 0 220px;
 	padding: 0 0 0 20px;
-	clear: none;
 }
+
 
 #main-content > h1:first-child,
 #main-content > h2:first-child,
@@ -355,7 +356,7 @@ ul.sidebar-course-progress li.test-progress div
 
 ul.sidebar-course-progress li.test-progress div.status.locked
 {
-	color: #6C6C6C;
+	color: #811D23;
 }
 
 ul.sidebar-course-progress li.test-progress div.status.new-test
@@ -378,8 +379,12 @@ ul.sidebar-course-progress li.spacer
 	margin-bottom: 12px;
 }
 
-ul.sidebar-course-progress li a:link,
-ul.sidebar-course-progress li a:visited
+ul.sidebar-course-progress li.lock-spacer
+{
+	margin-bottom: 44px;
+}
+
+ul.sidebar-course-progress li .anchor
 {
 	display: block;
 	font-family: 'Lato', sans-serif;
@@ -387,43 +392,45 @@ ul.sidebar-course-progress li a:visited
 	padding: 8px 6px 6px 31px;
 	margin-left: -29px;
 	background: #f4f4f4;
+}
+
+ul.sidebar-course-progress li a:link,
+ul.sidebar-course-progress li a:visited
+{
 	transition: all 100ms ease-out;
 	outline: none !important;
 }
 
-ul.sidebar-course-progress li.test a:link,
-ul.sidebar-course-progress li.test a:visited
+ul.sidebar-course-progress li.test .anchor
 {
 	background: #e8e8e8;
 }
 
 ul.sidebar-course-progress li a:hover,
-ul.sidebar-course-progress li a:active,
-ul.sidebar-course-progress li.test a:hover,
-ul.sidebar-course-progress li.test a:active
+ul.sidebar-course-progress li a:active
 {
 	background: #f44;
 	color: #fff;
 	text-decoration: none;
 }
 
-ul.sidebar-course-progress li.test a
+ul.sidebar-course-progress li.test .anchor
 {
 	border-bottom-right-radius: 5px;
 }
 
-ul.sidebar-course-progress li.material a,
-ul.sidebar-course-progress li.test.no-material a
+ul.sidebar-course-progress li.material .anchor,
+ul.sidebar-course-progress li.test.no-material .anchor
 {
 	border-top-right-radius: 5px;
 }
 
-ul.sidebar-course-progress li.material a
+ul.sidebar-course-progress li.material .anchor
 {
 	border-bottom: 1px solid #e1e1e1;
 }
 
-ul.sidebar-course-progress li.material.active a
+ul.sidebar-course-progress li.material.active .anchor
 {
 	border-bottom: 1px solid #FA9148;
 }
@@ -443,7 +450,7 @@ ul.sidebar-course-progress li.active a:active
 	color: #fff;
 }
 
-ul.sidebar-course-progress li a i.fa
+ul.sidebar-course-progress li .anchor i.fa
 {
 	float: left;
 	padding: 2px 6px 0 0;
@@ -451,13 +458,13 @@ ul.sidebar-course-progress li a i.fa
 	transition: all 100ms ease-out;
 }
 
-ul.sidebar-course-progress li.material a i.fa
+ul.sidebar-course-progress li.material .anchor i.fa
 {
 	color: #f44;
 	text-shadow: 1px 2px 0 #A30C1F;
 }
 
-ul.sidebar-course-progress li.test a i.fa
+ul.sidebar-course-progress li.test .anchor i.fa
 {
 	color: #126491;
 }
@@ -468,10 +475,18 @@ ul.sidebar-course-progress li a:hover i.fa
 	text-shadow: none;
 }
 
-ul.sidebar-course-progress li a span
+ul.sidebar-course-progress li .anchor > span
 {
 	display: block;
 	margin-left: 17px;
+}
+
+
+ul.sidebar-course-progress li .anchor > span span.glyphicon
+{
+	float: right;
+	padding-right: 4px;
+	color: #777;
 }
 
 /**************************************************************/
@@ -914,7 +929,7 @@ div.tab-content-row
 div.tab-content-row > div.tab-panel
 {
 	display: inline-block;
-	width: 760px;
+	width: 710px;
 	margin: 0 auto;
 	transition: margin 350ms ease-out;
 }
@@ -926,7 +941,7 @@ div.tab-content-row > div.tab-panel
 
 .form-login div.tab-panel:first-child
 {
-	margin-left: -760px;
+	margin-left: -710px;
 }
 
 fieldset legend

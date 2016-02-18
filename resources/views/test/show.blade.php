@@ -129,8 +129,8 @@
 			'form-login' 	=> @$authentication_type == 1,
 		]) }}">
 		{!! csrf_field() !!}
-
-		<div class="form-group">
+		
+		<div xclass="form-group">
 			<h1 class="test-title">{{ $test->title }}</h1>
 			@if($test->description && strlen($test->description) > 0)
 				<div class="test-description">{{ $test->description }}</div>
