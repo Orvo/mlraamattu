@@ -18,16 +18,17 @@
 		<h3>
 			<div class="line"></div>
 			<div class="text">
-				<span>{{ $test->title }} asdfasd fasdf sdfds sdfasd fsadf sdf gdsfgd fgdfg df adfg dfgadfg</span>
+				<span>{{ $test->title }}</span>
 			</div>
 		</h3>
 		<div class="clearfix"></div>
 	</div>
+	
 	<div class="test-material-body">
 		{!! $test->page->body !!}
 	</div>
-	<hr>
-	<div>
+	
+	<div style="padding-top:1em">
 		<a href="/test/{{ $test->id }}" class="btn btn-primary btn-block">
 			Jatka kokeen suorittamiseen <span class="glyphicon glyphicon-chevron-right"></span>
 		</a>

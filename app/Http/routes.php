@@ -98,8 +98,14 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 	Route::get('archive/{id}', 'Ajax\ArchiveController@show');
 	Route::put('archive/{id}', 'Ajax\ArchiveController@store');
 	Route::post('archive/{id}/discard', 'Ajax\ArchiveController@discard');
-	
+});
 
+Route::group(['middleware' => 'auth.ajax'], function()
+{
+	Route::get('ng/{view}', function($view)
+	{
+		return view('ng.' . $view);
+	});
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function()

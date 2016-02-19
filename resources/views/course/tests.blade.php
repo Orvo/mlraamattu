@@ -37,7 +37,7 @@
 		@foreach($course->tests as $test)
 			<?php if(!$test->hasQuestions()): continue; endif;?>
 			
-			@if($test->page()->exists())
+			@if(!$test->page->hidden)
 				<div class="test list-item list-item-flat">
 					<div class="title title-dual-row">
 						<div class="title-anchor">

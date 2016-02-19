@@ -71,77 +71,83 @@ app.config(
 		$routeProvider
 			.when('/', {
 				controller: 'IndexController',
-				templateUrl: '/ng/index.html',
+				templateUrl: '/ng/index',
 				resolve: { factory: authProvider, },
 			})
 			
+			////////////////////////////////////////////////
+			// Courses
+			
 			.when('/courses', {
 				controller: 'CoursesController',
-				templateUrl: '/ng/courses/list.html',
+				templateUrl: '/ng/courses.list',
 				resolve: { factory: authProvider, },
 			})
 			.when('/courses/new', {
 				controller: 'CoursesFormController',
-				templateUrl: '/ng/courses/form.html',
+				templateUrl: '/ng/courses.form',
 				resolve: { factory: authProvider, },
 			})
 			.when('/courses/:id', {
 				controller: 'CourseShowController',
-				templateUrl: '/ng/courses/show.html',
+				templateUrl: '/ng/courses.show',
 				resolve: { factory: authProvider, },
 			})
 			.when('/courses/:id/edit', {
 				controller: 'CoursesFormController',
-				templateUrl: '/ng/courses/form.html',
+				templateUrl: '/ng/courses.form',
 				resolve: { factory: authProvider, },
 			})
 			
-			// .when('/tests', {
-			// 	controller: 'TestsController',
-			// 	templateUrl: '/ng/tests/list.html',
-			// 	resolve: { factory: authProvider, },
-			// })
+			////////////////////////////////////////////////
+			// Tests
+			
 			.when('/tests/new/:course_id', {
 				controller: 'TestsFormController',
-				templateUrl: '/ng/tests/form.html',
+				templateUrl: '/ng/tests.form',
 				resolve: { factory: authProvider, },
 			})
 			.when('/tests/:id', {
 				controller: 'TestsShowController',
-				templateUrl: '/ng/tests/show.html',
+				templateUrl: '/ng/tests.show',
 				resolve: { factory: authProvider, },
 			})
 			.when('/tests/:id/edit', {
 				controller: 'TestsFormController',
-				templateUrl: '/ng/tests/form.html',
+				templateUrl: '/ng/tests.form',
 				resolve: { factory: authProvider, },
 			})
 			
+			////////////////////////////////////////////////
+			// Users
+			
 			.when('/users', {
 				controller: 'UsersController',
-				templateUrl: '/ng/users/list.html',
+				templateUrl: '/ng/users.list',
 				resolve: { factory: authProvider, },
 			})
 			.when('/users/new/', {
 				controller: 'UsersFormController',
-				templateUrl: '/ng/users/form.html',
+				templateUrl: '/ng/users.form',
 				resolve: { factory: authProvider, },
 			})
 			.when('/users/:id/edit', {
 				controller: 'UsersFormController',
-				templateUrl: '/ng/users/form.html',
+				templateUrl: '/ng/users.form',
 				resolve: { factory: authProvider, },
 			})
 			
+			////////////////////////////////////////////////
+			// Archive
 			
 			.when('/archive/', {
 				controller: 'ArchiveController',
-				templateUrl: '/ng/archive/list.html',
+				templateUrl: '/ng/archive.list',
 				resolve: { factory: authProvider, },
 			})
 			.when('/archive/:id/reply', {
 				controller: 'ArchiveFormController',
-				templateUrl: '/ng/archive/form.html',
+				templateUrl: '/ng/archive.form',
 				resolve: { factory: authProvider, },
 			})
 			
