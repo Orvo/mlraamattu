@@ -23,7 +23,7 @@ $_CONFIG = array(
 
     'disabled' => false,
     'uploadURL' => "upload",
-    'uploadDir' => "../uploads/",
+    'uploadDir' => "../uploads",
     'theme' => "default",
 
     'types' => array(
@@ -109,7 +109,7 @@ $_CONFIG = array(
 // THE FOLLOWING SETTINGS CANNOT BE OVERRIDED WITH SESSION SETTINGS
 
     '_normalizeFilenames' => false,
-    '_check4htaccess' => true,
+    '_check4htaccess' => false,
     //'_tinyMCEPath' => "/tiny_mce",
 
     '_sessionVar' => "KCFINDER",
