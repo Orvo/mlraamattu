@@ -172,7 +172,6 @@ This CSS code is generated from http://ui.sunhater.com
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
     border: 1px solid #d5bc2c;
-    box-shadow: inset 0 0 5px #d5bc2c;
     background: #fff6bf;
     color: #6b6b6b;
 }
@@ -180,7 +179,6 @@ This CSS code is generated from http://ui.sunhater.com
 .ui-widget-content .ui-state-error,
 .ui-widget-header .ui-state-error {
     border: 1px solid #cf7f7f;
-    box-shadow: inset 0 0 5px #cf7f7f;
     background: #fac4c4;
     color: #6b6b6b;
 }
@@ -654,7 +652,6 @@ th.ui-datepicker-week-end {
     left: 0;
     padding: 4px;
     outline: 0;
-    box-shadow: 0 0 10px #000;
 }
 .ui-dialog .ui-dialog-titlebar {
     padding: 5px 10px;
@@ -827,10 +824,8 @@ th.ui-datepicker-week-end {
     height: 18px;
     border-radius: 9px;
     cursor: default;
-    box-shadow: 0 0 3px #6b6b6b, inset 0 0 7px #fff, inset 0 0 3px #fff;
 }
 .ui-slider .ui-slider-handle.ui-state-active {
-    box-shadow: 0 0 3px #1b79b8, inset 0 0 7px #fff, inset 0 0 3px #fff;
 }
 .ui-slider .ui-slider-range {
     position: absolute;
@@ -1007,7 +1002,6 @@ body .ui-tooltip {
     max-width: 300px;
     color: #808080;
     border-color: #a5a5a5;
-    box-shadow: inset 0 0 4px #a5a5a5, 0 0 4px #a5a5a5;
     background: -webkit-linear-gradient(top, #ddd, #fff);
     background: -moz-linear-gradient(top, #ddd, #fff);
     background: -ms-linear-gradient(top, #ddd, #fff);
@@ -1307,12 +1301,10 @@ body .ui-tooltip {
 .ui-dialog-titlebar,
 .ui-dialog-titlebar-close.ui-state-default.ui-state-hover,
 .ui-datepicker .ui-datepicker-buttonpane button {
-    box-shadow: inset 0 0 7px #fff, inset 0 0 3px #fff;
 }
 
 .ui-spinner,
 .ui-menu {
-    box-shadow: inset 0 0 4px #6b6b6b;
 }
 
 .ui-accordion-content,
@@ -1321,7 +1313,6 @@ body .ui-tooltip {
 .ui-dialog-buttonpane,
 .ui-datepicker,
 .ui-datepicker .ui-datepicker-buttonpane {
-    box-shadow: inset 0 0 4px #1b79b8;
 }
 
 .ui-state-default,
@@ -1346,7 +1337,6 @@ body .ui-tooltip {
 .ui-datepicker .ui-state-highlight {
     color: #215b82;
     border-color: #1b79b8;
-    box-shadow: inset 0 0 4px #1b79b8;
     background: #fff;
     background: -webkit-linear-gradient(top, #dfeef8, #fff);
     background: -moz-linear-gradient(top, #dfeef8, #fff);
@@ -1356,7 +1346,6 @@ body .ui-tooltip {
 }
 
 .ui-progressbar, .ui-slider, .ui-menu {
-    box-shadow: inset 0 0 4px #6b6b6b;
     background: #fff;
     background: -webkit-linear-gradient(top, #f0f0f0, #fff);
     background: -moz-linear-gradient(top, #f0f0f0, #fff);
@@ -1387,7 +1376,6 @@ body .ui-tooltip {
     background: -ms-linear-gradient(top, #ccc, #ddd, #eee, #fff, #fff, #fff);
     background: -o-linear-gradient(top, #ccc, #ddd, #eee, #fff, #fff, #fff);
     background: linear-gradient(to bottom, #ccc, #ddd, #eee, #fff, #fff, #fff);
-    box-shadow: inset 0 0 5px #fff, inset 0 0 5px #fff, inset 0 0 5px #fff;
 }
 .ui-tabs-active.ui-state-active a {
     color: #215b82;
@@ -1412,7 +1400,6 @@ body .ui-tooltip {
 .ui-dialog-titlebar-close.ui-state-default {
     border-color: transparent;
     background: none;
-    box-shadow: none;
 }
 
 .ui-dialog-titlebar-close.ui-state-default.ui-state-hover {
@@ -1691,7 +1678,6 @@ textarea.uniform,
 div.uploader span.filename,
 div.selector span {
     border-color: #6b6b6b;
-    box-shadow: inset 0 0 4px #6b6b6b;
     background: #fff;
     background: -webkit-linear-gradient(top, #f0f0f0, #fff);
     background: -moz-linear-gradient(top, #f0f0f0, #fff);
@@ -1718,7 +1704,6 @@ div.uploader.focus span.filename,
 div.selector.active span,
 div.selector.focus span {
     border-color: #1b79b8;
-    box-shadow: inset 0 0 4px #1b79b8;
     color: #000;
     background: #fff;
     background: -webkit-linear-gradient(top, #dfeef8, #fff);
@@ -1735,7 +1720,6 @@ input.uniform-input[readonly]:focus,
 textarea.uniform[readonly]:focus {
     color: #808080;
     border-color: #a5a5a5;
-    box-shadow: inset 0 0 4px #a5a5a5;
     background: -webkit-linear-gradient(top, #ddd, #fff);
     background: -moz-linear-gradient(top, #ddd, #fff);
     background: -ms-linear-gradient(top, #ddd, #fff);
@@ -1756,7 +1740,6 @@ div.checker {
     background: -ms-linear-gradient(top, #ababab, #6b6b6b);
     background: -o-linear-gradient(top, #ababab, #6b6b6b);
     background: linear-gradient(to bottom, #ababab, #6b6b6b);
-    box-shadow: inset 0 0 7px #fff, inset 0 0 3px #fff;
 }
 
 /* Hover - buttons */
@@ -1892,7 +1875,6 @@ textarea.uniform:focus:-ms-input-placeholder {
 
 fieldset.sh-uniform {
     border: 1px solid #6B6B6B;
-    box-shadow: inset 0 0 4px #6B6B6B;
     border-radius: 4px;
     background: #fff;
     background: -webkit-linear-gradient(top, #f0f0f0, #fff);
@@ -1946,7 +1928,6 @@ label.sh-uniform {
 }
 .shcs > div, .shcs label:hover {
     border-color: #6b6b6b;
-    box-shadow: inset 0 0 4px #6b6b6b;
     background: #fff;
     background: -webkit-linear-gradient(top, #f0f0f0, #fff);
     background: -moz-linear-gradient(top, #f0f0f0, #fff);
@@ -1960,7 +1941,6 @@ label.sh-uniform {
 }
 .shcs > div.focus, .shcs label.checked {
     border-color: #1b79b8;
-    box-shadow: inset 0 0 4px #1b79b8;
     color: #000;
     background: #fff;
     background: -webkit-linear-gradient(top, #dfeef8, #fff);
@@ -1996,7 +1976,6 @@ label.sh-uniform {
     background: -ms-linear-gradient(top, #ababab, #6b6b6b);
     background: -o-linear-gradient(top, #ababab, #6b6b6b);
     background: linear-gradient(to bottom, #ababab, #6b6b6b);
-    box-shadow: inset 0 0 7px #fff, inset 0 0 3px #fff;
 }
 
 .shcs div.checker.focus.hover {
@@ -2013,4 +1992,9 @@ label.sh-uniform {
     position:relative;
     margin-left:5px;
     top:1px;
+}
+
+a[href="kcact:maximize"]
+{
+    display: none;
 }

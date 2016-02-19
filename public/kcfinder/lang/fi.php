@@ -1,12 +1,12 @@
 <?php
 
 /** Finnish localization file for KCFinder
-  * author: Heikki Tenhunen (heikki@sivudesign.fi)
+  * author: Heikki Tenhunen ({hidden email})
   */
 
 $lang = array(
 
-    '_locale' => "fi_FI.UTF-8",  // UNIX localization code
+    '_locale' => "Binary file (standard input) matches",  // UNIX localization code
     '_charset' => "utf-8",       // Browser charset
 
     // Date time formats. See http://www.php.net/manual/en/function.strftime.php
@@ -122,6 +122,11 @@ $lang = array(
     "You cannot rename the extension of files!" => "Et voi nimetä uudelleen tiedostopäätettä!",
     "Uploading file {number} of {count}... {progress}" => "Siirretään tiedostoa {number}/{count} ... {progress}",
     "Failed to upload {filename}!" => "Siirto epäonnistui {filename}!",
+    "Close" => "Sulje",
+    "Previous" => "Edellinen",
+    "Next" => "Seuraava",
+    "Confirmation" => "Varmistus",
+    "Warning" => "Varoitus",
 );
 
 ?>

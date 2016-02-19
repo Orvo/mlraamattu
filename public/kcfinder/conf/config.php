@@ -21,9 +21,9 @@ $_CONFIG = array(
 
 // GENERAL SETTINGS
 
-    'disabled' => true,
+    'disabled' => false,
     'uploadURL' => "upload",
-    'uploadDir' => "",
+    'uploadDir' => "../uploads/",
     'theme' => "default",
 
     'types' => array(
@@ -57,9 +57,9 @@ $_CONFIG = array(
 
 // DISABLE / ENABLE SETTINGS
 
-    'denyZipDownload' => false,
-    'denyUpdateCheck' => false,
-    'denyExtensionRename' => false,
+    'denyZipDownload' => true,
+    'denyUpdateCheck' => true,
+    'denyExtensionRename' => true,
 
 
 // PERMISSION SETTINGS
@@ -84,7 +84,7 @@ $_CONFIG = array(
         )
     ),
 
-    'deniedExts' => "exe com msi bat cgi pl php phps phtml php3 php4 php5 php6 py pyc pyo pcgi pcgi3 pcgi4 pcgi5 pchi6",
+    'deniedExts' => "exe com msi bat cgi pl php phps phtml php3 php4 php5 php6 py pyc pyo pcgi pcgi3 pcgi4 pcgi5 pchi6 .DS_Store",
 
 
 // MISC SETTINGS

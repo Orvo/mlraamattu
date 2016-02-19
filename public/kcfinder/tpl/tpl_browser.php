@@ -23,7 +23,6 @@
         <a href="kcact:upload"><span><?php echo $this->label("Upload") ?></span></a>
         <a href="kcact:refresh"><span><?php echo $this->label("Refresh") ?></span></a>
         <a href="kcact:settings"><span><?php echo $this->label("Settings") ?></span></a>
-        <a href="kcact:maximize"><span><?php echo $this->label("Maximize") ?></span></a>
         <a href="kcact:about"><span><?php echo $this->label("About") ?></span></a>
         <div id="loading"></div>
         </div>
