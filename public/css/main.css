@@ -234,21 +234,17 @@ nav li a:active
 
 #sidebar-content
 {
-	/*display: table-cell;
-	vertical-align: top;*/
-	float: left;
-	width: 220px !important;
+	/*float: left;*/
+	/*width: 220px !important;*/
 	margin: 0;
 	padding: 0;
 }
 
 #main-content
 {
-	/*display: table-cell;
-	vertical-align: top;*/
 	/*width: 710px !important;*/
 	min-height: 100%;
-	margin: 0 0 0 220px;
+	/*margin: 0 0 0 220px;*/
 	padding: 0 0 0 20px;
 }
 
@@ -336,11 +332,15 @@ ul.sidebar-course-progress li
 	list-style: none;
 }
 
-ul.sidebar-course-progress li.test-title h5
+ul.sidebar-course-progress li.test-title div
 {
 	background: #fff;
-	padding: 4px 0 7px 0;
-	margin: 0 0 0 -4px;
+	padding: 4px 0 2px 28px;
+	margin: 0 0 5px -29px;
+	font-family: 'Lato', sans-serif;
+	font-size: 12pt;
+	font-weight: bold;
+	border-bottom: 1px solid #ddd;
 }
 
 ul.sidebar-course-progress li.test-progress div
@@ -352,7 +352,6 @@ ul.sidebar-course-progress li.test-progress div
 	font-family: 'Lato', sans-serif;
 	font-weight: 900;
 }
-
 
 ul.sidebar-course-progress li.test-progress div.status.locked
 {
@@ -376,12 +375,12 @@ ul.sidebar-course-progress li.test-progress div.status.completed
 
 ul.sidebar-course-progress li.spacer
 {
-	margin-bottom: 12px;
+	margin-bottom: 22px;
 }
 
 ul.sidebar-course-progress li.lock-spacer
 {
-	margin-bottom: 44px;
+	margin-bottom: 33px;
 }
 
 ul.sidebar-course-progress li .anchor
@@ -407,7 +406,9 @@ ul.sidebar-course-progress li.test .anchor
 }
 
 ul.sidebar-course-progress li a:hover,
-ul.sidebar-course-progress li a:active
+ul.sidebar-course-progress li a:active,
+ul.sidebar-course-progress li.test a.anchor:hover,
+ul.sidebar-course-progress li.test a.anchor:active
 {
 	background: #f44;
 	color: #fff;
@@ -440,13 +441,15 @@ ul.sidebar-course-progress li.active a:visited
 {
 	background: #FD8B2E;
 	color: #fff;
+	border-left: 6px solid #E66D21;
+	padding-left: 25px;
 }
 
 ul.sidebar-course-progress li.active a:hover,
 ul.sidebar-course-progress li.active a:active
 {
 	background: #F95423;
-	/*background: #F60035;*/
+	border-left: 6px solid #E5391A;
 	color: #fff;
 }
 
@@ -469,7 +472,8 @@ ul.sidebar-course-progress li.test .anchor i.fa
 	color: #126491;
 }
 
-ul.sidebar-course-progress li a:hover i.fa
+ul.sidebar-course-progress li a.anchor:hover i.fa,
+ul.sidebar-course-progress li.active .anchor i.fa
 {
 	color: #fff;
 	text-shadow: none;
@@ -481,12 +485,76 @@ ul.sidebar-course-progress li .anchor > span
 	margin-left: 17px;
 }
 
-
 ul.sidebar-course-progress li .anchor > span span.glyphicon
 {
 	float: right;
 	padding-right: 4px;
+}
+
+ul.sidebar-course-progress li .anchor > span span.glyphicon.glyphicon-record
+{
+	color: #fff;
+	text-shadow: 0 2px 0 #C93317;
+	padding-top: 1px;
+}
+
+ul.sidebar-course-progress li .anchor > span span.glyphicon.glyphicon-lock
+{
 	color: #777;
+	text-shadow: 0 1px 0 #444;
+}
+/*
+.alert > .clearfix::after,
+.form-group::after
+{
+	clear: none !important;
+}
+
+.form-horizontal .form-group::after
+{
+	clear: both !important;
+}*/
+
+.centered-titles
+{
+	text-align: center;
+	position: relative;
+}
+
+.centered-titles h1,
+.centered-titles h2
+{
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.centered-titles h3
+{
+	min-height: 42px;
+	position: relative;
+}
+
+.centered-titles h3 div.line
+{
+	display: block;
+	width: 100%;
+	border-bottom: 1px solid #ccc;
+	margin-top: 10px;
+}
+
+.centered-titles h3 div.text
+{
+	width: 100%;
+	float: left;
+	display: block;
+	margin-top: -15px;
+	padding: 0 1em;
+}
+
+div.text span
+{
+	background: #fff;
+	padding: 0 12px;
 }
 
 /**************************************************************/
@@ -616,7 +684,7 @@ div.list
 
 div.list div.list-item
 {
-	border: 1px solid #f1f1f1;
+	border: 1px solid #eaeaea;
 	border-bottom: 1px solid #e5e5e5;
 	box-shadow: 0 2px 0px #f4f4f4;
 	border-radius: 6px;
@@ -767,9 +835,20 @@ div.list div.list-item .description .read-more
 	margin: 12px 0 0 0;
 	padding: 8px 0 0 0;
 	border-top: 1px solid #eee;
-	font-size: 14pt;
+	font-size: 13pt;
 	font-weight: bold;
 	font-family: 'Lato', sans-serif;
+}
+
+div.list div.list-item .description .read-more .btn
+{
+	font-size: 13pt;
+	font-weight: bold;
+	font-family: 'Lato', sans-serif;
+	text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.3);
+	box-shadow: 0 2px 0 #245995;
+	outline: none;
+	padding: 5px 14px;
 }
 
 div.list div.list-item .description .alert

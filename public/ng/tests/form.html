@@ -88,7 +88,7 @@
 			<div>
 				<div style="float:right;width:29%;padding:0 0.5%">
 					<p>
-						Kuvaa lyhyesti kokeen aihealuetta. Älä kirjoita kuvaukseen koemateriaalia, sen syöttö on erikseen.
+						Kuvaa lyhyesti kokeen aihealuetta. Älä kirjoita kuvaukseen opintomateriaalia, sen syöttö on erikseen.
 					</p>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo fugit atque in ullam, blanditiis sapiente at esse alias ipsam. Dolores nemo ducimus illum expedita unde qui ullam porro explicabo pariatur.
@@ -104,7 +104,7 @@
 		
 		<ul class="tabs">
 			<li ng-class="{'active': activeTab == 1}"><a ng-click="setActiveTab(1)">Kysymykset</a></li>
-			<li ng-class="{'active': activeTab == 2}"><a ng-click="setActiveTab(2)">Koemateriaali</a></li>
+			<li ng-class="{'active': activeTab == 2}"><a ng-click="setActiveTab(2)">Opintomateriaali</a></li>
 		</ul>
 		
 		<div class="tab-wrapper">
@@ -353,7 +353,7 @@
 			
 			<div class="tab-panel" ng-show="activeTab == 2">
 				<p>
-					Koemateriaali näytetään erillisellä sivulla ennen kokeen suoritusta.
+					Opintomateriaali näytetään käyttäjälle ennen kokeen suoritusta.
 				</p>
 				<div class="form-group ckeditor">
 					<textarea ckeditor="editor_options" ng-model="data.test.page.body"></textarea>

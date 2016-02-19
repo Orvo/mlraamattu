@@ -53,7 +53,7 @@
 			</div>
 		</div>
 		
-		<div class="form-group pull-right">
+		<div class="form-group pull-right" style="padding-top:1em">
 			<a href="/auth/reset">Unohtunut salasana?</a>
 		</div>
 	

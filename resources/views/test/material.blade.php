@@ -13,7 +13,16 @@
 @endsection
 
 @section('content')
-	<h1>Koemateriaali: {{ $test->title }}</h1>
+	<div class="centered-titles">
+		<h2>Opintomateriaali</h2>
+		<h3>
+			<div class="line"></div>
+			<div class="text">
+				<span>{{ $test->title }} asdfasd fasdf sdfds sdfasd fsadf sdf gdsfgd fgdfg df adfg dfgadfg</span>
+			</div>
+		</h3>
+		<div class="clearfix"></div>
+	</div>
 	<div class="test-material-body">
 		{!! $test->page->body !!}
 	</div>

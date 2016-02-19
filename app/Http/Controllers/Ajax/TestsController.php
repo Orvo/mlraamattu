@@ -113,9 +113,9 @@ class TestsController extends Controller
 		///////////////////////
 		
 		$isNewPage = !array_key_exists('id', $data['page']);
-		
 		$pageBody = trim($data['page']['body']);
-		$savePage = strlen($pageBody) > 0;
+		
+		$page = false;
 		
 		if($isNewPage)
 		{
@@ -123,19 +123,21 @@ class TestsController extends Controller
 		}
 		else
 		{
-			$page = $test->page;
+			$page = Page::find($data['page']['id']);
 		}
 		
-		$page->test_id = $test->id;
-		$page->body = trim($data['page']['body']);
-		
-		if($savePage)
+		if($page)
 		{
+			$page->test_id = $test->id;
+			$page->body = $pageBody;
+			$page->hidden = false;
+			
+			if(strlen(trim(strip_tags($pageBody))) == 0)
+			{
+				$page->hidden = true;
+			}
+			
 			$page->save();
-		}
-		elseif(!$isNewPage)
-		{
-			$page->delete();
 		}
 		
 		/////////////////////////

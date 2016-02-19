@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Page extends Model
 {
 	
+	protected $casts = [
+		'hidden' => 'boolean'
+	];
+	
 	public function test()
 	{
 		return $this->belongsTo('App\Test');

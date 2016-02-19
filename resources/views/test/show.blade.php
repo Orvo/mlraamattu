@@ -34,7 +34,7 @@
 	
 	<input type="hidden" id="authentication_type" name="authentication_type" value="{{ $authentication_type }}">
 	
-	<div id="authentication-form">
+	<div id="authentication-form" class="form-horizontal">
 		<div class="tab-content-wrapper">
 			<div class="tab-content-row">
 				<div class="tab-panel">
@@ -89,14 +89,14 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-xs-3 col-xs-offset-3">
+						<div class="col-xs-4 col-xs-offset-3">
 							<div class="checkbox">
 								<label>
 									<input type="checkbox" name="remember_me"> Muista kirjautuminen
 								</label>
 							</div>
 						</div>
-						<div class="col-xs-4">
+						<div class="col-xs-3">
 							<p style="text-align: right; padding: 0.45em 0">
 								<a href="/auth/reset" target="_blank">Unohtunut salasana?</a>
 							</p>
@@ -124,18 +124,24 @@
 
 @section('content')
 	
-	<form action="/test/{{ $test->id }}" method="post" class="test-form form-horizontal {{ css([
+	<form action="/test/{{ $test->id }}" method="post" class="test-form {{ css([
 			'form-register' => @$authentication_type == 0,
 			'form-login' 	=> @$authentication_type == 1,
 		]) }}">
 		{!! csrf_field() !!}
+		<input type="hidden" name="test_id" value="{{ $test->id }}">
 		
-		<div xclass="form-group">
-			<h1 class="test-title">{{ $test->title }}</h1>
+		<div class="centered-titles">
+			<h2>Koe</h2>
+			<h3>
+				<div class="line"></div>
+				<div class="text">
+					<span>{{ $test->title }}</span>
+				</div>
+			</h3>
 			@if($test->description && strlen($test->description) > 0)
 				<div class="test-description">{{ $test->description }}</div>
 			@endif
-			<input type="hidden" name="test_id" value="{{ $test->id }}">
 		</div>
 		
 		@if(!Auth::check() && $errors->any())

@@ -52,8 +52,8 @@
 						{{ $test->page->description }}
 						<div class="read-more">
 							@if($test->progress->status != \App\Test::LOCKED)
-								<a href="/test/{{ $test->id }}/material">
-									Lue lisää <span class="glyphicon glyphicon-chevron-right"></span>
+								<a href="/test/{{ $test->id }}/material" class="btn btn-primary">
+									Jatka lukemista <span class="glyphicon glyphicon-chevron-right"></span>
 								</a>
 							@else
 								Suorita edellinen koe ensin.

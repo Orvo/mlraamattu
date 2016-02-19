@@ -1,16 +1,16 @@
 <h4>{{ $test->course->title }}</h4>
 <ul class="sidebar-course-progress">
-	@foreach($test->course->tests as $course_test)
+	@foreach($test->course->tests as $key => $course_test)
 		@if($course_test->progress->status == \App\Test::LOCKED && !@$hasLockSpacer)
 			<li class="lock-spacer"></li>
 			<?php $hasLockSpacer = true; ?>
 		@endif
 		
 		<li class="test-title">
-			<h5>{{ $course_test->title }}</h5>
+			<div>{{ ($key+1) }}. {{ $course_test->title }}</div>
 		</li>
 		
-		@if($course_test->page()->exists())
+		@if(!$course_test->page->hidden)
 			<li class="material {{ css([
 				'active' => $course_test->id == $test->id && @$isMaterialPage
 			]) }}">
@@ -20,7 +20,14 @@
 					<div class="anchor">
 				@endif
 					<i class="fa fa-bookmark"></i>
-					<span>Koemateriaali</span>
+					<span>
+						@if($course_test->progress->status == \App\Test::LOCKED)
+							<span class="glyphicon glyphicon-lock"></span>
+						@elseif($course_test->id == $test->id && @$isMaterialPage)
+							<span class="glyphicon glyphicon-record"></span>
+						@endif
+						Opintomateriaali
+					</span>
 				@if($course_test->progress->status != \App\Test::LOCKED)
 					</a>
 				@else
@@ -42,6 +49,8 @@
 				<span>
 					@if($course_test->progress->status == \App\Test::LOCKED)
 						<span class="glyphicon glyphicon-lock"></span>
+					@elseif($course_test->id == $test->id && @!$isMaterialPage)
+						<span class="glyphicon glyphicon-record"></span>
 					@endif
 					Koe
 				</span>
@@ -51,7 +60,7 @@
 				</div>
 			@endif
 		</li>
-		
+		<!-- 
 		<li class="test-progress">
 			<div class="status {{
 					css([
@@ -72,7 +81,7 @@
 				@endif
 			</div>
 		</li>
-		
+		 -->
 		<li class="spacer"></li>
 	@endforeach
 </ul>
