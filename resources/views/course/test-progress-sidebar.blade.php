@@ -10,7 +10,7 @@
 			<div>{{ ($key+1) }}. {{ $course_test->title }}</div>
 		</li>
 		
-		@if(!$course_test->page->hidden)
+		@if($course_test->page()->exists() && !$course_test->page->hidden)
 			<li class="material {{ css([
 				'active' => $course_test->id == $test->id && @$isMaterialPage
 			]) }}">

@@ -64,7 +64,7 @@ class TestsController extends Controller
 	{
 		$test = Test::with('page')->has('page')->find($id);
 		
-		if($test)
+		if($test && !$test->page->hidden)
 		{
 			return view('test.material')->with([
 				'test' 				=> $test,
