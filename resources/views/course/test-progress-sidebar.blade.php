@@ -1,6 +1,8 @@
 <h4>{{ $test->course->title }}</h4>
 <ul class="sidebar-course-progress">
 	@foreach($test->course->tests as $key => $course_test)
+		<?php if(!$course_test->hasQuestions()) break; ?>
+		
 		@if($course_test->progress->status == \App\Test::LOCKED && !@$hasLockSpacer)
 			<li class="lock-spacer"></li>
 			<?php $hasLockSpacer = true; ?>

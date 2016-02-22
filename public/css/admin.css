@@ -1352,3 +1352,29 @@ div.result-badge.incorrect
 	box-shadow: 0 3px 0 rgba(0, 0, 0, 0.4);
 	overflow: hidden;
 }
+
+.kcfinder
+{
+	position: relative;
+}
+
+.kcfinder iframe
+{
+	width: 100%;
+	min-height: 700px;
+	height: 100%;
+	overflow: hidden;
+}
+
+.kcfinder .kcfinder-type
+{
+	float: right;
+	position: absolute;
+	top: 5px;
+	right: 4px;
+}
+
+.kcfinder .kcfinder-type button
+{
+	outline: none !important;
+}

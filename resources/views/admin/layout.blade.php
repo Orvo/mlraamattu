@@ -34,6 +34,16 @@
 					
 					<ul class="nav navbar-nav navbar-right">
 						<li>
+							<a href="/" target="_blank">
+								<span class="glyphicon glyphicon-globe"></span> Näytä sivu
+							</a>
+						</li>
+						<li>
+							<a href="#/files">
+								<span class="glyphicon glyphicon-file"></span> Tiedostonhallinta
+							</a>
+						</li>
+						<li>
 							<a href="#/users">
 								<span class="glyphicon glyphicon-user"></span> Käyttäjät
 							</a>
@@ -147,10 +157,11 @@
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-resource.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.min.js"></script>
+		<script src="/js/ng/modules/ng-onload.min.js"></script>
+		<script src="/js/ng/modules/sortable.js"></script>
 		
 		<script src="/js/vendor/ckeditor/ckeditor.js"></script>
 		<script src="/js/ng/modules/angular-ckeditor.min.js"></script>
-		<script src="/js/ng/modules/sortable.js"></script>
 		
 		<script src="/js/ng/main.js"></script>
 		<script src="/js/ng/controllers.js"></script>

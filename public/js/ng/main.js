@@ -3,7 +3,7 @@
  * Application
  */
  
-var app = angular.module('adminpanel', ['ngResource', 'ngRoute', 'ngSanitize', 'ui.sortable', 'ckeditor'],
+var app = angular.module('adminpanel', ['ngResource', 'ngRoute', 'ngSanitize', 'ngOnload', 'ui.sortable', 'ckeditor'],
 	function($interpolateProvider)
 	{
 		$interpolateProvider.startSymbol('[[');
@@ -148,6 +148,15 @@ app.config(
 			.when('/archive/:id/reply', {
 				controller: 'ArchiveFormController',
 				templateUrl: '/ng/archive.form',
+				resolve: { factory: authProvider, },
+			})
+			
+			////////////////////////////////////////////////
+			// Files
+			
+			.when('/files/', {
+				controller: 'FilesController',
+				templateUrl: '/ng/files',
 				resolve: { factory: authProvider, },
 			})
 			
@@ -321,3 +330,15 @@ app.directive('elastic', [
         };
     }
 ]);
+
+app.directive('iframeOnload', [function(){
+return {
+    scope: {
+        callBack: '&iframeOnload'
+    },
+    link: function(scope, element, attrs){
+        element.on('load', function(){
+            return scope.callBack();
+        })
+    }
+}}])

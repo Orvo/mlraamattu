@@ -51,7 +51,6 @@ app.controller('IndexController', function($scope, $window, $location, $routePar
 	$http.get('/ajax/recent')
 	.then(function success(response)
 	{
-		console.log(response);
 		$scope.recent = response.data;
 		
 		angular.forEach($scope.recent.tests, function(value, key)
@@ -70,6 +69,24 @@ app.controller('IndexController', function($scope, $window, $location, $routePar
 	{
 		console.log("error", response);
 	});
+});
+
+// ----------------------------------------------------------------------------------------------------
+// File controllers
+
+app.controller('FilesController', function($rootScope, $scope, $window, $location, $routeParams, $breadcrumbs)
+{
+	$breadcrumbs.reset();
+	$breadcrumbs.segment('Tiedostonhallinta');
+	
+	$scope.file_type = 'images';
+	
+	$scope.loaded = false;
+	$scope.kcfinderLoaded = function()
+	{
+		//$scope.loaded = true;
+		alert('hello');
+	}
 });
 
 // ----------------------------------------------------------------------------------------------------
@@ -506,8 +523,6 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	$scope.selected_course = undefined;
 	$scope.select_course = function(course_id)
 	{
-		console.log("Blizz pls", course_id);
-		
 		angular.forEach($scope.data.courses, function(value, key){
 			if(value.id == course_id)
 			{
@@ -521,7 +536,6 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	
 	$scope.update_course_selection = function(new_value)
 	{
-		console.log("Blizz pls", new_value);
 		$scope.data.test.course = new_value;
 	}
 	
@@ -843,8 +857,6 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 					$scope.courses[item.test.course.id] = item.test.course;
 				}
 			});
-			
-			console.log($scope.tests);
 		}
 	});
 	
@@ -934,7 +946,6 @@ app.controller('ArchiveFormController', function($rootScope, $scope, $window, $l
 			$breadcrumbs.segment('Koepalautteen lähetys');
 			
 			$scope.feedback = $scope.data.archive.feedback || {};
-			console.log($scope.feedback);
 			
 			$scope.loaded = true;
 		}
@@ -970,13 +981,11 @@ app.controller('ArchiveFormController', function($rootScope, $scope, $window, $l
 			$scope.errors = [
 				"<b>" + response.status + "</b> " + response.statusText,
 			];
-			console.log(response);
 			
 			$scope.processing = false;
 		});
 	}
 });
-
 
 // ----------------------------------------------------------------------------------------------------
 // Navbar controllers

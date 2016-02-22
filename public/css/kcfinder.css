@@ -1,0 +1,18 @@
+html, body
+{
+	background-image: none;
+	background: #fff !important;
+}
+
+#files, #folders, #toolbar a
+{
+	box-shadow: none !important;
+	text-shadow: none !important;
+	transition: none !important;
+}
+
+#left .folder a span
+{
+	box-shadow: none !important;
+	text-shadow: none !important;
+}

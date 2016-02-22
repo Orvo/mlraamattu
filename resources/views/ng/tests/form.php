@@ -84,7 +84,6 @@
 				ng-model="data.test.title" ng-class="{'area-has-error': data.errors.fields.test_title}" placeholder="Kokeen otsikko">
 		</div>
 		<div class="form-group">
-			<label>Kokeen kuvaus</label>
 			<div>
 				<div style="float:right;width:29%;padding:0 0.5%">
 					<p>

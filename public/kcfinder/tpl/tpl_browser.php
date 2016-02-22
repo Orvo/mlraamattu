@@ -5,6 +5,7 @@
 <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 <?php INCLUDE "tpl/tpl_css.php" ?>
 <?php INCLUDE "tpl/tpl_javascript.php" ?>
+<link rel="stylesheet" href="/css/kcfinder.css"/>
 </head>
 <body>
 <div id="resizer"></div>
