@@ -20,9 +20,20 @@ class TestValidator
 		
 		foreach($test->questions as $question)
 		{
-			$result = $this->ValidateAnswer($question, $given_answers[$question->id]);
-			$validation[$question->id] = $result;
+			if(array_key_exists($question->id, $given_answers))
+			{
+				$result = $this->ValidateAnswer($question, $given_answers[$question->id]);
+			}
+			else
+			{
+				$result = [
+					'correct' 	=> false,
+					'status'	=> \App\Question::INCORRECT,
+				];
+			}
 			
+			$validation[$question->id] = $result;
+				
 			$all_correct = $all_correct && $result['correct'];
 			if($result['correct'])
 			{

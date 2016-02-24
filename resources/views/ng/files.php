@@ -23,10 +23,8 @@
 				</button>
 			</div>
 		</div>
-		<iframe src="/kcfinder/browse.php?type=images&amp;lang=fi" frameborder="0" ng-if="file_type == 'images'" ng-onload="kcfinderLoaded()">
-		asdfasdfasd</iframe>
+		<iframe src="/kcfinder/browse.php?type=images&amp;lang=fi" frameborder="0" ng-if="file_type == 'images'" ng-onload="kcfinderLoaded()"></iframe>
 		<iframe src="/kcfinder/browse.php?type=files&amp;lang=fi" frameborder="0" ng-if="file_type == 'files'" ng-onload="kcfinderLoaded()"></iframe>
-		[[ loaded ]]
 		<div class="load-placeholder" ng-if="!loaded">
 			<h3>
 				<img src="/img/ajax-loader.gif" alt=""> Ladataan...

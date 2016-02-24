@@ -132,7 +132,7 @@ class TestsController extends Controller
 			$page->body = $pageBody;
 			$page->hidden = false;
 			
-			if(strlen(trim(strip_tags($pageBody))) == 0)
+			if(strlen(trim(strip_tags($pageBody, '<img>'))) == 0)
 			{
 				$page->hidden = true;
 			}
@@ -326,6 +326,36 @@ class TestsController extends Controller
 				{
 					case 'CHOICE':
 					case 'MULTI':
+						$has_correct_answer = false;
+						
+						if(array_key_exists('correct_answer', $question))
+						{
+							$question['answers'][$question['correct_answer']]['is_correct'] = true;
+						}
+						
+						foreach($question['answers'] as $akey => &$answer)
+						{
+							if($answer['is_correct'])
+							{
+								$has_correct_answer = true;
+								break;
+							}
+						}
+						
+						if(!$has_correct_answer)
+						{
+							if($question['type'] == 'CHOICE')
+							{
+								$errors['messages'][] = "Kysymyksellä " . ($key + 1) . ". pitää olla oikea vastaus.";
+								$errors['questions'][$key][] = "Kysymyksellä pitää olla oikea vastausa.";
+							}
+							elseif($question['type'] == 'MULTI')
+							{
+								$errors['messages'][] = "Kysymyksellä " . ($key + 1) . ". pitää olla ainakin yksi oikea vastaus.";
+								$errors['questions'][$key][] = "Kysymyksellä pitää olla pitää olla ainakin yksi oikea vastaus.";
+							}
+						}
+						
 					case 'MULTITEXT':
 						$non_empty_answers = 0;
 						
