@@ -3844,8 +3844,8 @@ _.viewImage = function(data) {
 
                 dlg = _.dialog($.$.htmlData(data.name), t.get(0), {
                     width: ww,
-                    height: w.height() - 36,
-                    position: [30, 30],
+                    height: w.height() - 46,
+                    position: [30, 50],
                     draggable: false,
                     nopadding: true,
                     close: closeFunc,
@@ -3883,6 +3883,7 @@ _.viewImage = function(data) {
                     ]
                 });
 
+                dlg.parent().addClass('kcfImageViewerParent');
                 dlg.addClass('kcfImageViewer').css('overflow', "hidden").parent().find('.ui-dialog-buttonpane button').get(2).focus();
 
             } else {

@@ -10,26 +10,30 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<td style="width:40px">ID</td>
-							<td>Kokeen otsikko</td>
-							<td style="width:30%">Muokattu</td>
+							<td>Koe</td>
+							<td style="width:20%">Kurssi</td>
+							<td style="width:20%">Muokattu</td>
 							<td style="width:110px">Toiminnot</td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="test in recent.tests" ng-show="loaded">
-							<td style="font-weight: bold;background:#f5f5f5">[[ test.id ]]</td>
 							<td>
-								[[ test.title ]]
+								<b>[[ test.title ]]</b>
 								<br>
-								[[ test.description ]]
+								[[ test.questions.length ]] kysymystä
+							</td>
+							<td>
+								<a href="#/courses/[[ test.course.id ]]">
+									[[ test.course.title ]]
+								</a>
 							</td>
 							<td>
 								[[ test.updated_at | date:"dd.MM.yyyy 'klo' HH:mm" ]]
 							</td>
 							<td>
-								<a href="#/tests/[[ test.id ]]/edit" class="btn btn-success btn-sm">
-									<span class="glyphicon glyphicon-edit"></span> Muokkaa
+								<a href="#/tests/[[ test.id ]]/edit" class="btn btn-primary btn-sm">
+									<span class="glyphicon glyphicon-search"></span> Näytä
 								</a>
 							</td>
 						</tr>
@@ -53,26 +57,26 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<td style="width:40px">ID</td>
 							<td>Kurssin otsikko</td>
-							<td style="width:30%">Muokattu</td>
+							<td style="width:10%"></td>
+							<td style="width:20%">Muokattu</td>
 							<td style="width:110px">Toiminnot</td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr ng-repeat="course in recent.courses" ng-show="loaded">
-							<td style="font-weight: bold;background:#f5f5f5">[[ course.id ]]</td>
 							<td>
 								[[ course.title ]]
-								<br>
-								[[ course.description ]]
+							</td>
+							<td>
+								[[ course.tests.length ]] koetta
 							</td>
 							<td>
 								[[ course.updated_at | date:"dd.MM.yyyy 'klo' HH:mm" ]]
 							</td>
 							<td>
-								<a href="#/course/[[ course.id ]]/edit" class="btn btn-success btn-sm">
-									<span class="glyphicon glyphicon-edit"></span> Muokkaa
+								<a href="#/courses/[[ course.id ]]" class="btn btn-primary btn-sm">
+									<span class="glyphicon glyphicon-search"></span> Näytä
 								</a>
 							</td>
 						</tr>

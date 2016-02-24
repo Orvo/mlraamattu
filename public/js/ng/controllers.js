@@ -79,13 +79,23 @@ app.controller('FilesController', function($rootScope, $scope, $window, $locatio
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Tiedostonhallinta');
 	
+	$scope.loaded = false;
 	$scope.file_type = 'images';
 	
-	$scope.loaded = false;
+	$scope.setFileType = function(type)
+	{
+		if(type == $scope.file_type) return;
+		
+		$scope.loaded = false;
+		$scope.file_type = type;
+	}
+	
 	$scope.kcfinderLoaded = function()
 	{
-		//$scope.loaded = true;
-		alert('hello');
+		$scope.$apply(function()
+		{
+			$scope.loaded = true;
+		});
 	}
 });
 

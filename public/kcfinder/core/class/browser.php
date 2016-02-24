@@ -739,7 +739,8 @@ class browser extends uploader {
         if ($files === false)
             return $return;
 
-        foreach ($files as $file) {
+        foreach ($files as $k => $file) {
+            if(substr(basename($file), 0, 1) == '.') continue;
 
             $img = new fastImage($file);
             $type = $img->getType();
