@@ -2,7 +2,6 @@
 
 @section('content')
 	
-
 	{!! Form::open(['method' => 'POST', 'action' => 'AuthController@login', 'class' => 'centered-form']) !!}
 
 		{!! csrf_field() !!}

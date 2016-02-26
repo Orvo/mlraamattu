@@ -124,7 +124,7 @@
 
 @section('content')
 	
-	<form action="/test/{{ $test->id }}" method="post" class="test-form {{ css([
+	<form action="/test/{{ $test->id }}" method="post" class="test-form form-horizontal {{ css([
 			'form-register' => @$authentication_type == 0,
 			'form-login' 	=> @$authentication_type == 1,
 		]) }}">
@@ -140,7 +140,9 @@
 				</div>
 			</h3>
 			@if($test->description && strlen($test->description) > 0)
-				<div class="test-description">{{ $test->description }}</div>
+				<div class="test-description">
+					{!! $test->description !!}
+				</div>
 			@endif
 		</div>
 		
@@ -301,7 +303,7 @@
 				<i class="fa fa-exclamation"></i>
 				<div>
 					<p>
-						<b>Eikö suju?</b> Halutessasi voit kerrata koemateriaalia <a href="/test/{{ $test->id }}/material"><span class="ul">täällä</span></a>.
+						<b>Eikö suju?</b> Halutessasi voit kerrata opintomateriaalia <a href="/test/{{ $test->id }}/material"><span class="ul">täällä</span></a>.
 					</p>
 				</div>
 				<div class="clearfix"></div>

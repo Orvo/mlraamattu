@@ -27,12 +27,15 @@
 		</a>
 	</div>
 	<div class="description">
-		<p>
-			{!! nl2br($course->description) !!}
-		</p>
+		<div class="inner">
+			{!! $course->description !!}
+		</div>
 		@if($course->progressStatus != \App\Course::COMPLETED && $course->nextTest)
 			<div class="pull-right">
-				<a href="test/{{ $course->nextTest->id }}/{{ $course->nextTest->goToMaterial ? 'material' : '' }}" class="btn btn-default quick-start-course">
+				<a href="test/{{ $course->nextTest->id }}/{{ $course->nextTest->goToMaterial ? 'material' : '' }}" class="btn quick-start-course {{ css([
+						'btn-primary' => $course->progressStatus == \App\Course::UNSTARTED,
+						'btn-default' => $course->progressStatus == \App\Course::IN_PROGRESS || $course->progressStatus == \App\Course::STARTED
+					]) }}">
 					@if($course->progressStatus == \App\Course::IN_PROGRESS || $course->progressStatus == \App\Course::STARTED)
 						Jatka kurssia
 					@elseif($course->progressStatus == \App\Course::UNSTARTED)

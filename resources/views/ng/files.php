@@ -6,10 +6,6 @@
 	<p>
 		Valitsemalla yläoikealta aktiivisen kategorian voit selata kuva- ja tiedostohakemistoja.
 	</p>
-	<hr>
-	<p>
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempora corporis atque voluptas itaque possimus earum aliquam obcaecati iste voluptates dignissimos, quod molestiae exercitationem cumque rem consequatur, fuga accusamus harum fugit asperiores debitis. Animi provident obcaecati molestias alias veritatis libero laborum cum aliquam blanditiis, aut quas consequatur labore, ipsam in ut?
-	</p>
 </div>
 <div id="content-main">
 	<div class="kcfinder">

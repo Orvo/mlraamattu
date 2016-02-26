@@ -63,9 +63,6 @@
 		
 		<div class="sidebar-help">
 			<p>
-				Uuden kokeen luonti!
-			</p>
-			<p>
 				Kysymyksiin tehdyt muutokset tulevat voimaan vasta kun hyväksyt ne painamalla "Valmis" painiketta lomakkeen alareunassa. Jos haluat hylätä tekemäsi muutokset paina "Peruuta".
 			</p>
 			<p>
@@ -87,20 +84,17 @@
 			<div>
 				<div style="float:right;width:29%;padding:0 0.5%">
 					<p>
-						Kuvaa lyhyesti kokeen aihealuetta. Älä kirjoita kuvaukseen opintomateriaalia, sen syöttö on erikseen.
-					</p>
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo fugit atque in ullam, blanditiis sapiente at esse alias ipsam. Dolores nemo ducimus illum expedita unde qui ullam porro explicabo pariatur.
+						Kuvaa lyhyesti kokeen aihealuetta. <b>Älä kirjoita kuvaukseen opintomateriaalia</b>, sen syöttö on erikseen.
 					</p>
 				</div>
 				<div style="width:70%">
 					<textarea class="form-control vertical-textarea big" id="test-description"
 						ng-model="data.test.description" ng-class="{'area-has-error': data.errors.fields.test_description}"
-						placeholder="Kokeen kuvaus"></textarea>
+						placeholder="Kokeen kuvaus" ckeditor="description_editor_options"></textarea>
 				</div>
 			</div>
 		</div>
-		
+		<hr>
 		<ul class="tabs">
 			<li ng-class="{'active': activeTab == 1}"><a ng-click="setActiveTab(1)">Kysymykset</a></li>
 			<li ng-class="{'active': activeTab == 2}"><a ng-click="setActiveTab(2)">Opintomateriaali</a></li>

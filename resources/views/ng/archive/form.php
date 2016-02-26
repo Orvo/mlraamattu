@@ -48,17 +48,18 @@
 		<h1>
 			Koepalautteen lähetys / <b>[[ data.user.name ]] - [[ data.test.title ]]</b></span>
 		</h1>
-		<h3 class="test-result-box">
-			Kokeen tulos:
-			<span ng-if="data.archive.all_correct" style="color:#379315;">Kaikki oikein</span>
-			<span ng-if="!data.archive.all_correct && data.archive.num_correct > 0" style="color:#E19C28;">Osittain oikein</span>
-			<span ng-if="!data.archive.all_correct && data.archive.num_correct == 0" style="color:#A70014;">Kaikki väärin</span>
-			<span>
-				[[ data.archive.num_correct ]] / [[ data.archive.total ]]
-			</span>
-		</h3>
+		<div class="test-result">
+			<h3>Kokeen tulos</h3>
+			<div>
+				<span ng-if="data.archive.all_correct" style="color:#379315;">Kaikki oikein</span>
+				<span ng-if="!data.archive.all_correct && data.archive.num_correct > 0" style="color:#E19C28;">Osittain oikein</span>
+				<span ng-if="!data.archive.all_correct && data.archive.num_correct == 0" style="color:#A70014;">Kaikki väärin</span>
+				<span class="sbadge">
+					[[ data.archive.num_correct ]] / [[ data.archive.total ]]
+				</span>
+			</div>
+		</div>
 		<fieldset>
-			<legend>Kysymyskohtainen palaute</legend>
 			<ul class="test-feedback-list questions">
 				<li class="question active" ng-repeat="(qkey, question) in data.test.questions">
 					<div class="info">

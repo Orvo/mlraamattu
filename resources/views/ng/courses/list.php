@@ -1,20 +1,22 @@
 <div id="content-sidebar" class="fixed" ng-show="loaded">
-	<div class="sidebar-actions">
-		<div class="form-group">
-			<a href="#/courses/new" class="btn btn-success btn-lg btn-block">
-				<span class="glyphicon glyphicon-plus"></span> Lisää uusi kurssi
-			</a>
-		</div>
-	</div>
 	<div class="sidebar-help">
+		<h3>Ohjeet</h3>
 		<p>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit at a eveniet optio, delectus qui consequuntur, dolor cumque debitis fuga recusandae repudiandae sed blanditiis in magni vitae obcaecati. Voluptate, totam optio facere obcaecati in. Debitis nesciunt obcaecati aspernatur quas quos dolor eum eos deleniti! Facilis voluptatum expedita aperiam corrupti tempora.
+			Kurssit ovat kokonaisuus kokeita järjestetyssä sarjassa. Kurssin suorittaja voi edetä kurssilla vastaamalla oikein ainakin 50% kysymyksistä kokeessa.
+		</p>
+		<p>
+			Kurssin voi myös tallentaa luonnoksena jolloin käyttäjät eivät voi vielä suorittaa sitä. Hyvä vaihtoehto silloin kun kurssin kokeita ollaan vielä rakentamassa.
 		</p>
 	</div>
 </div>
 <div id="content-main" ng-show="loaded">
 	<h1><b>Kurssit</b></h1>
 	<div class="actions-row">
+		<div class="pull-right" style="text-align: right">
+			<a href="#/courses/new" class="btn btn-success">
+				<span class="glyphicon glyphicon-plus"></span> Lisää uusi kurssi
+			</a>
+		</div>
 		<div>
 			<input type="text" ng-model="searchFilter" placeholder="Hae kursseja" class="form-control search-filter">
 		</div>
@@ -23,10 +25,10 @@
 		<thead>
 			<tr>
 				<td style="width:40px">ID</td>
-				<td style="min-width:160px;max-width:230px;">Kurssin otsikko</td>
+				<td style="min-width:180px;max-width:260px;">Kurssin otsikko</td>
 				<td style="width:100px;"></td>
 				<td>Kuvaus</td>
-				<td style="min-width:160px;">Kurssin kokeet</td>
+				<td style="min-width:200px;">Kurssin kokeet</td>
 				<td style="width:210px">Toiminnot</td>
 			</tr>
 		</thead>
@@ -50,7 +52,7 @@
 						Ei kokeita
 					</div>
 				</td>
-				<td>[[ course.description ]]</td>
+				<td ng-bind-html="course.description">[[ course.description ]]</td>
 				<td class="list-no-padding">
 					<ol>
 						<li ng-repeat="test in course.tests">

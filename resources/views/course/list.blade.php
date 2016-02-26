@@ -1,5 +1,23 @@
 @extends('layout')
 
+@section('sidebar_content')
+	<p>
+		Aloita tai jatka kurssien suorittamista valitsemalla jokin tarjolla olevista kursseistamme.
+	</p>
+	<p>
+		Voit päästä alkuun nopeasti klikkaamalla <b>Aloita ensimmäisestä kokeesta</b> -painiketta. Jos olet jo aloittanut kurssin niin pääset nopeasti jatkamaan sitä <b>Jatka kurssia</b> -painikkeella.
+	</p>
+	@if(!Auth::check())
+		<hr>
+		<p>
+			Jos sinulla ei ole vielä tunnusta niin ei hätää!
+		</p>
+		<p>
+			Voit luoda uuden käyttäjätunnuksen suorittaessasi ensimmäistä koetta. Koesivun lopussa voit syöttää tietosi ja järjestelmä tallentaa siitä lähtien koesuorituksesi muistiin.
+		</p>
+	@endif
+@endsection
+
 @section('content')
 	
 	@if(!Auth::check())

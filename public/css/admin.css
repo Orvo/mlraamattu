@@ -20,7 +20,7 @@ html
 body
 {
 	font-family: 'Source Sans Pro', sans-serif;
-	background: #f1f1f1;
+	background: #fff url('/img/background.png') repeat-x;
 	overflow-y: scroll;
 	padding-top: 50px;
 }
@@ -58,10 +58,11 @@ body
 #main-container > .wrapper
 {
 	min-height: 100%;
-	background: #fff;
+	background: #fff fixed;
 	margin: 0 auto;
 	padding: 60px 15px 30px 30px;
 	position: relative;
+	box-shadow: 0 -30px 30px rgba(252, 208, 90, 0.4);
 }
 
 #content-sidebar
@@ -85,6 +86,7 @@ body
 
 #content-sidebar .sidebar-help
 {
+	text-align: justify;
 	padding-right: 15px;
 }
 
@@ -1215,18 +1217,38 @@ ul.tabs li.active a
 
 /**************************************************/
 
-.test-result-box
+.test-result
 {
-	background: #fafafa;
-	border: 1px solid #ddd;
-	box-shadow: 0 2px 2px #eee;
-	border-radius: 5px;
+	width: 600px;
+	margin: 0 auto;
+	font-size: 18pt;
 	padding: 12px 16px;
+	text-align: center;
 }
 
-.test-result-box > span
+.test-result > h3
+{
+	padding-bottom: 5px;
+	margin-bottom: 0;
+}
+
+.test-result > div
 {
 	font-weight: bold;
+	padding-left: 0.5em;
+}
+
+.test-result > div .sbadge
+{
+	display: inline-block;
+	font-size: 16pt;
+	border-radius: 60px;
+	padding: 0 17px;
+	margin: 0 0 0 10px;
+	background: #F7C53E;
+	color: #fff;
+	border: 1px solid #eee;
+	text-shadow: 0 1px 0px #83651C;
 }
 
 .test-feedback-list .test-answer
@@ -1306,6 +1328,13 @@ div.result-badge.incorrect
 	max-height: 35em;
 	resize: none !important;
 	line-height: 1.4;
+}
+
+/*************************************************/
+
+.test-sorting
+{
+	padding-top: 1em;
 }
 
 /*************************************************/
@@ -1390,4 +1419,9 @@ div.result-badge.incorrect
 	padding-top: 100px;
 	background: rgba(255, 255, 255, 0.75);
 	z-index: 9999;
+}
+
+blockquote
+{
+	font-size: inherit !important;
 }

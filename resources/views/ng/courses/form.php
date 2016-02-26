@@ -40,6 +40,13 @@
 			<p>
 				Kurssit ovat kokonaisuus kokeita järjestetyssä sarjassa. Kurssin suorittaja voi edetä kurssilla vastaamalla oikein ainakin 50% kysymyksistä kokeessa.
 			</p>
+			
+			<div ng-if="!id">
+				<h4>Kurssin kokeet</h4>
+				<p>
+					Kurssin luonnin jälkeen edetään automaattisesti kurssin ensimmäisen kokeen lisäykseen.
+				</p>
+			</div>
 		</div>
 	</div>
 	<div id="content-main">
@@ -58,45 +65,53 @@
 				<li ng-repeat="error in data.errors.messages">[[ error ]]</li>
 			</ul>
 		</div>
-		<div class="form-group">
-			<label class="control-label">Kurssin otsikko</label>
-			<input type="text" class="form-control input-lg input-block" id="course-title"
-				ng-model="data.course.title" ng-class="{'area-has-error': data.errors.fields.course_title}" placeholder="Kurssin otsikko">
-		</div>
-		<div class="form-group">
-			<label class="control-label">Kurssin kuvaus</label>
-			<textarea class="form-control vertical-textarea big" id="course-description"
-				ng-model="data.course.description" ng-class="{'area-has-error': data.errors.fields.course_description}" placeholder="Kurssin kuvaus"></textarea>
-		</div>
-		<hr>
-		<div ng-if="!id">
-			<h3>Kurssin kokeet</h3>
-			<p>
-				Kurssin luonnin jälkeen edetään automaattisesti kurssin ensimmäisen kokeen lisäykseen.
-			</p>
-		</div>
-		<div class="test-sorting" ng-if="id && data.course.tests.length > 0">
-			<h3>Järjestä kokeet</h3>
-			<p>
-				Voit uudelleenjärjestää kokeita kurssilla haluaamaasi järjestykseen.
-			</p>
-			<ul class="questions sortable-questions" ui-sortable="sortableOptions" ng-model="data.course.tests">
-				<li class="question" ng-repeat="(key, test) in data.course.tests" id="question-sortable-[[ key ]]">
-					<div class="info">
-						<div class="title-row clearfix">
-							<div class="left-aligned">
-								<div class="number">[[ (key + 1) ]].</div>
-								<div class="title" ng-class="{'no-subtitle': test.description.trim().length == 0}">
-									[[ test.title ]]
-								</div>
-								<div class="subtitle">
-									[[ test.description.split('\n')[0] ]]
+		
+		<ul class="tabs" ng-if="id && data.course.tests.length > 0">
+			<li ng-class="{'active': activeTab == 1}"><a ng-click="setActiveTab(1)">Kurssin tiedot</a></li>
+			<li ng-class="{'active': activeTab == 2}"><a ng-click="setActiveTab(2)">Järjestä kokeita</a></li>
+		</ul>
+		
+		<div class="tab-wrapper">
+		
+			<div class="tab-panel" ng-show="activeTab == 1">
+				<div class="form-group">
+					<label class="control-label">Kurssin otsikko</label>
+					<input type="text" class="form-control input-lg input-block" id="course-title"
+						ng-model="data.course.title" ng-class="{'area-has-error': data.errors.fields.course_title}" placeholder="Kurssin otsikko">
+				</div>
+				<div class="form-group">
+					<label class="control-label">Kurssin kuvaus</label>
+					<textarea class="form-control vertical-textarea big" id="course-description"
+						ng-model="data.course.description" ng-class="{'area-has-error': data.errors.fields.course_description}" placeholder="Kurssin kuvaus" ckeditor="editor_options"></textarea>
+				</div>
+			</div>
+			
+			<div class="tab-panel" ng-show="activeTab == 2">
+				<div class="test-sorting">
+					<h3>Järjestä kokeita</h3>
+					<p>
+						Voit uudelleenjärjestää kokeita kurssilla haluaamaasi järjestykseen.
+					</p>
+					<ul class="questions sortable-questions" ui-sortable="sortableOptions" ng-model="data.course.tests">
+						<li class="question" ng-repeat="(key, test) in data.course.tests" id="question-sortable-[[ key ]]">
+							<div class="info">
+								<div class="title-row clearfix">
+									<div class="left-aligned">
+										<div class="number">[[ (key + 1) ]].</div>
+										<div class="title" ng-class="{'no-subtitle': test.description.trim().length == 0}">
+											[[ test.title ]]
+										</div>
+										<div class="subtitle">
+											[[ test.description.split('\n')[0] ]]
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-				</li>
-			</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
 		</div>
 	</div>
 </form>

@@ -218,6 +218,23 @@ app.controller('CoursesFormController', function($rootScope, $scope, $window, $l
 	
 	$scope.data = {};
 	
+	$scope.editor_options = {
+		language: 'fi',
+		autoGrow_minHeight: 200,
+		autoGrow_maxHeight: 350,
+		autoGrow_bottomSpace: 50,
+	};
+	
+	////////////////////////////////////////////////////
+	
+	$scope.activeTab = 1;
+	$scope.setActiveTab = function(index)
+	{
+		$scope.activeTab = index;
+	}
+	
+	////////////////////////////////////////////////////
+	
 	if($scope.id)
 	{
 		CoursesModel.get({id: $scope.id}, function(data)
@@ -522,6 +539,14 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		autoGrow_minHeight: 500,
 		autoGrow_maxHeight: 650,
 		autoGrow_bottomSpace: 50,
+	};
+	
+	
+	$scope.description_editor_options = {
+		language: 'fi',
+		autoGrow_minHeight: 150,
+		autoGrow_maxHeight: 300,
+		autoGrow_bottomSpace: 20,
 	};
 	
 	$scope.test_material = '';

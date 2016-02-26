@@ -1,8 +1,16 @@
 <div id="content-sidebar" class="fixed" ng-show="loaded">
-	<h2>Toiminnot</h2>
-	<p>
-		Käyttäjät. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, magni, quo. Porro, iusto facilis repellendus eligendi, voluptatum assumenda sed provident nesciunt eveniet odio quos dignissimos hic, dolores eum ad consequuntur ullam. Dolores at aut, quia culpa rem aliquid perferendis error sed animi dolor eos facere illo, provident nobis officia ipsa!
-	</p>
+	<div class="sidebar-actions">
+	
+	</div>
+	<div class="sidebar-help">
+		<h3>Ohjeet</h3>
+		<p>
+			Käyttäjänhallintasivulla voit luoda uusia käyttäjätunnuksia sekä muokata olemassa olevia. Voit myös asettaa käyttäjän ylläpitäjäksi.
+		</p>
+		<p>
+			Ylläpitäjän käyttäjäoikeudet sallii käyttäjän kirjautumisen tähän ylläpitopaneeliin. Ylläpitäjä voi siis hallita kursseja, kysymyksiä ja koesuoritusten palautteenantoa. Ole tarkka kenelle annat ylläpitäjän oikeudet.
+		</p>
+	</div>
 </div>
 <div id="content-main" ng-show="loaded">
 	<div class="breadcrumbs">

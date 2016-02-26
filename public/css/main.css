@@ -119,7 +119,7 @@ h1, h2, h3, h4, h5, h6
 header
 {
 	width: 100%;
-	background: #fe7e17 url('/img/background.png') repeat-x center bottom;
+	background: #fe7e17 url('/img/header-background.png') repeat-x center bottom;
 	border-bottom: 2px solid #9D4600;
 	z-index: 9999;
 	transition: all 500ms ease-in-out;
@@ -261,7 +261,7 @@ footer
 {
 	min-height: 200px;
 	color: #fff;
-	background: #fe7e17 url('/img/background.png') repeat-x center bottom;
+	background: #fe7e17 url('/img/header-background.png') repeat-x center bottom;
 	border-top: 4px solid #CE3F0D;
 	padding: 0 0 40px 0;
 }
@@ -335,8 +335,8 @@ ul.sidebar-course-progress li
 ul.sidebar-course-progress li.test-title div
 {
 	background: #fff;
-	padding: 4px 0 2px 28px;
-	margin: 0 0 5px -29px;
+	padding: 4px 0 2px 27px;
+	margin: 0 0 5px -27px;
 	font-family: 'Lato', sans-serif;
 	font-size: 12pt;
 	font-weight: bold;
@@ -388,9 +388,40 @@ ul.sidebar-course-progress li .anchor
 	display: block;
 	font-family: 'Lato', sans-serif;
 	font-weight: bold;
-	padding: 8px 6px 6px 31px;
-	margin-left: -29px;
+	padding: 8px 6px 6px 30px;
+	margin-left: -28px;
 	background: #f4f4f4;
+}
+
+ul.sidebar-course-progress li.course-title
+{
+	margin-bottom: 14px;
+}
+
+ul.sidebar-course-progress li.course-title .anchor
+{
+	font-style: 'Lato', sans-serif;
+	font-weight: 900;
+	font-size: 13pt;
+	border-bottom: 3px solid #eee;
+	background: #fff;
+	color: #444;
+}
+
+
+ul.sidebar-course-progress li.course-title .anchor:hover,
+ul.sidebar-course-progress li.course-title .anchor:active
+{
+	background: #F91C22;
+	color: #fff;
+}
+
+ul.sidebar-course-progress li.course-title .anchor:hover,
+ul.sidebar-course-progress li.course-title .anchor:active,
+ul.sidebar-course-progress li.course-title.active .anchor
+{
+	border-top-right-radius: 4px;
+	border-bottom-right-radius: 5px;
 }
 
 ul.sidebar-course-progress li a:link,
@@ -503,17 +534,6 @@ ul.sidebar-course-progress li .anchor > span span.glyphicon.glyphicon-lock
 	color: #777;
 	text-shadow: 0 1px 0 #444;
 }
-/*
-.alert > .clearfix::after,
-.form-group::after
-{
-	clear: none !important;
-}
-
-.form-horizontal .form-group::after
-{
-	clear: both !important;
-}*/
 
 .centered-titles
 {
@@ -603,12 +623,10 @@ h1, h2, h3, h4, h5, h6
 
 div.course-description
 {
-	padding: 10px 14px;
+	padding: 10px 0;
 	margin-bottom: 1em;
-	border: 1px solid #eee;
-	border-radius: 3px;
 	color: #444;
-	box-shadow: 0 2px 0 #e7e7e7;
+	border-bottom: 1px solid #ddd;
 }
 
 div.error-block
@@ -815,13 +833,27 @@ div.list div.list-item .title .title-anchor i.fa.test-icon
 	color: #126491;
 }
 
-div.list div.list-item .description
+div.list div.list-item .description,
+.course-description
 {
 	text-align: justify;
-	padding: 12px;
+	padding: 12px 18px 12px 18px;
 	margin: 0;
 	color: #555;
 	background: #fcfcfc;
+	font-size: 11pt;
+}
+
+div.list div.list-item .description .inner
+{
+	padding: 0.45em 0;
+}
+
+div.list div.list-item .description blockquote,
+.course-description blockquote
+{
+	font-size: 11pt;
+	border-left-color: #ddd;
 }
 
 div.list div.list-item.list-item-flat .description
@@ -1475,6 +1507,11 @@ div.alert-icon > div.clearfix
 {
 	margin: 0;
 	padding: 0;
+}
+
+blockquote
+{
+	font-size: inherit !important;
 }
 
 /* ==========================================================================

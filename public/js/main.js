@@ -1,4 +1,15 @@
-$(function(){
+$(function()
+{
+	var sidebar_height = $('#sidebar-content .fixed').height();
+	var maincontent_height = $('#main-content').height();
+	
+	$(document).scroll(function()
+	{
+		if($('#sidebar-content .fixed'))
+		{
+			$('#sidebar-content .fixed').css({'margin-top': Math.max(0, Math.min(maincontent_height-sidebar_height, $(document).scrollTop()-110)) + 'px'});
+		}
+	});
 	
 	$('div.question .answer input, div.question .answer label').click(function()
 	{

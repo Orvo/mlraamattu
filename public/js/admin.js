@@ -1,11 +1,17 @@
 $(window).load(function()
 {
-
+	var sidebar_height = $('#content-sidebar').height();
+	var maincontent_height = $('#content-main').height();
+	
 	$(document).scroll(function()
 	{
-		if($('#content-sidebar').hasClass('fixed'))
+		var sidebar_height = $('#content-sidebar').height();
+		var maincontent_height = $('#content-main').height();
+		
+		if($('#content-sidebar.fixed'))
 		{
-			$('#content-sidebar').css({'margin-top': $(document).scrollTop() + 'px'});
+			var offset = Math.max(0, Math.min(maincontent_height-sidebar_height, $(document).scrollTop()));
+			$('#content-sidebar.fixed').css({'margin-top': offset + 'px'});
 		}
 	});
 	

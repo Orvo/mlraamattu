@@ -1,36 +1,60 @@
-<h4>{{ $test->course->title }}</h4>
-<ul class="sidebar-course-progress">
-	@foreach($test->course->tests as $key => $course_test)
-		<?php if(!$course_test->hasQuestions()) break; ?>
+<?php
+	$is_test_page = false;
+	if(isset($test))
+	{
+		$course = $test->course;
+		$tests = $course->tests;
+		$current_test = $test;
+		$is_test_page = true;
+	}
+	else
+	{
+		$tests = $course->tests;
+		$current_test = false;
+	}
+	
+?>
+<ul class="sidebar-course-progress fixed">
+
+	<li class="course-title {{ css([
+			'active' => !$is_test_page
+		]) }}">
+		<a href="/course/{{ $course->id }}" class="anchor">
+			{{ $course->title }}
+		</a>
+	</li>
+	
+	@foreach($tests as $key => $test)
+		<?php if(!$test->hasQuestions()) break; ?>
 		
-		@if($course_test->progress->status == \App\Test::LOCKED && !@$hasLockSpacer)
+		@if($test->progress->status == \App\Test::LOCKED && !@$hasLockSpacer)
 			<li class="lock-spacer"></li>
 			<?php $hasLockSpacer = true; ?>
 		@endif
 		
 		<li class="test-title">
-			<div>{{ ($key+1) }}. {{ $course_test->title }}</div>
+			<div>{{ ($key+1) }}. {{ $test->title }}</div>
 		</li>
 		
-		@if($course_test->page()->exists() && !$course_test->page->hidden)
+		@if($test->page()->exists() && !$test->page->hidden)
 			<li class="material {{ css([
-				'active' => $course_test->id == $test->id && @$isMaterialPage
+				'active' => $is_test_page && $test->id == $current_test->id && @$isMaterialPage
 			]) }}">
-				@if($course_test->progress->status != \App\Test::LOCKED)
-					<a href="/test/{{ $course_test->id }}/material" class="anchor">
+				@if($test->progress->status != \App\Test::LOCKED)
+					<a href="/test/{{ $test->id }}/material" class="anchor">
 				@else
 					<div class="anchor">
 				@endif
 					<i class="fa fa-bookmark"></i>
 					<span>
-						@if($course_test->progress->status == \App\Test::LOCKED)
+						@if($test->progress->status == \App\Test::LOCKED)
 							<span class="glyphicon glyphicon-lock"></span>
-						@elseif($course_test->id == $test->id && @$isMaterialPage)
+						@elseif($is_test_page && $test->id == $current_test->id && @$isMaterialPage)
 							<span class="glyphicon glyphicon-record"></span>
 						@endif
 						Opintomateriaali
 					</span>
-				@if($course_test->progress->status != \App\Test::LOCKED)
+				@if($test->progress->status != \App\Test::LOCKED)
 					</a>
 				@else
 					</div>
@@ -39,24 +63,24 @@
 		@endif
 		
 		<li class="test {{ css([
-			'active' 		=> $course_test->id == $test->id && @!$isMaterialPage,
-			'no-material' 	=> !$course_test->page()->exists()
+			'active' 		=> $is_test_page && $test->id == $current_test->id && @!$isMaterialPage,
+			'no-material' 	=> !$test->page()->exists()
 		]) }}">
-			@if($course_test->progress->status != \App\Test::LOCKED)
-				<a href="/test/{{ $course_test->id }}" class="anchor">
+			@if($test->progress->status != \App\Test::LOCKED)
+				<a href="/test/{{ $test->id }}" class="anchor">
 			@else
 				<div class="anchor">
 			@endif
 				<i class="fa fa-file-text-o"></i>
 				<span>
-					@if($course_test->progress->status == \App\Test::LOCKED)
+					@if($test->progress->status == \App\Test::LOCKED)
 						<span class="glyphicon glyphicon-lock"></span>
-					@elseif($course_test->id == $test->id && @!$isMaterialPage)
+					@elseif($is_test_page && $test->id == $current_test->id && @!$isMaterialPage)
 						<span class="glyphicon glyphicon-record"></span>
 					@endif
 					Koe
 				</span>
-			@if($course_test->progress->status != \App\Test::LOCKED)
+			@if($test->progress->status != \App\Test::LOCKED)
 				</a>
 			@else
 				</div>
@@ -66,19 +90,19 @@
 		<li class="test-progress">
 			<div class="status {{
 					css([
-						'locked' 		=> $course_test->progress->status == \App\Test::LOCKED,
-						'new-test'		=> $course_test->progress->status == \App\Test::UNSTARTED,
-						'in-progress'	=> $course_test->progress->status == \App\Test::IN_PROGRESS,
-						'completed'		=> $course_test->progress->status == \App\Test::COMPLETED,
+						'locked' 		=> $test->progress->status == \App\Test::LOCKED,
+						'new-test'		=> $test->progress->status == \App\Test::UNSTARTED,
+						'in-progress'	=> $test->progress->status == \App\Test::IN_PROGRESS,
+						'completed'		=> $test->progress->status == \App\Test::COMPLETED,
 					])
 				}}">
-				@if($course_test->progress->status == \App\Test::LOCKED)
+				@if($test->progress->status == \App\Test::LOCKED)
 					Lukittu
-				@elseif($course_test->progress->status == \App\Test::UNSTARTED)
+				@elseif($test->progress->status == \App\Test::UNSTARTED)
 					Aloittamatta
-				@elseif($course_test->progress->status == \App\Test::IN_PROGRESS)
+				@elseif($test->progress->status == \App\Test::IN_PROGRESS)
 					Kesken
-				@elseif($course_test->progress->status == \App\Test::COMPLETED)
+				@elseif($test->progress->status == \App\Test::COMPLETED)
 					Suoritettu
 				@endif
 			</div>

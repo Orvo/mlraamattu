@@ -19,7 +19,48 @@ class CoursesController extends Controller
 	 */
 	public function index()
 	{
-		return Course::with('tests')->get();
+		$courses = Course::with('tests')->get();
+		
+		foreach($courses as &$course)
+		{
+			//$course->description = (str_replace("</p>", "</p>", html_entity_decode($course->description)));
+			$course->description = $this->getParagraphs(html_entity_decode($course->description), 2);
+		}
+		
+		return $courses;
+	}
+	
+	protected function getParagraphs($string, $num_paragraphs = 1, $offset = 0)
+	{
+		--$num_paragraphs;
+		
+		$start = stripos($string, '<p', $offset);
+		$end = stripos($string, '</p>', $offset);
+		
+		if($start === false)
+		{
+			return $string;
+		}
+		
+		$result = trim(strip_tags(substr($string, $start, $end-$start)));
+		
+		if(strlen($result) > 0)
+		{
+			$result = "<p>$result</p>";
+			
+			if($num_paragraphs > 0)
+			{
+				return $result . $this->getParagraphs($string, $num_paragraphs, $end+4);
+			}
+			else
+			{
+				return $result;
+			}
+		}
+		else
+		{
+			return $this->getFirstParagraph($string, $num_paragraphs, $end+4);
+		}
 	}
 
 	/**

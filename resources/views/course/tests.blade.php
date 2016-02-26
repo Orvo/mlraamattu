@@ -1,10 +1,23 @@
 @extends('layout')
 
+@section('sidebar_content')
+	@include('course.test-progress-sidebar')
+@endsection
+
 @section('content')
 	
-	<h1>Kurssi: {{ $course->title }}</h1>
-	<div class="course-description">
-		{!! nl2br($course->description) !!}
+	<div class="centered-titles">
+		<h2>Kurssi</h2>
+		<h3>
+			<div class="line"></div>
+			<div class="text">
+				<span>{{ $course->title }}</span>
+			</div>
+		</h3>
+		<div class="course-description">
+			{!! $course->description !!}
+		</div>
+		<div class="clearfix"></div>
 	</div>
 	
 	@if(session('error'))
@@ -43,7 +56,7 @@
 						<div class="title-anchor">
 							<i class="fa fa-bookmark material-icon"></i>
 							<div>
-								<span class="small-title">Koemateriaali</span>
+								<span class="small-title">Opintomateriaali</span>
 								{{ $test->title }}
 							</div>
 						</div>
@@ -103,7 +116,9 @@
 					@endif
 				</div>
 				<div class="description">
-					{!! nl2br($test->description) !!}
+					<div class="inner">
+						{!! $test->description !!}
+					</div>
 					@if($test->hasFeedback())
 						<div class="alert alert-success alert-icon alert-icon-small">
 							<span class="glyphicon glyphicon-ok-sign"></span>
