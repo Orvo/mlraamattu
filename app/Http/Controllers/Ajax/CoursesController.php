@@ -59,7 +59,7 @@ class CoursesController extends Controller
 		}
 		else
 		{
-			return $this->getFirstParagraph($string, $num_paragraphs, $end+4);
+			return $this->getParagraphs($string, $num_paragraphs, $end+4);
 		}
 	}
 

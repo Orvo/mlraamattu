@@ -413,6 +413,26 @@ td.block-level-links a:hover
 	text-decoration: none;
 }
 
+td.status-labels .label
+{
+	font-size: 9pt;	
+}
+
+td.status-labels .label.label-success
+{
+	color: #023C02;
+}
+
+td.status-labels .label.label-warning
+{
+	color: #5D3802;
+}
+
+td.status-labels .label.label-danger
+{
+	color: #460705;
+}
+
 /* ----------------------------------------------------------------
  * Frontpage
  */

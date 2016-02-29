@@ -20,6 +20,23 @@
 		<div>
 			<input type="text" ng-model="searchFilter" placeholder="Hae kursseja" class="form-control search-filter">
 		</div>
+		<div class="replied-to-toggles">
+			<div class="radio">
+				<label class="btn" ng-class="{'btn-warning': courseFilter.published === undefined, 'btn-default': courseFilter.published !== undefined}">
+					<input type="radio" ng-model="courseFilter.published" ng-value="undefined"> Näytä kaikki
+				</label>
+			</div>
+			<div class="radio">
+				<label class="btn" ng-class="{'btn-warning': courseFilter.published == 1, 'btn-default': courseFilter.published != 1}">
+					<input type="radio" ng-model="courseFilter.published" ng-value="1"> Vain julkaistut
+				</label>
+			</div>
+			<div class="radio">
+				<label class="btn" ng-class="{'btn-warning': courseFilter.published == 0, 'btn-default': courseFilter.published != 0}">
+					<input type="radio" ng-model="courseFilter.published" ng-value="0"> Vain luonnokset/piilotetut
+				</label>
+			</div>
+		</div>
 	</div>
 	<table class="table table-hover">
 		<thead>
@@ -33,7 +50,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="course in courses | filter : searchFilter" class="min-height">
+			<tr ng-repeat="course in courses | coursefilter : courseFilter | filter : searchFilter" class="min-height">
 				<td style="font-weight: bold;background:#fafafa">[[ course.id ]]</td>
 				<td class="block-level-links">
 					<a href="#/courses/[[ course.id ]]">
@@ -42,14 +59,17 @@
 					<span class="clearfix"></span>
 				</td>
 				<td class="status-labels">
-					<div class="label label-success" ng-if="course.published == 1">
+					<div class="label label-success" ng-if="course.published == 1 && course.tests.length > 0">
 						Julkaistu
 					</div>
-					<div class="label label-warning" ng-if="course.published == 0">
-						Piilotettu
+					<div class="label label-warning" ng-if="course.published == 1 && course.tests.length == 0">
+						Julkaistu mutta piilotettu
 					</div>
-					<div class="label label-danger" ng-if="course.tests.length == 0">
-						Ei kokeita
+					<div class="label label-warning" ng-if="course.published == 0 && course.tests.length > 0">
+						Luonnos
+					</div>
+					<div class="label label-danger" ng-if="course.published == 0 && course.tests.length == 0">
+						Piilotettu
 					</div>
 				</td>
 				<td ng-bind-html="course.description">[[ course.description ]]</td>
