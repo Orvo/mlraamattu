@@ -21,11 +21,15 @@
 		</div>
 		
 		<div class="sidebar-help">
-			<p>
-				Käyttäjänhallinta
+			<h3>Ohjeet</h3>
+			<p ng-show="userData.user.id == data.user.id">
+				Muokkaa omia käyttäjätietojasi tarpeen mukaan.
 			</p>
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore ad, aliquid! Assumenda beatae quibusdam sint labore excepturi, mollitia obcaecati porro, numquam aliquam! Aperiam a cum, adipisci laboriosam voluptatem, unde voluptatibus in reprehenderit quas rerum aspernatur placeat ad quia, aliquid sapiente facere omnis sequi porro quos debitis illo reiciendis, esse. Vitae.
+			<p ng-show="data.user.id && userData.user.id != data.user.id">
+				Muokkaa käyttäjätietoja käyttäjän puolesta
+			</p>
+			<p ng-show="!data.user.id">
+				Voit luoda käyttäjälle uuden tilin ilman, että tämän täytyy itse rekisteröityä. Tässä tapauksessa käyttäjälle lähetetään tieto luodusta tilisti sähköpostitse, jossa mainitaan myös annettu salasana. Käyttäjää rohkaistaan vaihtamaan salasanansa.
 			</p>
 		</div>
 	</div>

@@ -36,6 +36,7 @@ Route::get('potato', function ()
 
 Route::get('test/{id}', 'TestsController@show');
 Route::get('test/{id}/material', 'TestsController@material');
+Route::get('test/{id}/material/popup', 'TestsController@material_popup');
 Route::post('test/{id}', 'TestsController@check');
 
 Route::get('course', 'CoursesController@index');
@@ -100,12 +101,9 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 	Route::post('archive/{id}/discard', 'Ajax\ArchiveController@discard');
 });
 
-Route::group(['middleware' => 'auth.ajax'], function()
+Route::get('ng/{view}', function($view)
 {
-	Route::get('ng/{view}', function($view)
-	{
-		return view('ng.' . $view);
-	});
+	return view('ng.' . $view);
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function()

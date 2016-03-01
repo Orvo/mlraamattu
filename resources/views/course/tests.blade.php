@@ -1,4 +1,8 @@
-@extends('layout')
+@extends('layout.main')
+
+@section('title')
+	{{ $course->title }}
+@endsection
 
 @section('sidebar_content')
 	@include('course.test-progress-sidebar')

@@ -246,7 +246,24 @@ app.factory('$breadcrumbs', function($rootScope)
 {
 	var list = [];
 	
+	var title = false;
+	
 	return {
+		title: function(title)
+		{
+			$rootScope.title = function()
+			{
+				if(typeof title == "function")
+				{
+					return title();
+				}
+				else
+				{
+					return title;
+				}
+			}
+		},
+		
 		get: function()
 		{
 			return list;
@@ -255,6 +272,9 @@ app.factory('$breadcrumbs', function($rootScope)
 		{
 			list = [];
 			$rootScope.$broadcast('breadcrumb_change');
+			
+			title = false;
+			$rootScope.title = false;
 		},
 		segment: function(title, link, loaded)
 		{

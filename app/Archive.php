@@ -17,5 +17,15 @@ class Archive extends Model
 	{
 		return $this->belongsTo("App\User");
 	}
+	
+	public function getDiscardedAttribute($value)
+	{
+		return ($value || $this->test->autodiscard ? 1 : 0);
+	}
+	
+	public function setDiscardedAttribute($value)
+	{
+		$this->attributes['discarded'] = $value;
+	}
 
 }

@@ -1,4 +1,8 @@
-@extends('layout')
+@extends('layout.main')
+
+@section('title')
+	Salasanan palautus
+@endsection
 
 @section('content')
 	

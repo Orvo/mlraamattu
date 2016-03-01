@@ -300,6 +300,40 @@ nav.navbar .nav.navbar-nav > .open > a:hover
 	border-right: 1px solid #FEC140;
 }
 
+@media (min-width: 979px) {
+	
+	ul.nav li.dropdown.dropdown-hover:active > .dropdown-menu,
+	ul.nav li.dropdown.dropdown-hover:focus > .dropdown-menu
+	{
+		display: none;
+	}
+	ul.nav li.dropdown.dropdown-hover:hover > .dropdown-menu
+	{
+		display: block !important;
+	}
+}
+
+.dropdown-menu
+{
+	min-width: 180px;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.35);
+	border-top: none;
+	/*margin-top: 1px !important;*/
+}
+
+.dropdown-menu > li > a
+{
+	padding: 8px 20px;
+}
+
+.dropdown-menu .divider
+{
+	margin: 5px 0;
+	background-color: #f3f3f3;
+}
+
+/**************************************************************/
+
 div.breadcrumbs
 {
 	position: fixed;
@@ -350,27 +384,6 @@ nav.navbar .badge
 {
 	box-shadow: 0 0 4px 2px #FFF3CE;
 	animation: glow-animation 4s infinite;
-}
-
-.dropdown-menu
-{
-	width: 100%;
-	min-width: 180px;
-	max-width: 240px;
-	box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
-	border-top: none;
-	margin-top: 1px !important;
-}
-
-.dropdown-menu > li > a
-{
-	padding: 8px 20px;
-}
-
-.dropdown-menu .divider
-{
-	margin: 5px 0;
-	background-color: #f3f3f3;
 }
 
 td.status-labels div.label

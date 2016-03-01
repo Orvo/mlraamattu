@@ -1,4 +1,8 @@
-@extends('layout')
+@extends('layout.main')
+
+@section('title')
+	Kirjaudu sisään
+@endsection
 
 @section('content')
 	

@@ -78,6 +78,7 @@ app.controller('FilesController', function($rootScope, $scope, $window, $locatio
 {
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Tiedostonhallinta');
+	$breadcrumbs.title('Tiedostonhallinta');
 	
 	$scope.loaded = false;
 	$scope.file_type = 'images';
@@ -124,6 +125,7 @@ app.controller('CoursesController', function($scope, $window, $location, $routeP
 {
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Kurssit');
+	$breadcrumbs.title('Kurssit');
 	
 	$scope.courseFilter = {
 			
@@ -174,6 +176,7 @@ app.controller('CourseShowController', function($scope, $window, $location, $rou
 {
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Kurssit', '#/courses/');
+	$breadcrumbs.title('Kurssi');
 	
 	$scope.id = $routeParams.id;
 	
@@ -217,6 +220,8 @@ app.controller('CourseShowController', function($scope, $window, $location, $rou
 			null,
 			function loaded() 	{ return $scope.loaded; }
 		);
+		
+		$breadcrumbs.title(function title(){ return 'Kurssi: ' + $scope.course.title; });
 	},
 	function(data)
 	{
@@ -237,6 +242,15 @@ app.controller('CoursesFormController', function($rootScope, $scope, $window, $l
 	$breadcrumbs.segment('Kurssit', '#/courses/');
 	
 	$scope.id = $routeParams.id;
+	
+	if(!$scope.id)
+	{
+		$breadcrumbs.title('Uusi kurssi');
+	}
+	else
+	{
+		$breadcrumbs.title('Muokataan kurssia');
+	}
 	
 	$scope.data = {};
 	
@@ -265,6 +279,7 @@ app.controller('CoursesFormController', function($rootScope, $scope, $window, $l
 			$scope.loaded = true;
 			
 			$breadcrumbs.segment('Muokataan kurssia');
+			$breadcrumbs.title('Muokataan kurssia ' + $scope.data.course.title);
 		},
 		function(data)
 		{
@@ -360,6 +375,7 @@ app.controller('UsersController', function($scope, $window, $location, $routePar
 {
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Käyttäjät');
+	$breadcrumbs.title('Käyttäjät');
 	
 	$scope.usersFilter = {
 		accessLevel: undefined,
@@ -375,12 +391,18 @@ app.controller('UsersFormController', function($rootScope, $scope, $window, $loc
 {
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Käyttäjät', '#/users/');
-	$breadcrumbs.segment('Muokataan käyttäjää', undefined, function()
-		{
-			return $scope.loaded;
-		});
 	
 	$scope.id = $routeParams.id;
+	
+	if(!$scope.id)
+	{
+		$breadcrumbs.title('Uusi käyttäjä');
+	}
+	else
+	{
+		$breadcrumbs.title('Muokataan käyttäjää');
+	}
+	
 	$scope.data = {};
 	
 	$scope.access_levels = {
@@ -405,6 +427,8 @@ app.controller('UsersFormController', function($rootScope, $scope, $window, $loc
 		$scope.loaded = true;
 		
 		$scope.access_level = $scope.access_levels[0];
+		
+		$breadcrumbs.segment('Uusi käyttäjä');
 	}
 	else
 	{
@@ -412,8 +436,11 @@ app.controller('UsersFormController', function($rootScope, $scope, $window, $loc
 		{
 			$scope.data.user = data;
 			$scope.loaded = true;
-		
+			
 			$scope.access_level = $scope.access_levels[$scope.data.user.access_level];
+			
+			$breadcrumbs.title('Muokataan käyttäjää ' + $scope.data.user.name);
+			$breadcrumbs.segment('Muokataan käyttäjää');
 		});
 	}
 	
@@ -493,6 +520,7 @@ app.controller('TestsController', function($scope, $window, $location, $routePar
 {
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Kokeet');
+	$breadcrumbs.title('Kokeet');
 	
 	$scope.routeError = $routeParams.error;
 	
@@ -525,6 +553,15 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		function link()		{ return $scope.loaded && $scope.data.test.course ? '#/courses/' + $scope.data.test.course.id : ''; },
 		function loaded() 	{ return $scope.loaded && $scope.courses_loaded; }
 	);
+	
+	if(!$scope.id)
+	{
+		$breadcrumbs.title('Uusi koe');
+	}
+	else
+	{
+		$breadcrumbs.title('Muokataan koetta');
+	}
 	
 	////////////////////////////////////////////////////
 	
@@ -624,6 +661,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 			query_courses(function()
 			{
 				$breadcrumbs.segment('Muokataan koetta');
+				$breadcrumbs.title('Muokataan koetta ' + $scope.data.test.title);
 			});
 		},
 		function(data)
@@ -884,6 +922,7 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 {
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Koesuoritukset');
+	$breadcrumbs.title('Koesuoritukset');
 	
 	$scope.tests = { 0: { id: undefined, title: 'Rajaa kokeen mukaan', }};
  	$scope.courses = { 0: { id: undefined, title: 'Rajaa kurssin mukaan', }};
@@ -986,6 +1025,7 @@ app.controller('ArchiveFormController', function($rootScope, $scope, $window, $l
 {
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Koesuoritukset', '#/archive/');
+	$breadcrumbs.title('Koepalautteen lähetys');
 	
 	$http.get('/ajax/archive/' + $routeParams.id).then(function success(response)
 	{
@@ -1047,7 +1087,7 @@ app.controller('ArchiveFormController', function($rootScope, $scope, $window, $l
 // ----------------------------------------------------------------------------------------------------
 // Navbar controllers
 
-app.controller('NavbarController', function($rootScope, $scope, $window, $location, $routeParams, $http)
+app.controller('NavbarController', function($rootScope, $scope, $window, $location, $routeParams, $http, CoursesModel)
 {
 	$rootScope.update_archive_stats = function()
 	{
@@ -1063,4 +1103,6 @@ app.controller('NavbarController', function($rootScope, $scope, $window, $locati
 	}, 5 * 60 * 1000);
 	
 	$rootScope.update_archive_stats();
+	
+	$scope.courses = CoursesModel.query();
 });

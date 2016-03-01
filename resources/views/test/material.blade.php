@@ -1,4 +1,8 @@
-@extends('layout')
+@extends('layout.main')
+
+@section('title')
+	Opintomateriaali kokeelle {{ $test->title }}
+@endsection
 
 @section('extra_navigation')
 	<li>

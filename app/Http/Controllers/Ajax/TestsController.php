@@ -108,6 +108,8 @@ class TestsController extends Controller
 		$test->title 		= $data['title'];
 		$test->description 	= $data['description'];
 		
+		$test->autodiscard 	= $data['autodiscard'];
+		
 		$test->save();
 		
 		///////////////////////

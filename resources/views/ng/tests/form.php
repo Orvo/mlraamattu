@@ -35,6 +35,23 @@
 					<span class="glyphicon glyphicon-sort"></span> Tallenna järjestys
 				</button>
 			</div>
+			
+			<div class="form-group">
+				<label>Automaattinen kuittaus</label>
+				<div class="radio" ng-class="{'active': data.test.autodiscard == 0}">
+					<label>
+						<input type="radio" ng-model="data.test.autodiscard" value="0"> Odota palautteenantoa
+					</label>
+				</div>
+				<div class="radio" ng-class="{'active': data.test.autodiscard == 1}">
+					<label>
+						<input type="radio" ng-model="data.test.autodiscard" value="1"> Kuittaa automaattisesti
+					</label>
+				</div>
+				<div class="help">
+					Jos et välitä antaa kokeelle palautetta, se ei ole pakollista. Voit helpottaa taakkaa merkitsemällä käyttäjän koesuorituksen automaattisesti kuitatuksi kun käyttäjä on palauttanut kokeen.
+				</div>
+			</div>
 
 			<hr>
 			<div class="form-group">

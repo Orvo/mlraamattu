@@ -4,6 +4,78 @@
 		"selected_items":
 		[
 			[
+				"ng-bind",
+				"ng-bind-html	AngularJS"
+			],
+			[
+				"html",
+				"html_entity_decode〔function〕"
+			],
+			[
+				"htmlde",
+				"htmlspecialchars_decode"
+			],
+			[
+				"border-top",
+				"border-top-right-radius"
+			],
+			[
+				"array_key",
+				"array_key_exists"
+			],
+			[
+				"border-bott-",
+				"border-bottom-right-radius"
+			],
+			[
+				"border-rad",
+				"border-bottom-right-radius"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"authentic",
+				"authentication_type"
+			],
+			[
+				"ease",
+				"ease-out"
+			],
+			[
+				"backgrou",
+				"background-image"
+			],
+			[
+				"alt",
+				"$alt_text〔variable〕"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"with",
+				"withErrors〔function〕"
+			],
+			[
+				"Input",
+				"Input::get	Retrieve an Input value"
+			],
+			[
+				"In",
+				"Input::old	Retrieve Old Data"
+			],
+			[
+				"Hash",
+				"Hash::check	Check the given plain value against a hash."
+			],
+			[
+				"$route",
+				"$routeParams	AngularJS"
+			],
+			[
 				"ques",
 				"questions"
 			],
@@ -24,10 +96,6 @@
 				"background"
 			],
 			[
-				"array_key",
-				"array_key_exists"
-			],
-			[
 				"arraky",
 				"array_key_exists"
 			],
@@ -44,92 +112,219 @@
 	"buffers":
 	[
 		{
-			"file": "/G/CPP11/ivi2/Ivie/workdir/gaussian.frag",
+			"file": "public/js/ng/models.js",
 			"settings":
 			{
-				"buffer_size": 963,
-				"line_ending": "Windows"
+				"buffer_size": 1020,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/G/wanhaservu/OLDSERVU/bender/bender.php",
+			"file": "app/Http/routes.php",
 			"settings":
 			{
-				"buffer_size": 885,
-				"line_ending": "Windows"
+				"buffer_size": 3364,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/G/wanhaservu/OLDSERVU/close/close.php",
+			"file": "resources/views/ng/courses/form.php",
 			"settings":
 			{
-				"buffer_size": 2473,
-				"line_ending": "Windows"
+				"buffer_size": 4488,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/G/CPP11/ivi2/Ivie/workdir/background.frag",
+			"contents": "<!DOCTYPE html>\n<html ng-app=\"adminpanel\">\n	<head>\n		<title>M7R Admin</title>\n		<meta charset=\"utf-8\">\n		<meta name=\"viewport\" content=\"width=1000, initial-scale=1\">\n		<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n		<link rel=\"shortcut icon\" type=\"image/png\" href=\"/favicon.png\">\n		<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css\" integrity=\"sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==\" crossorigin=\"anonymous\">\n		<link rel=\"stylesheet\" href=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css\">\n		<link rel=\"stylesheet\" href=\"/css/admin.css\">\n	</head>\n	<body>\n		<nav class=\"navbar navbar-default navbar-fixed-top\" ng-controller=\"NavbarController\">\n			<div class=\"container-fluid\">\n				<div class=\"navbar-header\">\n					<a class=\"navbar-brand\" href=\"#/\">\n						<span class=\"glyphicon glyphicon-home\"></span>\n					</a>\n				</div>\n				<div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n					<ul class=\"nav navbar-nav\">\n						<li class=\"dropdown\">\n							<a href=\"#/courses\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">Kurssit</a>\n							<ul class=\"dropdown-menu\">\n								<li>\n									<a href=\"#/users/[[ userData.user.id ]]/edit\">Muokkaa tietoja</a>\n								</li>\n								<li role=\"separator\" class=\"divider\"></li>\n								<li>\n									<a href=\"#/courses/new\"><span class=\"glyphicon glyphicon-plus\"></span> Kirjaudu ulos</a>\n								</li>\n							</ul>\n						</li>\n						<li>\n							<a href=\"#/archive\">\n								Koesuoritukset\n								<span class=\"badge glow-animation ng-cloak\" ng-show=\"test_records !== undefined && test_records.new > 0\">\n									[[ test_records.new ]] uutta!\n								</span>\n							</a>\n						</li>\n					</ul>\n					\n					<ul class=\"nav navbar-nav navbar-right\">\n						<li>\n							<a href=\"/\" target=\"_blank\">\n								<span class=\"glyphicon glyphicon-globe\"></span> Näytä sivu\n							</a>\n						</li>\n						<li>\n							<a href=\"#/files\">\n								<span class=\"glyphicon glyphicon-file\"></span> Tiedostonhallinta\n							</a>\n						</li>\n						<li>\n							<a href=\"#/users\">\n								<span class=\"glyphicon glyphicon-user\"></span> Käyttäjät\n							</a>\n						</li>\n						<li class=\"dropdown ng-cloak\" ng-show=\"userData\">\n							<a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">\n								<b>[[ userData.user.name ]]</b> <span class=\"caret\"></span>\n							</a>\n							<ul class=\"dropdown-menu\">\n								<li>\n									<a href=\"#/users/[[ userData.user.id ]]/edit\">Muokkaa tietoja</a>\n								</li>\n								<li role=\"separator\" class=\"divider\"></li>\n								<li><a href=\"/auth/logout\"><span class=\"glyphicon glyphicon-log-out\"></span> Kirjaudu ulos</a></li>\n							</ul>\n						</li>\n					</ul>\n				</div>\n			</div>\n		</nav>\n		<div id=\"main-container\">\n			<div class=\"wrapper\" ng-view>\n				@yield('content')\n			</div>\n			\n			<div class=\"breadcrumbs\" ng-controller=\"Breadcrumbs\">\n				<ol class=\"breadcrumb\">\n					<li><a href=\"#/\">Ylläpitopaneeli</a></li>\n					<li ng-repeat=\"(key, item) in breadcrumbs\">\n						<span ng-if=\"!item.hasOwnProperty('loaded') || item.loaded\">\n							<a href=\"[[ item.link ]]\" ng-if=\"item.hasOwnProperty('link')\">[[ item.title ]]</a>\n							<span ng-if=\"!item.hasOwnProperty('link')\">[[ item.title ]]</span>\n						</span>\n						<span ng-if=\"item.hasOwnProperty('loaded') && !item.loaded\">\n							<img src=\"/img/ajax-loader-breadcrumb.gif\" alt=\"\">\n						</span>\n					</li>\n				</ol>\n			</div>\n			\n			<form ng-submit=\"do_login()\" ng-controller=\"AjaxLogin\" class=\"form-horizontal\">\n				<div class=\"modal fade\" id=\"modal-login\">\n					<div class=\"modal-dialog\">\n						<div class=\"modal-content\">\n							<div class=\"modal-header\">\n								<h4 class=\"modal-title\">\n									<span class=\"glyphicon glyphicon-lock\"></span> Kirjaudu sisään\n								</h4>\n							</div>\n							<div class=\"modal-body\" style=\"text-align:center;font-size:120%\">\n								<p>\n									Istuntosi on päättynyt ja jatkaaksesi sinun tulee kirjautua sisään.\n								</p>\n								<div class=\"body-content\">\n									<div class=\"fields clearfix\">\n										<div class=\"form-group\">\n											<div class=\"col-xs-12\">\n												<input type=\"text\" class=\"form-control input-lg\" ng-model=\"email\" placeholder=\"Sähköposti\">\n											</div>\n										</div>\n										<div class=\"form-group\">\n											<div class=\"col-xs-12\">\n												<input type=\"password\" class=\"form-control input-lg\" ng-model=\"password\" placeholder=\"Salasana\">\n											</div>\n										</div>\n									</div>\n									<div class=\"alert-box errors\" ng-show=\"errors.length > 0\">\n										<ul>\n											<li ng-repeat=\"error in errors\">[[ error ]]</li>\n										</ul>\n									</div>\n								</div>\n							</div>\n							<div class=\"modal-footer\">\n								<div class=\"col-xs-4\" style=\"text-align: left\">\n									<a href=\"[[ redirectURL || '/auth/login' ]]\" class=\"btn\" ng-class=\"{'btn-danger': unsavedData, 'btn-warning': !unsavedData}\" ng-hide=\"verifying\">\n										<span class=\"glyphicon glyphicon-remove\"></span>\n										<span ng-show=\"unsavedData\">Hylkää muutokset</span>\n										<span ng-show=\"!unsavedData\">Poistu ylläpidosta</span>\n									</a>\n								</div>\n								<div class=\"col-xs-4\">\n									<div class=\"checkbox\" ng-hide=\"verifying\" ng-hide=\"verifying\">\n										<label>\n											<input type=\"checkbox\" ng-model=\"remember_me\"> Muista kirjautuminen\n										</label>\n									</div>\n								</div>\n								<div class=\"col-xs-4\">\n									<button class=\"btn btn-primary btn-block\" ng-hide=\"verifying\">\n										<span class=\"glyphicon glyphicon-log-in\"></span> Kirjaudu sisään\n									</button>\n									<div ng-show=\"verifying\">\n										<img src=\"/img/ajax-loader.gif\" alt=\"\" style=\"width:30px;\">\n									</div>\n								</div>\n							</div>\n						</div>\n					</div>\n				</div>\n			</form>\n			\n		</div>\n		\n		<script src=\"//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js\"></script>\n		<script src=\"https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js\"></script>\n		\n		<script src=\"//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js\" integrity=\"sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==\" crossorigin=\"anonymous\"></script>\n		\n		<script src=\"//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js\"></script>\n		<script src=\"//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-resource.min.js\"></script>\n		<script src=\"//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js\"></script>\n		<script src=\"//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.min.js\"></script>\n		<script src=\"/js/ng/modules/ng-onload.min.js\"></script>\n		<script src=\"/js/ng/modules/sortable.js\"></script>\n		\n		<script src=\"/js/vendor/ckeditor/ckeditor.js\"></script>\n		<script src=\"/js/ng/modules/angular-ckeditor.min.js\"></script>\n		\n		<script src=\"/js/ng/main.js\"></script>\n		<script src=\"/js/ng/controllers.js\"></script>\n		<script src=\"/js/ng/models.js\"></script>\n		\n		<script src=\"/js/admin.js\"></script>\n	</body>\n</html>\n\n",
+			"file": "resources/views/admin/layout.blade.php",
+			"file_size": 7220,
+			"file_write_time": 131012918510000000,
 			"settings":
 			{
-				"buffer_size": 908,
-				"line_ending": "Windows"
+				"buffer_size": 7220,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/D/Dropbox/gaussian.py",
+			"file": "public/css/main.css",
 			"settings":
 			{
-				"buffer_size": 624,
-				"line_ending": "Windows"
+				"buffer_size": 26919,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/css/admin.css",
+			"settings":
+			{
+				"buffer_size": 22011,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/js/ng/main.js",
+			"settings":
+			{
+				"buffer_size": 7950,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/js/main.js",
+			"settings":
+			{
+				"buffer_size": 2410,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/js/admin.js",
+			"settings":
+			{
+				"buffer_size": 1378,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Http/Controllers/Ajax/CoursesController.php",
+			"settings":
+			{
+				"buffer_size": 4293,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/js/ng/controllers.js",
+			"settings":
+			{
+				"buffer_size": 22433,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/ng/tests/form.php",
+			"settings":
+			{
+				"buffer_size": 18811,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/ng/courses/list.php",
+			"settings":
+			{
+				"buffer_size": 5121,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/course/list.blade.php",
+			"settings":
+			{
+				"buffer_size": 1701,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/course/list-item.blade.php",
+			"settings":
+			{
+				"buffer_size": 2112,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/ng/users/list.php",
+			"settings":
+			{
+				"buffer_size": 3516,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/ng/files.php",
+			"settings":
+			{
+				"buffer_size": 1369,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/auth/login.blade.php",
+			"settings":
+			{
+				"buffer_size": 2014,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/layout.blade.php",
+			"settings":
+			{
+				"buffer_size": 3800,
+				"line_ending": "Unix"
 			}
 		}
 	],
-	"build_system": "Packages/Python/Python.sublime-build",
+	"build_system": "",
 	"build_system_choices":
 	[
-		[
-			[
-				[
-					"Packages/Python/Python.sublime-build",
-					""
-				],
-				[
-					"Packages/Python/Python.sublime-build",
-					"Syntax Check"
-				]
-			],
-			[
-				"Packages/Python/Python.sublime-build",
-				""
-			]
-		]
 	],
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 400.0,
-		"last_filter": "install",
+		"height": 206.0,
+		"last_filter": "html",
 		"selected_items":
 		[
+			[
+				"html",
+				"Set Syntax: HTML"
+			],
+			[
+				"wrap",
+				"Word Wrap: Toggle"
+			],
+			[
+				"wra",
+				"Word Wrap: Toggle"
+			],
+			[
+				"css",
+				"Set Syntax: CSS"
+			],
+			[
+				"ssj",
+				"Set Syntax: JavaScript"
+			],
 			[
 				"install",
 				"Package Control: Install Package"
 			],
 			[
-				"instal",
-				"Package Control: Install Package"
+				"laravel blad",
+				"Set Syntax: Laravel Blade"
 			],
 			[
-				"gist",
-				"Gist: Create Private Gist"
+				"sslara",
+				"Set Syntax: Laravel Blade"
+			],
+			[
+				"php",
+				"Set Syntax: PHP"
+			],
+			[
+				"ssjson",
+				"Set Syntax: JSON"
+			],
+			[
+				"ssjs",
+				"Set Syntax: JavaScript"
 			],
 			[
 				"c++",
 				"Set Syntax: C++"
-			],
-			[
-				"wrap",
-				"Word Wrap: Toggle"
 			],
 			[
 				"insta",
@@ -142,6 +337,10 @@
 			[
 				"ssangu",
 				"Set Syntax: HTML (Angular.js)"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
 			],
 			[
 				"sid",
@@ -157,10 +356,6 @@
 			],
 			[
 				"sshm",
-				"Set Syntax: HTML"
-			],
-			[
-				"html",
 				"Set Syntax: HTML"
 			],
 			[
@@ -196,14 +391,13 @@
 				"View: Toggle Minimap"
 			]
 		],
-		"width": 480.0
+		"width": 538.0
 	},
 	"console":
 	{
 		"height": 125.0,
 		"history":
 		[
-			"2+4",
 			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
 		]
 	},
@@ -218,138 +412,144 @@
 	},
 	"expanded_folders":
 	[
-		"/G/servu/mlraamattu"
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/admin",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/course",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/vendor",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/storage"
 	],
 	"file_history":
 	[
-		"/G/CPP11/ivi2/Ivie/README.md",
-		"/D/DAI/new/nit_readme_3_00.txt",
-		"/D/DAI/new/seraredhead/readme.txt",
-		"/G/projektit/gu.cca",
-		"/G/projektit/temzb/code.tb",
-		"/G/projektit/gaussian.CB",
-		"/G/projektit/bgs/0040.tpc",
-		"/G/CPP11/ivi2/Ivie/Ivie/thirdparty/README.md",
-		"/G/CPP11/ivi2/boost_1_60_0/boost/filesystem/path.hpp",
-		"/G/wanhaservu/OLDSERVU/ahdasruutu/ahdasruutu.php",
-		"/G/wanhaservu/OLDSERVU/close/asd.php",
-		"/G/wanhaservu/OLDSERVU/autoupdate/plusser.php",
-		"/G/wanhaservu/OLDSERVU/autoupdate/laddar.php",
-		"/C/World of Warcraft/BlizzInterface/wow-ui-source-live/FrameXML/GlobalStrings.lua",
-		"/G/Downloads/Contig/Eula.txt",
-		"/C/Users/Sonaza/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
-		"/G/servu/post.php",
-		"/G/CPP11/ivi2/Ivie/workdir/display.frag",
-		"/G/CPP11/ivi2/Ivie/workdir/display_2.frag",
-		"/C/World of Warcraft/Interface/!FakeParty/core.lua",
-		"/C/Users/Sonaza/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/G/CSharp/WebServer/WebServer/Program.cs",
-		"/G/CSharp/MyWebServer/MyWebServer.exe",
-		"/G/CSharp/MyWebServer/MyWebServer.cs",
-		"/G/servu/mlraamattu/public/ng/index.html",
-		"/G/servu/mlraamattu/app/Http/routes.php",
-		"/G/servu/mlraamattu/public/js/ng/models.js",
-		"/G/servu/mlraamattu/public/css/admin.css",
-		"/G/servu/mlraamattu/app/Http/Controllers/Ajax/CoursesController.php",
-		"/G/servu/mlraamattu/public/js/ng/controllers.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/ng/index.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/ng/courses/form.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/course/tests.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/ng/courses/show.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/ng/courses/list.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Page.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/course/list-item.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/test/material.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/ng/files.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/kcfinder/conf/config.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/ng/archive/form.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/kcfinder/core/class/browser.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/kcfinder/cache/base.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/misc/codeignited/ng/tests/form.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/ng/tests/form.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/test/show.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/course/list.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/layout.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/course/test-progress-sidebar.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Test.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Course.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/Ajax/TestsController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/css/kcfinder.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/vendor/ckeditor/contents.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/uploads/.gitignore",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Repositories/TestValidator.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/ng/controllers.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/vendor/laravel/framework/src/Illuminate/View/FileViewFinder.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/vendor/laravel/framework/src/Illuminate/View/Factory.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/uploads/.thumbs/.gitignore",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/kcfinder/js/091.viewImage.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/kcfinder/js/041.dialogs.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/kcfinder/tpl/tpl_browser.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/ng/modules/ng-onload.min.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/auth/login.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/kcfinder/themes/default/02.misc.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/TestsController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/kcfinder/themes/default/css.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/vendor/ckeditor/config.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/kcfinder/themes/default/01.ui.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/misc/codeignited/ng/index.html",
+		"/Applications/XAMPP/xamppfiles/etc/php.ini",
+		"/Users/media7/Downloads/fi.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/kcfinder/lang/fi.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/kcfinder/cache/theme_default.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/kcfinder/browse.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/main.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/database/migrations/2016_02_19_113744_add_hidden_column_to_pages_table.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/tests/form.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/bootstrap/app.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/thirdparty/kcfinder-3.12/.gitignore",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/ng/main.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/admin/layout.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/course/test-list-item.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/vendor/ckeditor/build-config.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/thirdparty/ckeditor/config.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/ng/modules/ng-ckeditor.min.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/archive/form.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/archive/list.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/Ajax/ArchiveController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/index.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Question.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/AuthController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/admin.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/ng/modules/sortable.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/misc/codeignited/js/ng/modules/ckeditor.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/vendor/laravel/framework/src/Illuminate/Routing/ControllerServiceProvider.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/ng/modules/asdfckeditor.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/ng/modules/ckeditor2.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/ng/modules/ckeditor.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/CoursesController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/vendor/ckeditor/samples/toolbarconfigurator/js/fulltoolbareditor.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/vendor/ckeditor/samples/js/sf.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/js/vendor/ckeditor/samples/js/sample.js",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/vendor/symfony/http-kernel/Tests/EventListener/AddRequestFormatsListenerTest.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/storage/framework/views/e2fde1a67710b7cc19c0163ecb1d023c",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/helpers.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/vendor/laravel/framework/src/Illuminate/Foundation/Auth/ResetsPasswords.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/vendor/laravel/framework/src/Illuminate/Support/Facades/Password.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/Auth/AuthController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/css/main.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Requests/LoginFormRequest.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/email/feedback_notification.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/storage/logs/laravel.log",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/css/admin.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/users/form.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/User.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/courses/show.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/storage/framework/views/f96fa960c6509e987ec94ed7aaf02dda",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/config/mail.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/Ajax/UsersController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/Auth/PasswordController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/vendor/laravel/framework/src/Illuminate/Mail/Mailer.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/lang/fi/passwords.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/config/auth.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Providers/AppServiceProvider.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/email/reset_password.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/auth/password.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/auth/reset_password.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/auth/reset_sent.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/auth/reset.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/auth/reset_sent.blade php.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/users/list.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/resources/views/auth/edit.blade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Requests/AccountEditRequest.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/AccountController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/vendor/mockery/mockery/library/Mockery/Generator/StringManipulationGenerator.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/composer.json",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/config/app.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Providers/RouteServiceProvider.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/ArchiveController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Facades/TestValidator.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/vendor/illuminate/html/FormFacade.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Libraries/TestValidator.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Kernel.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Providers/EventServiceProvider.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/vendor/laravel/framework/src/Illuminate/Support/ServiceProvider.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/database/migrations/2016_02_02_095554_add_reply_data_column_to_archive.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/routes.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/app/Http/Controllers/Ajax/CoursesController.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/courses/list.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/public/ng/courses/form.html",
 		"/G/CPP11/ivi2/Ivie/.gitignore",
-		"/G/servu/mlraamattu/public/js/ng/main.js",
-		"/G/servu/mlraamattu/app/Http/Controllers/Ajax/TestsController.php",
-		"/G/servu/mlraamattu/public/ng/courses/list.html",
-		"/G/servu/mlraamattu/public/ng/courses/show.html",
-		"/G/servu/mlraamattu/public/ng/tests/form.html",
-		"/G/servu/mlraamattu/app/Http/Controllers/CoursesController.php",
-		"/G/servu/mlraamattu/resources/views/course/list.blade.php",
-		"/G/servu/mlraamattu/resources/views/course/tests.blade.php",
-		"/G/servu/mlraamattu/public/ng/courses/form.html",
-		"/D/torrent/VS2013_RTM_PRO_ENU/KEY.txt",
-		"/G/servu/mlraamattu/public/ng/tests/list.html",
-		"/G/servu/mlraamattu/resources/views/admin/layout.blade.php",
-		"/G/servu/mlraamattu/app/Http/Controllers/TestsController.php",
 		"/G/CPP11/ivi2/FreeImage3170/FreeImage/Examples/Generic/BatchLoad.cpp",
 		"/G/CPP11/imageviewer/FreeImage3170/FreeImage/Source/FreeImage/GetType.cpp",
 		"/G/CPP11/imageviewer/FreeImage3170/FreeImage/Examples/OpenGL/TextureManager/TextureManager.cpp",
 		"/G/CPP11/ivi2/FreeImage3170/FreeImage/Win32/Debug/FreeImage.2013.log",
-		"/G/CPP11/ivi2/Ivie/Ivie.v12.suo",
-		"/G/CPP11/ivi2/FreeImage3170/FreeImage/Wrapper/FreeImagePlus/src/fipMultiPage.cpp",
-		"/G/CPP11/ivi2/FreeImage3170/FreeImage/Wrapper/FreeImagePlus/src/FreeImagePlus.cpp",
-		"/G/CPP11/imageviewer/FreeImage3170/FreeImage/Examples/Generic/CreateAlpha.cpp",
-		"/G/CPP11/imageviewer/FreeImage3170/FreeImage/Examples/Generic/LoadFromMemory.cpp",
-		"/G/CPP11/imageviewer/FreeImage3170/FreeImage/Source/FreeImage/MemoryIO.cpp",
-		"/G/CPP11/imageviewer/FreeImage3170/FreeImage/Source/FreeImage/Conversion32.cpp",
-		"/G/CPP11/imageviewer/FreeImage3170/FreeImage/Source/FreeImage/Conversion.cpp",
-		"/G/CPP11/ivi2/Ivie/Ivie/thirdparty/FreeImage/FreeImage.h",
-		"/G/servu/mlraamattu/resources/views/layout.blade.php",
-		"/G/servu/mlraamattu/database/migrations/2015_11_13_082828_add_timestamps_to_users.php",
-		"/G/servu/mlraamattu/database/migrations/2015_12_17_162411_add_timestamps_to_courses_table.php",
-		"/C/xampp/php/php.ini",
-		"/G/servu/mlraamattu/public/ng/users/form.html",
-		"/G/servu/mlraamattu/app/Http/Controllers/Ajax/UsersController.php",
-		"/G/servu/mlraamattu/app/User.php",
-		"/G/servu/mlraamattu/public/js/main.js",
-		"/G/servu/mlraamattu/vendor/mockery/mockery/library/Mockery/Generator/StringManipulationGenerator.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/mlraamattu/ml.sublime-project",
-		"/private/etc/hosts",
-		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/config/routes.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/config/autoload.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/libraries/Layout.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/libraries/Auth.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/ng/test/form.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/m7.sublime-project",
-		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/m7.sublime-workspace",
-		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/controllers/AuthController.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/views/login.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/m7raamattu/code/application/controllers/Auth.php",
-		"/Applications/XAMPP/xamppfiles/apache2/conf/httpd.conf",
-		"/Applications/XAMPP/xamppfiles/etc/httpd.conf",
-		"/Users/media7/Documents/m7raamattu/m7raamattu/application/controllers/Home.php",
-		"/Users/media7/Documents/m7raamattu/m7raamattu/application/models/Questionnaire_model.php",
-		"/Applications/XAMPP/xamppfiles/apache2/README.txt",
-		"/Users/media7/Documents/media7layout/ohjeet.html",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts.yml",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/containers.yml",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts/super_wide.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts/right_column.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts/no_nothing.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts/menu_left.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts/no_containers.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts/left_column.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts/home.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/layouts/default.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.1/untitled.html",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/public/assets/css/main.css",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts/right_column.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts/no_nothing.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts/no_containers.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts/menu_left.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts/left_column.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts/home.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts/default.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts.yml",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/layouts/super_wide.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/about.yml",
-		"/Users/media7/Documents/media7layout/bluetheme_5.47/public/assets/css/main.css",
-		"/Users/media7/Documents/media7layout/bluetheme_5.47/about.yml",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/public/assets/css/widget.css",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/public/assets/css/untitled.html",
-		"/Users/media7/Documents/aitolahtilayout/greentheme_v1.0/containers.yml",
-		"/Users/media7/Documents/aitolahtilayout/aitolahti/index.html",
-		"/Users/media7/Documents/media7layout/bluetheme_5.47/layouts/default.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/aitolahti/css/normalize.min.css",
-		"/Users/media7/Documents/aitolahtilayout/aitolahti/css/main.css",
-		"/Users/media7/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/Users/media7/Documents/aitolahtilayout/3-crosses-aitolahti_2_3/layouts/default.html.liquid",
-		"/Users/media7/Documents/aitolahtilayout/3-crosses-aitolahti_2_3/about.yml",
-		"/Users/media7/Documents/aitolahtilayout/3-crosses-aitolahti_2_3/public/assets/css/main.css",
-		"/Users/media7/Documents/media7layout/layoutblue/css/main.css",
-		"/Users/media7/Documents/media7layout/layoutblue/js/mobile_menu_toggle.js",
-		"/Users/media7/Documents/media7layout/layoutblue/js/main.js",
-		"/Users/media7/Documents/media7layout/bluetheme_5.47/public/assets/css/widget.css",
-		"/Users/media7/Documents/media7layout/bluetheme_5.47/layouts/home.html.liquid",
-		"/Users/media7/Documents/media7layout/bluetheme_5.47/layouts/no_containers.html.liquid",
-		"/Users/media7/Documents/media7layout/bluetheme_5.47/layouts/refresh.html.liquid",
-		"/Users/media7/Documents/media7layout/bluetheme_5.47/layouts/f5home.html.liquid",
-		"/Users/media7/Documents/media7layout/layoutblue/info.html"
+		"/G/CPP11/ivi2/Ivie/Ivie.v12.suo"
 	],
 	"find":
 	{
@@ -367,141 +567,146 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"receive loot",
-			"offset",
-			".y",
-			"3.14152",
-			"[",
-			"::White",
-			"position",
-			"size.y",
-			"size.x",
-			"15",
-			"10",
-			"05",
-			".1",
-			"0.1",
-			": ",
-			":",
-			"i",
-			"V",
-			"U",
-			"Y",
-			"y",
-			"Y",
-			"vpx_image->planes[VPX_PLANE_U]",
-			"vpx_image->planes[VPX_PLANE_V]",
-			"vpx_image->planes[VPX_PLANE_Y]",
-			"+",
-			"]+(",
-			"+",
-			"tests",
-			"archive",
-			" btn-block",
-			"btn-xs",
-			"btn",
-			"success",
-			"num_max_questions",
-			"odota",
-			"course_id",
-			"$scope.data.test",
-			"save_s",
-			"save_succ",
-			"title",
-			"Kokeen",
-			"title",
-			"test",
-			"test_edited",
-			"question",
-			"qkey",
-			"question",
-			"SolutionDir",
-			"FreeImage_GetFileTypeFromMemory",
-			"FreeImage_GetFileTypeU",
-			"INPLACESWAP",
-			"SwapRedBlue32",
-			"wchar",
-			"include",
-			"kurssit",
-			"breadcrumb_added",
-			"Breadcrumbs",
-			"_list",
-			"$rootScope.breadcrumbs",
-			"add",
-			"$rootScope.breadcrumbs",
-			"add",
-			"$rootScope.breadcrumbs",
-			"_list",
+			"published",
+			"course",
+			".inner",
+			"p",
+			"trim($__env->yieldContent('sidebar_content'))",
+			"background.p",
+			"span",
 			"h3",
-			"lg",
-			"test",
-			"http",
-			"ladataan",
-			"item",
-			"mbs",
+			"padding",
+			"fixed",
+			"#content-sidebar",
 			"h2",
-			"=",
-			"====================================================================================================",
-			"=",
-			"for=\"\"",
+			"12",
+			"<br />",
+			"$current_test",
+			"$course_test",
+			"$test",
 			"test",
-			"/courses/new'",
-			"$('#video')[0]",
-			"w",
-			"95",
-			"255",
-			"file_",
-			"ile",
-			"finfo",
-			"test_crea",
-			"alert-box",
-			"CoursesFormController",
-			"content-main",
-			"name",
-			"test",
-			"title",
-			"test",
-			"\n			<div class=\"row\">",
-			"row",
-			"vertical",
-			"choice",
-			"t\"]",
-			"[\"",
-			"indexed_choices[$question->id]",
-			"choice.title",
-			".title-row",
-			"choices",
-			"edit()",
-			".edit",
-			"\n								<div class=\"form-group\">\n									<input type=\"text\" class=\"form-control\" ng-model=\"question.answer\">\n								</div>",
-			"MULTITEXT",
-			"tab",
-			"tab-p",
+			"->hidden",
+			"correct_answer",
+			"radio",
+			"TestsFormController",
+			"testsformcontroller",
+			"testsform",
+			"tests",
+			"viewImage",
 			"top",
-			"checkbox",
-			"div",
+			"outervs",
+			"outertop",
+			"top",
+			".ui-dialog",
+			"ui-dialog ",
+			"ui-dialog",
+			"ui-dialo",
+			"getdirs",
+			"typedir",
+			"getdir",
+			"jpg",
+			"$rootScope",
+			"{\n",
+			"$rootScope",
+			"load-pl",
+			"scope",
+			"$scope",
+			"kcfind",
+			"small",
+			"db",
+			"box-shadow",
+			"';",
+			"files",
+			"linear-gradient",
+			".html",
+			"/ng/tests",
+			"/ng/courses/",
+			"courses/",
+			"main-cont",
+			"h1",
+			"savePage",
+			"span",
+			"koema",
+			" style=\"text-align: center\"",
+			"hourglass",
+			"asterisk",
+			"600",
+			"fieldset",
+			"sidebar",
+			"form",
+			".test-form",
+			"li a ",
+			" a",
+			"$test",
+			"Test",
+			"test",
+			"status",
+			"sidebar",
+			"h5",
+			"h4",
+			"h5",
+			"test",
+			"div.list div.list-item .title .title-anchor ",
+			"$test",
+			"test",
+			".alert",
+			"hasfeed",
+			"15",
+			"font-size",
+			"lato",
+			"qdata",
+			"adata",
+			"tab",
+			"div.tabs",
+			"questions",
+			"navbar",
+			"dialog",
+			"test",
+			"h2",
+			"box-s",
+			"box-siz",
+			".list",
+			"h2",
+			"my_courses",
+			"multitext",
+			"margin-left: -",
+			"@$validation",
+			"$validation",
+			"@",
+			"passed",
+			"haspass",
+			"Course",
+			"course",
+			"Course",
+			"course",
+			"Course",
+			"static public ",
+			"num_completed",
+			"success",
 			"h3",
-			"checkbox",
-			"style=\"width:50%;margin:0 0 5px 0\"",
-			"$scope.new_choice_text",
-			"elem",
-			"item.",
-			"useasta",
-			"choice",
-			"Text",
-			"text",
-			"Text",
-			"text",
-			"home",
-			"...",
-			"role=\"presentation\""
+			" {",
+			"col-xs-6",
+			"register",
+			"#authentication-form",
+			"user-login-",
+			"form-help",
+			"user-",
+			"user-email",
+			"passowrd",
+			"email",
+			"v"
 		],
-		"highlight": false,
+		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
+			"; ?>",
+			"<?php echo",
+			"$data['validation']",
+			"$question->id",
+			"$data['\\1']->",
 			"-",
 			"",
 			"\n"
@@ -515,29 +720,468 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/G/CPP11/ivi2/Ivie/workdir/gaussian.frag",
+					"file": "public/js/ng/models.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 963,
+						"buffer_size": 1020,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								854,
-								854
+								197,
+								197
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/OpenGL Shading Language (GLSL)/GLSL.tmLanguage",
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 17,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/Http/routes.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3364,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2545,
+								2547
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1332.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "resources/views/ng/courses/form.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4488,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								310,
+								310
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "resources/views/admin/layout.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7220,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1653,
+								1653
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 293.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "public/css/main.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 26919,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13552,
+								13558
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 13894.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/css/admin.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 22011,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1355,
+								1355
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1025.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "public/js/ng/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7950,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1622,
+								1637
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 740.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 16,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "public/js/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2410,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								230,
+								230
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "public/js/admin.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1378,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								720,
+								720
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "app/Http/Controllers/Ajax/CoursesController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4293,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								982,
+								982
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 265.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "public/js/ng/controllers.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 22433,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11526,
+								11544
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 8674.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 18,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 11,
+					"file": "resources/views/ng/tests/form.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 18811,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2235,
+								2235
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 416.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "resources/views/ng/courses/list.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5121,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								103,
+								85
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"history_list_is_closing": true,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "resources/views/course/list.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1701,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "resources/views/course/list-item.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2112,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								794,
+								794
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -548,124 +1192,127 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "/G/wanhaservu/OLDSERVU/bender/bender.php",
+					"buffer": 15,
+					"file": "resources/views/ng/users/list.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 885,
+						"buffer_size": 3516,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								134,
-								134
+								112,
+								124
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "/G/wanhaservu/OLDSERVU/close/close.php",
+					"buffer": 16,
+					"file": "resources/views/ng/files.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2473,
+						"buffer_size": 1369,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1320,
-								1320
+								320,
+								320
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1008.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 3,
-					"file": "/G/CPP11/ivi2/Ivie/workdir/background.frag",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 908,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								73,
-								73
-							]
-						],
-						"settings":
-						{
-							"auto_name": "",
-							"syntax": "Packages/OpenGL Shading Language (GLSL)/GLSL.tmLanguage"
-						},
-						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "/D/Dropbox/gaussian.py",
+					"buffer": 17,
+					"file": "resources/views/auth/login.blade.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 624,
+						"buffer_size": 2014,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								603,
-								603
+								485,
+								485
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"file": "resources/views/layout.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3800,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2199,
+								2199
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai.tmTheme",
+							"syntax": "Packages/Laravel Blade Highlighter/blade.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 624.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
 					"type": "text"
 				}
 			]
@@ -699,7 +1346,7 @@
 		"cols":
 		[
 			0.0,
-			0.358854166666,
+			0.628920491536,
 			1.0
 		],
 		"rows":
@@ -709,10 +1356,6 @@
 		]
 	},
 	"menu_visible": true,
-	"output.exec":
-	{
-		"height": 533.0
-	},
 	"output.find_results":
 	{
 		"height": 0.0
@@ -731,196 +1374,516 @@
 		"selected_items":
 		[
 			[
-				"courseshow",
-				"public\\ng\\courses\\show.html"
-			],
-			[
-				"nglist",
-				"public\\ng\\tests\\list.html"
-			],
-			[
-				"resourceview",
-				"resources\\views\\course\\tests.blade.php"
-			],
-			[
-				"viewcourse",
-				"resources\\views\\course\\list.blade.php"
-			],
-			[
-				"coursecontr",
-				"app\\Http\\Controllers\\CoursesController.php"
-			],
-			[
-				"ajaxtest",
-				"app\\Http\\Controllers\\Ajax\\TestsController.php"
-			],
-			[
-				"testcontro",
-				"app\\Http\\Controllers\\TestsController.php"
-			],
-			[
-				"adminlay",
-				"resources\\views\\admin\\layout.blade.php"
-			],
-			[
-				"layouta",
-				"resources\\views\\layout.blade.php"
-			],
-			[
-				"courselist",
-				"public\\ng\\courses\\list.html"
-			],
-			[
-				"ngindex",
-				"public\\ng\\index.html"
-			],
-			[
-				"timecourse",
-				"database\\migrations\\2015_12_17_162411_add_timestamps_to_courses_table.php"
-			],
-			[
-				"timestamps",
-				"database\\migrations\\2015_11_13_082828_add_timestamps_to_users.php"
-			],
-			[
-				"route",
-				"app\\Http\\routes.php"
-			],
-			[
-				"models",
-				"public\\js\\ng\\models.js"
-			],
-			[
-				"adminla",
-				"resources\\views\\admin\\layout.blade.php"
-			],
-			[
-				"ajaxcoursec",
-				"app\\Http\\Controllers\\Ajax\\CoursesController.php"
+				"adminlayout",
+				"resources/views/admin/layout.blade.php"
 			],
 			[
 				"ngtestform",
-				"public\\ng\\tests\\form.html"
+				"resources/views/ng/tests/form.php"
+			],
+			[
+				"ngcourseform",
+				"resources/views/ng/courses/form.php"
+			],
+			[
+				"courselistite",
+				"resources/views/course/list-item.blade.php"
+			],
+			[
+				"courselist",
+				"resources/views/course/list.blade.php"
+			],
+			[
+				"layoutblade",
+				"resources/views/layout.blade.php"
+			],
+			[
+				"courselistblade",
+				"resources/views/course/list.blade.php"
+			],
+			[
+				"loginblade",
+				"resources/views/auth/login.blade.php"
+			],
+			[
+				"ngfiles",
+				"resources/views/ng/files.php"
+			],
+			[
+				"ngcourselist",
+				"resources/views/ng/courses/list.php"
+			],
+			[
+				"userslist",
+				"resources/views/ng/users/list.php"
+			],
+			[
+				"archiveform",
+				"resources/views/ng/archive/form.php"
 			],
 			[
 				"courseform",
-				"public\\ng\\courses\\form.html"
+				"resources/views/ng/courses/form.php"
 			],
 			[
-				"ajaxuser",
-				"app\\Http\\Controllers\\Ajax\\UsersController.php"
+				"resourccourselist",
+				"resources/views/course/list.blade.php"
 			],
 			[
-				"user",
-				"app\\User.php"
+				"courseshow",
+				"resources/views/ng/courses/show.php"
 			],
 			[
-				"publuserform",
-				"public\\ng\\users\\form.html"
+				"apppage",
+				"app/Page.php"
 			],
 			[
-				"controlj",
-				"public\\js\\ng\\controllers.js"
+				"jaxcourse",
+				"app/Http/Controllers/Ajax/CoursesController.php"
 			],
 			[
-				"admin",
-				"public\\css\\admin.css"
+				"appcourse",
+				"app/Course.php"
 			],
 			[
-				"publicngshow",
-				"public\\ng\\courses\\show.html"
+				"resourngform",
+				"resources/views/ng/tests/form.php"
 			],
 			[
-				"ngmainjs",
-				"public\\js\\ng\\main.js"
+				"coursetests",
+				"resources/views/course/tests.blade.php"
 			],
 			[
-				"mainjs",
-				"public\\js\\main.js"
+				"material",
+				"resources/views/test/material.blade.php"
 			],
 			[
-				"ngmain",
-				"vendor/mockery/mockery/library/Mockery/Generator/StringManipulationGenerator.php"
-			],
-			[
-				"sublime",
-				"ml.sublime-project"
-			],
-			[
-				"model",
-				"js/ng/models.js"
-			],
-			[
-				"testmode",
-				"application/models/Tests_model.php"
-			],
-			[
-				"ajax",
-				"application/controllers/Ajax_Controller.php"
-			],
-			[
-				"contjs",
-				"js/ng/controllers.js"
-			],
-			[
-				"contmain",
-				"application/views/layout/main.php"
-			],
-			[
-				"testsf",
-				"ng/tests/form.html"
-			],
-			[
-				"ngtestfor",
-				"ng/test/form.html"
-			],
-			[
-				"ngin",
-				"ng/index.html"
+				"layout",
+				"resources/views/layout.blade.php"
 			],
 			[
 				"adminjs",
-				"js/admin.js"
+				"public/js/admin.js"
 			],
 			[
-				"login",
-				"application/views/login.php"
+				"mainjs",
+				"public/js/main.js"
 			],
 			[
-				"rout",
-				"application/config/routes.php"
+				"testshowblade",
+				"resources/views/test/show.blade.php"
 			],
 			[
-				"layoutma",
-				"application/views/layout/main.php"
+				"resourtestform",
+				"resources/views/ng/tests/form.php"
 			],
 			[
-				"autol",
-				"application/config/autoload.php"
+				"content",
+				"public/js/vendor/ckeditor/contents.css"
 			],
 			[
-				"lay",
-				"application/libraries/Layout.php"
+				"courseblade",
+				"resources/views/course/tests.blade.php"
 			],
 			[
-				"cmss",
-				"css/main.css"
+				"courselistitem",
+				"resources/views/course/list-item.blade.php"
 			],
 			[
-				"ques",
-				"application/views/questionnaire.php"
+				"ajaxtest",
+				"app/Http/Controllers/Ajax/TestsController.php"
 			],
 			[
-				"qu",
-				"application/models/Questionnaire_model.php"
+				"ngformphp",
+				"resources/views/ng/tests/form.php"
 			],
 			[
-				"home",
-				"application/controllers/Home.php"
+				"ajaxtestcontr",
+				"app/Http/Controllers/Ajax/TestsController.php"
 			],
 			[
-				"datab",
-				"application/config/database.php"
+				"controller.js",
+				"public/js/ng/controllers.js"
+			],
+			[
+				"testshowblad",
+				"resources/views/test/show.blade.php"
+			],
+			[
+				"testvali",
+				"app/Repositories/TestValidator.php"
+			],
+			[
+				"testsblade",
+				"resources/views/course/tests.blade.php"
+			],
+			[
+				"kcfbase",
+				"public/kcfinder/cache/base.js"
+			],
+			[
+				"base.js",
+				"public/kcfinder/cache/base.js"
+			],
+			[
+				"tplbro",
+				"public/kcfinder/tpl/tpl_browser.php"
+			],
+			[
+				"kcfcss",
+				"public/css/kcfinder.css"
+			],
+			[
+				"kcbrowser",
+				"public/kcfinder/core/class/browser.php"
+			],
+			[
+				"ngon",
+				"public/js/ng/modules/ng-onload.min.js"
+			],
+			[
+				"ngform.php",
+				"resources/views/ng/archive/form.php"
+			],
+			[
+				"control",
+				"public/js/ng/controllers.js"
+			],
+			[
+				"ngindex",
+				"resources/views/ng/index.php"
+			],
+			[
+				"kcfbrowser",
+				"public/kcfinder/core/class/browser.php"
+			],
+			[
+				"kcfbrows",
+				"public/kcfinder/tpl/tpl_browser.php"
+			],
+			[
+				"kcfindbrow",
+				"public/kcfinder/browse.php"
+			],
+			[
+				"ckeditconfig",
+				"public/js/vendor/ckeditor/config.js"
+			],
+			[
+				"kcfinderconfig",
+				"public/kcfinder/conf/config.php"
+			],
+			[
+				"ngmainjs",
+				"public/js/ng/main.js"
+			],
+			[
+				"viewfactory",
+				"vendor/laravel/framework/src/Illuminate/View/Factory.php"
+			],
+			[
+				"fileviewfinder",
+				"vendor/laravel/framework/src/Illuminate/View/FileViewFinder.php"
+			],
+			[
+				"addhidden",
+				"database/migrations/2016_02_19_113744_add_hidden_column_to_pages_table.php"
+			],
+			[
+				"app",
+				"bootstrap/app.php"
+			],
+			[
+				"ngform",
+				"public/ng/tests/form.html"
+			],
+			[
+				"ajaxtestsc",
+				"app/Http/Controllers/Ajax/TestsController.php"
+			],
+			[
+				"loginbl",
+				"resources/views/auth/login.blade.php"
+			],
+			[
+				"testcontrol",
+				"app/Http/Controllers/TestsController.php"
+			],
+			[
+				"ayoutblade",
+				"resources/views/layout.blade.php"
+			],
+			[
+				"ckeditorcontent",
+				"public/js/vendor/ckeditor/contents.css"
+			],
+			[
+				"admincss",
+				"public/css/admin.css"
+			],
+			[
+				"buildconf",
+				"public/js/vendor/ckeditor/build-config.js"
+			],
+			[
+				"configjs",
+				"public/js/vendor/ckeditor/config.js"
+			],
+			[
+				"testscontrol",
+				"app/Http/Controllers/TestsController.php"
+			],
+			[
+				"ajatestcontroll",
+				"app/Http/Controllers/Ajax/TestsController.php"
+			],
+			[
+				"layoutblad",
+				"resources/views/layout.blade.php"
+			],
+			[
+				"sortable",
+				"public/js/ng/modules/sortable.js"
+			],
+			[
+				"ng-cke",
+				"public/js/ng/modules/ng-ckeditor.min.js"
+			],
+			[
+				"ckeditor",
+				"misc/codeignited/js/ng/modules/ckeditor.js"
+			],
+			[
+				"controljs",
+				"public/js/ng/controllers.js"
+			],
+			[
+				"controllers",
+				"vendor/laravel/framework/src/Illuminate/Routing/ControllerServiceProvider.php"
+			],
+			[
+				"ngmain",
+				"public/js/ng/main.js"
+			],
+			[
+				"testform",
+				"vendor/symfony/http-kernel/Tests/EventListener/AddRequestFormatsListenerTest.php"
+			],
+			[
+				"ngarchive",
+				"public/ng/archive/list.html"
+			],
+			[
+				"nginde",
+				"public/ng/index.html"
+			],
+			[
+				"e2fd",
+				"storage/framework/views/e2fde1a67710b7cc19c0163ecb1d023c"
+			],
+			[
+				"loginblad",
+				"resources/views/auth/login.blade.php"
+			],
+			[
+				"maincss",
+				"public/css/main.css"
+			],
+			[
+				"coursescon",
+				"app/Http/Controllers/CoursesController.php"
+			],
+			[
+				"testvald",
+				"app/Repositories/TestValidator.php"
+			],
+			[
+				"question",
+				"app/Question.php"
+			],
+			[
+				"testcontr",
+				"app/Http/Controllers/TestsController.php"
+			],
+			[
+				"password.php",
+				"vendor/laravel/framework/src/Illuminate/Support/Facades/Password.php"
+			],
+			[
+				"reset",
+				"vendor/laravel/framework/src/Illuminate/Foundation/Auth/ResetsPasswords.php"
+			],
+			[
+				"authcontrol",
+				"app/Http/Controllers/Auth/AuthController.php"
+			],
+			[
+				"apptest",
+				"app/Test.php"
+			],
+			[
+				"courselistblad",
+				"resources/views/course/list.blade.php"
+			],
+			[
+				"coursecontr",
+				"app/Http/Controllers/CoursesController.php"
+			],
+			[
+				"loginform",
+				"app/Http/Requests/LoginFormRequest.php"
+			],
+			[
+				"authcontr",
+				"app/Http/Controllers/AuthController.php"
+			],
+			[
+				"nglist",
+				"public/ng/archive/list.html"
+			],
+			[
+				"coursetestsbl",
+				"resources/views/course/tests.blade.php"
+			],
+			[
+				"storagelog",
+				"storage/logs/laravel.log"
+			],
+			[
+				"ngarchivelist",
+				"public/ng/archive/list.html"
+			],
+			[
+				"appuser",
+				"app/User.php"
+			],
+			[
+				"ngarchiveform",
+				"public/ng/archive/form.html"
+			],
+			[
+				"f96",
+				"storage/framework/views/f96fa960c6509e987ec94ed7aaf02dda"
+			],
+			[
+				"help",
+				"app/Http/helpers.php"
+			],
+			[
+				"testblade",
+				"resources/views/test/show.blade.php"
+			],
+			[
+				"testvalid",
+				"app/Repositories/TestValidator.php"
+			],
+			[
+				"testcontro",
+				"app/Http/Controllers/TestsController.php"
+			],
+			[
+				"admincs",
+				"public/css/admin.css"
+			],
+			[
+				"ngarchivefor",
+				"public/ng/archive/form.html"
+			],
+			[
+				"feedback",
+				"resources/views/email/feedback_notification.blade.php"
+			],
+			[
+				"archivecontr",
+				"app/Http/Controllers/Ajax/ArchiveController.php"
+			],
+			[
+				"nguserform",
+				"public/ng/users/form.html"
+			],
+			[
+				"fipass",
+				"resources/lang/fi/passwords.php"
+			],
+			[
+				"mailerphp",
+				"vendor/laravel/framework/src/Illuminate/Mail/Mailer.php"
+			],
+			[
+				"configmail",
+				"config/mail.php"
+			],
+			[
+				"configauth",
+				"config/auth.php"
+			],
+			[
+				"password",
+				"resources/lang/fi/passwords.php"
+			],
+			[
+				"resetspass",
+				"vendor/laravel/framework/src/Illuminate/Foundation/Auth/ResetsPasswords.php"
+			],
+			[
+				"passwordcontro",
+				"app/Http/Controllers/Auth/PasswordController.php"
+			],
+			[
+				"passwordcontr",
+				"app/Http/Controllers/Auth/PasswordController.php"
+			],
+			[
+				"resetsent",
+				"resources/views/auth/reset_sent.blade.php"
+			],
+			[
+				"authcontro",
+				"app/Http/Controllers/AuthController.php"
+			],
+			[
+				"testb.ade",
+				"resources/views/course/tests.blade.php"
+			],
+			[
+				"appservi",
+				"app/Providers/AppServiceProvider.php"
+			],
+			[
+				"loginformrequest",
+				"app/Http/Requests/LoginFormRequest.php"
+			],
+			[
+				"userform",
+				"public/ng/users/form.html"
+			],
+			[
+				"ccountcontr",
+				"app/Http/Controllers/AccountController.php"
+			],
+			[
+				"archivelist",
+				"public/ng/archive/list.html"
+			],
+			[
+				"maincs",
+				"public/css/main.css"
+			],
+			[
+				"rchivecontr",
+				"app/Http/Controllers/ArchiveController.php"
+			],
+			[
+				"routes",
+				"app/Providers/RouteServiceProvider.php"
+			],
+			[
+				"facade",
+				"vendor/illuminate/html/FormFacade.php"
+			],
+			[
+				"app.php",
+				"bootstrap/app.php"
 			]
 		],
 		"width": 0.0
@@ -943,7 +1906,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
@@ -951,7 +1914,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": false,
-	"side_bar_width": 180.0,
+	"side_bar_width": 215.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

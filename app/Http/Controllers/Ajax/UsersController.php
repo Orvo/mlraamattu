@@ -8,7 +8,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\User;
+use \Auth;
 use \Hash;
+use Mail;
 
 class UsersController extends Controller
 {
@@ -206,6 +208,7 @@ class UsersController extends Controller
 		if($isNewEntry)
 		{
 			$user = new User();
+			$user->change_password = true;
 		}
 		else
 		{
@@ -218,6 +221,33 @@ class UsersController extends Controller
 		if(strlen(@$data['password']) > 0)
 		{
 			$user->password = Hash::make($data['password']);
+		}
+		
+		if($isNewEntry)
+		{
+			Mail::send('email.admin_account_created',
+			[
+				'user' 		=> $user,
+				'password'	=> $data['password'],
+			],
+			function($m) use ($user)
+			{
+				$m->to($user->email, $user->name)->subject('Sinulle on luotu käyttäjätunnus Media7 raamattuopistoon');
+			});
+		}
+		elseif($user->id != Auth::user()->id)
+		{
+			$user->change_password = true;
+			
+			Mail::send('email.admin_account_edited',
+			[
+				'user' 		=> $user,
+				'password'	=> strlen(@$data['password']) > 0 ? $data['password'] : false,
+			],
+			function($m) use ($user)
+			{
+				$m->to($user->email, $user->name)->subject('Käyttäjätietojasi on muokattu Media7 raamattuopistossa');
+			});
 		}
 		
 		$user->save();

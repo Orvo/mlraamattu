@@ -1,4 +1,8 @@
-@extends('layout')
+@extends('layout.main')
+
+@section('title')
+	Kurssit
+@endsection
 
 @section('sidebar_content')
 	<p>

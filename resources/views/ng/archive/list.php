@@ -60,6 +60,11 @@
 					<input type="radio" ng-model="archiveFilter.discarded" ng-value="undefined"> Näytä kuitatut
 				</label>
 			</div>
+			<div class="radio">
+				<label class="btn" ng-class="{'btn-info': archiveFilter.discarded == 1, 'btn-default': archiveFilter.discarded != 1}">
+					<input type="radio" ng-model="archiveFilter.discarded" ng-value="1"> Näytä vain kuitatut
+				</label>
+			</div>
 		</div>
 		<div class="archive-select-filters">
 			<label>Rajaa suorituksia</label>

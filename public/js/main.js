@@ -44,6 +44,20 @@ $(function()
 		$('#top-spoiler-warning').slideUp(400);
 	});
 	
+	$('a.popup').click(function(e)
+	{
+		var href = $(this).attr('href');
+		
+		window.open(href + '/popup', 'material_popup', 'width=700,height=800,resizable,scrollbars');
+		
+		e.preventDefault();
+	});
+	
+	$('.window-close').click(function()
+	{
+		window.close();
+	})
+	
 	var getAuthenticationTypeByActiveTab = function()
 	{
 		if($('#tab-register').hasClass('active'))

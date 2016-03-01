@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html ng-app="adminpanel">
 	<head>
-		<title>M7R Admin</title>
+		<title ng-bind="(title ? title() + ' - ' : '') + '{{ Config::get('site.title') }} Ylläpitopaneeli'">
+			{{ Config::get('site.title') }} Ylläpitopaneeli
+		</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=1000, initial-scale=1">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,15 +20,27 @@
 						<span class="glyphicon glyphicon-home"></span>
 					</a>
 				</div>
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="#/courses">Kurssit</a></li>
-						<!-- <li><a href="#/tests">Kokeet</a></li> -->
+						<li class="dropdown dropdown-hover">
+							<a href="#/courses">
+								Kurssit <span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li ng-repeat="course in courses">
+									<a href="#/courses/[[ course.id ]]">[[ course.title ]]</a>
+								</li>
+								<li role="separator" class="divider"></li>
+								<li>
+									<a href="#/courses/new"><span class="glyphicon glyphicon-plus"></span> Lisää uusi kurssi</a>
+								</li>
+							</ul>
+						</li>
 						<li>
 							<a href="#/archive">
 								Koesuoritukset
 								<span class="badge glow-animation ng-cloak" ng-show="test_records !== undefined && test_records.new > 0">
-									[[ test_records.new ]] uutta!
+									[[ test_records.new ]] [[ test_records.new > 0 ? 'uutta' : 'uusi' ]]!
 								</span>
 							</a>
 						</li>

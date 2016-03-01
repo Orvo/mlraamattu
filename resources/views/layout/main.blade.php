@@ -4,7 +4,12 @@
 		<meta charset="utf-8">
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>M7 Laravel</title>
+		<title>
+			@if(isset($__env->getSections()['title']))
+				@yield('title') - 
+			@endif
+			{{ Config::get('site.title') }}
+		</title>
 		<link rel="shortcut icon" type="image/png" href="/favicon.png">
         <link rel="stylesheet" href="/css/normalize.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">

@@ -248,6 +248,18 @@ nav li a:active
 	padding: 0 0 0 20px;
 }
 
+#content-wrapper-popup
+{
+	min-height: 100%;
+}
+
+#content-wrapper-popup #main-content
+{
+	min-width: 650px;
+	max-width: 850px;
+	margin: 0 auto;
+	padding: 20px 25px 50px 25px;
+}
 
 #main-content > h1:first-child,
 #main-content > h2:first-child,
@@ -1059,6 +1071,15 @@ fieldset legend
 {
 	padding-left: 0.4em;
 }
+
+/*********************************************************************/
+
+.test-status-alert .pull-right
+{
+	margin: 0 0 0.5em 1em;
+}
+
+/*********************************************************************/
 
 div.question
 {

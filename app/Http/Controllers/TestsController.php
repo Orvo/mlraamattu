@@ -15,6 +15,7 @@ use App\User;
 use App\Test;
 use App\Archive;
 
+use Mail;
 
 class TestsController extends Controller
 {
@@ -69,6 +70,22 @@ class TestsController extends Controller
 			return view('test.material')->with([
 				'test' 				=> $test,
 				'isMaterialPage' 	=> true,
+			]);
+		}
+		else
+		{
+			return redirect('/test/' . $id);
+		}
+	}
+	
+	public function material_popup($id)
+	{
+		$test = Test::with('page')->has('page')->find($id);
+		
+		if($test && !$test->page->hidden)
+		{
+			return view('test.material-popup')->with([
+				'test' 		=> $test,
 			]);
 		}
 		else
@@ -135,6 +152,15 @@ class TestsController extends Controller
 						$user->email = $request->input('user-email');
 						$user->password = Hash::make($request->input('user-password'));
 						$user->save();
+						
+						Mail::send('email.user_account_created',
+						[
+							'user' 		=> $user,
+						],
+						function($m) use ($user)
+						{
+							$m->to($user->email, $user->name)->subject('Käyttäjätunnus luotu Media7 raamattuopistoon');
+						});
 						
 						Auth::login($user);
 					break;
