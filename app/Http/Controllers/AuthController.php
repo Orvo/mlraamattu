@@ -145,7 +145,7 @@ class AuthController extends Controller
 			'name'				=> 'required',
 			'email'				=> 'required|email|unique:users,email,' . $user->id,
 			'current_password'	=> 'required_with:new_password|match_password',
-			'new_password'		=> 'required_with:current_password|min:8|confirmed'
+			'new_password'		=> 'required_with:current_password|min:8|confirmed|match_password:false'
 		],
 		[
 			'name.required'						=> 'Nimi on pakollinen.',
@@ -157,6 +157,7 @@ class AuthController extends Controller
 			'new_password.required_with'		=> 'Syötä uusi salasana.',
 			'new_password.min'					=> 'Uuden salasanan pitää olla ainakin :min merkkiä pitkä.',
 			'new_password.confirmed'			=> 'Uudet salasanat eivät täsmää.',
+			'new_password.match_password'		=> 'Uusi salasana on sama kuin nykyinen. Käytä jotain muuta salasanaa!',
 		]);
 		
 		if(!$validation->passes())
@@ -175,6 +176,8 @@ class AuthController extends Controller
 			{
 				$user->password = Hash::make($request->get('new_password'));
 			}
+			
+			$user->change_password = 0;
 			
 			$user->save();
 			

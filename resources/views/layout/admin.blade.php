@@ -27,6 +27,10 @@
 								Kurssit <span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu">
+								<li>
+									<a href="#/courses/">Kurssit</a>
+								</li>
+								<li role="separator" class="divider"></li>
 								<li ng-repeat="course in courses">
 									<a href="#/courses/[[ course.id ]]">[[ course.title ]]</a>
 								</li>

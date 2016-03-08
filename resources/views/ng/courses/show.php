@@ -7,21 +7,18 @@
 		</div>
 		
 		<div class="form-group">
-			<p>
-				Muokkaa kurssin tietoja, julkaisutilaa ja kokeiden järjestystä.
-			</p>
-			<a href="#/courses/[[ course.id ]]/edit" class="btn btn-primary btn-block btn-lg">
-				<span class="glyphicon glyphicon-edit"></span> Muokkaa kurssia
+			<a href="#/tests/new/[[ course.id ]]" class="btn btn-success btn-block btn-lg">
+				<span class="glyphicon glyphicon-plus"></span> Lisää uusi koe
 			</a>
 		</div>
 		
 		<div class="form-group">
-			<p>
-				Luo uusi koe tälle kurssille.
-			</p>
-			<a href="#/tests/new/[[ course.id ]]" class="btn btn-success btn-block btn-lg">
-				<span class="glyphicon glyphicon-plus"></span> Lisää uusi koe
+			<a href="#/courses/[[ course.id ]]/edit" class="btn btn-primary btn-block btn-lg">
+				<span class="glyphicon glyphicon-edit"></span> Muokkaa kurssia
 			</a>
+			<div class="help">
+				Muokkaa kurssin tietoja, julkaisutilaa ja kokeiden järjestystä.
+			</div>
 		</div>
 	</div>
 	<hr>

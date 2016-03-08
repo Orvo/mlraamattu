@@ -124,6 +124,7 @@ body
 }
 
 #content-sidebar .radio label,
+.fancy-radio .radio label,
 #content-sidebar .checkbox label
 {
 	display: block;
@@ -137,6 +138,7 @@ body
 }
 
 #content-sidebar .radio.active label,
+.fancy-radio .radio.active label,
 #content-sidebar .checkbox.active label
 {
 	background: #ABD9FF;
@@ -144,6 +146,7 @@ body
 }
 
 #content-sidebar .radio label:hover,
+.fancy-radio .radio label:hover,
 #content-sidebar .checkbox label:hover
 {
 	background: #FED081;
@@ -1246,6 +1249,12 @@ ul.tabs li.active a
 {
 	height: 40px;
 	background: #fff;
+}
+
+div.tab-wrapper,
+div.tab-panel
+{
+	padding: 6px;
 }
 
 /**************************************************/

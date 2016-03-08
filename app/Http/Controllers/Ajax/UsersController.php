@@ -193,6 +193,15 @@ class UsersController extends Controller
 			$errors['messages'][] = "Salasana puuttuu!";
 			$errors['fields']['user_password'] = true;
 		}
+		else
+		{
+			$user = User::find($data['id']);
+			if($user && Hash::check($data['password'], $user->password))
+			{
+				$errors['messages'][] = "Uusi salasana on sama kuin vanha. Käytä jotain muuta salasanaa!";
+				$errors['fields']['user_password'] = true;
+			}
+		}
 		
 		return (object)[
 			'data' 		=> $data,
@@ -248,6 +257,10 @@ class UsersController extends Controller
 			{
 				$m->to($user->email, $user->name)->subject('Käyttäjätietojasi on muokattu Media7 raamattuopistossa');
 			});
+		}
+		elseif(strlen(@$data['password']) > 0)
+		{
+			$user->change_password = false;
 		}
 		
 		$user->save();

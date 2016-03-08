@@ -1,21 +1,43 @@
 $(function()
 {
 	var sidebar_height = $('#sidebar-content .fixed').height();
+	var sidebar_float = 0;
 	var maincontent_height = $('#main-content').height();
 	
-	var updateSidebarMargin = function()
+	var updateSidebarMargin = function(delta)
 	{
+		if(delta === undefined) delta = 0;
+		
+		var window_height = $(window).height() - 110;
+		
 		if($('#sidebar-content .fixed'))
 		{
-			$('#sidebar-content .fixed').css({'margin-top': Math.max(20, Math.min(maincontent_height-sidebar_height, $(document).scrollTop()-110)) + 'px'});
+			if(sidebar_height > window_height)
+			{
+				sidebar_float = Math.max(0, Math.min(Math.abs(sidebar_height - window_height), sidebar_float + delta));
+			}
+			else
+			{
+				sidebar_float = 0;	
+			}
+			
+			var offset = Math.max(20, Math.min(maincontent_height - sidebar_height, $(document).scrollTop() - 110 - sidebar_float));
+			$('#sidebar-content .fixed').css({'margin-top': offset + 'px'});
+			
+			console.log(window_height, sidebar_height, delta, offset, $(document).scrollTop());
 		}
 	}
 	
 	updateSidebarMargin();
 	
+	var currentScroll = $(document).scrollTop();
+	
 	$(document).scroll(function()
 	{
-		updateSidebarMargin();
+		var delta = $(document).scrollTop() - currentScroll;
+		currentScroll = $(document).scrollTop();
+		
+		updateSidebarMargin(delta);
 	});
 	
 	$('div.question .answer input, div.question .answer label').click(function()

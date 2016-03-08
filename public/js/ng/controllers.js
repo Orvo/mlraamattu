@@ -580,7 +580,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		$scope.isSorting = true;
 		$scope.edit_data = false;
 		
-		$scope.setActiveTab(1);
+		$scope.setActiveTab(2);
 	}
 	
 	$scope.stopSorting = function()
@@ -595,8 +595,8 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	
 	$scope.editor_options = {
 		language: 'fi',
-		autoGrow_minHeight: 500,
-		autoGrow_maxHeight: 650,
+		autoGrow_minHeight: 350,
+		autoGrow_maxHeight: 500,
 		autoGrow_bottomSpace: 50,
 	};
 	
@@ -840,6 +840,8 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 
 	$scope.add_question = function()
 	{
+		$scope.setActiveTab(2);
+		
 		$scope.data.test.questions.push({
 			type: 'CHOICE',
 			title: 'Uusi kysymys',

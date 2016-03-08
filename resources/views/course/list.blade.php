@@ -37,6 +37,27 @@
 			</div>
 			<div class="clearfix"></div>
 		</div>
+	@elseif(Auth::user()->change_password)
+		<div class="alert alert-danger alert-icon login-note">
+			<span class="glyphicon glyphicon-warning-sign"></span>
+			<div>
+				<p>
+					Ylläpito on tehnyt sinulle salasanan vaihdon. Sinun tulisi vaihtaa salasanasi mahdollisimman pian.
+					
+					Voit vaihtaa salasanasi 
+					@if(Auth::user()->isAdmin())
+						<a href="/admin#/users/{{ Auth::user()->id }}/edit" target="_blank">
+							<span class="ul">täällä</span> <span class="glyphicon glyphicon-edit"></span>
+						</a>
+					@else
+						<a href="/auth/edit">
+							<span class="ul">täällä</span> <span class="glyphicon glyphicon-edit"></span>
+						</a>
+					@endif
+				</p>
+			</div>
+			<div class="clearfix"></div>
+		</div>
 	@endif
 	
 	@if(count($my_courses) > 0)

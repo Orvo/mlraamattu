@@ -39,7 +39,7 @@ class CoursesController extends Controller
 		
 		if($start === false)
 		{
-			return $string;
+			return $offset == 0 ? $string : '';
 		}
 		
 		$result = trim(strip_tags(substr($string, $start, $end-$start)));

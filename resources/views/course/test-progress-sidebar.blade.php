@@ -24,6 +24,7 @@
 		</a>
 	</li>
 	
+	@for($i=0;$i<1;++$i)
 	@foreach($tests as $key => $test)
 		<?php if(!$test->hasQuestions()) break; ?>
 		
@@ -110,4 +111,5 @@
 		 -->
 		<li class="spacer"></li>
 	@endforeach
+	@endfor
 </ul>
