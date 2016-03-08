@@ -351,14 +351,10 @@ app.directive('elastic', [
     }
 ]);
 
-app.directive('iframeOnload', [function(){
-return {
-    scope: {
-        callBack: '&iframeOnload'
-    },
-    link: function(scope, element, attrs){
-        element.on('load', function(){
-            return scope.callBack();
-        })
-    }
-}}])
+app.filter('trusted', function($sce)
+{
+	return function(html)
+	{
+		return $sce.trustAsHtml(html);
+	}
+});

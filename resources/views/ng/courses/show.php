@@ -31,7 +31,7 @@
 </div>
 <div id="content-main" ng-show="loaded">
 	<h1><b>Kurssi</b> / [[ course.title ]]</h1>
-	<p ng-bind-html="course.description"></p>
+	<div ng-bind-html="course.description | trusted"></div>
 	<div class="alert alert-warning" ng-if="!course.published">
 		<b>Huom!</b> Tämä kurssi on tällä hetkellä piilotettu. <a href="#/courses/[[ course.id ]]/edit">Muokkaa</a> kurssia jos haluat julkaista sen.
 	</div>
@@ -59,7 +59,7 @@
 					</a>
 				</td>
 				<td>
-					<p ng-bind-html="test.description"></p>
+					<div ng-bind-html="test.description | trusted"></div>
 				</td>
 				<td class="list-no-padding">
 					<ol>

@@ -104,24 +104,24 @@ app.controller('FilesController', function($rootScope, $scope, $window, $locatio
 // Course controllers
 
 app.filter('coursefilter', function()
+{
+	return function(list, settings)
 	{
-		return function(list, settings)
+		var out = [];
+		
+		angular.forEach(list, function(value, key)
 		{
-			var out = [];
-			
-			angular.forEach(list, function(value, key)
+			if(settings.published === undefined || settings.published == value.published || (settings.published == 0 && value.tests.length == 0))
 			{
-				if(settings.published === undefined || settings.published == value.published || (settings.published == 0 && value.tests.length == 0))
-				{
-					out.push(value);
-				}
-			});
-			
-			return out;
-		}
-	});
+				out.push(value);
+			}
+		});
+		
+		return out;
+	}
+});
 
-app.controller('CoursesController', function($scope, $window, $location, $routeParams, $breadcrumbs, CoursesModel)
+app.controller('CoursesController', function($scope, $window, $location, $routeParams, $breadcrumbs, $sce, CoursesModel)
 {
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Kurssit');
