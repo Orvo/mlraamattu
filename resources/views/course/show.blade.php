@@ -35,20 +35,7 @@
 		</div>
 	@endif
 	
-	@if(!Auth::check())
-		<div class="alert alert-info alert-icon login-note">
-			<span class="glyphicon glyphicon-info-sign"></span>
-			<div>
-				<p>
-					Jatkaaksesi siitä mihin jäit, <a href="/auth/login"><span class="ul">kirjaudu sisään</span> <span class="glyphicon glyphicon-log-in"></span></a>
-				</p>
-				<p>
-					Jos et ole vielä rekisteröitynyt voit tehdä sen vastatessasi ensimmäiseen kokeeseen.
-				</p>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-	@endif
+	@include('alerts.auth-related')
 	
 	<div class="list">
 		@foreach($course->tests as $test)
@@ -122,6 +109,13 @@
 				<div class="description">
 					<div class="inner">
 						{!! $test->description !!}
+						@if($test->progress->status != \App\Test::LOCKED)
+							<div class="test read-more">
+								<a href="/test/{{ $test->id }}" class="btn btn-default">
+									Kokeeseen <span class="glyphicon glyphicon-chevron-right"></span>
+								</a>
+							</div>
+						@endif
 					</div>
 					@if($test->hasFeedback())
 						<div class="alert alert-success alert-icon alert-icon-small">

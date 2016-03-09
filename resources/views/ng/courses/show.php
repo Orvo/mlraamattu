@@ -20,6 +20,12 @@
 				Muokkaa kurssin tietoja, julkaisutilaa ja kokeiden järjestystä.
 			</div>
 		</div>
+		
+		<div class="form-group">
+			<a href="#/archive?course=[[ course.id ]]" class="btn btn-block btn-default">
+				Tarkista koesuorituksia tälle kurssille
+			</a>
+		</div>
 	</div>
 	<hr>
 	<div class="sidebar-help">
@@ -34,7 +40,7 @@
 	</div>
 	<div class="actions-row">
 		<div>
-			<input type="text" ng-model="searchFilter" placeholder="Hae kursseja" class="form-control search-filter">
+			<input type="text" ng-model="searchFilter" placeholder="Hae kokeita" class="form-control search-filter">
 		</div>
 	</div>
 	<table class="table table-hover">

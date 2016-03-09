@@ -144,6 +144,7 @@ app.config(
 				controller: 'ArchiveController',
 				templateUrl: '/ng/archive.list',
 				resolve: { factory: authProvider, },
+				reloadOnSearch: false,
 			})
 			.when('/archive/:id/reply', {
 				controller: 'ArchiveFormController',

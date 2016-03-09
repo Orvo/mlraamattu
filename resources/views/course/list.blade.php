@@ -24,41 +24,7 @@
 
 @section('content')
 	
-	@if(!Auth::check())
-		<div class="alert alert-info alert-icon login-note">
-			<span class="glyphicon glyphicon-info-sign"></span>
-			<div>
-				<p>
-					Jatkaaksesi siitä mihin jäit, <a href="/auth/login"><span class="ul">kirjaudu sisään</span> <span class="glyphicon glyphicon-log-in"></span></a>
-				</p>
-				<p>
-					Jos et ole vielä rekisteröitynyt voit tehdä sen vastatessasi ensimmäiseen kokeeseen.
-				</p>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-	@elseif(Auth::user()->change_password)
-		<div class="alert alert-danger alert-icon login-note">
-			<span class="glyphicon glyphicon-warning-sign"></span>
-			<div>
-				<p>
-					Ylläpito on tehnyt sinulle salasanan vaihdon. Sinun tulisi vaihtaa salasanasi mahdollisimman pian.
-					
-					Voit vaihtaa salasanasi 
-					@if(Auth::user()->isAdmin())
-						<a href="/admin#/users/{{ Auth::user()->id }}/edit" target="_blank">
-							<span class="ul">täällä</span> <span class="glyphicon glyphicon-edit"></span>
-						</a>
-					@else
-						<a href="/auth/edit">
-							<span class="ul">täällä</span> <span class="glyphicon glyphicon-edit"></span>
-						</a>
-					@endif
-				</p>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-	@endif
+	@include('alerts.auth-related')
 	
 	@if(count($my_courses) > 0)
 		<h3>Kurssini</h3>

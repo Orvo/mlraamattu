@@ -72,7 +72,9 @@
 					</div>
 				</td>
 				<td style="text-align: left">
-					<b>[[ user.tests_completed ]] oikein</b> / [[ user.archives.length ]] kokeesta
+					Suorittanut <b>[[ user.archives.length ]]</b> koetta joista <b>[[ user.tests_completed ]]</b> oikein
+					
+					(<a href="#/archive?q=nimi:&quot;[[ user.name ]]&quot;&amp;replied=all&amp;discarded=show">käyttäjän koesuoritukset</a>)
 				</td>
 				<td>
 					<a href="#/users/[[ user.id ]]/edit" class="btn btn-primary btn-sm">

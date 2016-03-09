@@ -78,7 +78,7 @@
 				<select class="form-control"
 					ng-model="select_filters.test"
 					ng-change="test_filter_changed()"
-					ng-options="test as test.title for test in tests">
+					ng-options="test as test.title group by test.course.title for test in tests">
 					<option ng-value="undefined">Rajaa kokeen mukaan</option>
 				</select>
 				<button type="button" class="btn btn-primary"
@@ -87,6 +87,10 @@
 					<span class="glyphicon glyphicon-remove-sign"></span> Nollaa rajaus
 				</button>
 			</div>
+		</div>
+		<div>
+			<input type="text" ng-model="searchName">
+			[[ searchFilterParsed ]]
 		</div>
 	</div>
 	<table class="table table-hover">
@@ -102,7 +106,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="(key, item) in archive | filter : searchFilter | filter : archiveFilter : true" ng-class="{'missing-test':!item.test}">
+			<tr ng-repeat="(key, item) in archive | keyfilter : ({ key: 'user.name', value: searchName }) | filter : searchFilterParsed | filter : archiveFilter : true" ng-class="{'missing-test':!item.test}">
 				<td style="font-weight: bold;text-align: right;">[[ key + 1 ]].</td>
 				<td>
 					[[ item.user.name ]]
@@ -157,7 +161,7 @@
 					</div>
 				</td>
 			</tr>
-			<tr ng-if="(archive | filter : searchFilter | filter : archiveFilter : true).length == 0">
+			<tr ng-if="(archive | keyfilter : ({ key: 'user.name', value: searchName }) | filter : searchFilterParsed | filter : archiveFilter : true).length == 0">
 				<td colspan="6" style="text-align: center;font-weight: bold;">
 					Ei suorituksia annetuilla hakuehdoilla
 				</td>

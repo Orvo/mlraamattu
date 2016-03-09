@@ -23,8 +23,6 @@ $(function()
 			
 			var offset = Math.max(20, Math.min(maincontent_height - sidebar_height, $(document).scrollTop() - 110 - sidebar_float));
 			$('#sidebar-content .fixed').css({'margin-top': offset + 'px'});
-			
-			console.log(window_height, sidebar_height, delta, offset, $(document).scrollTop());
 		}
 	}
 	

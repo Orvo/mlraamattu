@@ -879,20 +879,26 @@ div.list div.list-item .description .read-more
 	margin: 12px 0 0 0;
 	padding: 8px 0 0 0;
 	border-top: 1px solid #eee;
-	font-size: 13pt;
+	font-size: 12pt;
 	font-weight: bold;
 	font-family: 'Lato', sans-serif;
 }
 
 div.list div.list-item .description .read-more .btn
 {
-	font-size: 13pt;
+	font-size: 12pt;
 	font-weight: bold;
 	font-family: 'Lato', sans-serif;
 	text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.3);
 	box-shadow: 0 2px 0 #245995;
 	outline: none;
 	padding: 5px 14px;
+}
+
+div.list div.list-item .description .test.read-more .btn
+{
+	text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 2px 0 #AAAAAA;
 }
 
 div.list div.list-item .description .alert

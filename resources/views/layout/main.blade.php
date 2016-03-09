@@ -53,7 +53,7 @@
 			<div id="content-wrapper" class="row">
 				@if(isset($__env->getSections()['sidebar_content']))
 					<div id="sidebar-content" class="col-xs-3">
-						@yield('sidebar_content', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur ipsa rem facere aliquam illo nesciunt, vel commodi autem harum impedit corrupti blanditiis, ab tenetur doloribus sunt mollitia neque necessitatibus! Quaerat vero molestias praesentium minus cupiditate. Necessitatibus temporibus, suscipit. Dicta similique, molestiae rem, perspiciatis commodi voluptas nihil non veritatis fugiat repellendus.')
+						@yield('sidebar_content', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.')
 					</div>
 				@endif
 				<div id="main-content" class="{{ css([

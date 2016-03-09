@@ -60,7 +60,7 @@ class CoursesController extends Controller
 	{
 		$course = Course::with('tests', 'tests.questions')->has('tests.questions', '>', 0)->published()->findOrFail($id);
 
-		return view('course.tests', [
+		return view('course.show', [
 			'course' => $course,
 		]);
 	}

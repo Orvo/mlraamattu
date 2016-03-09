@@ -468,6 +468,9 @@ app.controller('UsersFormController', function($rootScope, $scope, $window, $loc
 					if(data.user_edited !== undefined)
 					{
 						$scope.save_success = true;
+						
+						$scope.data.user.password = '';
+						$scope.data.user.password_confirmation = '';
 					}
 				}, function(data)
 				{
@@ -920,14 +923,86 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 // ----------------------------------------------------------------------------------------------------
 // Archive controllers
 
-app.controller('ArchiveController', function($rootScope, $scope, $window, $location, $routeParams, $http, $breadcrumbs, $filter, TestsModel, CoursesModel)
+app.filter('archiveSelectFilter', function()
+{
+	return function(list, settings)
+	{
+		var out = [];
+		var matchKeys = ['discarded', 'replied_to'];
+		
+		angular.forEach(list, function(value, key)
+		{
+			if(value.id === undefined)
+			{
+				out.push(value);
+			}
+			else
+			{
+				var hasMatch = false;
+				
+				for(x in matchKeys)
+				{
+					var key_name = matchKeys[x];
+					
+					if(settings[key_name] === undefined || value[key_name] == settings[key_name])
+					{
+						hasMatch = true;
+						break;
+					}
+				}
+				
+				if(hasMatch)
+				{
+					out.push(value);
+				}
+			}
+		});
+		
+		return out;
+	}
+});
+
+app.filter('keyfilter', function()
+{
+	return function(list, settings)
+	{
+		var out = [];
+		
+		var resolveObjectKey = function(keypath, object)
+		{
+			var tokens = keypath.split('.');
+			
+			var value = object;
+			for(var x in tokens)
+			{
+				value = value[tokens[x]];
+			}
+			
+			return value;
+		}
+		
+		angular.forEach(list, function(value, key)
+		{
+			var resolved = resolveObjectKey(settings.key, value);
+			
+			if(settings.value === undefined || resolved.toLowerCase().indexOf(settings.value.toLowerCase()) > -1)
+			{
+				out.push(value);
+			}
+		});
+		
+		return out;
+	}
+});
+
+app.controller('ArchiveController', function($rootScope, $scope, $window, $location, $routeParams, $filter, $http, $breadcrumbs, $filter, TestsModel, CoursesModel)
 {
 	$breadcrumbs.reset();
 	$breadcrumbs.segment('Koesuoritukset');
 	$breadcrumbs.title('Koesuoritukset');
 	
-	$scope.tests = { 0: { id: undefined, title: 'Rajaa kokeen mukaan', }};
- 	$scope.courses = { 0: { id: undefined, title: 'Rajaa kurssin mukaan', }};
+	$scope.tests = { 0: { id: undefined, title: 'Rajaa kokeen mukaan', } };
+ 	$scope.courses = { 0: { id: undefined, title: 'Rajaa kurssin mukaan', } };
 	
 	$http.get('/ajax/archive').then(function success(response)
 	{
@@ -955,15 +1030,71 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 					$scope.courses[item.test.course.id] = item.test.course;
 				}
 			});
+			
+			if($location.search().course)
+			{
+				$scope.select_filters.course = $scope.courses[$location.search().course];
+				$scope.course_filter_changed();
+			}
+			else if($location.search().test)
+			{
+				$scope.select_filters.test = $scope.tests[$location.search().test];
+				$scope.test_filter_changed();
+			}
 		}
 	});
 	
+	var replied_translate = { hide: 0, show: 1, all: undefined, };
+	var discarded_translate = { hide: 0, only: 1, show: undefined, };
+	
 	$scope.archiveFilter = {
-		replied_to: 0,
-		discarded: 0,
+		replied_to: $location.search().replied ? replied_translate[$location.search().replied] : 0,
+		discarded: $location.search().discarded ? discarded_translate[$location.search().discarded] : 0,
 	};
 	
-	$scope.reset_select_filter = function()
+	$scope.$watch('searchFilter', function(new_value)
+	{
+		var query = $.trim(new_value);
+		$location.search('q', query.length > 0 ? query : undefined);
+		
+		var pattern = /nimi:\"(.*?)\"/;
+		var regex_match = query.match(pattern);
+		
+		if(regex_match !== null)
+		{
+			$scope.searchName = $.trim(regex_match[1]);
+			$scope.searchFilterParsed = query.replace(pattern, '');
+		}
+		else
+		{
+			$scope.searchName = '';
+			$scope.searchFilterParsed = query;
+		}
+	});
+	
+	$scope.searchFilter = $location.search().q;
+	
+	$scope.$watch('archiveFilter.replied_to', function(new_value)
+	{
+		var translated = '';
+		if(new_value == 0) 			translated = 'hide';
+		if(new_value == 1) 			translated = 'show';
+		if(new_value === undefined) translated = 'all';
+		
+		$location.search('replied', translated);
+	});
+	
+	$scope.$watch('archiveFilter.discarded', function(new_value)
+	{
+		var translated = '';
+		if(new_value == 0) 			translated = 'hide';
+		if(new_value == 1) 			translated = 'only';
+		if(new_value === undefined) translated = 'show';
+		
+		$location.search('discarded', translated);
+	});
+	
+	$scope.reset_select_filter = function(no_reset_search)
 	{
 		$scope.select_filters = {
 			test: $scope.tests[0],
@@ -972,9 +1103,15 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 		
 		$scope.archiveFilter.course_id = undefined;
 		$scope.archiveFilter.test_id = undefined;
+		
+		if(!no_reset_search)
+		{
+			$location.search('course', undefined);
+			$location.search('test', undefined);
+		}
 	}
 	
-	$scope.reset_select_filter();
+	$scope.reset_select_filter(true);
 	
 	$scope.course_filter_changed = function()
 	{
@@ -982,6 +1119,9 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 		
 		$scope.select_filters.test = $scope.tests[0];
 		$scope.archiveFilter.test_id = undefined;
+		
+		$location.search('course', $scope.archiveFilter.course_id);
+		$location.search('test', undefined);
 	}
 	
 	$scope.test_filter_changed = function()
@@ -998,6 +1138,9 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 			$scope.select_filters.course = $scope.courses[0];
 			$scope.archiveFilter.course_id = undefined;
 		}
+		
+		$location.search('test', $scope.archiveFilter.test_id);
+		$location.search('course', undefined);
 	}
 	
 	$scope.save_success = $rootScope.archiveFeedbackSent;
