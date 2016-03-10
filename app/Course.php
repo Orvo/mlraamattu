@@ -37,14 +37,32 @@ class Course extends Model
 		}
 		else
 		{
-			foreach($this->tests()->get() as $test)
+			$tests = $this->tests()->get();
+			
+			foreach($tests as $test)
 			{
 				if(!$test->hasQuestions()) continue;
 				if($test->hasFeedback(true)) continue;
 				
-				if($test->progress->status == \App\Test::UNSTARTED || $test->progress->status == \App\Test::IN_PROGRESS)
+				if($test->progress->status == \App\Test::UNSTARTED)
 				{
 			 		$result = $test;
+			 		break;
+				}
+			}
+			
+			if(!$result)
+			{
+				foreach($tests as $test)
+				{
+					if(!$test->hasQuestions()) continue;
+					if($test->hasFeedback(true)) continue;
+					
+					if($test->progress->status == \App\Test::IN_PROGRESS)
+					{
+				 		$result = $test;
+				 		break;
+					}
 				}
 			}
 		}
