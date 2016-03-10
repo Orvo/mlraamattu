@@ -45,7 +45,6 @@ class Course extends Model
 				if($test->progress->status == \App\Test::UNSTARTED || $test->progress->status == \App\Test::IN_PROGRESS)
 				{
 			 		$result = $test;
-			 		break;
 				}
 			}
 		}
