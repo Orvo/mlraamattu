@@ -9,17 +9,6 @@
 /*!40101 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
--- Dumping structure for table mlraamattu.answers
-CREATE TABLE IF NOT EXISTS `answers` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `question_id` int(11) NOT NULL,
-  `text` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `error_margin` int(11) DEFAULT '0',
-  `is_correct` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 -- Dumping data for table mlraamattu.answers: ~16 rows (approximately)
 /*!40000 ALTER TABLE `answers` DISABLE KEYS */;
 INSERT INTO `answers` (`id`, `question_id`, `text`, `error_margin`, `is_correct`) VALUES
@@ -41,20 +30,6 @@ INSERT INTO `answers` (`id`, `question_id`, `text`, `error_margin`, `is_correct`
 	(16, 6, 'Vrysrsbsns', 0, 0);
 /*!40000 ALTER TABLE `answers` ENABLE KEYS */;
 
-
--- Dumping structure for table mlraamattu.archive
-CREATE TABLE IF NOT EXISTS `archive` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `test_id` int(11) NOT NULL,
-  `data` text COLLATE utf8_unicode_ci NOT NULL,
-  `replied_to` tinyint(1) NOT NULL,
-  `discarded` tinyint(1) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 -- Dumping data for table mlraamattu.archive: ~8 rows (approximately)
 /*!40000 ALTER TABLE `archive` DISABLE KEYS */;
 INSERT INTO `archive` (`id`, `user_id`, `test_id`, `data`, `replied_to`, `discarded`, `created_at`, `updated_at`) VALUES
@@ -68,18 +43,6 @@ INSERT INTO `archive` (`id`, `user_id`, `test_id`, `data`, `replied_to`, `discar
 	(10, 4, 2, '{"all_correct":true,"num_correct":1,"total":1,"given_answers":{"6":"13"},"validation":{"6":{"correct":true,"correct_answers":{"id":13,"question_id":6,"text":"Very","error_margin":0,"is_correct":1},"status":3}}}', 0, 0, '2016-02-15 16:59:07', '2016-02-15 17:00:17');
 /*!40000 ALTER TABLE `archive` ENABLE KEYS */;
 
-
--- Dumping structure for table mlraamattu.courses
-CREATE TABLE IF NOT EXISTS `courses` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` text COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `published` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 -- Dumping data for table mlraamattu.courses: ~5 rows (approximately)
 /*!40000 ALTER TABLE `courses` DISABLE KEYS */;
 INSERT INTO `courses` (`id`, `title`, `description`, `created_at`, `updated_at`, `published`) VALUES
@@ -89,13 +52,6 @@ INSERT INTO `courses` (`id`, `title`, `description`, `created_at`, `updated_at`,
 	(4, 'Testi Kurssi', 'Ahoy!', '2015-12-22 09:23:13', '2015-12-22 09:23:13', 1),
 	(5, 'asdfasdf', '<p>asdfasdfasdfasdf</p>\n', '2016-02-29 13:26:19', '2016-02-29 13:26:19', 0);
 /*!40000 ALTER TABLE `courses` ENABLE KEYS */;
-
-
--- Dumping structure for table mlraamattu.migrations
-CREATE TABLE IF NOT EXISTS `migrations` (
-  `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table mlraamattu.migrations: ~16 rows (approximately)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
@@ -118,18 +74,6 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 	('2016_02_19_113744_add_hidden_column_to_pages_table', 10);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
-
--- Dumping structure for table mlraamattu.pages
-CREATE TABLE IF NOT EXISTS `pages` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `test_id` int(11) NOT NULL,
-  `body` text COLLATE utf8_unicode_ci NOT NULL,
-  `hidden` tinyint(1) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 -- Dumping data for table mlraamattu.pages: ~5 rows (approximately)
 /*!40000 ALTER TABLE `pages` DISABLE KEYS */;
 INSERT INTO `pages` (`id`, `test_id`, `body`, `hidden`, `created_at`, `updated_at`) VALUES
@@ -140,31 +84,9 @@ INSERT INTO `pages` (`id`, `test_id`, `body`, `hidden`, `created_at`, `updated_a
 	(5, 10, '<p><img src="http://raamattuavautuu.adventist.fi/uploaded_assets/534136-kansi01b.jpg?thumbnail=original&amp;1432180481" style="float:right; margin:1em; width:250px" /></p>\n\n<p>Paavalilla oli n&auml;ky &ndash; unelma. Se oli suuri unelma, unelma uudesta ajasta ja uudesta maailmanj&auml;rjestyksest&auml;. Kaikki olisi uutta, ihmiskunta olisi j&auml;lleen yht&auml; ja ihmiset el&auml;isiv&auml;t tasa-arvoisina, rauhassa ja toisiaan rakastaen.</p>\n\n<p>Olympiaurheilijan kipin&auml; syd&auml;mess&auml;&auml;n Paavali l&auml;hti muuttamaan maail&shy;maa. H&auml;n kirjoitti korinttilaisille, joilla oli tapana j&auml;rjest&auml;&auml; joka toinen vuosi Isthmian kisat:</p>\n\n<blockquote>&rdquo;Tied&auml;tteh&auml;n, ett&auml; vaikka juoksukilpailussa kaikki juoksevat, vain yksi saa palkinnon. Juoskaa siis niin, ett&auml; voitatte sen!&nbsp; Jokainen kilpailija noudattaa lujaa itsekuria, juoksijat saavuttaakseen katoavan seppeleen, me saadaksemme katoamattoman. Min&auml; en siis juokse p&auml;&auml;m&auml;&auml;r&auml;tt&ouml;m&auml;sti enk&auml; nyrkkeilless&auml;ni huido ilmaan. Kohdistan iskut omaan ruumiiseeni ja pakotan sen tottelemaan, jottei itse&auml;ni lopulta hyl&auml;tt&auml;isi, minua, joka olen kutsunut muita kilpailuun.&rdquo; (1. Kor. 9:24&ndash;27.)</blockquote>\n\n<p>Paavali oli l&ouml;yt&auml;nyt n&auml;yn, jonka puolesta h&auml;n oli valmis kuolemaan. T&auml;st&auml; syyst&auml; h&auml;n eli el&auml;m&auml;ns&auml; t&auml;ydesti. H&auml;nen j&auml;lkeens&auml; maailma ei olisi koskaan en&auml;&auml; sama.</p>\n\n<p>Kahdensadan viidenkymmenen vuoden kuluttua h&auml;nen sanomansa oli vastaanotettu puolessa Rooman valtakuntaa ja se unelma, jota h&auml;n eli, on t&auml;h&auml;n p&auml;iv&auml;&auml;n menness&auml; vaikuttanut maailmaan enemm&auml;n kuin mik&auml;&auml;n muu maailmankatsomus.</p>\n\n<p>Mik&auml; h&auml;nt&auml; innosti ja mik&auml; oli h&auml;nen sanomansa? Miten sellainen ihminen eli, joka otti teht&auml;v&auml;kseen yhdist&auml;&auml; maailman?</p>\n\n<p>T&auml;m&auml; on kertomus Sauluksesta, tarsolaisesta teltantekij&auml;st&auml;, josta tuli Paavali, muutoksen tekij&auml;.</p>', 0, '2016-02-29 13:19:14', '2016-02-29 13:19:14');
 /*!40000 ALTER TABLE `pages` ENABLE KEYS */;
 
-
--- Dumping structure for table mlraamattu.password_resets
-CREATE TABLE IF NOT EXISTS `password_resets` (
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  KEY `password_resets_email_index` (`email`),
-  KEY `password_resets_token_index` (`token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 -- Dumping data for table mlraamattu.password_resets: ~0 rows (approximately)
 /*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
 /*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
-
-
--- Dumping structure for table mlraamattu.questions
-CREATE TABLE IF NOT EXISTS `questions` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `test_id` int(11) NOT NULL,
-  `type` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `title` text COLLATE utf8_unicode_ci NOT NULL,
-  `subtitle` text COLLATE utf8_unicode_ci NOT NULL,
-  `order` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table mlraamattu.questions: ~7 rows (approximately)
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
@@ -178,19 +100,6 @@ INSERT INTO `questions` (`id`, `test_id`, `type`, `title`, `subtitle`, `order`) 
 	(13, 10, 'TEXTAREA', 'No mercy!!', 'The hardest question ever!', 1);
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
 
-
--- Dumping structure for table mlraamattu.tests
-CREATE TABLE IF NOT EXISTS `tests` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `course_id` int(11) NOT NULL,
-  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` text COLLATE utf8_unicode_ci NOT NULL,
-  `order` int(11) NOT NULL DEFAULT '1',
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 -- Dumping data for table mlraamattu.tests: ~5 rows (approximately)
 /*!40000 ALTER TABLE `tests` DISABLE KEYS */;
 INSERT INTO `tests` (`id`, `course_id`, `title`, `description`, `order`, `created_at`, `updated_at`) VALUES
@@ -200,21 +109,6 @@ INSERT INTO `tests` (`id`, `course_id`, `title`, `description`, `order`, `create
 	(11, 1, 'Really Blank Test', 'Hehe', 3, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 	(12, 1, 'ASDASDASD', 'SDFSDGSDFGFDFDGFG', 4, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `tests` ENABLE KEYS */;
-
-
--- Dumping structure for table mlraamattu.users
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `access_level` int(11) NOT NULL DEFAULT '0',
-  `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Dumping data for table mlraamattu.users: ~3 rows (approximately)
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;

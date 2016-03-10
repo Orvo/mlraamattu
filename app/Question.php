@@ -21,4 +21,9 @@ class Question extends Model
 	{
 		return $this->hasMany('App\Answer');
 	}
+	
+	public function correctAnswers()
+	{
+		return $his->answers()->where('is_correct', 1)->get();
+	}
 }

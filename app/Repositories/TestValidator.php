@@ -76,7 +76,7 @@ class TestValidator
 		$response = [];
 		$empty_answer = ($given_answer === null || (!is_array($given_answer) && strlen(trim($given_answer)) == 0) || is_array($given_answer) && count($given_answer) == 0);
 		
-		$correct_answers = $question->answers->where('is_correct', 1);
+		$correct_answers = $question->correctAnswers();
 		
 		switch($question->type)
 		{
