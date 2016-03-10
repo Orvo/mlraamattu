@@ -19,12 +19,20 @@ Route::get('/', function ()
 	return redirect('/course');
 });
 
-Route::get('make', function()
+Route::get('install', function()
 {
-	// $user = new User();
-	// $user->email = "temu92@gmail.com";
-	// $user->password = bcrypt("asdfasdf");
-	// $user->save();
+	if(User::find(1))
+	{
+		return redirect('/');
+	}
+	
+	$user = new User();
+	$user->name = "Ylläpitäjä";
+	$user->email = "admin";
+	$user->password = Hash::make("password");
+	$user->access_level = 1;
+	
+	$user->save();
 });
 
 Route::get('potato', function ()

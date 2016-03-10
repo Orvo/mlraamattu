@@ -51,5 +51,12 @@
 			@endforeach
 		</div>
 	@endif
+	
+	@if(count($my_courses) == 0 && count($available_courses) == 0)
+		<h3>Ei tarjolla olevia kursseja</h3>
+		<p>
+			Valitettavasti yhtäkään kurssia ei löytynyt.
+		</p>
+	@endif
 
 @endsection

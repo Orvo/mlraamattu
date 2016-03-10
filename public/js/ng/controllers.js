@@ -678,6 +678,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	else
 	{
 		$scope.data.test = new TestsModel();
+		$scope.data.test.autodiscard = 0;
 		$scope.data.test.questions = [];
 		
 		$scope.course_id = parseInt($routeParams.course_id);
