@@ -24,6 +24,6 @@ class Question extends Model
 	
 	public function correctAnswers()
 	{
-		return $his->answers()->where('is_correct', 1)->get();
+		return $this->answers()->where('is_correct', 1)->get();
 	}
 }
