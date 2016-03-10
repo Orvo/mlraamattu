@@ -37,7 +37,7 @@ class Course extends Model
 		}
 		else
 		{
-			foreach($this->tests as $test)
+			foreach($this->tests()->get() as $test)
 			{
 				if(!$test->hasQuestions()) continue;
 				if($test->hasFeedback(true)) continue;
