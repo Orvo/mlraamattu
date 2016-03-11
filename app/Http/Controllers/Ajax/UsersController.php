@@ -193,7 +193,7 @@ class UsersController extends Controller
 			$errors['messages'][] = "Salasana puuttuu!";
 			$errors['fields']['user_password'] = true;
 		}
-		else
+		elseif(!$isNewEntry && @$data['password'])
 		{
 			$user = User::find($data['id']);
 			if($user && Hash::check($data['password'], $user->password))

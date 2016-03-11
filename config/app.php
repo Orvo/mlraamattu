@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://mlraamattu.dev',
+    'url' => env('APP_URL', 'http://mlraamattu.dev'),
 
     /*
     |--------------------------------------------------------------------------
