@@ -126,12 +126,6 @@ class ArchiveController extends Controller
 					'validation'	=> $validation['validation'],
 				];
 				
-				// print_r($validation['validation']); die;
-				//print_r(); die;
-				//$archive->test->course;
-				
-				//return \View::make('email.feedback_notification', $mail_data);
-				
 				// Email notification
 				Mail::send('email.feedback_notification', $mail_data, function($m) use ($archive)
 				{
