@@ -34,7 +34,7 @@
 								<li ng-repeat="course in courses">
 									<a href="#/courses/[[ course.id ]]">[[ course.title ]]</a>
 								</li>
-								<li role="separator" class="divider"></li>
+								<li role="separator" class="divider" ng-if="courses.length > 0"></li>
 								<li>
 									<a href="#/courses/new"><span class="glyphicon glyphicon-plus"></span> Lisää uusi kurssi</a>
 								</li>

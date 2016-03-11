@@ -49,12 +49,11 @@ class ArchiveController extends Controller
 	
 	function stats()
 	{
-		$archive = Archive::has('test')->get();
+		$archive = Archive::has('test')->has('user');
 		
 		return [
 			'new' 		=> $archive->where('replied_to', 0)->where('discarded', 0)->count(),
 			'total' 	=> $archive->count(),
-			// 'archive'	=> $archive->,
 		];
 	}
 	
@@ -129,7 +128,8 @@ class ArchiveController extends Controller
 				// Email notification
 				Mail::send('email.feedback_notification', $mail_data, function($m) use ($archive)
 				{
-					$m->to($archive->user->email, $archive->user->name)->subject('Koepalautetta Media7 raamattuopistolta');
+					$m->to($archive->user->email, $archive->user->name)
+					  ->subject('Koepalautetta Media7 raamattuopistolta');
 				});
 			}
 			
