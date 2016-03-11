@@ -107,6 +107,8 @@ class ArchiveController extends Controller
 			}
 		}
 		
+		$reviewer = \Auth::user();
+		
 		if($archive && count($feedback) > 0)
 		{
 			$archive->data = json_decode($archive->data, true);
@@ -115,11 +117,11 @@ class ArchiveController extends Controller
 			{
 				$validation = $testvalidator->WithAnswers($archive->test, $archive->data['given_answers']);
 				
-				
 				$mail_data = [
 					'user' 			=> $archive->user,
 					'test' 			=> $archive->test,
 					'data'			=> $archive->data,
+					'reviewer'		=> $reviewer,
 					'feedback'		=> $feedback,
 					'validation'	=> $validation['validation'],
 				];
@@ -143,6 +145,8 @@ class ArchiveController extends Controller
 			$archive->data = json_encode($data);
 			
 			$archive->replied_to = 1;
+			$archive->reviewed_by = $reviewer->id;
+			
 			$archive->discarded = 0;
 			
 			$archive->save();

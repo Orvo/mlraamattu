@@ -19,15 +19,6 @@ Route::get('/', function ()
 	return redirect('/course');
 });
 
-Route::get('mailtest', function()
-{
-	Mail::send('laravel-mail', [], function($m)
-	{
-		$m->from('noreply@mlrprod.sonaza.com', 'Autobot');
-		$m->to('temu92@gmail.com', 'Käyttäjä')->subject('Laravel mail test');
-	});
-});
-
 Route::get('test/{id}', 'TestsController@show');
 Route::get('test/{id}/material', 'TestsController@material');
 Route::get('test/{id}/material/popup', 'TestsController@material_popup');

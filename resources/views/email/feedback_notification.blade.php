@@ -94,6 +94,9 @@
 		@endif
 	@endforeach
 	<p>
+		<b>Kokeen tarkistaja:</b> {{ $reviewer->name }}
+	</p>
+	<p>
 		Halutessasi voit nähdä kokeen <a href="{{ url('/test/' . $test->id) }}">täällä</a>.
 		Voit myös jatkaa <a href="{{ url('/course/' . $test->course->id) }}">kurssin suorittamista</a>.
 	</p>

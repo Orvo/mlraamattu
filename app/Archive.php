@@ -18,8 +18,15 @@ class Archive extends Model
 		return $this->belongsTo("App\User");
 	}
 	
+	public function reviewer()
+	{
+		return $this->belongsTo("App\User", "reviewed_by");
+	}
+	
 	public function getDiscardedAttribute($value)
 	{
+		if($this->attributes['replied_to']) return 0;
+
 		return ($value || $this->test->autodiscard ? 1 : 0);
 	}
 	
