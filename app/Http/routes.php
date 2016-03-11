@@ -14,8 +14,6 @@
 use App\Question;
 use App\User;
 
-use Mail;
-
 Route::get('/', function ()
 {
 	return redirect('/course');
