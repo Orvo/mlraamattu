@@ -54,6 +54,19 @@
 					Jos tarpeen, voit vaihtaa tunnuksen salasanan syöttämällä uuden salasanan alle. Jätä kentät tyhjiksi jos et halua vaihtaa salasanaa.
 				</p>
 			</div>
+			@if(Auth::user()->change_password)
+				<div class="form-group">
+					<div class="col-xs-offset-3 alert alert-danger alert-icon alert-icon-small login-note">
+						<i class="fa fa-exclamation"></i>
+						<div>
+							<p>
+								Ylläpito on tehnyt sinulle salasananvaihdon. Sinun tulisi vaihtaa salasanasi.
+							</p>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			@endif
 			<div class="form-group">
 				<label for="user-current-password" class="control-label col-xs-3">
 					Nykyinen salasana

@@ -13,7 +13,7 @@
 	</div>
 @elseif(Auth::user()->change_password)
 	<div class="alert alert-danger alert-icon login-note">
-		<span class="glyphicon glyphicon-warning-sign"></span>
+		<i class="fa fa-exclamation"></i>
 		<div>
 			<p>
 				Ylläpito on tehnyt sinulle salasananvaihdon. Sinun tulisi vaihtaa salasanasi mahdollisimman pian.
