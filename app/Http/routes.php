@@ -21,8 +21,9 @@ Route::get('/', function ()
 
 Route::get('mailtest', function()
 {
-	Mail::send('ng.tests.form', [], function($m)
+	Mail::send('laravel-mail', [], function($m)
 	{
+		$m->from('Autobot <noreply@mlrprod.sonaza.com');
 		$m->to('temu92@gmail.com', 'Käyttäjä')->subject('Laravel mail test');
 	});
 });
