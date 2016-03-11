@@ -23,7 +23,7 @@ Route::get('mailtest', function()
 {
 	Mail::send('laravel-mail', [], function($m)
 	{
-		$m->from('Autobot <noreply@mlrprod.sonaza.com');
+		$m->from('noreply@mlrprod.sonaza.com', 'Autobot');
 		$m->to('temu92@gmail.com', 'Käyttäjä')->subject('Laravel mail test');
 	});
 });
