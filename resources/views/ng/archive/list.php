@@ -88,10 +88,6 @@
 				</button>
 			</div>
 		</div>
-		<div>
-			<input type="text" ng-model="searchName">
-			[[ searchFilterParsed ]]
-		</div>
 	</div>
 	<table class="table table-hover">
 		<thead>

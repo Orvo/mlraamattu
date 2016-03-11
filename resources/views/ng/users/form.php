@@ -23,10 +23,10 @@
 		<div class="sidebar-help">
 			<h3>Ohjeet</h3>
 			<p ng-show="userData.user.id == data.user.id">
-				Muokkaa omia käyttäjätietojasi tarpeen mukaan.
+				Muokkaa omia käyttäjätietojasi.
 			</p>
 			<p ng-show="data.user.id && userData.user.id != data.user.id">
-				Muokkaa käyttäjätietoja käyttäjän puolesta
+				Muokkaa toisen käyttäjätunnuksen tietoja käyttäjän puolesta. Tehdyistä muutoksista lähetetään käyttäjälle ilmoitus sähköpostiin.
 			</p>
 			<p ng-show="!data.user.id">
 				Voit luoda käyttäjälle uuden tilin ilman, että tämän täytyy itse rekisteröityä. Tässä tapauksessa käyttäjälle lähetetään tieto luodusta tilisti sähköpostitse, jossa mainitaan myös annettu salasana. Käyttäjää rohkaistaan vaihtamaan salasanansa.
