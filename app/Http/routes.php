@@ -14,9 +14,19 @@
 use App\Question;
 use App\User;
 
+use Mail;
+
 Route::get('/', function ()
 {
 	return redirect('/course');
+});
+
+Route::get('mailtest', function()
+{
+	Mail::send('ng.tests.form', [], function($m)
+	{
+		$m->to('temu92@gmail.com', 'Käyttäjä')->subject('Laravel mail test');
+	});
 });
 
 Route::get('test/{id}', 'TestsController@show');
