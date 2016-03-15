@@ -58,6 +58,7 @@ class TestsController extends Controller
 				'validation' 			=> @$validation['validation'],
 				'minimumToPass'			=> @$minimumToPass,
 				'authentication_type' 	=> 0,
+				'isMaterialPage'		=> false,
 			]);
 	}
 	
@@ -219,6 +220,7 @@ class TestsController extends Controller
 				'hasPassedFull'			=> @$passedFull,
 				'minimumToPass'			=> @$minimumToPass,
 				'authentication_type'	=> @$authenticationType,
+				'isMaterialPage'		=> false,
 			]))
 			->withErrors(@$validator)
 			->withInput($request);
