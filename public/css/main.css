@@ -99,6 +99,7 @@ textarea {
    
 html, body
 {
+	width: 100%;
 	height: 100%;
 }
 
@@ -106,8 +107,24 @@ body
 {
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 11pt;
-	background: #fdfdfd;
+	background: #fdfdfd url('/img/main-background-gradient.png') repeat-x center -50px fixed;
 	overflow-y: scroll;
+}
+/*
+a:not(.btn):link, a:not(.btn):visited
+{
+	color: #50731C;
+}
+
+a:not(.btn):hover, a:not(.btn):active
+{
+	color: #CF750B;
+}*/
+
+.mobile-width .hide-in-mobile-width,
+.desktop-width .hide-in-desktop-width
+{
+	display: none !important;
 }
 
 h1, h2, h3, h4, h5, h6
@@ -119,32 +136,42 @@ h1, h2, h3, h4, h5, h6
 header
 {
 	width: 100%;
-	background: #fe7e17 url('/img/header-background.png') repeat-x center bottom;
-	border-bottom: 2px solid #9D4600;
+	background: #99c14f url('/img/header-background.png') repeat-x center top;
+	border-bottom: 2px solid #418707;
 	z-index: 9999;
 	transition: all 500ms ease-in-out;
 	position: absolute;
 }
 
-header.fixed
+.desktop-width header.fixed
 {
 	position: fixed;
-	top: -110px;
+	top: -115px;
 	left: 0;
 	right: 0;
+	background: #BBE174 center top;
+}
+
+.desktop-width header.fixed .people
+{
+	display: none;
 }
 
 header > .inner
 {
 	max-width: 1000px;
-	min-width: 800px;
+	height: 100px;
+	padding: 0;
 	margin: 0 auto;
 	transition: all 500ms ease-in-out;
 }
 
 header .title
 {
-	padding: 15px 0 15px 0;
+	float: left;
+	width: 350px;
+	margin: 0;
+	padding: 15px 0 15px 20px;
 	font-family: 'Lato', sans-serif;
 	color: #fff;
 	transition: all 500ms ease-in-out;
@@ -166,54 +193,68 @@ header .title h3
 header .title h1
 {
 	font-weight: 900;
-	text-shadow: 2px 3px 1px #F17008;
+	text-shadow: 2px 3px 1px #799a25;
 }
 
-nav
+header .title h3
+{
+	color: #3d5a06;
+}
+
+header .people
+{
+	display: inline-block;
+	width: 347px;
+	height: 118px;
+	background: url('/img/header-people.png') no-repeat;
+}
+
+header nav
 {
 	margin-top: 18px;
-	padding: 4px 0 4px 0;
-	background: #E45A0D;
-	/*box-shadow: 0 15px 15px rgba(230, 230, 230, 0.7);*/
-	z-index: 999;
+	padding: 0;
+	border-top: 1px solid #4B821C;
+	background: #519815;
 	transition: all 500ms ease-in-out;
+	z-index: 999;
 }
 
-nav .inner
+header nav .inner
 {
 	max-width: 1000px;
-	min-width: 800px;
 	margin: 0 auto;
 }
 
-nav ul, nav li
+header nav ul,
+header nav li
 {
 	margin: 0;
 	padding: 0;
 }
 
-nav li
+header nav li
 {
 	display: inline-block;
 	list-style: none;
 }
 
-nav li a
+header nav li a:link,
+header nav li a:visited
 {
 	display: block;
-	padding: 9px 18px;
+	padding: 12px 18px;
 	color: #fff;
 	font-family: 'Lato', sans-serif;
 	font-weight: 700;
+	font-size: 13pt;
 }
 
-nav li a:hover,
-nav li a:active
+header nav li a:hover,
+header nav li a:active
 {
 	text-decoration: none;
 	background: #fff;
-	color: #EF730F;
-	border-radius: 4px;
+	color: #519815;
 }
 
 #main-wrapper
@@ -225,7 +266,7 @@ nav li a:active
 {
 	width: 950px;
 	margin: -2px auto 0 auto;
-	padding: 180px 25px 110px 25px;
+	padding: 190px 25px 110px 25px;
 	background: #fff;
 	box-shadow: 0 15px 15px #ddd;
 	z-index: 0;
@@ -234,17 +275,13 @@ nav li a:active
 
 #sidebar-content
 {
-	/*float: left;*/
-	/*width: 220px !important;*/
 	margin: 0;
 	padding: 0;
 }
 
 #main-content
 {
-	/*width: 710px !important;*/
 	min-height: 100%;
-	/*margin: 0 0 0 220px;*/
 	padding: 0 0 0 20px;
 }
 
@@ -273,19 +310,19 @@ footer
 {
 	min-height: 200px;
 	color: #fff;
-	background: #fe7e17 url('/img/header-background.png') repeat-x center bottom;
-	border-top: 4px solid #CE3F0D;
+	background: #8ABE3B;
+	border-top: 4px solid #578B07;
 	padding: 0 0 40px 0;
 }
 
 footer .inner-dark
 {
-	background: #E45A0D;
+	background: #699E18;
 }
 
 footer .inner
 {
-	width: 950px;
+	max-width: 950px;
 	margin: 0 auto;
 	padding: 26px 0 20px 0;
 	text-align: justify;
@@ -296,7 +333,7 @@ footer .inner h3
 	margin: 0;
 	padding: 0;
 	font-weight: 900;
-	text-shadow: 2px 3px 1px #D1400E;
+	text-shadow: 2px 3px 1px #56840F;
 }
 
 footer .inner ul,
@@ -310,19 +347,26 @@ footer .inner ul li
 footer .inner a:link,
 footer .inner a:visited
 {
-	display: inline-block;
+	display: block;
 	color: #fff;
 	font-weight: bold;
-	padding: 3px 8px;
+	padding: 5px 8px;
 }
 
 footer .inner a:hover,
 footer .inner a:active
 {
-	color: #B1370C;
+	color: #5C7B0A;
 	background: #fff;
 	text-decoration: none;
 	border-radius: 4px
+}
+
+footer .external-links h4
+{
+	border-bottom: 1px solid #A8D861;
+	padding-bottom: 7px;
+	margin-bottom: 4px;
 }
 
 /**************************************************************/
@@ -597,7 +641,7 @@ div.text span
 	margin: 2em auto 0 auto;
 }
 
-div#login-status
+#login-status
 {
 	float: right;
 	position: fixed;
@@ -611,7 +655,7 @@ div#login-status
 	z-index: 99999;
 }
 
-div#login-status a
+#login-status a
 {
 	display: inline-block;
 	padding: 0 6px;

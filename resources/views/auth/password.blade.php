@@ -6,7 +6,7 @@
 
 @section('content')
 
-	{!! Form::open(['method' => 'POST', 'action' => 'Auth\PasswordController@postEmail', 'style' => 'width:75%;margin:2em auto 0 auto']) !!}
+	{!! Form::open(['method' => 'POST', 'action' => 'Auth\PasswordController@postEmail', 'class' => 'centered-form']) !!}
 
 		{!! csrf_field() !!}
 	

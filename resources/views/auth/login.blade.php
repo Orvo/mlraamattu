@@ -42,21 +42,21 @@
 		</div>
 
 		<div class="form-group row">
-			<div class="col-xs-6">
+			<div class="col-md-6">
 				<div class="checkbox">
 					<label>
 						{!! Form::checkbox('remember_me', null, null, ['id' => 'remember_me']) !!} Muista kirjautuminen
 					</label>
 				</div>
 			</div>
-			<div class="col-xs-6">
+			<div class="col-md-6">
 				<button type="submit" class="btn btn-primary btn-block">
 					Kirjaudu sisään <span class="glyphicon glyphicon-log-in"></span>
 				</button>
 			</div>
 		</div>
 		
-		<div class="form-group pull-right" style="padding-top:1em">
+		<div class="form-group pull-right mobile-full-width" style="padding-top:1em">
 			<a href="/auth/reset">Unohtunut salasana?</a>
 		</div>
 	

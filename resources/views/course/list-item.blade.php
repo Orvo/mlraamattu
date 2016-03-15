@@ -21,7 +21,7 @@
 					<p>Aloitettu</p>
 				@elseif($course->progressStatus == \App\Course::UNSTARTED)
 					<span class="glyphicon glyphicon-star-empty"></span>
-					<p>Aloittamaton</p>
+					<p>Aloittamatta</p>
 				@endif
 			</div>
 		</a>
@@ -31,7 +31,7 @@
 			{!! $course->description !!}
 		</div>
 		@if($course->progressStatus != \App\Course::COMPLETED && $course->nextTest)
-			<div class="pull-right">
+			<div class="pull-right continue-button">
 				<a href="test/{{ $course->nextTest->id }}/{{ $course->nextTest->goToMaterial ? 'material' : '' }}" class="btn quick-start-course {{ css([
 						'btn-primary' => $course->progressStatus == \App\Course::UNSTARTED,
 						'btn-default' => $course->progressStatus == \App\Course::IN_PROGRESS || $course->progressStatus == \App\Course::STARTED

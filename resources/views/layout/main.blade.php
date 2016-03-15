@@ -10,23 +10,30 @@
 			@endif
 			{{ Config::get('site.title') }}
 		</title>
-		<link rel="shortcut icon" type="image/png" href="/favicon.png">
+		<link rel="shortcut icon" type="image/ico" href="/favicon.ico">
         <link rel="stylesheet" href="/css/normalize.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/mobile.css">
 	</head>
 	<body>
 		<div id="login-status">
 			@if(Auth::check())
 				Terve, {{ Auth::user()->name }}!
 				@if(Auth::user()->isAdmin())
-					<a href="/admin#/users/{{ Auth::user()->id }}/edit" target="_blank">Muokkaa tietoja</a>
-					<a href="/admin">Ylläpito</a>
+					<a href="/admin#/users/{{ Auth::user()->id }}/edit" target="_blank" class="hide-in-mobile-width">Muokkaa tietoja</a>
+					<a href="/auth/edit" class="hide-in-desktop-width">Muokkaa tietoja</a>
+					<a href="/admin" class="hide-in-mobile-width">Ylläpito</a>
 				@else
 					<a href="/auth/edit">Muokkaa tietoja</a>
 				@endif
-				<a href="/auth/logout">Kirjaudu ulos!</a>
+				<a href="/auth/logout">
+					<span class="hide-in-mobile-width">Kirjaudu ulos!</span>
+					<span class="hide-in-desktop-width">
+						<span class="glyphicon glyphicon-log-out"></span>
+					</span>
+				</a>
 			@else
 				<a href="/auth/login">Kirjaudu sisään</a>
 			@endif
@@ -39,6 +46,7 @@
 						<h1>Raamattu avautuu</h1>
 						<h3>Media7 Raamattuopisto</h3>
 					</div>
+					<div class="people"></div>
 				</div>
 				<nav>
 					<div class="inner">
@@ -67,31 +75,25 @@
 			<footer>
 				<div class="inner-dark">
 					<div class="inner row">
-						<div class="col-xs-5">
+						<div class="col-md-5">
 							<h3>Media7 Raamattuopisto &copy; 2016</h3>
 							<p>Suomen Adventtikirkko</p>
 						</div>
-						<div class="col-xs-7">
+						<div class="col-md-7">
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt illo magni consequuntur esse, corrupti similique nam. Laudantium sit possimus dolores!
 						</div>
 					</div>
 				</div>
 				<div class="inner row">
-					<div class="col-xs-2">
+					<div class="col-md-4 external-links">
+						<h4>Linkkejä</h4>
 						<ul>
-							<li><a href="#">Linkki 1</a></li>
-							<li><a href="#">Linkki 2</a></li>
-							<li><a href="#">Linkki 3</a></li>
+							<li><a href="http://media7.adventist.fi">Media7 verkkomedia</a></li>
+							<li><a href="http://aitolahti.adventist.fi">Aitolahden adventtiseurakunta</a></li>
+							<li><a href="http://adventist.fi">Suomen Adventtikirkko</a></li>
 						</ul>
 					</div>
-					<div class="col-xs-2">
-						<ul>
-							<li><a href="#">Linkki 4</a></li>
-							<li><a href="#">Linkki 5</a></li>
-							<li><a href="#">Linkki 6</a></li>
-						</ul>
-					</div>
-					<div class="col-xs-8">
+					<div class="col-md-8">
 						<p>
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt illo magni consequuntur esse, corrupti similique nam. Laudantium sit possimus dolores!
 						</p>

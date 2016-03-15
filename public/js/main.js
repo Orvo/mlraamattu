@@ -4,11 +4,13 @@ $(function()
 	var sidebar_float = 0;
 	var maincontent_height = $('#main-content').height();
 	
+	var stickyThreshold = 112;
+	
 	var updateSidebarMargin = function(delta)
 	{
 		if(delta === undefined) delta = 0;
 		
-		var window_height = $(window).height() - 110;
+		var window_height = $(window).height() - stickyThreshold;
 		
 		if($('#sidebar-content .fixed'))
 		{
@@ -21,12 +23,22 @@ $(function()
 				sidebar_float = 0;	
 			}
 			
-			var offset = Math.max(20, Math.min(maincontent_height - sidebar_height, $(document).scrollTop() - 110 - sidebar_float));
+			var offset = Math.max(20, Math.min(maincontent_height - sidebar_height, $(document).scrollTop() - stickyThreshold - sidebar_float));
 			$('#sidebar-content .fixed').css({'margin-top': offset + 'px'});
 		}
 	}
 	
-	updateSidebarMargin();
+	var updateStickyHeader = function()
+	{
+		if($(document).scrollTop() >= stickyThreshold)
+		{
+			$('header').addClass('fixed');
+		}
+		else
+		{
+			$('header').removeClass('fixed');
+		}
+	}
 	
 	var currentScroll = $(document).scrollTop();
 	
@@ -36,7 +48,35 @@ $(function()
 		currentScroll = $(document).scrollTop();
 		
 		updateSidebarMargin(delta);
+		updateStickyHeader();
 	});
+	
+	updateSidebarMargin();
+	updateStickyHeader();
+	
+	////////////////////////////////////
+	
+	var onResize = function()
+	{
+		var width = $(window).width();
+		if(width < 768)
+		{
+			$('html').addClass('mobile-width').removeClass('desktop-width');
+		}
+		else
+		{
+			$('html').removeClass('mobile-width').addClass('desktop-width');
+		}
+	}
+	
+	$(window).resize(function()
+	{
+		onResize();
+	});
+	
+	onResize();
+	
+	////////////////////////////////////
 	
 	$('div.question .answer input, div.question .answer label').click(function()
 	{
@@ -120,26 +160,5 @@ $(function()
 		
 		e.preventDefault();
 	});
-	
-	////////////////////////////////////
-	
-	var updateScroll = function()
-	{
-		if($(document).scrollTop() >= 110)
-		{
-			$('header').addClass('fixed');
-		}
-		else
-		{
-			$('header').removeClass('fixed');
-		}
-	}
-	
-	$(document).scroll(function()
-	{
-		updateScroll();
-	});
-	
-	updateScroll();
 	
 });
