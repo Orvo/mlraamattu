@@ -246,6 +246,8 @@ class UsersController extends Controller
 			$user->password = Hash::make($data['password']);
 		}
 		
+		$userAccessChanged = $user->access_level != $data['access_level'];
+		
 		if(Auth::user()->isAdmin() && $user->id != Auth::user()->id)
 		{
 			$user->access_level = $data['access_level'];
@@ -269,8 +271,9 @@ class UsersController extends Controller
 			
 			Mail::send('email.admin_account_edited',
 			[
-				'user' 		=> $user,
-				'password'	=> strlen(@$data['password']) > 0 ? $data['password'] : false,
+				'user' 					=> $user,
+				'password'				=> strlen(@$data['password']) > 0 ? $data['password'] : false,
+				'userAccessChanged'		=> $userAccessChanged,
 			],
 			function($m) use ($user)
 			{

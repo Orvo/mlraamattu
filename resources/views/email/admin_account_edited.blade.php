@@ -25,6 +25,17 @@
 		@else
 			<b>Salasanaasi ei ole muutettu.</b>
 		@endif
+		@if($userAccessChanged)
+			<br>
+			<b>Käyttäjäoikeudet muuttuivat:</b> Olet nyt
+			@if($user->access_level == 'ADMIN')
+				ylläpitäjä
+			@elseif($user->access_level == 'TEACHER')
+				opettaja
+			@else
+				peruskäyttäjä
+			@endif
+		@endif
 	</p>
 	@if($password)
 		<p>
