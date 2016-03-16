@@ -20,7 +20,10 @@
 				
 				Voit vaihtaa salasanasi 
 				@if(Auth::user()->isAdmin())
-					<a href="/admin#/users/{{ Auth::user()->id }}/edit" target="_blank">
+					<a href="/admin#/users/{{ Auth::user()->id }}/edit" target="_blank" class="hide-in-mobile-width">
+						<span class="ul">täällä</span> <span class="glyphicon glyphicon-edit"></span>
+					</a>
+					<a href="/auth/edit" class="hide-in-desktop-width">
 						<span class="ul">täällä</span> <span class="glyphicon glyphicon-edit"></span>
 					</a>
 				@else

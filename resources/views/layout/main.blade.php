@@ -29,10 +29,7 @@
 					<a href="/auth/edit">Muokkaa tietoja</a>
 				@endif
 				<a href="/auth/logout">
-					<span class="hide-in-mobile-width">Kirjaudu ulos!</span>
-					<span class="hide-in-desktop-width">
-						<span class="glyphicon glyphicon-log-out"></span>
-					</span>
+					<span class="glyphicon glyphicon-log-out" title="Kirjaudu ulos!"></span>
 				</a>
 			@else
 				<a href="/auth/login">Kirjaudu sisään</a>

@@ -48,26 +48,26 @@
 					</p>
 					
 					<div class="form-group field-name">
-						<label for="user-name" class="control-label col-xs-3">Nimi</label>
-						<div class="col-xs-7">
+						<label for="user-name" class="control-label col-sm-3">Nimi</label>
+						<div class="col-sm-7">
 							<input type="text" class="form-control" id="user-name" name="user-name" value="{{ old('user-name') }}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="user-email" class="control-label col-xs-3">Sähköpostiosoite</label>
-						<div class="col-xs-7">
+						<label for="user-email" class="control-label col-sm-3">Sähköpostiosoite</label>
+						<div class="col-sm-7">
 							<input type="text" class="form-control" id="user-email" name="user-email" value="{{ old('user-email') }}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="user-password" class="control-label col-xs-3">Salasana</label>
-						<div class="col-xs-7">
+						<label for="user-password" class="control-label col-sm-3">Salasana</label>
+						<div class="col-sm-7">
 							<input type="password" class="form-control" id="user-password" name="user-password">
 						</div>
 					</div>
 					<div class="form-group field-password-confirmation">
-						<label for="user-password_confirmation" class="control-label col-xs-3">Salasana uudestaan</label>
-						<div class="col-xs-7">
+						<label for="user-password_confirmation" class="control-label col-sm-3">Salasana uudestaan</label>
+						<div class="col-sm-7">
 							<input type="password" class="form-control" id="user-password_confirmation" name="user-password_confirmation">
 						</div>
 					</div>
@@ -81,27 +81,27 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="user-login-email" class="control-label col-xs-3">Sähköpostiosoite</label>
-						<div class="col-xs-7">
+						<label for="user-login-email" class="control-label col-sm-3">Sähköpostiosoite</label>
+						<div class="col-sm-7">
 							<input type="text" class="form-control" id="user-login-email" name="user-login-email" value="{{ old('user-login-email') }}">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="user-login-password" class="control-label col-xs-3">Salasana</label>
-						<div class="col-xs-7">
+						<label for="user-login-password" class="control-label col-sm-3">Salasana</label>
+						<div class="col-sm-7">
 							<input type="password" class="form-control" id="user-login-password" name="user-login-password">
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-xs-4 col-xs-offset-3">
+						<div class="col-sm-4 col-sm-offset-3">
 							<div class="checkbox">
 								<label>
 									<input type="checkbox" name="remember_me"> Muista kirjautuminen
 								</label>
 							</div>
 						</div>
-						<div class="col-xs-3">
-							<p style="text-align: right; padding: 0.45em 0">
+						<div class="col-sm-3">
+							<p style="text-align: right; padding: 0.45em 0" class="mobile-full-width">
 								<a href="/auth/reset" target="_blank">Unohtunut salasana?</a>
 							</p>
 						</div>

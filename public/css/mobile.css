@@ -1,33 +1,36 @@
 @media screen and (max-width: 999px) {
 
-#content-wrapper
-{
-	width: 100%;
-	margin: 0;
-	box-shadow: 0 15px 15px #ddd;
-	padding-top: 240px;
-}
+	#content-wrapper
+	{
+		width: 100%;
+		margin: 0;
+		box-shadow: 0 15px 15px #ddd;	}
 
-header
-{
-	/*position: static;*/
-}
+	.mobile-width header
+	{
+		position: static;
+	}
+	
+	.mobile-width #content-wrapper
+	{
+		padding-top: 20px;
+	}
 
-#sidebar-content
-{
-	display: none;
-}
+	#sidebar-content
+	{
+		display: none;
+	}
 
-#main-content
-{
-	width: 100%;
-	padding: 0;
-}
+	#main-content
+	{
+		width: 100%;
+		padding: 0;
+	}
 
-header .people
-{
-	display: none;
-}
+	header .people
+	{
+		display: none;
+	}
 
 }
 
@@ -35,145 +38,196 @@ header .people
 
 @media screen and (max-width: 767px) {
 
-body
-{
-	font-size: 13pt;
-}
+	body
+	{
+		font-size: 13pt;
+	}
 
-.btn
-{
-	font-size: 13pt;
-}
+	.btn
+	{
+		font-size: 13pt;
+	}
 
-.centered-form
-{
-	width: 100%;
-}
+	.centered-form
+	{
+		width: 100%;
+	}
 
-#login-status
-{
-	float: none;
-	position: static;
-	font-size: 13pt;
-	text-align: right;
-}
+	#login-status
+	{
+		float: none;
+		position: static;
+		font-size: 13pt;
+		text-align: right;
+	}
 
-header .title
-{
-	width: 100%;
-	text-align: center;
-}
+	header .title
+	{
+		width: 100%;
+		text-align: center;
+	}
 
-header nav li
-{
-	display: block;
-}
+	header nav li
+	{
+		display: block;
+	}
 
-header nav li a:link,
-header nav li a:visited
-{
-	text-align: center;
-	padding: 12px 6px;
-}
+	header nav li a:link,
+	header nav li a:visited
+	{
+		text-align: center;
+		padding: 12px 6px;
+	}
 
-footer .inner a:link,
-footer .inner a:visited
-{
-	width: 100%;
-	padding: 10px 8px;
-	margin: 0 0 4px 0;
-	text-align: center;
-	font-size: 12pt;
-	background: #7DB030;
-	border-radius: 4px;
-}
+	footer .inner a:link,
+	footer .inner a:visited
+	{
+		width: 100%;
+		padding: 10px 8px;
+		margin: 0 0 4px 0;
+		text-align: center;
+		font-size: 12pt;
+		background: #7DB030;
+		border-radius: 4px;
+	}
 
-footer .inner a:hover,
-footer .inner a:active
-{
-	color: #5C7B0A;
-	background: #fff;
-}
+	footer .inner a:hover,
+	footer .inner a:active
+	{
+		color: #5C7B0A;
+		background: #fff;
+	}
 
-footer .external-links ul
-{
-	margin-bottom: 1.5em;
-}
+	footer .external-links ul
+	{
+		margin-bottom: 1.5em;
+	}
 
-footer .external-links h4
-{
-	border-bottom: 1px solid #A8D861;
-	padding-bottom: 9px;
-	margin-bottom: 15px;
-	text-align: center;
-}
+	footer .external-links h4
+	{
+		border-bottom: 1px solid #A8D861;
+		padding-bottom: 9px;
+		margin-bottom: 15px;
+		text-align: center;
+	}
 
-.mobile-full-width
-{
-	display: block;
-	width: 100%;
-	text-align: center;
-}
+	.mobile-full-width
+	{
+		display: block;
+		width: 100%;
+		text-align: center !important;
+	}
+	
+	.mobile-full-width a
+	{
+		display: block;
+		padding: 1em 0 0 0 !important;
+	}
 
-.pull-left.mobile-full-width,
-.pull-right.mobile-full-width
-{
-	float: none;
-}
+	.pull-left.mobile-full-width,
+	.pull-right.mobile-full-width
+	{
+		float: none;
+	}
 
-div.list div.list-item .title .title-anchor
-{
-	height: 70px;
-	line-height: 1.15em;
-	border-bottom: 1px solid #ddd;
-	padding-top: 8px;
-}
+	div.list div.list-item .title .title-anchor
+	{
+		height: 75px;
+		line-height: 1.4em;
+		border-bottom: 1px solid #ddd;
+		padding-top: 5px;
+	}
 
-div.list div.list-item .title div.status,
-div.list div.list-item .title div.status p
-{
-	float: none;
-	position: static;
-	top: auto;
-	bottom: auto;
-	right: auto;
-	left: auto;
-	text-align: left;
-}
+	div.list div.list-item .title div.status,
+	div.list div.list-item .title div.status p
+	{
+		float: none;
+		position: static;
+		top: auto;
+		bottom: auto;
+		right: auto;
+		left: auto;
+		text-align: left;
+	}
 
-div.list div.list-item .title div.status p
-{
-	margin: -2px 0 0 0;
-}
+	div.list div.list-item .title div.status p
+	{
+		margin: -2px 0 0 0;
+	}
 
-div.list div.list-item .title div.status .glyphicon
-{
-	float: left;
-	font-size: 16pt !important;
-	padding-right: 5px;
-}
+	div.list div.list-item .title div.status .glyphicon
+	{
+		float: left;
+		font-size: 16pt !important;
+		padding-right: 5px;
+	}
 
-.list-item .description
-{	
-	font-size: 13pt !important;
-}
+	.list-item .description
+	{	
+		font-size: 13pt !important;
+	}
 
-div.course-description img,
-.course.list-item .description img
-{
-	float: none !important;
-	width: 100% !important;
-	margin: 1em 0 !important;
-}
+	div.course-description img,
+	.course.list-item .description img,
+	div.test-material-body img
+	{
+		float: none !important;
+		width: 100% !important;
+		height: auto !important;
+		margin: 1em 0 !important;
+	}
 
-.course.list-item .continue-button
-{
-	float: none !important;
-}
+	.course.list-item .continue-button
+	{
+		float: none !important;
+	}
 
-.course.list-item .continue-button .btn
-{
-	display: block;
-}
+	.course.list-item .continue-button .btn
+	{
+		display: block;
+	}
+	
+	div.tab-content-wrapper
+	{
+		overflow: hidden;
+	}
 
+	.form-register div.tab-content-wrapper
+	{
+		height: 420px;
+	}
+
+	.form-login div.tab-content-wrapper
+	{
+		height: 390px !important;
+	}
+	
+	div.tab-content-row
+	{
+		width: 100%;
+		height: 200%;
+	}
+	
+	div.tab-content-row > div.tab-panel
+	{
+		width: 100%;
+	}
+
+	.form-register div.tab-panel:first-child
+	{
+		margin-left: 0px;
+	}
+
+	.form-login div.tab-panel:first-child
+	{
+		margin-left: 0px;
+		display: none;
+	}
+
+	#authentication-form .form-help
+	{
+		max-width: 90%;
+		padding: 1.5em 0 1.5em 0;
+	}
+	
 }
