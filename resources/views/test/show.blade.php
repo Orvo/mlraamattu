@@ -168,146 +168,175 @@
 			<hr>
 		@endif
 		
-		<div class="test-status-alert">
-			@if(!$test->hasFeedback() && $validation && !$hasPassed)
-				<div class="alert alert-warning alert-icon">
-					<span class="glyphicon glyphicon-remove-circle"></span>
-					<div>
-						<p>
-							Sinun pitää vastata oikein vähintään {{ $minimumToPass }} kysymykseen. Et ole saavuttanut vaadittua vähimmäismäärää, joten et voi jatkaa kurssilla eteenpäin ennen sitä. Voit tehdä korjauksia nyt tai odottaa kunnes koe on tarkistettu ja vastaanotat palautetta.
-						</p>
-						<p id="top-spoiler-warning">
-							<a class="spoiler-warning">
-								<span class="glyphicon glyphicon-eye-open"></span> Oikeat vastaukset piilotettu. Klikkaa tästä nähdäksesi.
-							</a>
-						</p>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			@elseif($hasPassedFull)
-				<div class="alert alert-success alert-icon">
-					<span class="glyphicon glyphicon-ok-circle"></span>
-					<div>
-						<h4><b>Hurraa!</b> Koe läpäisty!</h4>
-						@if($test->course->nextTest)
-							<p class="pull-right">
-								<a href="/test/{{ $test->course->nextTest->id }}/{{ $test->course->nextTest->goToMaterial ? 'material' : '' }}" class="btn btn-success">
-									Seuraavaan kokeeseen! <span class="glyphicon glyphicon-chevron-right"></span>
-								</a>
+		@if(@$validation)
+			<div class="test-status-alert">
+				@if(isset($authFailed) && $authFailed)
+					<div class="alert alert-warning alert-icon">
+						<span class="glyphicon glyphicon-remove-circle"></span>
+						<div>
+							<p>
+								{{ @$authentication_type == 0 ? 'Rekisteröinti' : 'Kirjautuminen' }} epäonnistui.
 							</p>
 							<p>
-								Olet suorittanut tämän kokeen ja voit nyt jatkaa kurssilla eteenpäin.
+								@if($hasPassedFull)
+									Olet vastannut oikein kaikkiin kysymyksiin.
+								@elseif($hasPassed)
+									Olet vastannut oikein läpäisyyn vaadittuun vähimmäismäärään kysymyksistä.
+								@elseif($test->autodiscard)
+									Kokeesi on hyväksytty riippumatta oikeista vastauksista.
+								@else
+									Myös koevastauksissasi on virheitä.
+								@endif
+								
+								@if($hasPassed || $test->autodiscard)
+									Korjattuasi {{ @$authentication_type == 0 ? 'rekisteröinnin' : 'kirjautumisen' }} virheet voit jatkaa seuraavaan kokeeseen.
+								@else
+									Korjaa kaikki ongelmat jatkaaksesi.
+								@endif
 							</p>
-						@else
-							<p class="pull-right">
-								<a href="/" class="btn btn-success">
-									Palaa etusivulle <span class="glyphicon glyphicon-chevron-right"></span>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				@elseif(!$test->hasFeedback() && $validation && !$hasPassed && !$test->autodiscard)
+					<div class="alert alert-warning alert-icon">
+						<span class="glyphicon glyphicon-remove-circle"></span>
+						<div>
+							<p>
+								Sinun pitää vastata oikein vähintään {{ $minimumToPass }} kysymykseen. Et ole saavuttanut vaadittua vähimmäismäärää, joten et voi jatkaa kurssilla eteenpäin ennen sitä. Voit tehdä korjauksia nyt tai odottaa kunnes koe on tarkistettu ja vastaanotat palautetta.
+							</p>
+							<p id="top-spoiler-warning">
+								<a class="spoiler-warning">
+									<span class="glyphicon glyphicon-eye-open"></span> Oikeat vastaukset piilotettu. Klikkaa tästä nähdäksesi.
 								</a>
 							</p>
-							<p>
-								Olet suorittanut koko kurssin. Onneksi olkoon!
-							</p>
-						@endif
+						</div>
+						<div class="clearfix"></div>
 					</div>
-					<div class="clearfix"></div>
-				</div>
-			@elseif($test->hasFeedback())
-				<div class="alert alert-success alert-icon">
-					<span class="glyphicon glyphicon-ok-circle"></span>
-					<div>
-						<h4>Olet vastaanottanut koepalautetta!</h4>
-						<p>
-							@if($hasPassed)
-								Kokeesi on tarkistettu ja merkitty hyväksytyksi.
+				@elseif($hasPassedFull)
+					<div class="alert alert-success alert-icon">
+						<span class="glyphicon glyphicon-ok-circle"></span>
+						<div>
+							<h4><b>Hurraa!</b> Koe läpäisty!</h4>
+							@if($test->course->nextTest)
+								<p class="pull-right">
+									<a href="/test/{{ $test->course->nextTest->id }}/{{ $test->course->nextTest->goToMaterial ? 'material' : '' }}" class="btn btn-success">
+										Seuraavaan kokeeseen! <span class="glyphicon glyphicon-chevron-right"></span>
+									</a>
+								</p>
+								<p>
+									Olet suorittanut tämän kokeen ja voit nyt jatkaa kurssilla eteenpäin.
+								</p>
 							@else
-								Kokeesi on tarkistettu ja täten merkitty hyväksytyksi riippumatta siitä, saitko kaikkia vastauksia oikein.
+								<p class="pull-right">
+									<a href="/" class="btn btn-success">
+										Palaa etusivulle <span class="glyphicon glyphicon-chevron-right"></span>
+									</a>
+								</p>
+								<p>
+									Olet suorittanut koko kurssin. Onneksi olkoon!
+								</p>
 							@endif
-							Voit tarkastella vastaanottamaasi palautetta kysymyskohtaisesti vierittämällä sivua alaspäin.
-						</p>
-						@if($test->course->nextTest)
-							<p class="pull-right">
-								<a href="/test/{{ $test->course->nextTest->id }}/{{ $test->course->nextTest->goToMaterial ? 'material' : '' }}" class="btn btn-success">
-									Seuraavaan kokeeseen! <span class="glyphicon glyphicon-chevron-right"></span>
-								</a>
-							</p>
-							<p>
-								Voit nyt jatkaa kurssilla eteenpäin. Halutessasi voit vielä korjata vastauksia.
-							</p>
-						@else
-							<p class="pull-right">
-								<a href="/" class="btn btn-success">
-									Palaa etusivulle <span class="glyphicon glyphicon-chevron-right"></span>
-								</a>
-							</p>
-							<p>
-								Olet suorittanut koko kurssin. Halutessasi voit vielä korjata vastauksia.
-							</p>
-						@endif
+						</div>
+						<div class="clearfix"></div>
 					</div>
-					<div class="clearfix"></div>
-				</div>
-			@elseif($test->hasFeedback(true))
-				<div class="alert alert-success alert-icon">
-					<span class="glyphicon glyphicon-ok-circle"></span>
-					<div>
-						<h4>Koe on kuitattu!</h4>
-						<p>
-							Kokeesi on merkitty hyväksytyksi riippumatta siitä, saitko kaikkia vastauksia oikein.
-						</p>
-						@if($test->course->nextTest)
-							<p class="pull-right">
-								<a href="/test/{{ $test->course->nextTest->id }}/{{ $test->course->nextTest->goToMaterial ? 'material' : '' }}" class="btn btn-success">
-									Seuraavaan kokeeseen! <span class="glyphicon glyphicon-chevron-right"></span>
-								</a>
-							</p>
+				@elseif($test->hasFeedback())
+					<div class="alert alert-success alert-icon">
+						<span class="glyphicon glyphicon-ok-circle"></span>
+						<div>
+							<h4>Olet vastaanottanut koepalautetta!</h4>
 							<p>
-								Voit nyt jatkaa kurssilla eteenpäin. Halutessasi voit vielä korjata vastauksia.
+								@if($hasPassed)
+									Kokeesi on tarkistettu ja merkitty hyväksytyksi.
+								@else
+									Kokeesi on tarkistettu ja täten merkitty hyväksytyksi riippumatta siitä, saitko kaikkia vastauksia oikein.
+								@endif
+								Voit tarkastella vastaanottamaasi palautetta kysymyskohtaisesti vierittämällä sivua alaspäin.
 							</p>
-						@else
-							<p class="pull-right">
-								<a href="/" class="btn btn-success">
-									Palaa etusivulle <span class="glyphicon glyphicon-chevron-right"></span>
-								</a>
-							</p>
-							<p>
-								Olet suorittanut koko kurssin. Halutessasi voit vielä korjata vastauksia.
-							</p>
-						@endif
+							@if($test->course->nextTest)
+								<p class="pull-right">
+									<a href="/test/{{ $test->course->nextTest->id }}/{{ $test->course->nextTest->goToMaterial ? 'material' : '' }}" class="btn btn-success">
+										Seuraavaan kokeeseen! <span class="glyphicon glyphicon-chevron-right"></span>
+									</a>
+								</p>
+								<p>
+									Voit nyt jatkaa kurssilla eteenpäin. Halutessasi voit vielä korjata vastauksia.
+								</p>
+							@else
+								<p class="pull-right">
+									<a href="/" class="btn btn-success">
+										Palaa etusivulle <span class="glyphicon glyphicon-chevron-right"></span>
+									</a>
+								</p>
+								<p>
+									Olet suorittanut koko kurssin. Halutessasi voit vielä korjata vastauksia.
+								</p>
+							@endif
+						</div>
+						<div class="clearfix"></div>
 					</div>
-					<div class="clearfix"></div>
-				</div>
-			@elseif($hasPassed)
-				<div class="alert alert-success alert-icon">
-					<span class="glyphicon glyphicon-ok-circle"></span>
-					<div>
-						<h4>Koe läpäisty!</h4>
-						@if($test->course->nextTest)
+				@elseif($test->hasFeedback(true) || $test->autodiscard)
+					<div class="alert alert-success alert-icon">
+						<span class="glyphicon glyphicon-ok-circle"></span>
+						<div>
+							<h4>Koe on hyväksytty!</h4>
 							<p>
-								Olet vastannut oikein läpäisyyn vaadittuun vähimmäismäärään kysymyksistä ja voit nyt jatkaa seuraavaan kokeeseen jos niin tahdot.
+								Kokeesi on merkitty hyväksytyksi riippumatta siitä, saitko kaikkia vastauksia oikein.
 							</p>
-							<p class="pull-right">
-								<a href="/test/{{ $test->course->nextTest->id }}/{{ $test->course->nextTest->goToMaterial ? 'material' : '' }}" class="btn btn-success">
-									Seuraavaan kokeeseen! <span class="glyphicon glyphicon-chevron-right"></span>
-								</a>
-							</p>
-							<p>
-								Halutessasi voit vielä korjata vastauksia.
-							</p>
-						@else
-							<p class="pull-right">
-								<a href="/" class="btn btn-success">
-									Palaa etusivulle <span class="glyphicon glyphicon-chevron-right"></span>
-								</a>
-							</p>
-							<p>
-								Olet vastannut oikein läpäisyyn vaadittuun vähimmäismäärään kysymyksistä. Halutessasi voit vielä korjata vastauksia.
-							</p>
-						@endif
+							@if($test->course->nextTest)
+								<p class="pull-right">
+									<a href="/test/{{ $test->course->nextTest->id }}/{{ $test->course->nextTest->goToMaterial ? 'material' : '' }}" class="btn btn-success">
+										Seuraavaan kokeeseen! <span class="glyphicon glyphicon-chevron-right"></span>
+									</a>
+								</p>
+								<p>
+									Voit nyt jatkaa kurssilla eteenpäin. Halutessasi voit vielä korjata vastauksia.
+								</p>
+							@else
+								<p class="pull-right">
+									<a href="/" class="btn btn-success">
+										Palaa etusivulle <span class="glyphicon glyphicon-chevron-right"></span>
+									</a>
+								</p>
+								<p>
+									Olet suorittanut koko kurssin. Halutessasi voit vielä korjata vastauksia.
+								</p>
+							@endif
+						</div>
+						<div class="clearfix"></div>
 					</div>
-					<div class="clearfix"></div>
-				</div>
-			@endif
-		</div>
+				@elseif($hasPassed)
+					<div class="alert alert-success alert-icon">
+						<span class="glyphicon glyphicon-ok-circle"></span>
+						<div>
+							<h4>Koe läpäisty!</h4>
+							@if($test->course->nextTest)
+								<p>
+									Olet vastannut oikein läpäisyyn vaadittuun vähimmäismäärään kysymyksistä ja voit nyt jatkaa seuraavaan kokeeseen jos niin tahdot.
+								</p>
+								<p class="pull-right">
+									<a href="/test/{{ $test->course->nextTest->id }}/{{ $test->course->nextTest->goToMaterial ? 'material' : '' }}" class="btn btn-success">
+										Seuraavaan kokeeseen! <span class="glyphicon glyphicon-chevron-right"></span>
+									</a>
+								</p>
+								<p>
+									Halutessasi voit vielä korjata vastauksia.
+								</p>
+							@else
+								<p class="pull-right">
+									<a href="/" class="btn btn-success">
+										Palaa etusivulle <span class="glyphicon glyphicon-chevron-right"></span>
+									</a>
+								</p>
+								<p>
+									Olet vastannut oikein läpäisyyn vaadittuun vähimmäismäärään kysymyksistä. Halutessasi voit vielä korjata vastauksia.
+								</p>
+							@endif
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				@endif
+			</div>
+		@endif
 		
 		@if(@$validation && !$hasPassed && $test->page()->exists())
 			<div class="alert alert-info alert-icon alert-icon-small">

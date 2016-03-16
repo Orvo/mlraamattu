@@ -113,7 +113,7 @@ class TestsController extends Controller
 			switch($authenticationType)
 			{
 				case 0:
-					$validator = \Validator::make($request->all(),
+					$authvalidator = \Validator::make($request->all(),
 					[
 						'user-name'		=> 'required',
 						'user-email'	=> 'required|email|unique:users,email',
@@ -130,7 +130,7 @@ class TestsController extends Controller
 					]);
 				break;
 				case 1:
-					$validator = \Validator::make($request->all(),
+					$authvalidator = \Validator::make($request->all(),
 					[
 						'user-login-email'		=> 'required|email',
 						'user-login-password'	=> 'required'
@@ -143,7 +143,7 @@ class TestsController extends Controller
 				break;
 			}
 			
-			if($validator->passes())
+			if($authvalidator->passes())
 			{
 				switch($authenticationType)
 				{
@@ -175,7 +175,7 @@ class TestsController extends Controller
 						
 						if(!Auth::attempt($credentials, $remember))
 						{
-							$validator->getMessageBag()->add('user-login-email', 'Kirjautuminen annetuilla tunnuksilla ei onnistunut!');
+							$authvalidator->getMessageBag()->add('user-login-email', 'Kirjautuminen annetuilla tunnuksilla ei onnistunut!');
 						}
 						else
 						{
@@ -221,8 +221,9 @@ class TestsController extends Controller
 				'minimumToPass'			=> @$minimumToPass,
 				'authentication_type'	=> @$authenticationType,
 				'isMaterialPage'		=> false,
+				'authFailed'			=> !Auth::check() && !$authvalidator->passes(),
 			]))
-			->withErrors(@$validator)
+			->withErrors(@$authvalidator)
 			->withInput($request);
 	}
 	

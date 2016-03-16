@@ -331,6 +331,20 @@
 	}
 	
 	/***********************************
+		Test */
+	
+	.test-status-alert .pull-right
+	{
+		float: none !important;
+		margin: 1em 0;
+	}
+	
+	.test-status-alert .btn
+	{
+		display: block;
+	}
+	
+	/***********************************
 		Sidebar */
 
 	ul.sidebar-course-progress

@@ -30,26 +30,26 @@
 		<fieldset>
 			<legend></legend>
 			<div class="form-group">
-				<label for="user-email" class="control-label col-xs-3">
+				<label for="user-email" class="control-label col-md-3">
 					Sähköposti
 				</label>
-				<div class="col-xs-9">
+				<div class="col-md-9">
 					<input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Sähköposti">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="user-password" class="control-label col-xs-3">
+				<label for="user-password" class="control-label col-md-3">
 					Uusi salasana
 				</label>
-				<div class="col-xs-9">
+				<div class="col-md-9">
 					<input type="password" class="form-control" id="user-password" name="password" placeholder="Uusi salasana">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="user-password_confirmation" class="control-label col-xs-3">
+				<label for="user-password_confirmation" class="control-label col-md-3">
 					Uusi salasana uudestaan
 				</label>
-				<div class="col-xs-9">
+				<div class="col-md-9">
 					<input type="password" class="form-control" id="user-password_confirmation" name="password_confirmation" placeholder="Uusi salasana uudestaan">
 				</div>
 			</div>
@@ -58,7 +58,7 @@
 		<fieldset>
 			<legend></legend>
 			<div class="form-group">
-				<div class="col-xs-offset-6 col-xs-6">
+				<div class="col-md-offset-6 col-md-6">
 					<button type="submit" class="btn btn-primary btn-block">
 						Tallenna <span class="glyphicon glyphicon-floppy-disk"></span>
 					</button>
