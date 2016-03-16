@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
 			$user->name 		= "Ylläpitäjä";
 			$user->email 		= "admin";
 			$user->password 	= Hash::make("password");
-			$user->access_level = 1;
+			$user->access_level = "ADMIN";
 					
 			$user->save();
 			

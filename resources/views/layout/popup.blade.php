@@ -9,9 +9,9 @@
 		</title>
 		<link rel="shortcut icon" type="image/png" href="/favicon.png">
         <link rel="stylesheet" href="/css/normalize.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/css/main.css">
+		<link rel="stylesheet" href="/css/public-dist.min.css">
 	</head>
 	<body>
 		<div id="content-wrapper-popup">
@@ -22,6 +22,6 @@
 		</div>
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-		<script src="/js/main.js"></script>
+		<script src="/js/public-dist.js"></script>
 	</body>
 </html>

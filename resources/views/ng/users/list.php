@@ -62,7 +62,8 @@
 				<td>
 					<div class="pull-right">
 						<div ng-if="user.id == userData.user.id" class="label label-info">Sinä</div>
-						<div ng-if="user.access_level == 1" class="label label-primary">Ylläpitäjä</div>
+						<div ng-if="user.access_level == 'ADMIN'" class="label label-primary">Ylläpitäjä</div>
+						<div ng-if="user.access_level == 'TEACHER'" class="label label-warning">Opettaja</div>
 					</div>
 					<div class="info">
 						<a href="#/users/[[ user.id ]]">
@@ -80,9 +81,9 @@
 					<a href="#/users/[[ user.id ]]/edit" class="btn btn-primary btn-sm">
 						<span class="glyphicon glyphicon-edit"></span> Muokkaa
 					</a>
-					<a href="#/users/delete/[[ user.id ]]" class="btn btn-danger btn-sm" ng-if="user.id != userData.user.id">
+					<button class="btn btn-danger btn-sm" ng-if="user.id != userData.user.id" ng-click="delete(user)">
 						<span class="glyphicon glyphicon-trash"></span> Poista
-					</a>
+					</button>
 				</td>
 			</tr>
 			<tr ng-hide="(users | filter : searchFilter | filter : usersFilter).length > 0">
@@ -98,4 +99,33 @@
 	<h3>
 		<img src="/img/ajax-loader.gif" alt=""> Ladataan...
 	</h3>
+</div>
+
+<div class="modal fade" id="modal-delete-confirmation">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Poiston varmistus</h4>
+			</div>
+			<div class="modal-body" style="text-align:center;font-size:120%">
+				<p>
+					Oletko varma, että haluat poistaa käyttäjän <b>[[ modal_info.user.name ]]</b>?
+				</p>
+				<p>
+					Toiminto poistaa myös käyttäjän koesuoritukset eikä sitä ei voi peruuttaa.
+				</p>
+			</div>
+			<div class="modal-footer">
+				<div ng-if="!processing">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Peruuta</button>
+					<button type="button" class="btn btn-danger" ng-click="confirmed_delete()">
+						<span class="glyphicon glyphicon-trash"></span> Poista käyttäjä
+					</button>
+				</div>
+				<div ng-if="processing">
+					<img src="/img/ajax-loader.gif" alt="" style="width: 36px">
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

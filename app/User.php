@@ -29,6 +29,12 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $fillable = ['name', 'email', 'password'];
+    
+    protected $access_levels = [
+        'ADMIN'         => 999,
+        'TEACHER'       => 1,
+        'USER'          => 0,
+    ];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -44,7 +50,27 @@ class User extends Model implements AuthenticatableContract,
     
     public function isAdmin()
     {
-        return $this->access_level >= 1;
+        return $this->access_level == 'ADMIN';
+    }
+    
+    public function isTeacher()
+    {
+        return $this->access_level == 'TEACHER';
+    }
+    
+    public function accessLevel()
+    {
+        return $this->access_levels[$this->access_level];
+    }
+    
+    public function canAccessAdminPanel()
+    {
+        return $this->accessLevel() >= 1;
+    }
+    
+    public function canAccessAjax()
+    {
+        return $this->canAccessAdminPanel();
     }
 
 }

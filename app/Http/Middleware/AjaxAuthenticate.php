@@ -34,12 +34,9 @@ class AjaxAuthenticate
 	 */
 	public function handle($request, Closure $next)
 	{
-		if (!$this->auth->check() or !$this->auth->user()->isAdmin())
+		if (!$this->auth->check() or !$this->auth->user()->canAccessAjax())
 		{
-			return [
-				// 'error' => true,
-				// 'status' => 401,
-			];
+			return [];
 		}
 
 		return $next($request);

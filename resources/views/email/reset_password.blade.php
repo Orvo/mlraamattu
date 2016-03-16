@@ -15,7 +15,7 @@
 		<a href="{{ url('/auth/reset/' . $token) }}">{{ url('/auth/reset/' . $token) }}</a>
 	</p>
 	<p>
-		Jos et itse pyytänyt salasanan uusimista, voit jättää tämän viestin huomioimatta. Linkki vanhenee tunnin kuluessa.
+		Jos et itse pyytänyt salasanan uusimista, voit olla huomioimatta tätä viestiä. Linkki vanhenee tunnin kuluessa.
 	</p>
 	<p>
 		Terveisin, Media7 Raamattuopisto.

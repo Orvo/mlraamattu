@@ -8,9 +8,9 @@
 		<meta name="viewport" content="width=1000, initial-scale=1">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<link rel="shortcut icon" type="image/ico" href="/favicon.ico">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-		<link rel="stylesheet" href="/css/admin.css">
+		<link rel="stylesheet" href="/css/admin-dist.css">
 	</head>
 	<body>
 		<nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavbarController">
@@ -169,23 +169,21 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 		
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		
+		<script src="/js/vendor/ckeditor/ckeditor.js"></script>
 		
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-resource.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
 		<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.min.js"></script>
+		
 		<script src="/js/ng/modules/ng-onload.min.js"></script>
 		<script src="/js/ng/modules/sortable.js"></script>
-		
-		<script src="/js/vendor/ckeditor/ckeditor.js"></script>
 		<script src="/js/ng/modules/angular-ckeditor.min.js"></script>
 		
-		<script src="/js/ng/main.js"></script>
-		<script src="/js/ng/controllers.js"></script>
-		<script src="/js/ng/models.js"></script>
-		
-		<script src="/js/admin.js"></script>
+		<script src="/js/admin-ng-dist.min.js"></script>
+		<script src="/js/admin-dist.min.js"></script>
 	</body>
 </html>
 

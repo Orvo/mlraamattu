@@ -137,7 +137,21 @@ class UsersController extends Controller
 	 */
 	public function destroy($id)
 	{
-		//
+		$user = User::findOrFail($id);
+		
+		if($user && Auth::user()->id != $id)
+		{
+			$user->archives()->delete();
+			$user->delete();
+			
+			return [
+				'success' => true,
+			];
+		}
+		
+		return [
+			'success' => false,
+		];
 	}
 	
 	protected function _validate($data)
@@ -230,6 +244,11 @@ class UsersController extends Controller
 		if(strlen(@$data['password']) > 0)
 		{
 			$user->password = Hash::make($data['password']);
+		}
+		
+		if(Auth::user()->isAdmin() && $user->id != Auth::user()->id)
+		{
+			$user->access_level = $data['access_level'];
 		}
 		
 		if($isNewEntry)

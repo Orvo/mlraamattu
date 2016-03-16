@@ -8,21 +8,34 @@ module.exports = function(grunt)
 			options: {
 				separator: ';',
 			},
-			js: {
+			js_public: {
 				src: [
-					'public/js/plugins.js',
 					'public/js/main.js',
 				],
-				dest: 'public/build/js/scripts.js',
+				dest: 'public/js/public-dist.js',
+			},
+			js_admin: {
+				src: [
+					'public/js/ng/main.js',
+					'public/js/ng/controllers.js',
+					'public/js/ng/models.js',
+				],
+				dest: 'public/js/admin-ng-dist.js',
 			},
 		},
 		uglify: {
 			options: {
 				mangle: false,
 			},
-			js: {
+			js_public: {
 				files: {
-					'public/build/js/scripts.js': 'public/build/js/scripts.js',	
+					'public/js/public-dist.min.js': 'public/js/public-dist.js',	
+				},
+			},
+			js_admin: {
+				files: {
+					'public/js/admin-ng-dist.min.js': 'public/js/admin-ng-dist.js',
+					'public/js/admin-dist.min.js': 'public/js/admin.js',
 				},
 			},
 		}, 
@@ -31,9 +44,14 @@ module.exports = function(grunt)
 				shorthandCompacting: false,
 				roundingPrecision: -1
 			},
-			target: {
+			public: {
 				files: {
-					'output.css': ['foo.css', 'bar.css']
+					'public/css/public-dist.min.css': ['public/css/main.css', 'public/css/mobile.css']
+				}
+			},
+			admin: {
+				files: {
+					'public/css/admin-dist.min.css': ['public/css/admin.css']
 				}
 			}
 		},
@@ -63,5 +81,6 @@ module.exports = function(grunt)
 	
 	// Task definition
 	grunt.registerTask('default', ['watch']);
+	grunt.registerTask('thing', ['concat', 'cssmin', 'uglify']);
 	
 };
