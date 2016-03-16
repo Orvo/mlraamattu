@@ -20,6 +20,35 @@
 	{
 		display: none;
 	}
+	
+	.sidebar_before #sidebar-content
+	{
+		display: block;
+		width: 100%;
+		float: none;
+		clear: both;
+		padding: 0 0 20px 0;
+	}
+	
+	#sidebar-content-after
+	{
+		display: block;
+		float: none;
+		clear: both;
+		padding: 20px 0 0 0;
+	}
+	
+	.sidebar_before #sidebar-content-after
+	{
+		display: none;
+	}
+	
+	#sidebar-content-after h4
+	{
+		border-bottom: 1px solid #ddd;
+		padding-bottom: 6px;
+		text-align: center;
+	}
 
 	#main-content
 	{
@@ -60,6 +89,9 @@
 		font-size: 13pt;
 		text-align: right;
 	}
+	
+	/***********************************
+		Layout structure */
 
 	header .title
 	{
@@ -79,6 +111,12 @@
 		padding: 12px 6px;
 	}
 
+	footer .inner
+	{
+		padding-left: 12px;	
+		padding-right: 12px;	
+	}
+	
 	footer .inner a:link,
 	footer .inner a:visited
 	{
@@ -110,6 +148,9 @@
 		margin-bottom: 15px;
 		text-align: center;
 	}
+	
+	/***********************************
+		Misc */
 
 	.mobile-full-width
 	{
@@ -129,13 +170,30 @@
 	{
 		float: none;
 	}
+	
+	/***********************************
+		Lists */
 
 	div.list div.list-item .title .title-anchor
 	{
-		height: 75px;
+		min-height: 75px;
+		height: auto !important;
 		line-height: 1.4em;
 		border-bottom: 1px solid #ddd;
 		padding-top: 5px;
+	}
+	
+	div.list div.list-item.list-item-flat .title .title-anchor
+	{
+		line-height: 1em;
+		min-height: 60px;
+		height: auto !important;
+		border-bottom: none;
+	}
+	
+	div.list div.list-item .title div.status
+	{
+		padding: 5px 0 0 0;
 	}
 
 	div.list div.list-item .title div.status,
@@ -152,17 +210,18 @@
 
 	div.list div.list-item .title div.status p
 	{
-		margin: -2px 0 0 0;
+		margin: -5px 0 0 0px;
 	}
 
 	div.list div.list-item .title div.status .glyphicon
 	{
 		float: left;
 		font-size: 16pt !important;
-		padding-right: 5px;
+		padding-right: 8px;
 	}
 
-	.list-item .description
+	.list-item .description,
+	.course-description
 	{	
 		font-size: 13pt !important;
 	}
@@ -187,6 +246,22 @@
 		display: block;
 	}
 	
+	div.list div.list-item .description .read-more
+	{
+		font-size: 14pt;
+		text-align: center;
+	}
+	
+	div.list div.list-item .description .read-more .btn
+	{
+		display: block;
+		font-size: 14pt;
+		padding: 9px 14px;
+	}
+	
+	/***********************************
+		Questions */
+	
 	.big-validation-icon
 	{
 		display: none !important;
@@ -209,6 +284,9 @@
 		font-size: 12pt;
 	}
 	
+	/***********************************
+		Tabs */
+	
 	div.tab-content-wrapper
 	{
 		overflow: hidden;
@@ -216,7 +294,7 @@
 
 	.form-register div.tab-content-wrapper
 	{
-		height: 420px;
+		height: 440px;
 	}
 
 	.form-login div.tab-content-wrapper
@@ -250,6 +328,41 @@
 	{
 		max-width: 90%;
 		padding: 1.5em 0 1.5em 0;
+	}
+	
+	/***********************************
+		Sidebar */
+
+	ul.sidebar-course-progress
+	{
+		padding-left: 27px;
+		border-left: none;
+	}
+	
+	ul.sidebar-course-progress li .anchor
+	{
+		padding: 12px 6px 10px 30px;
+	}
+	
+	ul.sidebar-course-progress li.course-title .anchor
+	{
+		border-radius: 5px !important;
+	}
+	
+	ul.sidebar-course-progress li.test .anchor
+	{
+		border-bottom-left-radius: 5px;
+	}
+	
+	ul.sidebar-course-progress li.material .anchor,
+	ul.sidebar-course-progress li.test.no-material .anchor
+	{
+		border-top-left-radius: 5px;
+	}
+	
+	ul.sidebar-course-progress li.test.no-material .anchor
+	{
+		border-radius: 5px !important;
 	}
 	
 }

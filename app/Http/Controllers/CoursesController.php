@@ -47,6 +47,7 @@ class CoursesController extends Controller
 		return view('course.list', [
 			'my_courses' 		=> $my_courses,
 			'available_courses' => $available_courses,
+			'sidebar_before'	=> true,
 		]);
 	}
 

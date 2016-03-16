@@ -92,7 +92,7 @@
 							<span class="glyphicon glyphicon-remove-circle"></span>
 							<p>Kesken ({{ $test->progress->data->num_correct }}/{{ $test->progress->data->total }} oikein)</p>
 						@elseif($test->progress->status == \App\Test::UNSTARTED)
-							<span class="glyphicon glyphicon-star-empty"></span>
+							<span class="glyphicon glyphicon-star"></span>
 							<p>Suorittamaton</p>
 						@elseif($test->progress->status == \App\Test::LOCKED)
 							<span class="glyphicon glyphicon-lock"></span>
@@ -109,13 +109,15 @@
 				<div class="description">
 					<div class="inner">
 						{!! $test->description !!}
-						@if($test->progress->status != \App\Test::LOCKED)
-							<div class="test read-more">
+						<div class="test read-more">
+							@if($test->progress->status != \App\Test::LOCKED)
 								<a href="/test/{{ $test->id }}" class="btn btn-default">
 									Kokeeseen <span class="glyphicon glyphicon-chevron-right"></span>
 								</a>
-							</div>
-						@endif
+							@else
+								<span class="glyphicon glyphicon-lock"></span> Koe lukittu
+							@endif
+						</div>
 					</div>
 					@if($test->hasFeedback())
 						<div class="alert alert-success alert-icon alert-icon-small">

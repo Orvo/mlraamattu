@@ -14,6 +14,7 @@
 	}
 	
 ?>
+<h4 class="hide-in-desktop-width">Kurssikartta</h4>
 <ul class="sidebar-course-progress fixed">
 
 	<li class="course-title {{ css([

@@ -20,7 +20,7 @@
 					<span class="glyphicon glyphicon-remove-circle"></span>
 					<p>Aloitettu</p>
 				@elseif($course->progressStatus == \App\Course::UNSTARTED)
-					<span class="glyphicon glyphicon-star-empty"></span>
+					<span class="glyphicon glyphicon-star"></span>
 					<p>Aloittamatta</p>
 				@endif
 			</div>

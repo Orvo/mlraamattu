@@ -55,7 +55,7 @@
 					</div>
 				</nav>
 			</header>
-			<div id="content-wrapper" class="row">
+			<div id="content-wrapper" class="row {{ isset($sidebar_before) && $sidebar_before ? 'sidebar_before' : 'sidebar_after' }}">
 				@if(isset($__env->getSections()['sidebar_content']))
 					<div id="sidebar-content" class="col-xs-3">
 						@yield('sidebar_content', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.')
@@ -67,6 +67,11 @@
 					]) }}">
 					@yield('content')
 				</div>
+				@if(isset($__env->getSections()['sidebar_content']))
+					<div id="sidebar-content-after" class="hide-in-desktop-width">
+						@yield('sidebar_content')
+					</div>
+				@endif
 				<div class="clearfix"></div>
 			</div>
 			<footer>
