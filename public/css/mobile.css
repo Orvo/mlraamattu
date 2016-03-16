@@ -187,6 +187,28 @@
 		display: block;
 	}
 	
+	.big-validation-icon
+	{
+		display: none !important;
+	}
+	
+	div.question div.correct-answers h4,
+	div.question div.answer-feedback h4
+	{
+		font-size: 13pt;
+	}
+	
+	div.question div.correct-answers p,
+	div.question div.answer-feedback p
+	{
+		font-size: 12pt;
+	}
+	
+	div.question textarea
+	{
+		font-size: 12pt;
+	}
+	
 	div.tab-content-wrapper
 	{
 		overflow: hidden;

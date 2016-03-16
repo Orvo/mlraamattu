@@ -380,7 +380,12 @@
 							</div>
 						@elseif($validation[$question->id]['status'] == \App\Question::INCORRECT)
 							<div class="validation incorrect">
-								<span class="glyphicon glyphicon-remove"></span> Väärin!
+								<span class="glyphicon glyphicon-remove"></span>
+								@if($question->type == 'TEXTAREA')
+									Hylätty!
+								@else
+									Väärin!
+								@endif
 							</div>
 						@endif
 					@endif
