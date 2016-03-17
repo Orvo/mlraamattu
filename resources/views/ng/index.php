@@ -41,8 +41,10 @@
 							<td colspan="4" style="text-align:center;font-weight: bold;" ng-show="!loaded">
 								<img src="/img/ajax-loader.gif" alt="" style="height:38px;"> Ladataan...
 							</td>
-							<td colspan="4" style="text-align:center;font-weight: bold;" ng-show="loaded && recent.tests.length == 0">
-								<img src="/img/ajax-loader.gif" alt="" style="height:38px;"> Ladataan...
+						</tr>
+						<tr ng-if="loaded && recent.tests.length == 0">
+							<td colspan="4" style="text-align:center;font-weight: bold;">
+								Ei tuloksia.
 							</td>
 						</tr>
 					</tbody>
@@ -83,6 +85,11 @@
 						<tr>
 							<td colspan="4" style="text-align:center;font-weight: bold;" ng-show="!loaded">
 								<img src="/img/ajax-loader.gif" alt="" style="height:38px;"> Ladataan...
+							</td>
+						</tr>
+						<tr ng-if="loaded && recent.courses.length == 0">
+							<td colspan="4" style="text-align:center;font-weight: bold;">
+								Ei tuloksia.
 							</td>
 						</tr>
 					</tbody>
