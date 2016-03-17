@@ -1,8 +1,6 @@
-@extends('layout.main')
+@extends('layout.public')
 
-@section('title')
-	{{ $course->title }}
-@endsection
+@section('title', $course->title)
 
 @section('sidebar_content')
 	@include('course.test-progress-sidebar')

@@ -5,7 +5,8 @@
 			"path": ".",
 			"file_exclude_patterns":
 			[
-				"node_modules/*"
+				"node_modules/*",
+				"ignore/*",
 			]
 		},
 	]

@@ -1,8 +1,6 @@
-@extends('layout.main')
+@extends('layout.public')
 
-@section('title')
-	Käyttäjätietojen muokkaus
-@endsection
+@section('title', 'Käyttäjätietojen muokkaus')
 
 @section('content')
 	

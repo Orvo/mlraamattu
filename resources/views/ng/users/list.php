@@ -33,13 +33,13 @@
 				</label>
 			</div>
 			<div class="radio">
-				<label class="btn" ng-class="{'btn-warning': usersFilter.access_level == 0, 'btn-default': usersFilter.access_level != 0}">
-					<input type="radio" ng-model="usersFilter.access_level" ng-value="0"> Näytä käyttäjät
+				<label class="btn" ng-class="{'btn-warning': usersFilter.access_level == 'USER', 'btn-default': usersFilter.access_level != 'USER'}">
+					<input type="radio" ng-model="usersFilter.access_level" ng-value="'USER'"> Näytä käyttäjät
 				</label>
 			</div>
 			<div class="radio">
-				<label class="btn" ng-class="{'btn-warning': usersFilter.access_level === 1, 'btn-default': usersFilter.access_level !== 1}">
-					<input type="radio" ng-model="usersFilter.access_level" ng-value="1"> Näytä ylläpitäjät
+				<label class="btn" ng-class="{'btn-warning': usersFilter.access_level === 'ADMIN', 'btn-default': usersFilter.access_level !== 'ADMIN'}">
+					<input type="radio" ng-model="usersFilter.access_level" ng-value="'ADMIN'"> Näytä ylläpitäjät
 				</label>
 			</div>
 		</div>

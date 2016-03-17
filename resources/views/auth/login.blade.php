@@ -1,8 +1,6 @@
-@extends('layout.main')
+@extends('layout.public')
 
-@section('title')
-	Kirjaudu sisään
-@endsection
+@section('title', 'Kirjaudu sisään')
 
 @section('content')
 	

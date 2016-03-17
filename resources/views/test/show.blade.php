@@ -1,8 +1,6 @@
 @extends('layout.main')
 
-@section('title')
-	Koe {{ $test->title }}
-@endsection
+@section('title', 'Koe ' . $test->title)
 
 @section('authentication_form')
 	

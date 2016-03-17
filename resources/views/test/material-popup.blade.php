@@ -1,8 +1,6 @@
 @extends('layout.popup')
 
-@section('title')
-	Opintomateriaali - {{ $test->title }}
-@endsection
+@section('title', 'Opintomateriaali - ' . $test->title)
 
 @section('content')
 	<div class="centered-titles">

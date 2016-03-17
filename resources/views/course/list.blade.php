@@ -1,8 +1,6 @@
-@extends('layout.main')
+@extends('layout.public')
 
-@section('title')
-	Kurssit
-@endsection
+@section('title', 'Kurssit')
 
 @section('sidebar_content')
 	<p>
@@ -19,11 +17,15 @@
 		<p>
 			Voit luoda uuden käyttäjätunnuksen suorittaessasi ensimmäistä koetta. Koesivun lopussa voit syöttää tietosi ja järjestelmä tallentaa siitä lähtien koesuorituksesi muistiin.
 		</p>
+	@else
+		<hr>
+		<p>
+			Jos seuraat johdettua kurssiopetusta opettajan kanssa sinulla voi olla ryhmäkoodi. Voit syöttää sen <a href="/groups/join">täällä</a>.
+		</p>
 	@endif
 @endsection
 
 @section('content')
-	
 	@include('alerts.auth-related')
 	
 	@if(count($my_courses) > 0)
@@ -33,9 +35,7 @@
 		</p>
 		
 		<div class="list">
-			@foreach($my_courses as $course)
-				@include('course.list-item')
-			@endforeach
+			@each('course.list-item', $my_courses, 'course')
 		</div>
 	@endif
 	
@@ -46,13 +46,11 @@
 		</p>
 		
 		<div class="list">
-			@foreach($available_courses as $course)
-				@include('course.list-item')
-			@endforeach
+			@each('course.list-item', $available_courses, 'course')
 		</div>
 	@endif
 	
-	@if(count($my_courses) == 0 && count($available_courses) == 0)
+	@if((count($my_courses) + count($available_courses)) == 0)
 		<h3>Ei tarjolla olevia kursseja</h3>
 		<p>
 			Valitettavasti yhtäkään kurssia ei löytynyt.

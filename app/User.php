@@ -63,14 +63,14 @@ class User extends Model implements AuthenticatableContract,
         return $this->access_level == 'TEACHER';
     }
     
-    public function accessLevel()
+    public function getPowerLevelAttribute()
     {
         return $this->access_levels[$this->access_level];
     }
     
     public function canAccessAdminPanel()
     {
-        return $this->accessLevel() >= 1;
+        return $this->powerLevel >= 1;
     }
     
     public function canAccessAjax()

@@ -1,8 +1,6 @@
-@extends('layout.main')
+@extends('layout.public')
 
-@section('title')
-	Opintomateriaali kokeelle {{ $test->title }}
-@endsection
+@section('title', 'Opintomateriaali kokeelle ' . $test->title)
 
 @section('extra_navigation')
 	<li>
