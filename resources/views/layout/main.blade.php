@@ -20,7 +20,7 @@
 		<div id="login-status">
 			@if(Auth::check())
 				Terve, {{ Auth::user()->name }}!
-				@if(Auth::user()->isAdmin())
+				@if(Auth::user()->canAccessAdminPanel())
 					<a href="/admin#/users/{{ Auth::user()->id }}/edit" target="_blank" class="hide-in-mobile-width">Muokkaa tietoja</a>
 					<a href="/auth/edit" class="hide-in-desktop-width">Muokkaa tietoja</a>
 					<a href="/admin" class="hide-in-mobile-width">Ylläpito</a>

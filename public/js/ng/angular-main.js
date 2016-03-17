@@ -72,7 +72,7 @@ app.config(
 			.when('/', {
 				controller: 'IndexController',
 				templateUrl: '/ng/index',
-				resolve: { factory: authProvider, },
+				resolve: { authorization: authProvider, },
 			})
 			
 			////////////////////////////////////////////////
@@ -81,22 +81,22 @@ app.config(
 			.when('/courses', {
 				controller: 'CoursesController',
 				templateUrl: '/ng/courses.list',
-				resolve: { factory: authProvider, },
+				resolve: { authorization: authProvider, },
 			})
 			.when('/courses/new', {
 				controller: 'CoursesFormController',
 				templateUrl: '/ng/courses.form',
-				resolve: { factory: authProvider, },
+				resolve: { authorization: authProvider, },
 			})
 			.when('/courses/:id', {
 				controller: 'CourseShowController',
 				templateUrl: '/ng/courses.show',
-				resolve: { factory: authProvider, },
+				resolve: { authorization: authProvider, },
 			})
 			.when('/courses/:id/edit', {
 				controller: 'CoursesFormController',
 				templateUrl: '/ng/courses.form',
-				resolve: { factory: authProvider, },
+				resolve: { authorization: authProvider, },
 			})
 			
 			////////////////////////////////////////////////
@@ -105,17 +105,17 @@ app.config(
 			.when('/tests/new/:course_id', {
 				controller: 'TestsFormController',
 				templateUrl: '/ng/tests.form',
-				resolve: { factory: authProvider, },
+				resolve: { authorization: authProvider, },
 			})
 			.when('/tests/:id', {
 				controller: 'TestsShowController',
 				templateUrl: '/ng/tests.show',
-				resolve: { factory: authProvider, },
+				resolve: { authorization: authProvider, },
 			})
 			.when('/tests/:id/edit', {
 				controller: 'TestsFormController',
 				templateUrl: '/ng/tests.form',
-				resolve: { factory: authProvider, },
+				resolve: { authorization: authProvider, },
 			})
 			
 			////////////////////////////////////////////////
@@ -124,17 +124,36 @@ app.config(
 			.when('/users', {
 				controller: 'UsersController',
 				templateUrl: '/ng/users.list',
-				resolve: { factory: authProvider, },
+				resolve: { authorization: authProvider, },
 			})
 			.when('/users/new/', {
 				controller: 'UsersFormController',
 				templateUrl: '/ng/users.form',
-				resolve: { factory: authProvider, },
+				resolve: { authorization: authProvider, },
 			})
 			.when('/users/:id/edit', {
 				controller: 'UsersFormController',
 				templateUrl: '/ng/users.form',
-				resolve: { factory: authProvider, },
+				resolve: { authorization: authProvider, },
+			})
+			
+			////////////////////////////////////////////////
+			// Groups
+			
+			.when('/groups', {
+				controller: 'GroupsController',
+				templateUrl: '/ng/groups.list',
+				resolve: { authorization: authProvider, },
+			})
+			.when('/groups/new/', {
+				controller: 'GroupsFormController',
+				templateUrl: '/ng/groups.form',
+				resolve: { authorization: authProvider, },
+			})
+			.when('/groups/:id/edit', {
+				controller: 'GroupsFormController',
+				templateUrl: '/ng/groups.form',
+				resolve: { authorization: authProvider, },
 			})
 			
 			////////////////////////////////////////////////
@@ -143,13 +162,13 @@ app.config(
 			.when('/archive/', {
 				controller: 'ArchiveController',
 				templateUrl: '/ng/archive.list',
-				resolve: { factory: authProvider, },
+				resolve: { authorization: authProvider, },
 				reloadOnSearch: false,
 			})
 			.when('/archive/:id/reply', {
 				controller: 'ArchiveFormController',
 				templateUrl: '/ng/archive.form',
-				resolve: { factory: authProvider, },
+				resolve: { authorization: authProvider, },
 			})
 			
 			////////////////////////////////////////////////
@@ -158,7 +177,7 @@ app.config(
 			.when('/files/', {
 				controller: 'FilesController',
 				templateUrl: '/ng/files',
-				resolve: { factory: authProvider, },
+				resolve: { authorization: authProvider, },
 			})
 			
 			////////////////////////////////////////////////
@@ -166,7 +185,7 @@ app.config(
 			
 			.otherwise({
 				redirectTo: '/',
-				resolve: { factory: authProvider, },
+				resolve: { authorization: authProvider, },
 			});
 	}
 );

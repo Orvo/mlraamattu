@@ -5,20 +5,17 @@
 	<div class="sidebar-help">
 		<h3>Ohjeet</h3>
 		<p>
-			Käyttäjänhallintasivulla voit luoda uusia käyttäjätunnuksia sekä muokata olemassa olevia. Voit myös asettaa käyttäjän ylläpitäjäksi.
+			Käyttäjänhallintasivulla voit luoda ja muokata käyttäjätunnuksia, mukaanlukien käyttäjäoikeuksien vaihtamisen.
 		</p>
 		<p>
 			Ylläpitäjän käyttäjäoikeudet sallii käyttäjän kirjautumisen tähän ylläpitopaneeliin. Ylläpitäjä voi siis hallita kursseja, kysymyksiä ja koesuoritusten palautteenantoa. Ole tarkka kenelle annat ylläpitäjän oikeudet.
 		</p>
+		<p>
+			Opettajan käyttäjäoikeudet sallii käyttäjän luoda ryhmiä/luokkia joihin on liitetty tietyt kurssit. Toiset käyttäjät voivat liittyä näihin ryhmiin jolloin heidän koesuorituksensa näkyvät ylläpitopaneelissa opettajalle. Opettaja ei voi luoda tai muuttaa kursseja ja kokeita.
+		</p>
 	</div>
 </div>
 <div id="content-main" ng-show="loaded">
-	<div class="breadcrumbs">
-		<ol class="breadcrumb">
-			<li><a href="#/">Ylläpitopaneeli</a></li>
-			<li>Käyttäjät</li>
-		</ol>
-	</div>
 	<h1>Käyttäjät</h1>
 	<div class="actions-row">
 		<div class="pull-right" style="text-align: right">

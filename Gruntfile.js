@@ -12,15 +12,16 @@ module.exports = function(grunt)
 				src: [
 					'public/js/main.js',
 				],
-				dest: 'public/js/public-dist.js',
+				dest: 'public/js/public-dist.min.js',
 			},
 			js_admin: {
 				src: [
-					'public/js/ng/main.js',
-					'public/js/ng/controllers.js',
+					'public/js/ng/angular-main.js',
+					'public/js/ng/controllers-main.js',
+					'public/js/ng/controllers/*.js',
 					'public/js/ng/models.js',
 				],
-				dest: 'public/js/admin-ng-dist.js',
+				dest: 'public/js/admin-ng-dist.min.js',
 			},
 		},
 		uglify: {
@@ -29,12 +30,12 @@ module.exports = function(grunt)
 			},
 			js_public: {
 				files: {
-					'public/js/public-dist.min.js': 'public/js/public-dist.js',	
+					'public/js/public-dist.min.js': 'public/js/public-dist.min.js',	
 				},
 			},
 			js_admin: {
 				files: {
-					'public/js/admin-ng-dist.min.js': 'public/js/admin-ng-dist.js',
+					'public/js/admin-ng-dist.min.js': 'public/js/admin-ng-dist.min.js',
 					'public/js/admin-dist.min.js': 'public/js/admin.js',
 				},
 			},
@@ -64,10 +65,14 @@ module.exports = function(grunt)
 		watch: {
 			js: {
 				files: [
-					'public/js/plugins.js',
 					'public/js/main.js',
+					'public/js/admin.js',
+					'public/js/ng/*.js',
+					'public/js/ng/controllers/*.js',
+					'public/css/main.css',
+					'public/css/admin.css',
 				],
-				tasks: ['concat:js', 'uglify:js'],
+				tasks: ['thing'],
 			},
 		}
 	});

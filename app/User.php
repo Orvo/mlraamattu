@@ -45,7 +45,12 @@ class User extends Model implements AuthenticatableContract,
 
     public function archives()
     {
-        return $this->hasMany("App\Archive");
+        return $this->hasMany('App\Archive');
+    }
+    
+    public function groups()
+    {
+        return $this->belongsToMany('App\Group');
     }
     
     public function isAdmin()

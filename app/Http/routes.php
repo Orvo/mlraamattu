@@ -11,7 +11,6 @@
 |
 */
 
-use App\Question;
 use App\User;
 
 Route::get('/', function ()
@@ -24,6 +23,12 @@ Route::get('/home', function ()
 	return redirect('/');
 });
 
+Route::get('/potato', function()
+{
+	return App\Group::find(2)->users;
+	// return App\User::find(4)->groups;
+});
+
 Route::get('test/{id}', 'TestsController@show');
 Route::get('test/{id}/material', 'TestsController@material');
 Route::get('test/{id}/material/popup', 'TestsController@material_popup');
@@ -31,16 +36,11 @@ Route::post('test/{id}', 'TestsController@check');
 
 Route::get('course', 'CoursesController@index');
 Route::get('course/{id}', 'CoursesController@show');
-
-Route::get('archive/{id}', function($id)
-{
-	return User::findOrFail($id)->archives;
-});
 	
 Route::get('ajax/auth', function()
 {
 	$response = [
-		'authenticated' => Auth::check() && Auth::user()->isAdmin(),
+		'authenticated' => Auth::check() && Auth::user()->canAccessAdminPanel(),
 	];
 	
 	if($response['authenticated'])
@@ -68,21 +68,11 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 		];
 	});
 
-	Route::get('/questions', function ()
-	{
-		$question = Question::all();
-		return $question;
-	});
-
-	Route::get('/questions/{id}', function ($id)
-	{
-		$question = Question::with('answers')->findOrFail($id);
-		return $question;
-	});
-
 	Route::resource('courses', 'Ajax\CoursesController');
+	Route::resource('questions', 'Ajax\QuestionsController');
 	Route::resource('tests', 'Ajax\TestsController');
 	Route::resource('users', 'Ajax\UsersController');
+	Route::resource('groups', 'Ajax\GroupsController');
 	
 	Route::get('archive', 'Ajax\ArchiveController@index');
 	Route::get('archive/stats', 'Ajax\ArchiveController@stats');

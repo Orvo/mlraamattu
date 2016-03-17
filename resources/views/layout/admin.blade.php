@@ -10,7 +10,7 @@
 		<link rel="shortcut icon" type="image/ico" href="/favicon.ico">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-		<link rel="stylesheet" href="/css/admin-dist.css">
+		<link rel="stylesheet" href="/css/admin-dist.min.css">
 	</head>
 	<body>
 		<nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavbarController">
@@ -22,7 +22,7 @@
 				</div>
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="dropdown dropdown-hover">
+						<li class="dropdown dropdown-hover" ng-if="userData.user.access_level == 'ADMIN'">
 							<a href="#/courses">
 								Kurssit <span class="caret"></span>
 							</a>
@@ -41,6 +41,11 @@
 							</ul>
 						</li>
 						<li>
+							<a href="#/groups">
+								Ryhmät
+							</a>
+						</li>
+						<li>
 							<a href="#/archive">
 								Koesuoritukset
 								<span class="badge glow-animation ng-cloak" ng-show="test_records !== undefined && test_records.new > 0">
@@ -56,12 +61,12 @@
 								<span class="glyphicon glyphicon-globe"></span> Näytä sivu
 							</a>
 						</li>
-						<li>
+						<li ng-if="userData.user.access_level == 'ADMIN'">
 							<a href="#/files">
 								<span class="glyphicon glyphicon-file"></span> Tiedostonhallinta
 							</a>
 						</li>
-						<li>
+						<li ng-if="userData.user.access_level == 'ADMIN'">
 							<a href="#/users">
 								<span class="glyphicon glyphicon-user"></span> Käyttäjät
 							</a>
