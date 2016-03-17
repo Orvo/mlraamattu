@@ -6,22 +6,32 @@ module.exports = function(grunt)
 		// Task configuration
 		concat: {
 			options: {
-				separator: ';',
+				separator: ';\n',
 			},
 			js_public: {
 				src: [
-					'public/js/main.js',
+					'resources/assets/js/public.js',
 				],
-				dest: 'public/js/public-dist.min.js',
+				dest: 'public/js/public.min.js',
+			},
+			js_angular: {
+				src: [
+					// Third party modules
+					'resources/assets/js/ng/modules/*.js',
+					
+					// Application code
+					'resources/assets/js/ng/angular-main.js',
+					'resources/assets/js/ng/controllers-main.js',
+					'resources/assets/js/ng/controllers/*.js',
+					'resources/assets/js/ng/models.js',
+				],
+				dest: 'public/js/admin-angular.min.js',
 			},
 			js_admin: {
 				src: [
-					'public/js/ng/angular-main.js',
-					'public/js/ng/controllers-main.js',
-					'public/js/ng/controllers/*.js',
-					'public/js/ng/models.js',
+					'resources/assets/js/admin.js',
 				],
-				dest: 'public/js/admin-ng-dist.min.js',
+				dest: 'public/js/admin.min.js',
 			},
 		},
 		uglify: {
@@ -30,13 +40,13 @@ module.exports = function(grunt)
 			},
 			js_public: {
 				files: {
-					'public/js/public-dist.min.js': 'public/js/public-dist.min.js',	
+					'public/js/public.min.js': 'public/js/public.min.js',	
 				},
 			},
 			js_admin: {
 				files: {
-					'public/js/admin-ng-dist.min.js': 'public/js/admin-ng-dist.min.js',
-					'public/js/admin-dist.min.js': 'public/js/admin.js',
+					'public/js/admin-angular.min.js': 'public/js/admin-angular.min.js',
+					'public/js/admin.min.js': 'public/js/admin.min.js',
 				},
 			},
 		}, 
@@ -47,12 +57,17 @@ module.exports = function(grunt)
 			},
 			public: {
 				files: {
-					'public/css/public-dist.min.css': ['public/css/main.css', 'public/css/mobile.css']
+					'public/css/public.min.css': [
+						'resources/assets/css/public.css',
+						'resources/assets/css/public-mobile.css'
+					],
 				}
 			},
 			admin: {
 				files: {
-					'public/css/admin-dist.min.css': ['public/css/admin.css']
+					'public/css/admin.min.css': [
+						'resources/assets/css/admin.css',
+					],
 				}
 			}
 		},
@@ -65,14 +80,15 @@ module.exports = function(grunt)
 		watch: {
 			js: {
 				files: [
-					'public/js/main.js',
-					'public/js/admin.js',
-					'public/js/ng/*.js',
-					'public/js/ng/controllers/*.js',
-					'public/css/main.css',
-					'public/css/admin.css',
+					'resources/assets/js/*.js',
+					'resources/assets/js/ng/*.js',
+					'resources/assets/js/ng/controllers/*.js',
+					'resources/assets/css/main.css',
+					'resources/assets/css/admin.css',
 				],
-				tasks: ['thing'],
+				tasks: [
+					'prepare',
+				],
 			},
 		}
 	});
@@ -86,6 +102,10 @@ module.exports = function(grunt)
 	
 	// Task definition
 	grunt.registerTask('default', ['watch']);
-	grunt.registerTask('thing', ['concat', 'cssmin', 'uglify']);
+	grunt.registerTask('prepare', [
+		'concat',
+		'uglify',
+		'cssmin',
+	]);
 	
 };

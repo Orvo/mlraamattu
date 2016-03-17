@@ -34,29 +34,14 @@ $(window).load(function()
 				'padding-right': '3%',
 			});
 		}
-		
-		//$('#content-sidebar .sidebar-help').height(height - 120 - $('#content-sidebar .sidebar-actions').height());
 	}
 	
-	doResize();
 	doResize();
 	
 	$(window).resize(function()
 	{
 		doResize();
 	});
-	
-	$('.search-filter').focus(function()
-	{
-		console.log($(this));
-		$(this).addClass('focused');
-	});
-	
-	// $('nav.navbar a').click(function()
-	// {
-	// 	$('nav.navbar li').removeClass('active');
-	// 	$(this).parent().addClass('active');
-	// });
 	
 	$('nav.navbar .dropdown-toggle, .list-actions a').click(function(e)
 	{
