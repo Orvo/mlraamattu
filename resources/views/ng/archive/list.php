@@ -158,7 +158,7 @@
 				</td>
 			</tr>
 			<tr ng-if="(archive | keyfilter : ({ key: 'user.name', value: searchName }) | filter : searchFilterParsed | filter : archiveFilter : true).length == 0">
-				<td colspan="6" style="text-align: center;font-weight: bold;">
+				<td colspan="7" style="text-align: center;font-weight: bold;">
 					Ei suorituksia annetuilla hakuehdoilla
 				</td>
 			</tr>

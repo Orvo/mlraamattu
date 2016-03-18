@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 
-class AjaxAuthenticate
+class AjaxRequest
 {
 	/**
 	 * The Guard implementation.
@@ -34,18 +34,11 @@ class AjaxAuthenticate
 	 */
 	public function handle($request, Closure $next, $role = false)
 	{
-		if (!$this->auth->check() or !$this->auth->user()->canAccessAjax())
-		{
-			return [
-				'error' => 'Insufficient permissions',
-			];
-		}
+		$isAjaxRequest = $request->isXmlHttpRequest() || $request->ajax() || $request->wantsJson();
 		
-		if($role & !$this->auth->user()->hasPermission($role))
+		if (!$isAjaxRequest)
 		{
-			return [
-				'error' => 'Insufficient permissions',
-			];
+			return redirect('/');
 		}
 
 		return $next($request);

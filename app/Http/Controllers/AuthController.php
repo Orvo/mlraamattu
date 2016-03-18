@@ -65,6 +65,24 @@ class AuthController extends Controller
 	  		]);
 	}
 	
+	public function ajax_check()
+	{
+		$user = Auth::user();
+		
+		$response = [
+			'authenticated' => Auth::check() && $user->canAccessAdminPanel(),
+			'permissions'	=> $user->access_level,
+			'power'			=> $user->powerLevel,
+		];
+		
+		if($response['authenticated'])
+		{
+			$response['user'] = $user;
+		}
+		
+		return $response;
+	}
+	
 	public function ajax_login(Request $request)
 	{
 		if(Auth::check())

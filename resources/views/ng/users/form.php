@@ -2,7 +2,7 @@
 	<div id="content-sidebar" class="fixed">
 		<div class="sidebar-actions">
 			<div class="form-group">
-				<a href="#/archive/" class="btn btn-default btn-block">
+				<a href="#/users/" class="btn btn-default btn-block">
 					<span class="glyphicon glyphicon-chevron-left"></span> Peruuta
 				</a>
 			</div>

@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.public')
 
 @section('title', 'Koe ' . $test->title)
 
@@ -336,7 +336,7 @@
 			</div>
 		@endif
 		
-		@if(@$validation && !$hasPassed && $test->page()->exists())
+		@if(@$validation && !$hasPassed && $test->page()->exists() && !$test->page->hidden)
 			<div class="alert alert-info alert-icon alert-icon-small">
 				<i class="fa fa-exclamation"></i>
 				<div>

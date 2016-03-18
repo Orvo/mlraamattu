@@ -32,3 +32,18 @@ function alt($text, $alt_text)
 {
 	return strlen(trim($text)) > 0 ? $text : $alt_text;
 }
+
+function abort_unauthorized($user_id_compare = null)
+{
+	$user = \Auth::user();
+	if(!$user->isAdmin() && $user->canAccessAjax())
+	{
+		if(!is_null($user_id_compare) && $user->id == $user_id_compare)
+		{
+			return false;
+		}
+	}
+	
+	// throw new \Exception("Unauthorized Ajax Request", 1337);
+	abort(401, "Unauthorized");
+}

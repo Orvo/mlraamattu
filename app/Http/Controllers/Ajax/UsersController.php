@@ -21,6 +21,8 @@ class UsersController extends Controller
 	 */
 	public function index()
 	{
+		abort_unauthorized();
+		
 		$users = User::with('archives')->get();
 		
 		foreach($users as &$user)
@@ -70,6 +72,8 @@ class UsersController extends Controller
 	 */
 	public function store(Request $request)
 	{
+		abort_unauthorized();
+		
 		$validation = $this->_validate($request->all());
 		
 		$data = $validation->data;
@@ -91,20 +95,11 @@ class UsersController extends Controller
 	 */
 	public function show($id)
 	{
+		abort_unauthorized($id);
+		
 		$user = User::findOrFail($id);
 		
 		return $user;
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id)
-	{
-		
 	}
 
 	/**
@@ -116,6 +111,8 @@ class UsersController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
+		abort_unauthorized($id);
+		
 		$validation = $this->_validate($request->all());
 		
 		$data = $validation->data;
@@ -137,6 +134,8 @@ class UsersController extends Controller
 	 */
 	public function destroy($id)
 	{
+		abort_unauthorized();
+		
 		$user = User::findOrFail($id);
 		
 		if($user && Auth::user()->id != $id)

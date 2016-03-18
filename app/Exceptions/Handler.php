@@ -46,9 +46,20 @@ class Handler extends ExceptionHandler
 			$e = new NotFoundHttpException($e->getMessage(), $e);
 		}
 		
+		$isAjaxRequest = $request->isXmlHttpRequest() || $request->ajax() || $request->wantsJson();
+		
+		// if($isAjaxRequest)
+		// {
+		// 	return response()->json([
+		// 		'error' => [
+		// 			'exception' => class_basename( $e ) . ' in ' . basename( $e->getFile() ) . ' line ' . $e->getLine() . ': ' . $e->getMessage(),
+		// 		]
+		// 	], $e->getStatusCode());
+		// }
+		
 		if (config('app.debug'))
 		{
-			return $this->renderExceptionWithWhoops($e);
+			//return $this->renderExceptionWithWhoops($e);
 		}
 
 		return parent::render($request, $e);

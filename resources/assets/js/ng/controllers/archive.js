@@ -86,6 +86,8 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 	{
 		if(response)
 		{
+			console.log(response.data);
+			
 			$scope.archive = response.data;
 			
 			angular.forEach($scope.archive, function(item, key)
