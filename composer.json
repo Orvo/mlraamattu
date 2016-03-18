@@ -9,8 +9,7 @@
         "laravel/framework": "5.1.*",
         "illuminate/html": "^5.0",
         "doctrine/dbal": "^2.5",
-        "backup-manager/laravel": "^1.1",
-        "filp/whoops": "^2.1"
+        "backup-manager/laravel": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -18,7 +17,8 @@
         "phpunit/phpunit": "~4.0",
         "phpspec/phpspec": "~2.1",
         "way/generators": "^3.0",
-        "laracasts/generators": "^1.1"
+        "laracasts/generators": "^1.1",
+        "filp/whoops": "^2.1"
     },
     "autoload": {
         "classmap": [
