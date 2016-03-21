@@ -19,7 +19,7 @@
 	<h1>Ryhmät</h1>
 	<div class="actions-row">
 		<div class="pull-right" style="text-align: right">
-			<a href="#/users/new" class="btn btn-success">
+			<a href="#/groups/new" class="btn btn-success">
 				<span class="glyphicon glyphicon-plus"></span> Lisää uusi ryhmä
 			</a>
 		</div>

@@ -83,8 +83,7 @@ module.exports = function(grunt)
 					'resources/assets/js/*.js',
 					'resources/assets/js/ng/*.js',
 					'resources/assets/js/ng/controllers/*.js',
-					'resources/assets/css/main.css',
-					'resources/assets/css/admin.css',
+					'resources/assets/css/*.css',
 				],
 				tasks: [
 					'prepare',

@@ -60,6 +60,13 @@ Route::group(['prefix' => 'auth'], function()
 	});
 });
 
+Route::group(['prefix' => 'groups', 'middleware' => 'auth'], function()
+{
+	Route::get('manage', 'GroupsController@manage');
+	Route::post('manage', 'GroupsController@check');
+	Route::get('leave/{id}', 'GroupsController@leave');
+});
+
 /**********************************************	
 	Admin
 */
@@ -99,11 +106,17 @@ Route::group(['middleware' => 'ajax'], function ()
 
 Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 {
-	Route::get('/recent', function()
+	Route::get('/recent', function(App\Repositories\ArchiveEntries $entries)
 	{
+		$tests = App\Test::with('course', 'questions')->orderBy('updated_at', 'DESC')->limit(6)->get();
+		$courses = App\Course::with('tests')->orderBy('updated_at', 'DESC')->limit(6)->get();
+		
+		$archive = $entries->getEntries();
+		
 		return [
-			'tests' => App\Test::with('course', 'questions')->orderBy('updated_at', 'DESC')->limit(6)->get(),
-			'courses' => App\Course::with('tests')->orderBy('updated_at', 'DESC')->limit(6)->get(),
+			'archive'	=> $archive,
+			'tests' 	=> $tests,
+			'courses' 	=> $courses,
 		];
 	});
 	

@@ -44,6 +44,11 @@ function abort_unauthorized($user_id_compare = null)
 		}
 	}
 	
+	if($user->isAdmin())
+	{
+		return false;
+	}
+	
 	// throw new \Exception("Unauthorized Ajax Request", 1337);
 	abort(401, "Unauthorized");
 }

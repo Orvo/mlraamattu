@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Auth;
+use App\User;
 use App\Group;
 
 class GroupsController extends Controller
@@ -28,17 +29,7 @@ class GroupsController extends Controller
 			return Group::with('teacher', 'users')->where('teacher_id', Auth::user()->id)->get();	
 		}
 	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create()
-	{
-		//
-	}
-
+	
 	/**
 	 * Store a newly created resource in storage.
 	 *
@@ -47,7 +38,17 @@ class GroupsController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		//
+		$validation = $this->validate($request->all());
+		
+		$data = $validation->data;
+		$data['errors'] = $validation->errors;
+		
+		if($validation->passed)
+		{
+			$data['group_created'] = $this->save($data);
+		}
+		
+		return $data;
 	}
 
 	/**
@@ -62,17 +63,6 @@ class GroupsController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
 	 * Update the specified resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
@@ -81,7 +71,17 @@ class GroupsController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		//
+		$validation = $this->validate($request->all());
+		
+		$data = $validation->data;
+		$data['errors'] = $validation->errors;
+		
+		if($validation->passed)
+		{
+			$data['group_edited'] = $this->save($data);
+		}
+		
+		return $data;
 	}
 
 	/**
@@ -106,5 +106,99 @@ class GroupsController extends Controller
 		return [
 			'success' => true,
 		];
+	}
+	
+	protected function validate($data)
+	{
+		$errors = [
+			'messages' => [],
+			'fields' => [],
+		];
+		
+		$isNewEntry = !array_key_exists('id', $data);
+		
+		$codeHasChanged = false;
+		
+		if(!$isNewEntry)
+		{
+			$group = Group::find($data['id']);
+			$codeHasChanged = (trim($data['code']) != $group->code);
+		}
+		
+		if(!@$data['title'] || strlen(trim($data['title'])) == 0)
+		{
+			$errors['messages'][] = "Ryhmän nimi puuttuu!";
+			$errors['fields']['group_title'] = true;
+		}
+		
+		if(!@$data['code'] || strlen(trim($data['code'])) == 0)
+		{
+			$errors['messages'][] = "Ryhmän liittymiskoodi puuttuu!";
+			$errors['fields']['group_code'] = true;
+		}
+		elseif($isNewEntry || $codeHasChanged)
+		{
+			if(Group::where('code', trim($data['code']))->exists())
+			{
+				$errors['messages'][] = "Ryhmä samalla liittymiskoodilla on jo olemassa!";
+				$errors['fields']['group_code'] = true;
+			}
+		}
+		
+		return (object)[
+			'data' 		=> $data,
+			'errors' 	=> $errors,
+			'passed'	=> count($errors['messages']) == 0,
+		];
+	}
+	
+	protected function save($data)
+	{
+		$isNewEntry = !array_key_exists('id', $data);
+		
+		if($isNewEntry)
+		{
+			$group = new Group();
+		}
+		else
+		{
+			$group = Group::find($data['id']);
+		}
+		
+		$group->title = $data['title'];
+		$group->code = trim($data['code']);
+		
+		$old_teacher_id = $group->teacher_id;
+		
+		if(Auth::user()->isAdmin())
+		{
+			$group->teacher_id = $data['teacher_id'];
+		}
+		else
+		{
+			$group->teacher_id = Auth::user()->id;
+		}
+		
+		$group->save();
+		
+		if(!$isNewEntry)
+		{
+			if($old_teacher_id != $group->teacher_id)
+			{
+				$old_user = User::find($old_teacher_id);
+				if($old_user->isInGroup($group->id))
+				{
+					$old_user->groups()->detach($group->id);
+				}
+			}
+		}
+		
+		$user = User::find($group->teacher_id);
+		if(!$user->isInGroup($group->id))
+		{
+			$user->groups()->attach($group->id);
+		}
+		
+		return $group->id;
 	}
 }

@@ -22,22 +22,16 @@
 		
 		<div class="sidebar-help">
 			<h3>Ohjeet</h3>
-			<p ng-show="userData.user.id == data.user.id">
-				Muokkaa omia käyttäjätietojasi.
-			</p>
-			<p ng-show="data.user.id && userData.user.id != data.user.id">
-				Muokkaa toisen käyttäjätunnuksen tietoja käyttäjän puolesta. Tehdyistä muutoksista lähetetään käyttäjälle ilmoitus sähköpostiin.
-			</p>
-			<p ng-show="!data.user.id">
-				Voit luoda käyttäjälle uuden tilin ilman, että tämän täytyy itse rekisteröityä. Tässä tapauksessa käyttäjälle lähetetään tieto luodusta tilisti sähköpostitse, jossa mainitaan myös annettu salasana. Käyttäjää rohkaistaan vaihtamaan salasanansa.
+			<p>
+				Voit luoda ryhmiä joihin muut käyttäjät voivat liittyä. Ryhmään liittyneiden käyttäjien koesuoritukset näkyvät ryhmän opettajalle ja tämä voi tarkistaa ne.
 			</p>
 		</div>
 	</div>
 	<div id="content-main">
 		<h1>
-			<span ng-show="!id">Uusi käyttäjä</span>
-			<span ng-show="id">Muokataan käyttäjää</span>
-			<span ng-show="data.user.name">/ <b>[[ data.user.name ]]</b></span>
+			<span ng-show="!id">Uusi ryhmä</span>
+			<span ng-show="id">Muokataan ryhmä</span>
+			<span ng-show="data.group.name">/ <b>[[ data.user.name ]]</b></span>
 		</h1>
 		<div class="alert-box success" ng-show="save_success">
 			<h4><span class="glyphicon glyphicon-ok"></span> Muutokset tallennettu!</h4>
@@ -53,60 +47,42 @@
 			<fieldset>
 				<legend>Perustiedot</legend>
 				<div class="form-group">
-					<label for="user-name" class="control-label col-xs-3">
-						Käyttäjän nimi
+					<label for="group-title" class="control-label col-xs-3">
+						Ryhmän nimi
 					</label>
 					<div class="col-xs-6">
-						<input type="text" class="form-control" id="user-name" ng-model="data.user.name" placeholder="Käyttäjän nimi">
+						<input type="text" class="form-control" id="group-title" ng-model="data.group.title" placeholder="Ryhmän nimi">
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="user-email" class="control-label col-xs-3">
-						Käyttäjän sähköposti
+					<label for="group-teacher" class="control-label col-xs-3">
+						Ryhmän opettaja
 					</label>
 					<div class="col-xs-6">
-						<input type="text" class="form-control" id="user-email" ng-model="data.user.email" placeholder="Käyttäjän sähköposti">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="user-access_level" class="control-label col-xs-3">
-						Käyttäjän oikeudet
-					</label>
-					<div class="col-xs-6">
-						<select class="form-control" ng-model="access_level"
-							ng-change="access_level_change()"
-							ng-disabled="userData.user.id == data.user.id"
-							ng-options="level as level.description for level in access_levels track by level.level">
+						<select class="form-control" ng-model="group_teacher"
+							ng-change="group_teacher_change()"
+							ng-disabled="userData.user.access_level != 'ADMIN'"
+							ng-options="user as user.name for user in users track by user.id">
 						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="group-code" class="control-label col-xs-3">
+						Ryhmän liittymiskoodi
+					</label>
+					<div class="col-xs-6">
+						<input type="text" class="form-control" id="group-code" ng-model="data.group.code" placeholder="Liittymiskoodi">
+						<p class="help-block">
+							Käyttäjät liittyvät ryhmään syöttämällä tämän koodin sivustolla. Koodi voi olla mitä tahansa: sana, lause tai jotain muuta.
+						</p>
 					</div>
 				</div>
 			</fieldset>
 			<fieldset>
-				<legend>Salasana</legend>
-				<div class="form-group">
-					<p class="col-xs-offset-3" ng-if="id">
-						Jos tarpeen, voit vaihtaa tunnuksen salasanan syöttämällä uuden salasanan alle. Jätä kentät tyhjiksi jos et halua vaihtaa salasanaa.
-					</p>
-					<p class="col-xs-offset-3" ng-if="!id">
-						Syötä käyttäjätilille salasana. Salasanan tulee olla vähintään 8 merkkiä pitkä.
-					</p>
-				</div>
-				<div class="form-group">
-					<label for="user-password" class="control-label col-xs-3">
-						Salasana
-					</label>
-					<div class="col-xs-6">
-						<input type="password" class="form-control" id="user-password" ng-model="data.user.password" placeholder="Salasana">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="user-password_confirmation" class="control-label col-xs-3">
-						Salasana uudestaan
-					</label>
-					<div class="col-xs-6">
-						<input type="password" class="form-control" id="user-password_confirmation" ng-model="data.user.password_confirmation" placeholder="Salasana uudestaan">
-					</div>
-				</div>
+				<legend>Ryhmän jäsenet</legend>
+				<p>
+					Voit lisätä ryhmään jäseniä.
+				</p>
 			</fieldset>
 		</div>
 	</div>

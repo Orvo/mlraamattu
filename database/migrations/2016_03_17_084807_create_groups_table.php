@@ -16,7 +16,7 @@ class CreateGroupsTable extends Migration
             $table->increments('id');
             $table->integer('teacher_id');
             $table->string('group_title');
-            $table->string('group_code');
+            $table->string('group_code')->unique();
             $table->timestamps();
         });
     }

@@ -21,7 +21,12 @@ class UsersController extends Controller
 	 */
 	public function index()
 	{
-		abort_unauthorized();
+		if(Auth::user()->isTeacher())
+		{
+			return [
+				Auth::user(),
+			];
+		}
 		
 		$users = User::with('archives')->get();
 		
@@ -52,16 +57,6 @@ class UsersController extends Controller
 		}
 		
 		return $users;
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create()
-	{
-		//
 	}
 
 	/**

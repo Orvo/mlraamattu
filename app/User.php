@@ -53,6 +53,11 @@ class User extends Model implements AuthenticatableContract,
         return $this->belongsToMany('App\Group');
     }
     
+    public function isInGroup($id)
+    {
+        return $this->groups()->where('id', $id)->exists();
+    }
+    
     public function isAdmin()
     {
         return $this->access_level == 'ADMIN';

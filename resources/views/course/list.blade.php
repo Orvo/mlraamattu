@@ -20,7 +20,7 @@
 	@else
 		<hr>
 		<p>
-			Jos seuraat johdettua kurssiopetusta opettajan kanssa sinulla voi olla ryhmäkoodi. Voit syöttää sen <a href="/groups/join">täällä</a>.
+			Jos seuraat johdettua kurssiopetusta opettajan kanssa sinulla voi olla ryhmäkoodi. Voit syöttää sen <a href="/groups/manage">täällä</a>.
 		</p>
 	@endif
 @endsection
