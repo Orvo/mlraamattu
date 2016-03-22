@@ -62,7 +62,6 @@ return [
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
             'strict'    => false,
-            'unix_socket'   => '/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock',
         ],
 
         'pgsql' => [
