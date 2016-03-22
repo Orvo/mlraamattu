@@ -104,8 +104,6 @@ class TestsController extends Controller
 		$passedFull		= $validation['num_correct'] == $validation['total'];
 		$minimumToPass 	= ceil($validation['total'] * 0.5);
 		
-		$submit_login = false;
-		
 		if(!Auth::check())
 		{
 			$authenticationType = $request->input('authentication_type');
@@ -142,6 +140,11 @@ class TestsController extends Controller
 					]);
 				break;
 			}
+			
+			// if($request->get('group-code'))
+			
+			//$authvalidator->getMessageBag()->add('group-code', 'HELLO WORLD');
+			
 			
 			if($authvalidator->passes())
 			{

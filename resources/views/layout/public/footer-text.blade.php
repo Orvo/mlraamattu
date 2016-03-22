@@ -5,8 +5,8 @@
 
 @section('footer-links')
 	<ul>
+		<li><a href="http://media7.fi">Media7</a></li>
 		<li><a href="http://media7.adventist.fi">Media7 verkkomedia</a></li>
-		<li><a href="http://aitolahti.adventist.fi">Aitolahden adventtiseurakunta</a></li>
 		<li><a href="http://adventist.fi">Suomen Adventtikirkko</a></li>
 	</ul>
 @endsection

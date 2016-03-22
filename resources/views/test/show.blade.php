@@ -109,6 +109,20 @@
 				<div class="clearfix"></div>
 			</div>
 		</div>
+		
+		<div class="group-code">
+			<div class="form-group">
+				<label for="group-code" class="control-label col-sm-3">
+					Ryhmäkoodi
+				</label>
+				<div class="col-sm-7">
+					<input type="text" id="group-code" class="form-control" name="group-code" value="{{ Input::old('group-code') }}">
+					<p class="help-block">
+						Jos olet osa opetusryhmää ja sinulla on ryhmäkoodi, syötä se tähän. Muutoin jätä tyhjäksi.
+					</p>
+				</div>
+			</div>
+		</div>
 	</div>
 @endsection
 

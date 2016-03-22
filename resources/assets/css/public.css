@@ -1121,6 +1121,17 @@ div.tab-content-row > div.tab-panel
 	transition: margin 350ms ease-out;
 }
 
+#authentication-form div.group-code
+{
+	overflow: hidden;
+	padding-top: 1.2em;
+}
+
+#authentication-form div.group-code > .form-group
+{
+	width: 710px !important;
+}
+
 .form-register div.tab-panel:first-child
 {
 	margin-left: 0px;

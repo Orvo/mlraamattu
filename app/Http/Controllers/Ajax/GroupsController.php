@@ -38,14 +38,14 @@ class GroupsController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$validation = $this->validate($request->all());
+		$validation = $this->_validate($request->all());
 		
 		$data = $validation->data;
 		$data['errors'] = $validation->errors;
 		
 		if($validation->passed)
 		{
-			$data['group_created'] = $this->save($data);
+			$data['group_created'] = $this->_save($data);
 		}
 		
 		return $data;
@@ -71,14 +71,14 @@ class GroupsController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		$validation = $this->validate($request->all());
+		$validation = $this->_validate($request->all());
 		
 		$data = $validation->data;
 		$data['errors'] = $validation->errors;
 		
 		if($validation->passed)
 		{
-			$data['group_edited'] = $this->save($data);
+			$data['group_edited'] = $this->_save($data);
 		}
 		
 		return $data;
@@ -108,7 +108,7 @@ class GroupsController extends Controller
 		];
 	}
 	
-	protected function validate($data)
+	protected function _validate($data)
 	{
 		$errors = [
 			'messages' => [],
@@ -152,7 +152,7 @@ class GroupsController extends Controller
 		];
 	}
 	
-	protected function save($data)
+	protected function _save($data)
 	{
 		$isNewEntry = !array_key_exists('id', $data);
 		

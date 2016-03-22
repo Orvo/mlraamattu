@@ -50,7 +50,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	
 	////////////////////////////////////////////////////
 	
-	$scope.activeTab = 1;
+	$scope.activeTab = 3;
 	$scope.setActiveTab = function(index)
 	{
 		$scope.activeTab = index;

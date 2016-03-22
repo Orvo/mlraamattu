@@ -7,11 +7,11 @@
 		<div class="wrapper">
 			<h4>Viimeksi muokatut kokeet</h4>
 			<div class="inner">
-				<table class="table table-hover">
+				<table class="table">
 					<thead>
 						<tr>
 							<td>Koe</td>
-							<td style="width:20%">Kurssi</td>
+							<td style="width:30%">Kurssi</td>
 							<td style="width:20%">Muokattu</td>
 							<td style="width:110px">Toiminnot</td>
 						</tr>
@@ -56,7 +56,7 @@
 		<div class="wrapper">
 			<h4>Viimeksi muokatut kurssit</h4>
 			<div class="inner">
-				<table class="table table-hover">
+				<table class="table">
 					<thead>
 						<tr>
 							<td>Kurssin otsikko</td>

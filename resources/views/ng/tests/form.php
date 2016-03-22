@@ -82,9 +82,9 @@
 		</div>
 		
 		<ul class="tabs">
+			<li ng-class="{'active': activeTab == 3}"><a ng-click="setActiveTab(3)">Opintomateriaali</a></li>
 			<li ng-class="{'active': activeTab == 1}"><a ng-click="setActiveTab(1)">Perustiedot</a></li>
 			<li ng-class="{'active': activeTab == 2}"><a ng-click="setActiveTab(2)">Kysymykset</a></li>
-			<li ng-class="{'active': activeTab == 3}"><a ng-click="setActiveTab(3)">Opintomateriaali</a></li>
 		</ul>
 		
 		<div class="tab-wrapper">
@@ -179,9 +179,6 @@
 										</p>
 										<p>
 											Voit halutessassi myös tarkentaa kysymystä alempaan kenttään, vaikka syöttämällä esimerkkejä, lisämateriaalia tai jopa kuvia. Voit käyttää normaalia HTML-merkintäkoodia kentässä.
-										</p>
-										<p>
-											Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga placeat omnis consequuntur adipisci, eligendi architecto nobis. Doloremque vero quibusdam pariatur repudiandae, magni impedit ab totam quasi molestiae.
 										</p>
 									</div>
 								</div>
