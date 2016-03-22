@@ -3,7 +3,7 @@
 
 #mv p, #Maailmanvalo ul, #mv ol
 {
-	font-size: 1em !important;
+	font-size: 1em;
 }
 
 #mv .ointro1, #mv .otitle2, #mv .bible
@@ -21,7 +21,7 @@
 
 #pm p,#pm ul, #pm ol
 {
-	font-size: 1em !important;	
+	font-size: 1em;	
 }
 
 #pm .ointro1, #pm .otitle2, #pm .bible
