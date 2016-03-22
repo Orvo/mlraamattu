@@ -1,4 +1,4 @@
-@extends('layout.main')
+@extends('layout.public')
 
 @section('title', 'Salasanan palautus')
 

@@ -320,6 +320,11 @@
 		width: 100%;
 	}
 
+	#authentication-form div.group-code > .form-group
+	{
+		width: 100% !important;
+	}
+
 	.form-register div.tab-panel:first-child
 	{
 		margin-left: 0px;
