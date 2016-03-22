@@ -9,7 +9,7 @@ For licensing, see LICENSE.md or http://ckeditor.com/license
 
 html
 {
-	background: #fdfdfd;
+	background: #fafafa;
 	margin: 0;
 	padding: 0;
 	min-height: 100%;
@@ -17,7 +17,8 @@ html
 
 body
 {
-	width: 720px;
+	max-width: 720px !important;
+	width: auto !important;
 	min-height: 100%;
 	
 	border-left: 1px dashed #ccc;

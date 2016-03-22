@@ -62,10 +62,10 @@
 		width: 100%;
 		padding: 0;
 	}
-
-	header .people
+	
+	header > .inner
 	{
-		display: none;
+		background: none center top !important;
 	}
 
 }

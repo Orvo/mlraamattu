@@ -45,7 +45,6 @@
 							<h1>Raamattu avautuu</h1>
 							<h3>Media7 Raamattuopisto</h3>
 						</div>
-						<div class="people"></div>
 					</div>
 					<nav>
 						<div class="inner">
