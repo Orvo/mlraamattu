@@ -167,14 +167,18 @@ $(function()
 		
 		var position = $(this).attr('data-bref').split(',');
 		var book = position[0].replace(" ", "+").replace("–","-").replace("—", "-").replace(", ", ",");
-		var chapter = position[1];
+		var full_chapter = position[1];
 		
-		if(chapter != 0 && chapter !== undefined)
+		console.log(position, book, full_chapter);
+		
+		if(full_chapter != 0 && full_chapter !== undefined)
 		{
 			baseurl += "chp=1&";
 		}
 		
 		window.open(baseurl + "ref=" + book, 'bibleReference', 'height=500,width=800,resizable,scrollbars');
+		
+		e.preventDefault();
 	});
 	
 	// function bref (ref,luku) {
@@ -186,7 +190,7 @@ $(function()
 	// 	var urlref = "http://raamattu.uskonkirjat.net/servlet/biblesite.Bible?";
 	// 	if(luku!=0) {urlref += "chp=1&"};
 	// 	urlref += "ref=";
-	// 	biblewindow = window.open(urlref+ref1,'popUpWindow','height=500,width=800,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no, status=yes');
+	// 	biblewindow = window.open(urlref+ref1,'popUpWindow','height=700,width=800,left=100,top=100,resizable=yes,scrollbars=yes,toolbar=no,menubar=no,location=no,directories=no, status=yes');
 	// }
 
 });
