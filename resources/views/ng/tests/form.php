@@ -373,7 +373,7 @@
 					</div>
 					<div class="col-xs-3">
 						<p>
-							Voit liittää kokeeseen opintomateriaalia, josta kokeen suorittaja voi löytää vastaukset kysymyksiin.
+							Voit liittää kokeeseen opintomateriaalia, josta kokeen suorittaja voi löytää vastaukset kysymyksiin. <b>Opintomateriaalin syöttö ei ole pakollista.</b>
 						</p>
 						<p>
 							Opintomateriaali näytetään käyttäjälle ennen kokeen suoritusta ja käyttäjä voi palata materiaaliin takaisin jos kokeen suoritus ei onnistu ensiyrittämällä.

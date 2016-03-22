@@ -59,6 +59,7 @@ module.exports = function(grunt)
 				files: {
 					'public/css/public.min.css': [
 						'resources/assets/css/public.css',
+						'resources/assets/css/courses-special.css',
 						'resources/assets/css/public-mobile.css'
 					],
 				}

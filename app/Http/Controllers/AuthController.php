@@ -71,13 +71,13 @@ class AuthController extends Controller
 		
 		$response = [
 			'authenticated' => Auth::check() && $user->canAccessAdminPanel(),
-			'permissions'	=> $user->access_level,
-			'power'			=> $user->powerLevel,
 		];
 		
 		if($response['authenticated'])
 		{
-			$response['user'] = $user;
+			$response['user'] 			= $user;
+			$response['permissions']	= $user->access_level;
+			$response['power']			= $user->powerLevel;
 		}
 		
 		return $response;
@@ -88,9 +88,9 @@ class AuthController extends Controller
 		if(Auth::check())
 		{
 			return [
-				'success' 	=> true,
-				'user'		=> Auth::user(),
-				'isAdmin'	=> Auth::user()->isAdmin(),
+				'success' 				=> true,
+				'user'					=> Auth::user(),
+				'canAccessAdminPanel'	=> Auth::user()->canAccessAdminPanel(),
 			];
 		}
 		
@@ -108,16 +108,15 @@ class AuthController extends Controller
 			$credentials = [
 				'email' 		=> $request->input('email'),
 				'password'		=> $request->input('password'),
-				'access_level'	=> 1,
 			];
 			$remember = $request->input('remember_me');
 
 			if(Auth::attempt($credentials, $remember))
 			{
 				return [
-					'success' 	=> true,
-					'user'		=> Auth::user(),
-					'isAdmin'	=> Auth::user()->isAdmin(),
+					'success' 				=> true,
+					'user'					=> Auth::user(),
+					'canAccessAdminPanel'	=> Auth::user()->canAccessAdminPanel(),
 				];
 			}
 			else

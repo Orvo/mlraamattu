@@ -61,8 +61,8 @@ app.config(
 					deferred.reject(false);
 					
 					var hash = $window.location.hash.substr(1);
-					$window.location.hash = '';
-					$window.location = "/auth/login/?ref=admin&route=" + hash;
+					//$window.location.hash = '';
+					//$window.location = "/auth/login/?ref=admin&route=" + hash;
 				});
 			
 			return deferred.promise;
@@ -229,7 +229,7 @@ app.controller('AjaxLogin', function($rootScope, $scope, $window, $location, $ro
 				
 				if(response.data.success)
 				{
-					if(!response.data.isAdmin)
+					if(!response.data.canAccessAdminPanel)
 					{
 						$window.location = '/';
 					}

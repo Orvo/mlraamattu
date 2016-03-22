@@ -115,7 +115,7 @@ class TestsController extends Controller
 					[
 						'user-name'		=> 'required',
 						'user-email'	=> 'required|email|unique:users,email',
-						'user-password'	=> 'required|min:8|confirmed'
+						'user-password'	=> 'required|min:8|confirmed',
 					],
 					[
 						'user-name.required'		=> 'Nimi on pakollinen.',
@@ -143,11 +143,12 @@ class TestsController extends Controller
 			
 			// if($request->get('group-code'))
 			
-			//$authvalidator->getMessageBag()->add('group-code', 'HELLO WORLD');
-			
+			// dd($authvalidator->errors());
 			
 			if($authvalidator->passes())
 			{
+			
+			// $authvalidator->getMessageBag()->add('group-code', 'HELLO WORLD');
 				switch($authenticationType)
 				{
 					case 0:
@@ -215,6 +216,8 @@ class TestsController extends Controller
 			$archive->save();
 		}
 		
+		//dd($authvalidator->errors()->all());
+		
 		return view('test.show')
 			->with(array_merge($validation, [
 				'test' 					=> $test,
@@ -225,8 +228,9 @@ class TestsController extends Controller
 				'authentication_type'	=> @$authenticationType,
 				'isMaterialPage'		=> false,
 				'authFailed'			=> !Auth::check() && !$authvalidator->passes(),
+				'errors' => $authvalidator->errors(),
 			]))
-			->withErrors(@$authvalidator)
+			//->withErrors(@$authvalidator)
 			->withInput($request);
 	}
 	

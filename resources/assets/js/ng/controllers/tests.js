@@ -143,6 +143,11 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 			$scope.data.test = data;
 			$scope.course_id = $scope.data.test.course.id;
 			
+			if($scope.data.test.page.body.length == 0)
+			{
+				$scope.setActiveTab(1);
+			}
+			
 			query_courses(function()
 			{
 				$breadcrumbs.segment('Muokataan koetta');
@@ -153,7 +158,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		{
 			if(data.status == 404)
 			{
-				$location.path('/tests').search({error: 404});
+				$location.path('/courses').search({error: 404});
 			}
 		});
 	}
@@ -193,6 +198,11 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 					if(data.test_edited !== undefined)
 					{
 						$scope.save_success = true;
+						
+						setTimeout(function()
+						{
+							$scope.save_success = false;
+						}, 1500);
 					}
 				}, function(data)
 				{

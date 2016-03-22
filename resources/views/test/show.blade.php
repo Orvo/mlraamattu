@@ -4,6 +4,10 @@
 
 @section('authentication_form')
 	
+	<?php
+		print_r($errors->all());
+	?>
+	
 	@if($errors->any())
 		<div class="alert alert-danger alert-icon" role="alert">
 			<span class="glyphicon glyphicon-remove-sign"></span>
