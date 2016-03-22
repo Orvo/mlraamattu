@@ -16,14 +16,14 @@
 			<a href="#/courses/[[ course.id ]]/edit" class="btn btn-primary btn-block btn-lg">
 				<span class="glyphicon glyphicon-edit"></span> Muokkaa kurssia
 			</a>
-			<div class="help">
+			<p class="help-block">
 				Muokkaa kurssin tietoja, julkaisutilaa ja kokeiden järjestystä.
-			</div>
+			</p>
 		</div>
 		
 		<div class="form-group">
 			<a href="#/archive?course=[[ course.id ]]" class="btn btn-block btn-default">
-				Tarkista koesuorituksia tälle kurssille
+				Tarkista koesuorituksia
 			</a>
 		</div>
 	</div>
@@ -34,7 +34,7 @@
 </div>
 <div id="content-main" ng-show="loaded">
 	<h1><b>Kurssi</b> / [[ course.title ]]</h1>
-	<div ng-bind-html="course.description | trusted"></div>
+	<div ng-bind-html="course.description | trusted" class="tall-description"></div>
 	<div class="alert alert-warning" ng-if="!course.published">
 		<b>Huom!</b> Tämä kurssi on tällä hetkellä piilotettu. <a href="#/courses/[[ course.id ]]/edit">Muokkaa</a> kurssia jos haluat julkaista sen.
 	</div>

@@ -3,7 +3,7 @@
 	Tervetuloa ylläpitopaneeliin.
 </p>
 <div class="recent-edits">
-	<div class="list col-lg-6">
+	<div class="list">
 		<div class="wrapper">
 			<h4>Viimeksi muokatut kokeet</h4>
 			<div class="inner">
@@ -32,7 +32,7 @@
 								[[ test.updated_at | date:"dd.MM.yyyy 'klo' HH:mm" ]]
 							</td>
 							<td>
-								<a href="#/tests/[[ test.id ]]/edit" class="btn btn-primary btn-sm">
+								<a href="#/tests/[[ test.id ]]/edit" class="btn btn-block btn-primary btn-sm">
 									<span class="glyphicon glyphicon-search"></span> Näytä
 								</a>
 							</td>
@@ -52,7 +52,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="list col-lg-6">
+	<div class="list">
 		<div class="wrapper">
 			<h4>Viimeksi muokatut kurssit</h4>
 			<div class="inner">
@@ -77,7 +77,7 @@
 								[[ course.updated_at | date:"dd.MM.yyyy 'klo' HH:mm" ]]
 							</td>
 							<td>
-								<a href="#/courses/[[ course.id ]]" class="btn btn-primary btn-sm">
+								<a href="#/courses/[[ course.id ]]" class="btn btn-block btn-primary btn-sm">
 									<span class="glyphicon glyphicon-search"></span> Näytä
 								</a>
 							</td>

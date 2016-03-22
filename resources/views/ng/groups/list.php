@@ -48,10 +48,10 @@
 		<thead>
 			<tr>
 				<td style="width:40px">ID</td>
-				<td>Ryhmän otsikko</td>
-				<td>Ryhmän opettaja</td>
+				<td style="width:22%">Ryhmän nimi</td>
+				<td style="width:15%">Ryhmän opettaja</td>
 				<td>Oppilaita</td>
-				<td style="width:32%">Koodi</td>
+				<td style="width:15%">Koodi</td>
 				<td style="width:180px">Toiminnot</td>
 			</tr>
 		</thead>
@@ -146,6 +146,9 @@
 				<ul>
 					<li ng-repeat="user in modal_info.group.users" ng-if="user.id != modal_info.group.teacher.id">
 						[[ user.name ]]
+					</li>
+					<li ng-if="modal_info.group.users.length == 0">
+						Ei oppilaita.
 					</li>
 				</ul>
 			</div>

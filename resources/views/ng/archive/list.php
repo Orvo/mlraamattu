@@ -95,8 +95,7 @@
 				<td style="width:40px;"></td>
 				<td style="width:170px">Kokeen suorittaja</td>
 				<td style="width:180px">Suoritusaika</td>
-				<td style="min-width:150px">Kurssi</td>
-				<td style="width:24%">Koe</td>
+				<td style="min-width:150px">Kurssi / Koe</td>
 				<td style="width:20%">Tulos</td>
 				<td class="list-actions" style="width:180px">Toiminnot</td>
 			</tr>
@@ -112,23 +111,16 @@
 				</td>
 				<td>
 					<a href="#/courses/[[ item.test.course.id ]]">
-						[[ item.test.course.title ]]
-					</a><br>
-				</td>
-				<td>
-					<div ng-if="item.test">
-						<a href="#/tests/[[ item.test.id ]]/edit">
-							[[ item.test.title ]]
-						</a>
-						<div class="labels pull-right">
-							<span class="label label-success" ng-if="item.replied_to">Vastattu</span>
-							<span class="label label-warning" ng-if="item.discarded">Kuitattu</span>
-						</div>
+						<b>[[ item.test.course.title ]]</b>
+					</a>
+					<span class="separator-slash">/</span>
+					<a href="#/tests/[[ item.test.id ]]/edit">
+						[[ item.test.title ]]
+					</a>
+					<div class="labels pull-right">
+						<span class="label label-success" ng-if="item.replied_to">Vastattu</span>
+						<span class="label label-warning" ng-if="item.discarded">Kuitattu</span>
 					</div>
-					
-					<span ng-if="!item.test" style="color:#c22;font-weight: bold;">
-						Koe on poistettu
-					</span>
 				</td>
 				<td class="test-result">
 					<div class="clearfix">

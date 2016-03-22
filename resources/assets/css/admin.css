@@ -51,7 +51,7 @@ body
 #main-container
 {
 	height: 100%;
-	padding: 0px 3% 0 3%;
+	padding: 0;
 	position: relative;
 }
 
@@ -60,7 +60,7 @@ body
 	min-height: 100%;
 	background: #fff fixed;
 	margin: 0 auto;
-	padding: 60px 15px 30px 30px;
+	padding: 60px 30px 30px 30px;
 	position: relative;
 	box-shadow: 0 -30px 30px rgba(252, 208, 90, 0.4);
 }
@@ -87,7 +87,6 @@ body
 #content-sidebar .sidebar-help
 {
 	text-align: justify;
-	padding-right: 15px;
 }
 
 #content-main
@@ -96,6 +95,11 @@ body
 }
 
 @media screen and (max-width: 1700px) {
+	
+	#main-container > .wrapper
+	{
+		padding: 60px 22px 30px 22px;
+	}
 	
 	#content-sidebar
 	{
@@ -106,20 +110,6 @@ body
 	#content-main
 	{
 		margin-right: 260px;
-	}
-}
-
-@media screen and (max-width: 1200px) {
-	
-	#content-sidebar
-	{
-		float: right;
-		width: 200px;
-	}
-
-	#content-main
-	{
-		margin-right: 220px;
 	}
 }
 
@@ -455,6 +445,8 @@ td.status-labels .label.label-danger
 
 .recent-edits div.list
 {
+	max-width: 1200px;
+	width: auto !important;
 	padding: 0 8px;
 	margin-bottom: 1em;
 	overflow: hidden;
@@ -490,7 +482,24 @@ td.status-labels .label.label-danger
 	padding-left: 10px !important;
 }
 
-.ng-html-output img
+/**************************/
+
+.separator-slash
+{
+	display: inline-block;
+	font-weight: bold;
+	padding: 0 5px;
+}
+
+.tall-description
+{
+	max-width: 1000px;
+	max-height: 400px;
+	overflow-y: auto;
+}
+
+.ng-html-output img,
+.ng-html-output video
 {
 	float: left;
 	max-width: 150px;
@@ -513,6 +522,8 @@ td.status-labels .label.label-danger
 {
 	border: none;
 }
+
+/***********************/
 
 ul.questions, ul.questions li.question
 {

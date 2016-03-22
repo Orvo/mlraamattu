@@ -15,34 +15,6 @@ $(window).load(function()
 		}
 	});
 	
-	var doResize = function()
-	{
-		var width = $(window).width();
-		var height = $(window).height();
-		
-		if(width >= 1200)
-		{
-			$('#main-container').css({
-				'padding-left': '3%',
-				'padding-right': '3%',
-			});
-		}
-		else
-		{
-			$('#main-container').css({
-				'padding-left': '3%',
-				'padding-right': '3%',
-			});
-		}
-	}
-	
-	doResize();
-	
-	$(window).resize(function()
-	{
-		doResize();
-	});
-	
 	$('nav.navbar .dropdown-toggle, .list-actions a').click(function(e)
 	{
 		e.preventDefault();
