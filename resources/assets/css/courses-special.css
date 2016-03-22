@@ -6,7 +6,7 @@
 	font-size: 1em;
 }
 
-#mv .ointro1, #mv .otitle2, #mv .bible
+#mv .ointro1, #mv .ointro2, #mv .bible
 {
 	color: #0075a7;
 }
@@ -24,7 +24,7 @@
 	font-size: 1em;	
 }
 
-#pm .ointro1, #pm .otitle2, #pm .bible
+#pm .ointro1, #pm .ointro2, #pm .bible
 {
 	color: #0075a7;
 }
@@ -103,13 +103,13 @@
 	text-align:right;
 }
 
-.otitle2
+.ointro2
 {
 	font-size: 1.3em !important;
 	font-weight: normal;
 }
 
-.ointro2
+.ointro3
 {
 	font-size: 1em !important;
 	color: #000;
