@@ -12,7 +12,7 @@ module.exports = function(grunt)
 				src: [
 					'resources/assets/js/public.js',
 				],
-				dest: 'public/js/public.min.js',
+				dest: 'public/js/build/public.min.js',
 			},
 			js_angular: {
 				src: [
@@ -25,13 +25,13 @@ module.exports = function(grunt)
 					'resources/assets/js/ng/controllers/*.js',
 					'resources/assets/js/ng/models.js',
 				],
-				dest: 'public/js/admin-angular.min.js',
+				dest: 'public/js/build/admin-angular.min.js',
 			},
 			js_admin: {
 				src: [
 					'resources/assets/js/admin.js',
 				],
-				dest: 'public/js/admin.min.js',
+				dest: 'public/js/build/admin.min.js',
 			},
 		},
 		uglify: {
@@ -40,13 +40,13 @@ module.exports = function(grunt)
 			},
 			js_public: {
 				files: {
-					'public/js/public.min.js': 'public/js/public.min.js',	
+					'public/js/build/public.min.js': 'public/js/build/public.min.js',	
 				},
 			},
 			js_admin: {
 				files: {
-					'public/js/admin-angular.min.js': 'public/js/admin-angular.min.js',
-					'public/js/admin.min.js': 'public/js/admin.min.js',
+					'public/js/build/admin-angular.min.js': 'public/js/build/admin-angular.min.js',
+					'public/js/build/admin.min.js': 'public/js/build/admin.min.js',
 				},
 			},
 		}, 
@@ -57,7 +57,7 @@ module.exports = function(grunt)
 			},
 			public: {
 				files: {
-					'public/css/public.min.css': [
+					'public/css/build/public.min.css': [
 						'resources/assets/css/public.css',
 						'resources/assets/css/courses-special.css',
 						'resources/assets/css/public-mobile.css'
@@ -66,7 +66,7 @@ module.exports = function(grunt)
 			},
 			admin: {
 				files: {
-					'public/css/admin.min.css': [
+					'public/css/build/admin.min.css': [
 						'resources/assets/css/admin.css',
 					],
 				}
