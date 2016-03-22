@@ -228,9 +228,8 @@ class TestsController extends Controller
 				'authentication_type'	=> @$authenticationType,
 				'isMaterialPage'		=> false,
 				'authFailed'			=> !Auth::check() && !$authvalidator->passes(),
-				'errors' => $authvalidator->errors(),
 			]))
-			//->withErrors(@$authvalidator)
+			->withErrors(@$authvalidator)
 			->withInput($request);
 	}
 	
