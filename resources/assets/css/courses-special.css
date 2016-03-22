@@ -1,24 +1,28 @@
 /* Nettikurssiasetukset - yleiset
 ---------------------------------------------------------------*/
-.ointro1 {
+.ointro1
+{
 	font-size: x-large;
 	font-weight: normal;
 	font-style:italic;
 	text-align:right;
 }
 
-.otitle2 {
+.otitle2
+{
 	font-size: large;
 	font-weight: normal;
 }
 
-.ointro2 {
+.ointro2
+{
 	font-size: medium;
 	color: #000;
 	font-weight: strong;
 }
 
-.bible {
+.bible
+{
 	font-size: medium;
 	font-weight: normal;
 	font-style: italic;
@@ -30,60 +34,94 @@
 /* Nettikurssiasetukset - Maailman Valo
 ---------------------------------------------------------------*/
 
-#mv p, #Maailmanvalo ul, #mv ol {font-size: medium;}
+#mv p, #Maailmanvalo ul, #mv ol
+{
+	font-size: medium;
+}
 
-#mv .ointro1, #mv .otitle2, #mv .bible {
+#mv .ointro1, #mv .otitle2, #mv .bible
+{
 	color: #0075a7;
 }
 
-#Maailmanvalo a:hover {color: #0075a7;}
+#Maailmanvalo a:hover
+{
+	color: #0075a7;
+}
 
 /* Nettikurssiasetukset - Paavalin matkassa = pm
 ---------------------------------------------------------------*/
 
-#pm p,#pm ul, #pm ol {font-size: medium;}
+#pm p,#pm ul, #pm ol
+{
+	font-size: medium;
+}
 
-#pm .ointro1, #pm .otitle2, #pm .bible {
+#pm .ointro1, #pm .otitle2, #pm .bible
+{
 	color: #0075a7;
 }
 
-#viivaotsikko {
-font-size: x-large;
-color: #FFF;
-font-weight: normal;
-text-align:center;
-width: 100%;
-background-color: #d08620; 
-background-image: url(/uploads/images/viivaa.jpg);
-background-repeat: repeat-x; 
-}
-#avaintekstit {
-font-size: medium;
-color: #FFF;
-font-weight: strong;
-text-align:center;
-width: 100%;
-background-color: #ac1144; 
-}
-#tausta {
-font-size: medium;
-color: #FFF;
-width: 100%;
-padding: 0 0 0 5px;
-background-color: #ac1144; 
-}
-#mieti {
-font-size: medium;
-color: #000;
-width: 90%;
-padding: 0 5px 0 5px;
-margin-bottom: 25px;
-background-color: #f8c2c2; 
+#viivaotsikko
+{
+	font-size: x-large;
+	color: #FFF;
+	font-weight: normal;
+	text-align:center;
+	width: 100%;
+	background-color: #d08620; 
+	background-image: url(/uploads/images/viivaa.jpg);
+	background-repeat: repeat-x; 
 }
 
-#pm0 p {text-indent: -10000em;}
-#pm a {color: #000;}
-#pm a:hover {color: #ac1144;}
+#avaintekstit
+{
+	font-size: medium;
+	color: #FFF;
+	font-weight: bold;
+	text-align:center;
+	width: 100%;
+	background-color: #ac1144; 
+}
 
-#avaintekstit a {color: #FFF;}
-#avaintekstit a:hover {color: #f8c2c2;}
+#tausta
+{
+	font-size: medium;
+	color: #FFF;
+	width: 100%;
+	padding: 0 0 0 5px;
+	background-color: #ac1144; 
+}
+#mieti
+{
+	font-size: medium;
+	color: #000;
+	width: 90%;
+	padding: 0 5px 0 5px;
+	margin-bottom: 25px;
+	background-color: #f8c2c2; 
+}
+
+#pm0 p
+{
+	text-indent: -10000em;
+}
+
+#pm a
+{
+	color: #000;
+}
+
+#pm a:hover {
+	color: #ac1144;
+}
+
+#avaintekstit a
+{
+	color: #FFF;
+}
+
+#avaintekstit a:hover
+{
+	color: #f8c2c2;
+}
