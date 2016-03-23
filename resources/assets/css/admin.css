@@ -854,6 +854,14 @@ ul.questions div.question-answers div.answer .answer-label
 	padding: 3px 14px 0 3px;
 }
 
+ul.questions div.question-answers div.answer .answer-label.label-small
+{
+	float: left;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 7px 14px 0 10px;
+}
+
 ul.questions div.question-answers div.answer div.col
 {
 	float: left;
@@ -881,6 +889,18 @@ ul.questions div.question-answers div.answer div.col.answer-text select
 {
 	min-width: 100px;
 	max-width: 150px;
+}
+
+ul.questions div.question-answers div.answer div.col.answer-margin
+{
+	min-width: 350px;
+	max-width: 450px;
+}
+
+ul.questions div.question-answers div.answer div.col.answer-margin select
+{
+	min-width: 80px;
+	max-width: 80px;
 }
 
 ul.questions div.question-answers div.answer div.col.answer-text.wide

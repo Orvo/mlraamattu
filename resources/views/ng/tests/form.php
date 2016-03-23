@@ -290,6 +290,21 @@
 												<div class="col answer-text">
 													<input type="text" class="form-control" id="question-[[ qkey ]]-answer-[[ akey ]]" ng-model="answer.text" placeholder="Vastaus">
 												</div>
+												<div class="col answer-margin">
+													<select class="form-control" ng-model="answer.error_margin">
+														<option ng-value="0" ng-selected="answer.error_margin == 0">0%</option>
+														<option ng-value="10" ng-selected="answer.error_margin == 10">10%</option>
+														<option ng-value="15" ng-selected="answer.error_margin == 15">15%</option>
+														<option ng-value="20" ng-selected="answer.error_margin == 20">20%</option>
+														<option ng-value="25" ng-selected="answer.error_margin == 25">25%</option>
+														<option ng-value="30" ng-selected="answer.error_margin == 30">30%</option>
+														<option ng-value="40" ng-selected="answer.error_margin == 40">40%</option>
+														<option ng-value="50" ng-selected="answer.error_margin == 50">50%</option>
+													</select>
+													<div style="display:inline-block;padding:10px 0 0 14px">
+														[[ floor(answer.text.length * (answer.error_margin / 100.0)) ]] merkin virhemarginaali
+													</div>
+												</div>
 												<div class="col answer-delete" ng-hide="question.answers.length <= 2">
 													<a class="cursor-pointer" ng-click="remove_answer(qkey, akey)">
 														<span class="glyphicon glyphicon-remove"></span> Poista
@@ -313,8 +328,23 @@
 												Käyttäjän tulee syöttää vastaukseksi alla oleva sana tai lause.
 											</p>
 											<div class="form-group answer">
-												<div class="col answer-text wide">
+												<div class="col answer-text">
 													<input type="text" class="form-control" ng-model="question.answers[0].text" placeholder="Vastaus">
+												</div>
+												<div class="col answer-margin">
+													<select class="form-control" ng-model="question.answers[0].error_margin">
+														<option ng-value="0" ng-selected="question.answers[0].error_margin == 0">0%</option>
+														<option ng-value="10" ng-selected="question.answers[0].error_margin == 10">10%</option>
+														<option ng-value="15" ng-selected="question.answers[0].error_margin == 15">15%</option>
+														<option ng-value="20" ng-selected="question.answers[0].error_margin == 20">20%</option>
+														<option ng-value="25" ng-selected="question.answers[0].error_margin == 25">25%</option>
+														<option ng-value="30" ng-selected="question.answers[0].error_margin == 30">30%</option>
+														<option ng-value="40" ng-selected="question.answers[0].error_margin == 40">40%</option>
+														<option ng-value="50" ng-selected="question.answers[0].error_margin == 50">50%</option>
+													</select>
+													<div style="display:inline-block;padding:10px 0 0 14px">
+														[[ floor(question.answers[0].text.length * (question.answers[0].error_margin / 100.0)) ]] merkin virhemarginaali
+													</div>
 												</div>
 											</div>
 										</div>

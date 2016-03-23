@@ -50,7 +50,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	
 	////////////////////////////////////////////////////
 	
-	$scope.activeTab = 3;
+	$scope.activeTab = 2;
 	$scope.setActiveTab = function(index)
 	{
 		$scope.activeTab = index;
@@ -411,6 +411,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 			{
 				$scope.data.test.questions[key].answers.push({
 					text: text,
+					error_margin: 10,
 				});
 			}
 
@@ -429,4 +430,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		
 		$scope.updateQuestionData(question);
 	}
+	
+	$scope.floor = Math.floor;
+	
 });
