@@ -7,12 +7,6 @@
 		</div>
 		
 		<div class="form-group">
-			<a href="#/tests/new/[[ course.id ]]" class="btn btn-success btn-block btn-lg">
-				<span class="glyphicon glyphicon-plus"></span> Lisää uusi koe
-			</a>
-		</div>
-		
-		<div class="form-group">
 			<a href="#/courses/[[ course.id ]]/edit" class="btn btn-primary btn-block btn-lg">
 				<span class="glyphicon glyphicon-edit"></span> Muokkaa kurssia
 			</a>
@@ -23,7 +17,7 @@
 		
 		<div class="form-group">
 			<a href="#/archive?course=[[ course.id ]]" class="btn btn-block btn-default">
-				Tarkista koesuorituksia
+				Tarkista kurssin koesuorituksia
 			</a>
 		</div>
 	</div>
@@ -39,6 +33,11 @@
 		<b>Huom!</b> Tämä kurssi on tällä hetkellä piilotettu. <a href="#/courses/[[ course.id ]]/edit">Muokkaa</a> kurssia jos haluat julkaista sen.
 	</div>
 	<div class="actions-row">
+		<div class="pull-right">
+			<a href="#/tests/new/[[ course.id ]]" class="btn btn-success">
+				<span class="glyphicon glyphicon-plus"></span> Lisää uusi koe
+			</a>
+		</div>
 		<div>
 			<input type="text" ng-model="searchFilter" placeholder="Hae kokeita" class="form-control search-filter">
 		</div>

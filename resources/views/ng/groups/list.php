@@ -5,13 +5,10 @@
 	<div class="sidebar-help">
 		<h3>Ohjeet</h3>
 		<p>
-			Käyttäjänhallintasivulla voit luoda ja muokata käyttäjätunnuksia, mukaanlukien käyttäjäoikeuksien vaihtamisen.
+			Ryhmät ovat tarkoitettu helpottamaan opettajan johdolla vedettävää opetusta. Käyttäjät voivat liittyä ryhmiin käyttämällä ryhmän liittymiskoodia jonka jälkeen kaikki heidän koesuorituksensa näkyvät opettajalle.
 		</p>
-		<p>
-			Ylläpitäjän käyttäjäoikeudet sallii käyttäjän kirjautumisen tähän ylläpitopaneeliin. Ylläpitäjä voi siis hallita kursseja, kysymyksiä ja koesuoritusten palautteenantoa. Ole tarkka kenelle annat ylläpitäjän oikeudet.
-		</p>
-		<p>
-			Opettajan käyttäjäoikeudet sallii käyttäjän luoda ryhmiä/luokkia joihin on liitetty tietyt kurssit. Toiset käyttäjät voivat liittyä näihin ryhmiin jolloin heidän koesuorituksensa näkyvät ylläpitopaneelissa opettajalle. Opettaja ei voi luoda tai muuttaa kursseja ja kokeita.
+		<p ng-if="userData.user.access_level == 'ADMIN'">
+			Voit luoda opettajan käyttäjätunnuksen käyttäjähallinnasta. Käyttäjätunnus opettajan oikeuksilla sallii tämän vain tarkastella koesuorituksia ja lisätä tai poistaa omia ryhmiään.
 		</p>
 	</div>
 </div>
@@ -147,7 +144,7 @@
 					<li ng-repeat="user in modal_info.group.users" ng-if="user.id != modal_info.group.teacher.id">
 						[[ user.name ]]
 					</li>
-					<li ng-if="modal_info.group.users.length == 0">
+					<li ng-if="modal_info.group.users.length <= 1">
 						Ei oppilaita.
 					</li>
 				</ul>
