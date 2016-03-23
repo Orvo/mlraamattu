@@ -400,18 +400,20 @@ class TestsController extends Controller
 				break;
 			}
 			
-			
 			$question->save();
+			
+			///////////////////////////
 			
 			foreach($question_data['answers'] as $akey => $answer_data)
 			{
-				if(!array_key_exists('id', $answer_data))
-				{
-					$answer = new Answer();
-				}
-				else
+				if(array_key_exists('id', $answer_data))
 				{
 					$answer = Answer::find($answer_data['id']);
+				}
+				
+				if(!$answer)
+				{
+					$answer = new Answer();
 				}
 				
 				$answer->question_id 	= $question->id;

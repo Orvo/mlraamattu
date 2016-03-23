@@ -93,10 +93,22 @@ app.controller('CourseShowController', function($scope, $window, $location, $rou
 	{
 		if($scope.modal_info === false) return;
 		
+		angular.forEach($scope.course.tests, function(value, key)
+		{
+			if(value.id == $scope.modal_info.test.id)
+			{
+				$scope.course.tests.splice(key, 1);
+			}
+		});
+		
 		TestsModel.delete({id: $scope.modal_info.test.id});
 		
-		$scope.processing = true;
 		
+		$scope.processing = false;
+		$('#modal-delete-confirmation').modal('hide');
+		$scope.modal_info = false;
+		
+		/*$scope.processing = true;
 		CoursesModel.get({id: $scope.id}, function(data)
 		{
 			$scope.course = data;
@@ -105,7 +117,7 @@ app.controller('CourseShowController', function($scope, $window, $location, $rou
 			$('#modal-delete-confirmation').modal('hide');
 		
 			$scope.modal_info = false;
-		});
+		});*/
 	}
 
 	CoursesModel.get({id: $scope.id}, function(data)

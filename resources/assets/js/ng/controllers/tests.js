@@ -207,6 +207,8 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 			
 			if($scope.id) // existing entry
 			{
+				console.log("Data", $scope.data.test);
+				
 				$scope.data.test = TestsModel.update({id: $scope.id}, $scope.data.test, function(data, h)
 				{
 					$scope.processing = false;

@@ -536,7 +536,8 @@
 										<div class="col-xs-12">
 											{!! Form::text('answer-' . $question->id, @$given_answers[$question->id], [
 												'class' => 'form-control',
-												'placeholder' => 'Vastaus tähän'
+												'placeholder' => 'Vastaus tähän',
+												'maxlength' => '200',
 											]) !!}
 											@if(@$validation)
 												@if(@$validation[$question->id]['correct'])
@@ -586,7 +587,8 @@
 													{!! Form::text('answer-' . $question->id . '[]', @$given_answers[$question->id][$i], [
 														'class' => 'form-control',
 														'placeholder' => 'Vastaus tähän',
-														'id' => 'answer-' . $question->id .'-'. $i
+														'id' => 'answer-' . $question->id .'-'. $i,
+														'maxlength' => '200',
 													]) !!}
 													@if(@$validation)
 														@if(@$validation[$question->id]['correct_rows'][$i])

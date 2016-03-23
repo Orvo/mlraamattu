@@ -36,7 +36,7 @@ class Question extends Model
 	
 	public function setDataAttribute($value)
 	{
-		$this->attributes['data'] = json_encode($value);
+		$this->attributes['data'] = json_encode($value, JSON_FORCE_OBJECT);
 	}
 	
 	public function correctAnswers()

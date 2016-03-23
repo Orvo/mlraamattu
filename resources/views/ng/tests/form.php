@@ -288,7 +288,7 @@
 											<div class="form-group answer" ng-repeat="(akey, answer) in question.answers">
 												<label for="question-[[ qkey ]]-answer-[[ akey ]]" class="answer-label">[[ akey + 1 ]].</label>
 												<div class="col answer-text">
-													<input type="text" class="form-control" id="question-[[ qkey ]]-answer-[[ akey ]]" ng-model="answer.text" placeholder="Vastaus">
+													<input type="text" class="form-control" id="question-[[ qkey ]]-answer-[[ akey ]]" ng-model="answer.text" placeholder="Vastaus" maxlength="200">
 												</div>
 												<div class="col answer-margin">
 													<select class="form-control" ng-model="answer.error_margin">
@@ -329,7 +329,7 @@
 											</p>
 											<div class="form-group answer">
 												<div class="col answer-text">
-													<input type="text" class="form-control" ng-model="question.answers[0].text" placeholder="Vastaus">
+													<input type="text" class="form-control" ng-model="question.answers[0].text" placeholder="Vastaus" maxlength="200">
 												</div>
 												<div class="col answer-margin">
 													<select class="form-control" ng-model="question.answers[0].error_margin">
