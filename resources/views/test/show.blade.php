@@ -198,13 +198,13 @@
 									Olet vastannut oikein kaikkiin kysymyksiin.
 								@elseif($hasPassed)
 									Olet vastannut oikein läpäisyyn vaadittuun vähimmäismäärään kysymyksistä.
-								@elseif($test->autodiscard)
+								@elseif($test->autodiscard == \App\Test::FULL_AUTODISCARD)
 									Kokeesi on hyväksytty riippumatta oikeista vastauksista.
 								@else
 									Myös koevastauksissasi on virheitä.
 								@endif
 								
-								@if($hasPassed || $test->autodiscard)
+								@if($hasPassed || $test->autodiscard == \App\Test::FULL_AUTODISCARD)
 									Korjattuasi {{ @$authentication_type == 0 ? 'rekisteröinnin' : 'kirjautumisen' }} virheet voit jatkaa seuraavaan kokeeseen.
 								@else
 									Korjaa kaikki ongelmat jatkaaksesi.
@@ -213,7 +213,7 @@
 						</div>
 						<div class="clearfix"></div>
 					</div>
-				@elseif(!$test->hasFeedback() && $validation && !$hasPassed && !$test->autodiscard)
+				@elseif(!$test->hasFeedback() && $validation && !$hasPassed && $test->autodiscard != \App\Test::FULL_AUTODISCARD)
 					<div class="alert alert-warning alert-icon">
 						<span class="glyphicon glyphicon-remove-circle"></span>
 						<div>
@@ -290,7 +290,7 @@
 						</div>
 						<div class="clearfix"></div>
 					</div>
-				@elseif($test->hasFeedback(true) || $test->autodiscard)
+				@elseif($test->hasFeedback(true) || $test->autodiscard == \App\Test::FULL_AUTODISCARD)
 					<div class="alert alert-success alert-icon">
 						<span class="glyphicon glyphicon-ok-circle"></span>
 						<div>
@@ -574,7 +574,7 @@
 										<div class="tip alert alert-info">
 											<span class="glyphicon glyphicon-exclamation-sign"></span> Vastauksien järjestyksellä ei ole väliä.
 										</div>
-										@for($i=0; $i < $question->answers->count(); ++$i)
+										@for($i=0; $i < min($question->data->multitext_required, $question->answers->count()); ++$i)
 											<div class="row {{
 												css([
 													'has-success' 	=> (isset($validation) && @$validation[$question->id]['correct_rows'][$i]),
@@ -607,7 +607,7 @@
 												])
 											}}">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>
-												<h4>Oikeat vastaukset:</h4>
+												<h4>Oikeat vastaukset{{ $question->data->multitext_required != $question->answers->count() ? ' (' . $question->data->multitext_required . ' vaadittu)' : '' }}:</h4>
 												<ul>
 													@foreach($validation[$question->id]['correct_answers'] as $answer)
 														<li>{{ $answer['text'] }}</li>

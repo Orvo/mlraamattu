@@ -98,7 +98,7 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 				item.course_id = parseInt(item.test.course.id);
 				
 				item.replied_to = parseInt(item.replied_to);
-				item.discarded = parseInt(item.discarded);
+				item.discarded = parseInt(item.discarded) ? 1 : 0;
 				
 				if($scope.tests[item.test.id] === undefined)
 				{

@@ -50,7 +50,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 	
 	////////////////////////////////////////////////////
 	
-	$scope.activeTab = 3;
+	$scope.activeTab = 1;
 	$scope.setActiveTab = function(index)
 	{
 		$scope.activeTab = index;
@@ -178,6 +178,23 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		$("#test-title").focus();
 	}
 	
+	$scope.updateQuestionData = function(question)
+	{
+		if(question.type == "MULTITEXT")
+		{
+			$scope.multitext_required = [];
+			for(var i=2; i <= question.answers.length; ++i)
+			{
+				$scope.multitext_required.push(i);
+			}
+			
+			if(!question.data.multitext_required || question.data.multitext_required > question.answers.length)
+			{
+				question.data.multitext_required = question.answers.length;
+			}
+		}
+	}
+	
 	$scope.submit = function(data)
 	{
 		$scope.processing = true;
@@ -252,19 +269,9 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		if($scope.edit_data !== false)
 		{
 			$scope.cancel();
-			// var edit_key = $scope.edit_data.key;
-			// var question = $scope.data.test.questions[edit_key];
-		
-			// $scope.modal_info = {
-			// 	key: edit_key,
-			// 	newKey: key,
-			// 	question: question,
-			// };
-
-			// $('#modal-cancel-confirmation').modal('show');
-
-			// return;
 		}
+		
+		$scope.updateQuestionData($scope.data.test.questions[key]);
 
 		$scope.edit_data = {
 			key: key,
@@ -353,11 +360,14 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 					is_correct: false,
 				},
 			],
+			data: {},
 		});
 
 		var key = $scope.data.test.questions.length-1;
 
 		$scope.data.test.questions[key].order = key+1;
+		
+		$scope.updateQuestionData($scope.data.test.questions[key]);
 		
 		if($scope.data.errors && $scope.data.errors.fields.add_questions)
 		{
@@ -388,6 +398,8 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 				}
 			break;
 		}
+		
+		$scope.updateQuestionData(question);
 	}
 
 	$scope.add_answer = {
@@ -403,12 +415,18 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 			}
 
 			$scope.add_answer.text = '';
+			
+			$scope.updateQuestionData($scope.data.test.questions[key]);
 		},
 		text: '',
 	};
 
-	$scope.remove_answer = function(qkey, ckey)
+	$scope.remove_answer = function(qkey, akey)
 	{
-		$scope.data.test.questions[qkey].answers.splice(ckey, 1);
+		var question = $scope.data.test.questions[qkey];
+		
+		question.answers.splice(akey, 1);
+		
+		$scope.updateQuestionData(question);
 	}
 });

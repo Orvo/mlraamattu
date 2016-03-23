@@ -21,6 +21,10 @@ class Test extends Model
 	const HAS_FEEDBACK		= 2;
 	const IS_DISCARDED		= 3;
 	
+	const NO_AUTODISCARD	= 0;
+	const REQUIRE_CORRECT	= 1;
+	const FULL_AUTODISCARD	= 2;
+	
 	public function course()
 	{
 		return $this->belongsTo('App\Course');
@@ -100,8 +104,11 @@ class Test extends Model
 			if($archive)
 			{
 				$data = json_decode($archive->data, true);
-				return $data['all_correct'] || $archive->replied_to || $archive->discarded ||
-						(!$requireFullCompletion && ($data['num_correct'] >= $data['total'] * 0.5));
+				
+				return $data['all_correct'] ||
+					   $archive->replied_to ||
+					   $archive->discarded == \App\Archive::FULLY_DISCARDED ||
+					   (!$requireFullCompletion && ($data['num_correct'] >= $data['total'] * 0.5));
 			}
 		}
 		
@@ -134,7 +141,8 @@ class Test extends Model
 		}
 		else
 		{
-			if(Auth::user()->archives()->where('test_id', $this->id)->exists() || Auth::user()->isAdmin())
+			// || Auth::user()->isAdmin()
+			if(Auth::user()->archives()->where('test_id', $this->id)->exists())
 			{
 				$this->unlockStatus = true;
 			}

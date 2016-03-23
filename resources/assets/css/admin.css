@@ -860,7 +860,6 @@ ul.questions div.question-answers div.answer div.col
 	min-height: 35px;
 	vertical-align: middle;
 	margin: 0 5px 0 0;
-	/*background: #f55;*/
 }
 
 ul.questions div.question-answers div.answer div.help-block
@@ -876,6 +875,12 @@ ul.questions div.question-answers div.answer div.col.answer-text
 	width: 35%;
 	min-width: 200px;
 	max-width: 500px;
+}
+
+ul.questions div.question-answers div.answer div.col.answer-text select
+{
+	min-width: 100px;
+	max-width: 150px;
 }
 
 ul.questions div.question-answers div.answer div.col.answer-text.wide

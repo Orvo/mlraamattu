@@ -113,12 +113,22 @@
 								</div>
 								<div class="radio" ng-class="{'active': data.test.autodiscard == 1}">
 									<label>
-										<input type="radio" ng-model="data.test.autodiscard" value="1"> Kuittaa automaattisesti
+										<input type="radio" ng-model="data.test.autodiscard" value="1"> Kuittaa, mutta vaadi oikeat vastaukset
+									</label>
+								</div>
+								<div class="radio" ng-class="{'active': data.test.autodiscard == 2}">
+									<label>
+										<input type="radio" ng-model="data.test.autodiscard" value="2"> Kuittaa ja salli jatkaminen
 									</label>
 								</div>
 							</div>
 							<div class="help">
-								Jos et välitä antaa kokeelle palautetta, se ei ole pakollista. Voit helpottaa taakkaa merkitsemällä käyttäjän koesuorituksen automaattisesti kuitatuksi kun käyttäjä on palauttanut kokeen.
+								<p>
+									Jos et välitä antaa kokeelle palautetta, se ei ole pakollista. Voit helpottaa taakkaa merkitsemällä käyttäjän koesuorituksen automaattisesti kuitatuksi kun käyttäjä on palauttanut kokeen.
+								</p>
+								<p>
+									Voit sallia käyttäjän myös edetä kurssilla vapaasti ilman, että tämän täytyy vastata normaalisti vaadittuun määrään (50%) kysymyksistä oikein.
+								</p>
 							</div>
 						</div>
 					</div>
@@ -263,8 +273,17 @@
 										<div ng-show="question.type == 'MULTITEXT'">
 											<h3>Vastaukset / Moniteksti</h3>
 											<p>
-												Käyttäjän tulee syöttää vastaukseksi kaikki alla olevat sanat tai lauseet. Kysymyksellä pitää olla ainakin kaksi vastausta.
+												Käyttäjän tulee syöttää vastaukseksi vaadittu määrä vastauksia, jotka löytyvät määritellyistä sanoista tai lauseista. Kysymyksellä pitää olla ainakin kaksi vastausta.
 											</p>
+											
+											<div class="form-group answer">
+												<label for="multitext-required" class="answer-label">Vaadittuja vastauksia</label>
+												<div class="col answer-text">
+													<select class="form-control" id="multitext-required" ng-model="question.data.multitext_required"
+														ng-change="multitext_required_changed(question)"
+														ng-options="num for num in multitext_required"></select>
+												</div>
+											</div>
 
 											<div class="form-group answer" ng-repeat="(akey, answer) in question.answers">
 												<label for="question-[[ qkey ]]-answer-[[ akey ]]" class="answer-label">[[ akey + 1 ]].</label>

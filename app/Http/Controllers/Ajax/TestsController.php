@@ -45,166 +45,6 @@ class TestsController extends Controller
 		
 		return $data;
 	}
-	
-	protected function _saveTest($data)
-	{
-		$isNewEntry = !array_key_exists('id', $data);
-		
-		if($isNewEntry)
-		{
-			$test = new Test();
-			
-			$latest_test_on_course = Test::where([
-				'course_id' => $data['course']['id']
-			])->orderBy('order', 'DESC')->first();
-			
-			$next_course_order 	= ($latest_test_on_course ? $latest_test_on_course->order : 0) + 1;
-			$test->order 		= $next_course_order;
-		}
-		else
-		{
-			$test = Test::find($data['id']);
-			
-			$submitted_questions = [];
-			foreach($data['questions'] as $qkey => $qdata)
-			{
-				if(array_key_exists('id', $qdata))
-				{
-					$submitted_questions[] = $qdata['id'];
-				}
-			}
-			
-			foreach($test->questions as $question)
-			{
-				if(!in_array($question->id, $submitted_questions))
-				{
-					$question->delete();
-				}
-			}
-			
-			if($test->course->id != $data['course']['id'])
-			{
-				$latest_test_on_course = Test::where([
-					'course_id' => $data['course']['id']
-				])->orderBy('order', 'DESC')->first();
-				
-				$next_course_order 	= ($latest_test_on_course ? $latest_test_on_course->order : 0) + 1;
-				$test->order 		= $next_course_order;
-			}
-		}
-		
-		$test->course_id 	= $data['course']['id'];
-		
-		$test->title 		= $data['title'];
-		$test->description 	= $data['description'];
-		
-		$test->autodiscard 	= $data['autodiscard'];
-		
-		$test->save();
-		
-		///////////////////////
-		
-		$isNewPage = !array_key_exists('id', $data['page']);
-		$pageBody = trim($data['page']['body']);
-		
-		$page = false;
-		
-		if($isNewPage)
-		{
-			$page = new Page();
-		}
-		else
-		{
-			$page = Page::find($data['page']['id']);
-		}
-		
-		if($page)
-		{
-			$page->test_id = $test->id;
-			$page->body = $pageBody;
-			$page->hidden = false;
-			
-			if(strlen(trim(strip_tags($pageBody, '<img>'))) == 0)
-			{
-				$page->hidden = true;
-			}
-			
-			$page->save();
-		}
-		
-		/////////////////////////
-		
-		foreach($data['questions'] as $qkey => $question_data)
-		{
-			if(!array_key_exists('id', $question_data))
-			{
-				$question = new Question();
-			}
-			else
-			{
-				$question = Question::find($question_data['id']);
-				
-				$submitted_answers = [];
-				foreach($question_data['answers'] as $adata)
-				{
-					if(array_key_exists('id', $adata))
-					{
-						$submitted_answers[] = $adata['id'];
-					}
-				}
-				
-				foreach($question->answers as $akey => $answer)
-				{
-					if(!in_array($answer->id, $submitted_answers) ||
-					   ($question_data['type'] == "TEXT" && $akey > 0) || $question_data['type'] == "TEXTAREA")
-					{
-						$answer->delete();
-					}
-				}
-			}
-			
-			$question->test_id 	= $test->id;
-			
-			$question->type 	= $question_data['type'];
-			$question->title 	= $question_data['title'];
-			$question->subtitle = $question_data['subtitle'];
-			
-			$question->order 	= $qkey + 1;
-			
-			$question->save();
-			
-			foreach($question_data['answers'] as $akey => $answer_data)
-			{
-				if(!array_key_exists('id', $answer_data))
-				{
-					$answer = new Answer();
-				}
-				else
-				{
-					$answer = Answer::find($answer_data['id']);
-				}
-				
-				$answer->question_id 	= $question->id;
-				
-				$answer->text 			= $answer_data['text'];
-				$answer->is_correct 	= @$answer_data['is_correct'] ? true : false;
-				
-				switch($question->type)
-				{
-					case 'TEXT':
-					case 'MULTITEXT':
-						$answer->is_correct = true;
-					break;
-				}
-				
-				$answer->error_margin 	= 10;
-				
-				$answer->save();
-			}
-		}
-		
-		return $test->id;
-	}
 
 	/**
 	 * Display the specified resource.
@@ -229,32 +69,6 @@ class TestsController extends Controller
 			}
 		}
 		
-		return $test;
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit($id)
-	{
-		$test = Test::with('course', 'page', 'questions')->findOrFail($id);
-
-		foreach($test->questions as $question)
-		{
-			foreach($question->answers as $key => &$answer)
-			{
-				$answer->is_correct = $answer->is_correct ? true : false;
-
-				if($question->type == 'CHOICE' and $answer->is_correct)
-				{
-					$question->correct_answer = $answer->id;
-				}
-			}
-		}
-
 		return $test;
 	}
 
@@ -288,6 +102,29 @@ class TestsController extends Controller
 			'error' 		=> true,
 			'not_found'		=> true,
 		];
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy($id)
+	{
+		$test = Test::with('questions', 'questions.answers')->findOrFail($id);
+		
+		foreach($test->questions as $question)
+		{
+			foreach($question->answers as $answer)
+			{
+				$answer->delete();
+			}
+			
+			$question->delete();
+		}
+		
+		$test->delete();
 	}
 	
 	protected function _validateTest($data)
@@ -425,27 +262,171 @@ class TestsController extends Controller
 			'passed'	=> count($errors['messages']) == 0,
 		];
 	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return \Illuminate\Http\Response
-	 */
-	public function destroy($id)
+	
+	protected function _saveTest($data)
 	{
-		$test = Test::with('questions', 'questions.answers')->findOrFail($id);
+		$isNewEntry = !array_key_exists('id', $data);
 		
-		foreach($test->questions as $question)
+		if($isNewEntry)
 		{
-			foreach($question->answers as $answer)
+			$test = new Test();
+			
+			$latest_test_on_course = Test::where([
+				'course_id' => $data['course']['id']
+			])->orderBy('order', 'DESC')->first();
+			
+			$next_course_order 	= ($latest_test_on_course ? $latest_test_on_course->order : 0) + 1;
+			$test->order 		= $next_course_order;
+		}
+		else
+		{
+			$test = Test::find($data['id']);
+			
+			$submitted_questions = [];
+			foreach($data['questions'] as $qkey => $qdata)
 			{
-				$answer->delete();
+				if(array_key_exists('id', $qdata))
+				{
+					$submitted_questions[] = $qdata['id'];
+				}
 			}
 			
-			$question->delete();
+			foreach($test->questions as $question)
+			{
+				if(!in_array($question->id, $submitted_questions))
+				{
+					$question->delete();
+				}
+			}
+			
+			if($test->course->id != $data['course']['id'])
+			{
+				$latest_test_on_course = Test::where([
+					'course_id' => $data['course']['id']
+				])->orderBy('order', 'DESC')->first();
+				
+				$next_course_order 	= ($latest_test_on_course ? $latest_test_on_course->order : 0) + 1;
+				$test->order 		= $next_course_order;
+			}
 		}
 		
-		$test->delete();
+		$test->course_id 	= $data['course']['id'];
+		
+		$test->title 		= $data['title'];
+		$test->description 	= $data['description'];
+		
+		$test->autodiscard 	= $data['autodiscard'];
+		
+		$test->save();
+		
+		///////////////////////
+		
+		$isNewPage = !array_key_exists('id', $data['page']);
+		$pageBody = trim($data['page']['body']);
+		
+		$page = false;
+		
+		if($isNewPage)
+		{
+			$page = new Page();
+		}
+		else
+		{
+			$page = Page::find($data['page']['id']);
+		}
+		
+		if($page)
+		{
+			$page->test_id = $test->id;
+			$page->body = $pageBody;
+			$page->hidden = false;
+			
+			if(strlen(trim(strip_tags($pageBody, '<img>'))) == 0)
+			{
+				$page->hidden = true;
+			}
+			
+			$page->save();
+		}
+		
+		/////////////////////////
+		
+		foreach($data['questions'] as $qkey => $question_data)
+		{
+			if(!array_key_exists('id', $question_data))
+			{
+				$question = new Question();
+			}
+			else
+			{
+				$question = Question::find($question_data['id']);
+				
+				$submitted_answers = [];
+				foreach($question_data['answers'] as $adata)
+				{
+					if(array_key_exists('id', $adata))
+					{
+						$submitted_answers[] = $adata['id'];
+					}
+				}
+				
+				foreach($question->answers as $akey => $answer)
+				{
+					if(!in_array($answer->id, $submitted_answers) ||
+					   ($question_data['type'] == "TEXT" && $akey > 0) || $question_data['type'] == "TEXTAREA")
+					{
+						$answer->delete();
+					}
+				}
+			}
+			
+			$question->test_id 	= $test->id;
+			
+			$question->type 	= $question_data['type'];
+			$question->title 	= $question_data['title'];
+			$question->subtitle = $question_data['subtitle'];
+			
+			$question->order 	= $qkey + 1;
+			
+			$question->data 	= $question_data['data'];
+			
+			if($question->data->multitext_required > count($question_data['answers']))
+			{
+				$question->data->multitext_required = count($question_data['answers']);
+			}
+			
+			$question->save();
+			
+			foreach($question_data['answers'] as $akey => $answer_data)
+			{
+				if(!array_key_exists('id', $answer_data))
+				{
+					$answer = new Answer();
+				}
+				else
+				{
+					$answer = Answer::find($answer_data['id']);
+				}
+				
+				$answer->question_id 	= $question->id;
+				
+				$answer->text 			= $answer_data['text'];
+				$answer->is_correct 	= @$answer_data['is_correct'] ? true : false;
+				
+				switch($question->type)
+				{
+					case 'TEXT':
+					case 'MULTITEXT':
+						$answer->is_correct = true;
+					break;
+				}
+				
+				$answer->error_margin 	= 10;
+				
+				$answer->save();
+			}
+		}
+		
+		return $test->id;
 	}
 }

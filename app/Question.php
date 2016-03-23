@@ -22,6 +22,23 @@ class Question extends Model
 		return $this->hasMany('App\Answer');
 	}
 	
+	public function getDataAttribute()
+	{
+		$value = json_decode($this->attributes['data']);
+		
+		if(is_null($value))
+		{
+			return (object)[];
+		}
+		
+		return $value;
+	}
+	
+	public function setDataAttribute($value)
+	{
+		$this->attributes['data'] = json_encode($value);
+	}
+	
 	public function correctAnswers()
 	{
 		switch($this->type)

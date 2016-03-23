@@ -122,6 +122,8 @@ class TestValidator
 				$matched = [];
 				$correct_rows = [];
 				
+				$required = $question->data->multitext_required;
+				
 				if(!$empty_answer)
 				{
 					foreach($correct_answers as $correct_answer)
@@ -140,9 +142,9 @@ class TestValidator
 				}
 				
 				$response = [
-					'correct'			=> count($matched) == $correct_answers->count(),
+					'correct'			=> count($matched) == min($required, $correct_answers->count()),
 					'partial'			=> count($matched),
-					'total'				=> $correct_answers->count(),
+					'total'				=> min($required, $correct_answers->count()),
 					'correct_answers'	=> $correct_answers,
 					'correct_rows'		=> $correct_rows,
 				];
@@ -192,7 +194,7 @@ class TestValidator
 
 		if($margin > 0)
 		{
-			$margin = ceil(strlen($str1) * ($margin / 100.0));
+			$margin = floor(strlen($str1) * ($margin / 100.0));
 			return levenshtein($str1, $str2) <= $margin;
 		}
 		
