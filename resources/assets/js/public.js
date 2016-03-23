@@ -169,16 +169,12 @@ $(function()
 		var book = position[0].replace(" ", "+").replace("–","-").replace("—", "-").replace(", ", ",");
 		var isFullChapter = book.indexOf(":") < 0;
 		
-		console.log(position, book);
-		
 		if(isFullChapter)
 		{
 			baseurl += "chp=1&";
 		}
 		
 		var url = baseurl + "ref=" + book;
-		console.log(url);
-		
 		window.open(url, 'bibleReference', 'height=500,width=800,resizable,scrollbars');
 		
 		e.preventDefault();

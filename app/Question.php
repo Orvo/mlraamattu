@@ -24,6 +24,14 @@ class Question extends Model
 	
 	public function correctAnswers()
 	{
-		return $this->answers()->where('is_correct', 1)->get();
+		switch($this->type)
+		{
+			case 'MULTI':
+			case 'CHOICE':
+				return $this->answers()->where('is_correct', 1)->get();
+			break;
+		}
+		
+		return $this->answers()->get();
 	}
 }
