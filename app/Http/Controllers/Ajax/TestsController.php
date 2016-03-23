@@ -26,16 +26,6 @@ class TestsController extends Controller
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @param  \Illuminate\Http\Request  $request
@@ -198,6 +188,15 @@ class TestsController extends Controller
 				
 				$answer->text 			= $answer_data['text'];
 				$answer->is_correct 	= @$answer_data['is_correct'] ? true : false;
+				
+				switch($question->type)
+				{
+					case 'TEXT':
+					case 'MULTITEXT':
+						$answer->is_correct = true;
+					break;
+				}
+				
 				$answer->error_margin 	= 10;
 				
 				$answer->save();
