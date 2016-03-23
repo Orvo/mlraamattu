@@ -95,7 +95,7 @@ app.controller('GroupsFormController', function($rootScope, $scope, $window, $lo
 	if(!$scope.id)
 	{
 		$scope.data.group = new GroupsModel;
-		$scope.data.group.group_teacher = authorization.user.id;
+		$scope.data.group.teacher_id = authorization.user.id;
 		
 		$scope.loaded = true;
 		
