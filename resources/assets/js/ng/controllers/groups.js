@@ -113,7 +113,7 @@ app.controller('GroupsFormController', function($rootScope, $scope, $window, $lo
 			
 			angular.forEach($scope.users, function(value, key)
 			{
-				if(value.id == $scope.data.group.teacher_id)
+				if(value.id == $scope.data.group.teacher.id)
 				{
 					$scope.group_teacher = value;
 				}

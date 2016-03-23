@@ -74,9 +74,15 @@
 				<li>
 					<b>{{ $group->title }}</b><br>
 					Opettaja {{ $group->teacher->name }}
-					<a href="/groups/leave/{{ $group->id }}" class="btn btn-danger">
-						<span class="glyphicon glyphicon-remove"></span> Poistu ryhmästä
-					</a>
+					@if($group->teacher->id != Auth::user()->id)
+						<a href="/groups/leave/{{ $group->id }}" class="btn btn-danger">
+							<span class="glyphicon glyphicon-remove"></span> Poistu ryhmästä
+						</a>
+					@else
+						<a href="/admin#/groups/{{ $group->id }}/edit" class="btn btn-primary" target="_blank">
+							<span class="glyphicon glyphicon-edit"></span> Muokkaa ryhmää
+						</a>
+					@endif
 				</li>
 			@endforeach
 		</ul>

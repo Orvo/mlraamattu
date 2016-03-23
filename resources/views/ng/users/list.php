@@ -48,8 +48,8 @@
 		<thead>
 			<tr>
 				<td style="width:40px">ID</td>
-				<td>Käyttäjän tiedot</td>
-				<td style="width:32%">Koesuoritukset</td>
+				<td style="width:35%">Käyttäjän tiedot</td>
+				<td>Koesuoritukset</td>
 				<td style="width:180px">Toiminnot</td>
 			</tr>
 		</thead>

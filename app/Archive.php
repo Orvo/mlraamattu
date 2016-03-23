@@ -32,12 +32,18 @@ class Archive extends Model
 	{
 		if($this->attributes['replied_to']) return 0;
 		
-		if($this->test->autodiscard)
+		$result = 0;
+		
+		if($value)
 		{
-			return $this->test->autodiscard;
+			$result = $value;
+		}
+		elseif($this->test && $this->test->autodiscard)
+		{
+			$result = $this->test->autodiscard;
 		}
 		
-		return $value;
+		return $result;
 	}
 	
 	public function setDiscardedAttribute($value)
