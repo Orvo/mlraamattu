@@ -134,7 +134,7 @@ class Test extends Model
 		}
 		else
 		{
-			if(Auth::user()->archives()->where('test_id', $this->id)->exists())
+			if(Auth::user()->archives()->where('test_id', $this->id)->exists() || Auth::user()->isAdmin())
 			{
 				$this->unlockStatus = true;
 			}
