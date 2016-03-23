@@ -353,10 +353,12 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 			answers: [
 				{
 					text: "",
+					error_margin: 10,
 					is_correct: true,
 				},
 				{
 					text: "",
+					error_margin: 10,
 					is_correct: false,
 				},
 			],
@@ -393,6 +395,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 					{
 						question.answers.push({
 							text: '',
+							error_margin: 10,
 						});
 					}
 				}

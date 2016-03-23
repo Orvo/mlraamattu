@@ -427,7 +427,15 @@ class TestsController extends Controller
 					break;
 				}
 				
-				$answer->error_margin	= $answer_data['error_margin'];
+				if(array_key_exists('error_margin', $answer_data))
+				{
+					$answer->error_margin = $answer_data['error_margin'];
+					
+				}
+				else
+				{
+					$answer->error_margin = 10;	
+				}
 				
 				$answer->save();
 			}
