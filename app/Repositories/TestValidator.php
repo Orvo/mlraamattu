@@ -113,7 +113,7 @@ class TestValidator
 				$correct_answer = $correct_answers->first();
 				
 				$response = [
-					'correct' 			=> $this->_string_match($correct_answer->text, $given_answer, 10),
+					'correct' 			=> $this->_string_match($correct_answer->text, $given_answer, $correct_answer->error_margin),
 					'correct_answers'	=> $correct_answer,
 				];
 			break;
@@ -130,7 +130,7 @@ class TestValidator
 					{
 						foreach($given_answer as $key => $answer)
 						{
-							if($this->_string_match($correct_answer->text, $answer, 10))
+							if($this->_string_match($correct_answer->text, $answer, $correct_answer->error_margin))
 							{
 								$matched[] = $answer;
 								$correct_rows[$key] = true;
