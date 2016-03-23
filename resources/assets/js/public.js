@@ -171,12 +171,15 @@ $(function()
 		
 		console.log(position, book, full_chapter);
 		
-		if(full_chapter != 0 && full_chapter !== undefined)
+		if(full_chapter)
 		{
 			baseurl += "chp=1&";
 		}
 		
-		window.open(baseurl + "ref=" + book, 'bibleReference', 'height=500,width=800,resizable,scrollbars');
+		var url = baseurl + "ref=" + book;
+		console.log(url);
+		
+		window.open(url, 'bibleReference', 'height=500,width=800,resizable,scrollbars');
 		
 		e.preventDefault();
 	});
