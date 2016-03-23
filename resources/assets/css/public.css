@@ -1174,6 +1174,7 @@ div.question div.header
 	border-left: 4px solid #e4e4e4;
 	position: relative;
 	overflow: hidden;
+	z-index: 1;
 }
 
 div.question.no-validation div.header
@@ -1195,6 +1196,8 @@ div.question div.header .title
 {
 	font-weight: bold;
 	margin-left: 54px;
+	position: relative;
+	z-index: 50 !important;
 }
 
 div.question div.header .subtitle
@@ -1202,6 +1205,8 @@ div.question div.header .subtitle
 	font-weight: normal;
 	margin: 0;
 	color: #555;
+	position: relative;
+	z-index: 50 !important;
 }
 
 div.question div.header .subtitle img
@@ -1226,6 +1231,8 @@ div.question div.header .big-validation-icon
 	right: 0;
 	text-align: right;
 	overflow: hidden;
+	z-index: 2;
+	opacity: 0.25;
 }
 
 div.question.correct div.header .big-validation-icon
