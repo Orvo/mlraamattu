@@ -169,7 +169,7 @@ $(function()
 		var book = position[0].replace(" ", "+").replace("–","-").replace("—", "-").replace(", ", ",");
 		var isFullChapter = book.indexOf(":") < 0;
 		
-		console.log(position, book, full_chapter);
+		console.log(position, book);
 		
 		if(isFullChapter)
 		{
