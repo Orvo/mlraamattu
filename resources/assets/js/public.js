@@ -167,11 +167,11 @@ $(function()
 		
 		var position = $(this).attr('data-bref').split(',');
 		var book = position[0].replace(" ", "+").replace("–","-").replace("—", "-").replace(", ", ",");
-		var full_chapter = position[1];
+		var isFullChapter = book.indexOf(":") < 0;
 		
 		console.log(position, book, full_chapter);
 		
-		if(full_chapter)
+		if(isFullChapter)
 		{
 			baseurl += "chp=1&";
 		}
