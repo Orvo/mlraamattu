@@ -390,10 +390,16 @@ class TestsController extends Controller
 			
 			$question->data 	= $question_data['data'];
 			
-			if($question->data->multitext_required > count($question_data['answers']))
+			switch($question->type)
 			{
-				$question->data->multitext_required = count($question_data['answers']);
+				case 'MULTITEXT':
+					if($question->data->multitext_required > count($question_data['answers']))
+					{
+						$question->data->multitext_required = count($question_data['answers']);
+					}
+				break;
 			}
+			
 			
 			$question->save();
 			
