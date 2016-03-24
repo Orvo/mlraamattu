@@ -173,7 +173,7 @@ class TestsController extends Controller
 						
 						foreach($question['answers'] as $akey => &$answer)
 						{
-							if($answer['is_correct'])
+							if(@$answer['is_correct'])
 							{
 								$has_correct_answer = true;
 								break;
@@ -411,7 +411,7 @@ class TestsController extends Controller
 					$answer = Answer::find($answer_data['id']);
 				}
 				
-				if(!$answer)
+				if(!@$answer)
 				{
 					$answer = new Answer();
 				}
