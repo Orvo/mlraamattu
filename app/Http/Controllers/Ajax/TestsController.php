@@ -415,6 +415,11 @@ class TestsController extends Controller
 					$answer = Answer::find($answer_data['id']);
 				}
 				
+				if(!@$answer)
+				{
+					$answer = new Answer();
+				}
+				
 				$answer->question_id 	= $question->id;
 				
 				$answer->text 			= $answer_data['text'];
