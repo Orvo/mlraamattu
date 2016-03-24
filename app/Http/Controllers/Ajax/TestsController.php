@@ -406,14 +406,13 @@ class TestsController extends Controller
 			
 			foreach($question_data['answers'] as $akey => $answer_data)
 			{
-				if(array_key_exists('id', $answer_data))
-				{
-					$answer = Answer::find($answer_data['id']);
-				}
-				
-				if(!@$answer)
+				if(!array_key_exists('id', $answer_data))
 				{
 					$answer = new Answer();
+				}
+				else
+				{
+					$answer = Answer::find($answer_data['id']);
 				}
 				
 				$answer->question_id 	= $question->id;
