@@ -24,21 +24,6 @@
 			<input type="text" ng-model="searchFilter" placeholder="Hae ryhmiä" class="form-control search-filter">
 		</div>
 		<div class="user-toggles">
-			<div class="radio">
-				<label class="btn" ng-class="{'btn-warning': filter.access_level == undefined, 'btn-default': filter.access_level != undefined}">
-					<input type="radio" ng-model="filter.access_level" ng-value="undefined"> Näytä kaikki
-				</label>
-			</div>
-			<div class="radio">
-				<label class="btn" ng-class="{'btn-warning': filter.access_level == 0, 'btn-default': filter.access_level != 0}">
-					<input type="radio" ng-model="filter.access_level" ng-value="0"> Näytä käyttäjät
-				</label>
-			</div>
-			<div class="radio">
-				<label class="btn" ng-class="{'btn-warning': filter.access_level === 1, 'btn-default': filter.access_level !== 1}">
-					<input type="radio" ng-model="filter.access_level" ng-value="1"> Näytä ylläpitäjät
-				</label>
-			</div>
 		</div>
 	</div>
 	<table class="table table-hover">
