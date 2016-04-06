@@ -87,7 +87,7 @@ module.exports = function(grunt)
 					'resources/assets/css/*.css',
 				],
 				tasks: [
-					'prepare',
+					'build',
 				],
 			},
 		}
@@ -102,7 +102,7 @@ module.exports = function(grunt)
 	
 	// Task definition
 	grunt.registerTask('default', ['watch']);
-	grunt.registerTask('prepare', [
+	grunt.registerTask('build', [
 		'concat',
 		'uglify',
 		'cssmin',

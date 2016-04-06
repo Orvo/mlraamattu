@@ -8,3 +8,5 @@ Homestead.json
 *.sublime-workspace
 ml.sublime-workspace
 mlraamattu.zip
+
+*.docx#
