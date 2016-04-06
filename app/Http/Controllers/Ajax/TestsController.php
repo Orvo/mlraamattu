@@ -370,12 +370,16 @@ class TestsController extends Controller
 					}
 				}
 				
-				foreach($question->answers as $akey => $answer)
+				foreach($question->answers as $akey => &$answer)
 				{
-					if(!in_array($answer->id, $submitted_answers) ||
-					   ($question_data['type'] == "TEXT" && $akey > 0) || $question_data['type'] == "TEXTAREA")
+					if(!in_array($answer->id, $submitted_answers) || ($question_data['type'] == "TEXT" && $akey > 0) || $question_data['type'] == "TEXTAREA")
 					{
 						$answer->delete();
+					}
+					
+					if($question_data['type'] == "CHOICE")
+					{
+						$answer->is_correct = intval($question['correct_answer']) == $akey;
 					}
 				}
 			}
