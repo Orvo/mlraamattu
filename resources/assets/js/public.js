@@ -100,6 +100,11 @@ $(function()
 	
 	$('a.spoiler-warning').click(function()
 	{
+		$(this).parent().addClass('spoiled');
+	});
+		
+	$('#top-spoiler-warning a.spoiler-warning').click(function()
+	{
 		$('.correct-answers').addClass('spoiled');
 		$('#top-spoiler-warning').slideUp(400);
 	});

@@ -222,7 +222,7 @@
 							</p>
 							<p id="top-spoiler-warning">
 								<a class="spoiler-warning">
-									<span class="glyphicon glyphicon-eye-open"></span> Oikeat vastaukset piilotettu. Klikkaa tästä nähdäksesi.
+									<span class="glyphicon glyphicon-eye-open"></span> Oikeat vastaukset piilotettu. Klikkaa tästä nähdäksesi kaikki.
 								</a>
 							</p>
 						</div>

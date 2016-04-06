@@ -28,6 +28,13 @@ class Question extends Model
 		
 		if(is_null($value))
 		{
+			if($this->type == "MULTITEXT")
+			{
+				return (object)[
+					'multitext_required' => $this->answers()->count(),
+				];
+			}
+			
 			return (object)[];
 		}
 		
