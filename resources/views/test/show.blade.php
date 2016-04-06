@@ -572,7 +572,7 @@
 									case 'MULTITEXT':
 								?>
 									<div class="multitext">
-										@if(min($question->data->multitext_required, $question->answers->count()) > 1):
+										@if(min($question->data->multitext_required, $question->answers->count()) > 1)
 											<div class="tip alert alert-info">
 												<span class="glyphicon glyphicon-exclamation-sign"></span> Vastauksien järjestyksellä ei ole väliä.
 											</div>
@@ -584,7 +584,7 @@
 													'has-error'		=> (isset($validation) && @!$validation[$question->id]['correct_rows'][$i]),
 												])
 											}}">
-												@if(min($question->data->multitext_required, $question->answers->count()) > 1):
+												@if(min($question->data->multitext_required, $question->answers->count()) > 1)
 													<label for="answer-{{ $question->id .'-'. $i }}" class="col-xs-1 control-label">{{ $i+1 }}.</label>
 												@endif
 												<div class="{{ css([
