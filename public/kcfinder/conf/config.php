@@ -22,8 +22,8 @@ $_CONFIG = array(
 // GENERAL SETTINGS
 
     'disabled' => false,
-    'uploadURL' => "../uploads",
-    'uploadDir' => "../uploads",
+    'uploadURL' => "/uploads",
+    'uploadDir' => "/home/www/mlraamattu/html/public/uploads",
     'theme' => "default",
 
     'types' => array(
