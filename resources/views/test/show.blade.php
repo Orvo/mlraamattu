@@ -549,7 +549,7 @@
 										</div>
 									</div>
 									
-									@if(isset($validation) && $validation[$question->id]['correct_answers'])
+									@if(isset($validation) && @$validation[$question->id]['correct_answers'])
 										<hr>
 										<div class="correct-answers {{
 												css([
@@ -572,9 +572,11 @@
 									case 'MULTITEXT':
 								?>
 									<div class="multitext">
-										<div class="tip alert alert-info">
-											<span class="glyphicon glyphicon-exclamation-sign"></span> Vastauksien järjestyksellä ei ole väliä.
-										</div>
+										@if(min($question->data->multitext_required, $question->answers->count()) > 1):
+											<div class="tip alert alert-info">
+												<span class="glyphicon glyphicon-exclamation-sign"></span> Vastauksien järjestyksellä ei ole väliä.
+											</div>
+										@endif
 										@for($i=0; $i < min($question->data->multitext_required, $question->answers->count()); ++$i)
 											<div class="row {{
 												css([
@@ -582,8 +584,13 @@
 													'has-error'		=> (isset($validation) && @!$validation[$question->id]['correct_rows'][$i]),
 												])
 											}}">
-												<label for="answer-{{ $question->id .'-'. $i }}" class="col-xs-1 control-label">{{ $i+1 }}.</label>
-												<div class="col-xs-11">
+												@if(min($question->data->multitext_required, $question->answers->count()) > 1):
+													<label for="answer-{{ $question->id .'-'. $i }}" class="col-xs-1 control-label">{{ $i+1 }}.</label>
+												@endif
+												<div class="{{ css([
+														'col-xs-11' => min($question->data->multitext_required, $question->answers->count()) > 1,
+														'col-xs-12' => min($question->data->multitext_required, $question->answers->count()) == 1,
+													]) }}">
 													{!! Form::text('answer-' . $question->id . '[]', @$given_answers[$question->id][$i], [
 														'class' => 'form-control',
 														'placeholder' => 'Vastaus tähän',
@@ -601,7 +608,7 @@
 											</div>
 										@endfor
 
-										@if(isset($validation) && $validation[$question->id]['correct_answers'])
+										@if(isset($validation) && @$validation[$question->id]['correct_answers'])
 											<hr>
 											<div class="correct-answers {{
 												css([

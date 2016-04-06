@@ -183,7 +183,7 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 		if(question.type == "MULTITEXT")
 		{
 			$scope.multitext_required = [];
-			for(var i=2; i <= question.answers.length; ++i)
+			for(var i=1; i <= question.answers.length; ++i)
 			{
 				$scope.multitext_required.push(i);
 			}

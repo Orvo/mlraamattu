@@ -388,7 +388,7 @@ class TestsController extends Controller
 			
 			$question->order 	= $qkey + 1;
 			
-			$question->data 	= $question_data['data'];
+			$question->data 	= array_key_exists('data', $question_data) ? $question_data['data'] : '';
 			
 			switch($question->type)
 			{
