@@ -376,11 +376,6 @@ class TestsController extends Controller
 					{
 						$answer->delete();
 					}
-					
-					if($question_data['type'] == "CHOICE")
-					{
-						$answer->is_correct = intval($question['correct_answer']) == $akey;
-					}
 				}
 			}
 			
@@ -427,7 +422,15 @@ class TestsController extends Controller
 				$answer->question_id 	= $question->id;
 				
 				$answer->text 			= $answer_data['text'];
-				$answer->is_correct 	= @$answer_data['is_correct'] ? true : false;
+				
+				if($question->type == "CHOICE")
+				{
+					$answer->is_correct = intval($question_data['correct_answer']) == $akey;
+				}
+				else
+				{
+					$answer->is_correct = @$answer_data['is_correct'] ? true : false;
+				}
 				
 				switch($question->type)
 				{
