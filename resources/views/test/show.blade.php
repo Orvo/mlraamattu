@@ -52,13 +52,13 @@
 					<div class="form-group field-name">
 						<label for="user-name" class="control-label col-sm-3">Nimi</label>
 						<div class="col-sm-7">
-							<input type="text" class="form-control" id="user-name" name="user-name" value="{{ old('user-name') }}">
+							<input type="text" class="form-control" id="user-name" name="user-name" value="{{ @$old['user-name'] }}">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="user-email" class="control-label col-sm-3">Sähköpostiosoite</label>
 						<div class="col-sm-7">
-							<input type="text" class="form-control" id="user-email" name="user-email" value="{{ old('user-email') }}">
+							<input type="text" class="form-control" id="user-email" name="user-email" value="{{ @$old['user-email'] }}">
 						</div>
 					</div>
 					<div class="form-group">
@@ -85,7 +85,7 @@
 					<div class="form-group">
 						<label for="user-login-email" class="control-label col-sm-3">Sähköpostiosoite</label>
 						<div class="col-sm-7">
-							<input type="text" class="form-control" id="user-login-email" name="user-login-email" value="{{ old('user-login-email') }}">
+							<input type="text" class="form-control" id="user-login-email" name="user-login-email" value="{{ @$old['user-login-email'] }}">
 						</div>
 					</div>
 					<div class="form-group">
@@ -120,7 +120,7 @@
 					Ryhmäkoodi
 				</label>
 				<div class="col-sm-7">
-					<input type="text" id="group-code" class="form-control" name="group-code" value="{{ Input::old('group-code') }}">
+					<input type="text" id="group-code" class="form-control" name="group-code" value="{{ @$old['group-code'] }}">
 					<p class="help-block">
 						Jos olet osa opetusryhmää ja sinulla on ryhmäkoodi, syötä se tähän. Muutoin jätä tyhjäksi.
 					</p>

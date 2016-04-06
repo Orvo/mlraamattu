@@ -26,7 +26,14 @@ class Group extends Model
 			$user = Auth::user();
 		}
 		
+		if($user->isInGroup($this->id))
+		{
+			return false;
+		}
+		
 		$user->groups()->attach($this->id);
+		
+		return true;
 	}
 	
 	public function leave($user = false)
@@ -36,7 +43,14 @@ class Group extends Model
 			$user = Auth::user();
 		}
 		
+		if(!$user->isInGroup($this->id))
+		{
+			return false;
+		}
+		
 		$user->groups()->detach($this->id);
+		
+		return true;
 	}
 	
 }

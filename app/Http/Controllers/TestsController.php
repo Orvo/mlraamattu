@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\MessageBag;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -13,6 +15,7 @@ use \Hash;
 
 use App\User;
 use App\Test;
+use App\Group;
 use App\Archive;
 
 use Mail;
@@ -104,6 +107,9 @@ class TestsController extends Controller
 		$passedFull		= $validation['num_correct'] == $validation['total'];
 		$minimumToPass 	= ceil($validation['total'] * 0.5);
 		
+		$customErrors = new MessageBag;
+		$errors = [];
+		
 		if(!Auth::check())
 		{
 			$authenticationType = $request->input('authentication_type');
@@ -141,14 +147,25 @@ class TestsController extends Controller
 				break;
 			}
 			
-			// if($request->get('group-code'))
+			$group = false;
+			$shouldJoinGroup = false;
 			
-			// dd($authvalidator->errors());
-			
-			if($authvalidator->passes())
+			if(strlen($request->input('group-code')) > 0)
 			{
+				$group = Group::where('code', $request->input('group-code'));
+				
+				if(!$group->exists())
+				{
+					$customErrors->add('group-code', 'Annettua ryhmää ei löytynyt. Syötä oikea ryhmäkoodi.');
+				}
+				else
+				{
+					$shouldJoinGroup = true;
+				}
+			}
 			
-			// $authvalidator->getMessageBag()->add('group-code', 'HELLO WORLD');
+			if($authvalidator->passes() && $customErrors->isEmpty())
+			{
 				switch($authenticationType)
 				{
 					case 0:
@@ -156,6 +173,7 @@ class TestsController extends Controller
 						$user->name = $request->input('user-name');
 						$user->email = $request->input('user-email');
 						$user->password = Hash::make($request->input('user-password'));
+						$user->access_level = 'USER';
 						$user->save();
 						
 						Mail::send('email.user_account_created',
@@ -168,6 +186,11 @@ class TestsController extends Controller
 						});
 						
 						Auth::login($user);
+						
+						if($shouldJoinGroup)
+						{
+							$group->first()->join();
+						}
 					break;
 					case 1:
 						$credentials = [
@@ -179,18 +202,25 @@ class TestsController extends Controller
 						
 						if(!Auth::attempt($credentials, $remember))
 						{
-							$authvalidator->getMessageBag()->add('user-login-email', 'Kirjautuminen annetuilla tunnuksilla ei onnistunut!');
+							$customErrors->add('user-login-email', 'Kirjautuminen annetuilla tunnuksilla ei onnistunut!');
 						}
 						else
 						{
+							if($shouldJoinGroup)
+							{
+								$group->first()->join();
+							}
+							
 							return redirect('/test/' . $test->id);
 						}
 					break;
 				}
 			}
+		
+			$errors = array_merge($authvalidator->errors()->all(), $customErrors->all());
 		}
 		
-		if(Auth::check())
+		if(Auth::check() && $customErrors->isEmpty())
 		{
 			$archive = Auth::user()->archives()->where('test_id', $id)->first();
 			
@@ -216,8 +246,6 @@ class TestsController extends Controller
 			$archive->save();
 		}
 		
-		//dd($authvalidator->errors()->all());
-		
 		return view('test.show')
 			->with(array_merge($validation, [
 				'test' 					=> $test,
@@ -228,9 +256,11 @@ class TestsController extends Controller
 				'authentication_type'	=> @$authenticationType,
 				'isMaterialPage'		=> false,
 				'authFailed'			=> !Auth::check() && !$authvalidator->passes(),
+				
+				'old'					=> $request->all(),
 			]))
-			->withErrors(@$authvalidator)
-			->withInput($request);
+			->withInput($request)
+			->withErrors(@$errors);
 	}
 	
 	

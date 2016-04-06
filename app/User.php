@@ -81,7 +81,7 @@ class User extends Model implements AuthenticatableContract,
     
     public function getPowerLevelAttribute()
     {
-        return $this->access_levels[$this->access_level];
+        return $this->access_levels[$this->attributes['access_level']];
     }
     
     public function canAccessAdminPanel()
