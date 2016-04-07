@@ -64,6 +64,13 @@ module.exports = function(grunt)
 					],
 				}
 			},
+			ckeditor: {
+				files: {
+					'public/css/build/ckeditor-additional.min.css': [
+						'resources/assets/css/courses-special.css',
+					],
+				}
+			},
 			admin: {
 				files: {
 					'public/css/build/admin.min.css': [
