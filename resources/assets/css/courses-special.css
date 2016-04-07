@@ -25,12 +25,12 @@
 /* Nettikurssiasetukset - Löytöjä Raamatusta
 ---------------------------------------------------------------*/
 
-#lr p, #Maailmanvalo ul, #mv ol
+#lr p, #lr ul, #lr ol
 {
 	font-size: 1em;
 }
 
-#lr .ointro1, #mv .ointro2, #mv .bible
+#lr .ointro1, #lr .ointro2, #lr .bible
 {
 	color: #bd9122;
 }
