@@ -35,6 +35,11 @@
 	color: #bd9122;
 }
 
+#lr a
+{
+	color: #000;
+}
+
 #lr a:hover
 {
 	color: #bd9122;
