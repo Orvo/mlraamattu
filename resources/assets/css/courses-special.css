@@ -165,11 +165,11 @@
 	font-size: 1.7em;
 }
 
-.strippi
+.strippi p
 {
 	width: 100%;
-	font-size: 1.5em;
-	border-top-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-	padding: 5px, 20px;
+	font-size: 1.5em !important;
+	border-top-left-radius: 20px;
+	border-bottom-right-radius: 20px;
+	padding: 5px 20px;
 }
