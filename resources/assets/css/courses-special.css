@@ -16,7 +16,7 @@
 	color: #0075a7;
 }
 
-#mv .strippi p
+#mv .strippi
 {
 	color: #fff;
 	background-color: #0075a7;
@@ -40,7 +40,7 @@
 	color: #bd9122;
 }
 
-#lr .strippi p
+#lr .strippi
 {
 	color: #fff;
 	background-color: #bd9122;
@@ -123,7 +123,7 @@
 	color: #f8c2c2;
 }
 
-#pm .strippi p
+#pm .strippi
 {
 	color: #fff;
 	background-color: #ac1144;
@@ -165,7 +165,7 @@
 	font-size: 1.7em;
 }
 
-.strippi p
+.strippi
 {
 	width: 100%;
 	font-size: 1.5em !important;
