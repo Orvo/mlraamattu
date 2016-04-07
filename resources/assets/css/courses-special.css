@@ -1,7 +1,7 @@
 /* Nettikurssiasetukset - Maailman Valo
 ---------------------------------------------------------------*/
 
-#mv p, #Maailmanvalo ul, #mv ol
+#mv p, #mv ul, #mv ol
 {
 	font-size: 1em;
 }
@@ -168,7 +168,7 @@
 .strippi
 {
 	width: 100%;
-	font-size: 1.5em !important;
+	font-size: 1.2em !important;
 	border-top-left-radius: 20px;
 	border-bottom-right-radius: 20px;
 	padding: 5px 20px;
