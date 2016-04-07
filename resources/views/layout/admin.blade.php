@@ -54,6 +54,11 @@
 									</span>
 								</a>
 							</li>
+							<li>
+								<a href="#/pages">
+									Sivut
+								</a>
+							</li>
 						</ul>
 						
 						<ul class="nav navbar-nav navbar-right">

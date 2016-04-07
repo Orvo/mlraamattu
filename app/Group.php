@@ -21,9 +21,13 @@ class Group extends Model
 	
 	public function join($user = false)
 	{
-		if(!$user)
+		if(!$user && Auth::check())
 		{
 			$user = Auth::user();
+		}
+		else
+		{
+			return false;
 		}
 		
 		if($user->isInGroup($this->id))
@@ -38,9 +42,13 @@ class Group extends Model
 	
 	public function leave($user = false)
 	{
-		if(!$user)
+		if(!$user && Auth::check())
 		{
 			$user = Auth::user();
+		}
+		else
+		{
+			return false;
 		}
 		
 		if(!$user->isInGroup($this->id))
