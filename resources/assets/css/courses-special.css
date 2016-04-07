@@ -11,9 +11,39 @@
 	color: #0075a7;
 }
 
-#Maailmanvalo a:hover
+#mv a:hover
 {
 	color: #0075a7;
+}
+
+#mv .strippi p
+{
+	color: #fff;
+	background-color: #0075a7;
+}
+
+/* Nettikurssiasetukset - Löytöjä Raamatusta
+---------------------------------------------------------------*/
+
+#lr p, #Maailmanvalo ul, #mv ol
+{
+	font-size: 1em;
+}
+
+#lr .ointro1, #mv .ointro2, #mv .bible
+{
+	color: #bd9122;
+}
+
+#lr a:hover
+{
+	color: #bd9122;
+}
+
+#lr .strippi p
+{
+	color: #fff;
+	background-color: #bd9122;
 }
 
 /* Nettikurssiasetukset - Paavalin matkassa = pm
@@ -93,6 +123,12 @@
 	color: #f8c2c2;
 }
 
+#pm .strippi p
+{
+	color: #fff;
+	background-color: #ac1144;
+}
+
 /* Nettikurssiasetukset - yleiset
 ---------------------------------------------------------------*/
 .ointro1
@@ -127,4 +163,13 @@
 .mvfont
 {
 	font-size: 1.7em;
+}
+
+.strippi
+{
+	width: 100%;
+	font-size: 1.5em;
+	border-top-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	padding: 5px, 20px;
 }
