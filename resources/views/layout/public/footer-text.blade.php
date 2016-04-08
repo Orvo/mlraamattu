@@ -5,7 +5,7 @@
 
 @section('footer-links')
 	<ul>
-		<li><a href="http://media7.fi">Media7 Raamattuopisto (kirjeitse käytävät kurssit)</a></li>
+		<li><a href="http://media7.fi">Media7 Raamattuopisto<br>(kirjeitse käytävät kurssit)</a></li>
 		<li><a href="http://www.nykyaika.fi">Media7 Julkaisut </a></li>
 		<li><a href="http://media7.adventist.fi">Media7 Verkkomedia</a></li>
 		<li><a href="http://adventist.fi">Suomen Adventtikirkko</a></li>
