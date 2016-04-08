@@ -5,23 +5,24 @@
 
 @section('footer-links')
 	<ul>
-		<li><a href="http://media7.fi">Media7</a></li>
-		<li><a href="http://media7.adventist.fi">Media7 verkkomedia</a></li>
+		<li><a href="http://media7.fi">Media7 Raamattuopisto</a></li>
+		<li><a href="http://www.nykyaika.fi">Media7 Julkaisut</a></li>
+		<li><a href="http://media7.adventist.fi">Media7 Verkkomedia</a></li>
 		<li><a href="http://adventist.fi">Suomen Adventtikirkko</a></li>
 	</ul>
 @endsection
 
 @section('footer-side-top')
 	<p>
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt illo magni consequuntur esse, corrupti similique nam. Laudantium sit possimus dolores!
+		Ilmaiset kirjeitse ja Internetissä käyttävät raamattu- ja terveysaiheiset kurssit, raamattuleirit ja nettiraamattukoulu.
 	</p>
 @endsection
 
 @section('footer-side-bottom')
 	<p>
-		Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt illo magni consequuntur esse, corrupti similique nam. Laudantium sit possimus dolores!
+		Media7 Raamattuopisto on Suomen Adventtikirkon mediapohjaiseen raamattuopistukseen keskittyvä yksikkö.
 	</p>
 	<p>
-		Voluptates deleniti qui nihil a officia consectetur accusamus fugit perferendis corporis eos. Dolore, libero, nesciunt!
+		Muita Media7:n yksikköjä ovat Media7 Julkaisut (ent. Kirjatoimi) ja Media7 Verkkomedia (Radio, TV ja nettipohjaiset palvelut, mm. nettilähetykset).
 	</p>
 @endsection
