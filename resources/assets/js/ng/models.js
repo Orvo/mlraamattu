@@ -50,6 +50,15 @@ app.factory('GroupsModel', function($resource)
 	});
 });
 
+app.factory('PagesModel', function($resource)
+{
+	return $resource('/ajax/pages/:id', { id: '@_id' },
+	{
+		'get': { method: 'GET' },
+		'update': { method: 'PUT' },
+	});
+});
+
 app.factory('ArchiveModel', function($resource)
 {
 	return $resource('/ajax/archive/:id', { id: '@_id' },

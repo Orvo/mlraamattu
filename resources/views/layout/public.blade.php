@@ -50,7 +50,7 @@
 						<div class="inner">
 							<ul>
 								<li><a href="/">Etusivu</a></li>
-								<li><a href="/">Kurssit</a></li>
+								<li><a href="/course">Kurssit</a></li>
 								@yield('extra_navigation')
 							</ul>
 						</div>

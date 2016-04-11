@@ -172,6 +172,25 @@ app.config(
 			})
 			
 			////////////////////////////////////////////////
+			// Contentpage
+			
+			.when('/pages', {
+				controller: 'PagesController',
+				templateUrl: '/ng/pages.list',
+				resolve: { authorization: authProvider, },
+			})
+			.when('/pages/new/', {
+				controller: 'PagesFormController',
+				templateUrl: '/ng/pages.form',
+				resolve: { authorization: authProvider, },
+			})
+			.when('/pages/:id/edit', {
+				controller: 'PagesFormController',
+				templateUrl: '/ng/pages.form',
+				resolve: { authorization: authProvider, },
+			})
+			
+			////////////////////////////////////////////////
 			// Files
 			
 			.when('/files/', {

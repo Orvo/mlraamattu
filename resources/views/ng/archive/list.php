@@ -111,11 +111,11 @@
 				</td>
 				<td>
 					<a href="#/courses/[[ item.test.course.id ]]">
-						<b>[[ item.test.course.title ]]</b>
+						<b>[[ item.test.course.title ]]</b> #[[ item.test.order ]]
 					</a>
 					<span class="separator-slash">/</span>
 					<a href="#/tests/[[ item.test.id ]]/edit">
-						[[ item.test.title ]]
+						[[ item.test.title ]] 
 					</a>
 					<div class="labels pull-right">
 						<span class="label label-success" ng-if="item.replied_to">Vastattu</span>

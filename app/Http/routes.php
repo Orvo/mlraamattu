@@ -12,21 +12,25 @@
 */
 
 use App\User;
+use App\Contentpage;
 
 Route::get('/', function ()
 {
+	$page = Contentpage::find(1);
+	
+	if($page)
+	{
+		return view('layout.contentpage', [
+			'page' => $page,
+		]);	
+	}
+	
 	return redirect('/course');
 });
 
 Route::get('/home', function ()
 {
 	return redirect('/');
-});
-
-Route::get('/potato', function()
-{
-	return App\Group::find(2)->users;
-	// return App\User::find(4)->groups;
 });
 
 /**********************************************	
@@ -122,6 +126,7 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 	
 	Route::resource('users', 'Ajax\UsersController');
 	Route::resource('groups', 'Ajax\GroupsController');
+	Route::resource('pages', 'Ajax\PagesController');
 	
 	Route::get('archive', 'Ajax\ArchiveController@index');
 	Route::get('archive/stats', 'Ajax\ArchiveController@stats');
@@ -138,4 +143,25 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax:admin'], function()
 	Route::resource('courses', 'Ajax\CoursesController');
 	Route::resource('questions', 'Ajax\QuestionsController');
 	Route::resource('tests', 'Ajax\TestsController');
+});
+
+///////////////////////////////////////////////////////////////////////
+// Must be last because it'll overwrite everything
+
+Route::get('{tag}', function($tag)
+{
+	$page = Contentpage::where('tag', $tag)->firstOrFail();
+	
+	return view('layout.contentpage', [
+		'page' => $page,
+	]);
+});
+
+Route::get('sivu/{id}/{tag}', function($id, $tag)
+{
+	$page = Contentpage::where('id', $id)->orWhere('tag', $tag)->firstOrFail();
+	
+	return view('layout.contentpage', [
+		'page' => $page,
+	]);
 });

@@ -56,7 +56,7 @@
 							</li>
 							<li>
 								<a href="#/pages">
-									Sivut
+									Sisältösivut
 								</a>
 							</li>
 						</ul>

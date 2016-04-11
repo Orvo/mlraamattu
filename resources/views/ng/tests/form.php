@@ -157,11 +157,9 @@
 									</div>
 									<div class="left-aligned">
 										<div class="number">[[ (qkey + 1) ]].</div>
-										<div class="title" ng-class="{'no-subtitle': question.subtitle.trim().length == 0, 'dimmed': question.title.trim().length == 0}">
-											[[ question.title || 'Kysymys puuttuu' ]]
+										<div class="title" ng-class="{'no-subtitle': question.subtitle.trim().length == 0, 'dimmed': question.title.trim().length == 0}" ng-bind-html="(question.title || 'Kysymys puuttuu') | trusted">
 										</div>
-										<div class="subtitle">
-											[[ question.subtitle.split('\n')[0] ]]
+										<div class="subtitle" ng-bind-html="question.subtitle.split('\n')[0] | trusted">
 										</div>
 									</div>
 								</div>
