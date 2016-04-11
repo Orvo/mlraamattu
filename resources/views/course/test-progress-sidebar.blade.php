@@ -1,10 +1,15 @@
 <?php
+	$current_test_order = 0;
+	
 	$is_test_page = false;
 	if(isset($test))
 	{
 		$course = $test->course;
 		$tests = $course->tests;
+		
 		$current_test = $test;
+		$current_test_order = $current_test->order;
+		
 		$is_test_page = true;
 	}
 	else
@@ -12,6 +17,11 @@
 		$tests = $course->tests;
 		$current_test = false;
 	}
+	
+	$hiding = [
+		'backward' => 3,
+		'forward' => 7,
+	];
 	
 ?>
 <h4 class="hide-in-desktop-width">Kurssikartta</h4>
@@ -25,9 +35,35 @@
 		</a>
 	</li>
 	
-	@for($i=0;$i<1;++$i)
 	@foreach($tests as $key => $test)
 		<?php if(!$test->hasQuestions()) break; ?>
+		
+		<?php
+			$distance = $test->order - $current_test_order;
+		?>
+		
+		@if($distance <= -$hiding['backward'])
+			@if($distance == -$hiding['backward'])
+				<li class="test-title">
+					<div>...</div>
+				</li>
+				<li class="lock-spacer"></li>
+			@endif
+			<?php continue; ?>
+		@endif
+			
+		@if($distance >= $hiding['forward'])
+			@if($distance == $hiding['forward'])
+				<li class="lock-spacer"></li>
+				<li class="test-title">
+					<div>
+						<?php $num_hidden = count($tests) + 1 - $test->order; ?>
+						+ {{ $num_hidden }} koe{{ $num_hidden != 1 ? 'tta' : '' }}
+					</div>
+				</li>
+			@endif
+			<?php continue; ?>
+		@endif
 		
 		@if($test->progress->status == \App\Test::LOCKED && !@$hasLockSpacer)
 			<li class="lock-spacer"></li>
@@ -88,29 +124,6 @@
 				</div>
 			@endif
 		</li>
-		<!-- 
-		<li class="test-progress">
-			<div class="status {{
-					css([
-						'locked' 		=> $test->progress->status == \App\Test::LOCKED,
-						'new-test'		=> $test->progress->status == \App\Test::UNSTARTED,
-						'in-progress'	=> $test->progress->status == \App\Test::IN_PROGRESS,
-						'completed'		=> $test->progress->status == \App\Test::COMPLETED,
-					])
-				}}">
-				@if($test->progress->status == \App\Test::LOCKED)
-					Lukittu
-				@elseif($test->progress->status == \App\Test::UNSTARTED)
-					Aloittamatta
-				@elseif($test->progress->status == \App\Test::IN_PROGRESS)
-					Kesken
-				@elseif($test->progress->status == \App\Test::COMPLETED)
-					Suoritettu
-				@endif
-			</div>
-		</li>
-		 -->
 		<li class="spacer"></li>
 	@endforeach
-	@endfor
 </ul>

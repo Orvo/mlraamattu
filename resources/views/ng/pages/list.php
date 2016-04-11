@@ -23,7 +23,7 @@
 			<tr>
 				<td style="width:40px">ID</td>
 				<td style="min-width:180px;max-width:260px;">Sivun otsikko</td>
-				<td>Sisälllön esikatselu</td>
+				<td>Sisällön esikatselu</td>
 				<td style="width:210px">Toiminnot</td>
 			</tr>
 		</thead>

@@ -392,7 +392,9 @@ class TestsController extends Controller
 			switch($question->type)
 			{
 				case 'MULTITEXT':
-					if(!property_exists($question->data, 'multitext_required') || $question->data->multitext_required > count($question_data['answers']))
+					if(!property_exists($question->data, 'multitext_required') ||
+						is_null($question->data->multitext_required) ||
+						$question->data->multitext_required > count($question_data['answers']))
 					{
 						$question->data->multitext_required = count($question_data['answers']);
 					}
