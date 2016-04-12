@@ -2,7 +2,7 @@
 	<div id="content-sidebar" class="fixed">
 		<div class="sidebar-actions">
 			<div class="form-group">
-				<a href="#/courses/" class="btn btn-default btn-block">
+				<a href="#/pages/" class="btn btn-default btn-block">
 					<span class="glyphicon glyphicon-chevron-left"></span> Palaa sisältösivuihin
 				</a>
 			</div>
