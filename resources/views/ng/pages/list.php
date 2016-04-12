@@ -39,7 +39,7 @@
 					<span class="clearfix"></span>
 				</td>
 				<td>
-					<div class="label label-success" ng-if="page.id == 1 || page.pinned">Navigaatiossa</div>
+					<div class="label label-success" ng-if="page.id == 1 || page.pinned == 1">Navigaatiossa</div>
 				</td>
 				<td>
 					[[ page.tag ]]
