@@ -14,9 +14,16 @@ class Contentpage extends Model
 		return $this->where('pinned', 1);
 	}
 	
-	static public function tagExists($tag, $id = null)
+	static public function isUniqueTag($tag, $id = false)
 	{
+		$page = Contentpage::where('tag', $tag);
 		
+		if($id)
+		{
+			$page = $page->where('id', '!=', $id);
+		}
+		
+		return !$page->exists();
 	}
 	
 }

@@ -132,7 +132,7 @@ class PagesController extends Controller
 		
 		$existingPage = Contentpage::where('tag', $data['tag']);
 		
-		if($existingPage->exists() && ($isNewEntry || (!$isNewEntry && $existingPage->id != @$data['id'])))
+		if(Contentpage::isUniqueTag($data['tag'], @$data['id']))
 		{
 			$errors['messages'][] = "Sama viite on jo käytössä!";
 			$errors['fields']['page_tag'] = true;
