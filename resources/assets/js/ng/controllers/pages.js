@@ -113,7 +113,7 @@ app.controller('PagesFormController', function($rootScope, $scope, $window, $loc
 			$scope.data.page = data;
 			$scope.loaded = true;
 			
-			$breadcrumbs.title('Muokataan sivua ' + $scope.data.page.name);
+			$breadcrumbs.title('Muokataan sivua ' + $scope.data.page.title);
 			$breadcrumbs.segment('Muokataan sivua');
 		});
 	}
