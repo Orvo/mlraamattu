@@ -130,9 +130,7 @@ class PagesController extends Controller
 			$data['tag'] = $this->_tagify($data['title']);
 		}
 		
-		$existingPage = Contentpage::where('tag', $data['tag']);
-		
-		if(Contentpage::isUniqueTag($data['tag'], @$data['id']))
+		if(!Contentpage::isUniqueTag($data['tag'], @$data['id']))
 		{
 			$errors['messages'][] = "Sama viite on jo käytössä!";
 			$errors['fields']['page_tag'] = true;
