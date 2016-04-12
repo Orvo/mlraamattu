@@ -6,6 +6,28 @@
 					<span class="glyphicon glyphicon-chevron-left"></span> Palaa sisältösivuihin
 				</a>
 			</div>
+			
+			<div class="form-group">
+				<label>Navigaatio</label>
+				<div ng-if="id != 1">
+					<div class="radio" ng-class="{'active': data.page.pinned == 0}">
+						<label>
+							<input type="radio" ng-model="data.page.pinned" value="0" ng-disabled="id == 1"> Älä näytä navigaatiossa
+						</label>
+					</div>
+					<div class="radio" ng-class="{'active': data.page.pinned == 1}">
+						<label>
+							<input type="radio" ng-model="data.page.pinned" value="1" ng-disabled="id == 1"> Näytä navigaatiossa
+						</label>
+					</div>
+					<div class="help">
+						Voit kiinnittää sivun näkyville navigaatioon.
+					</div>
+				</div>
+				<div ng-if="id == 1">
+					Etusivu on aina näkyvillä navigaatiossa.
+				</div>
+			</div>
 			<hr>
 			<div class="form-group">
 				<div ng-hide="processing">

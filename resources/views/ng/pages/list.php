@@ -22,9 +22,11 @@
 		<thead>
 			<tr>
 				<td style="width:40px">ID</td>
-				<td style="min-width:180px;max-width:260px;">Sivun otsikko</td>
+				<td style="min-width:180px;max-width:360px;">Sivun otsikko</td>
+				<td></td>
+				<td style="width:110px">Viite</td>
 				<td>Sisällön esikatselu</td>
-				<td style="width:210px">Toiminnot</td>
+				<td style="width:240px">Toiminnot</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -37,9 +39,18 @@
 					<span class="clearfix"></span>
 				</td>
 				<td>
+					<div class="label label-success" ng-if="page.id == 1 || page.pinned">Navigaatiossa</div>
+				</td>
+				<td>
+					[[ page.tag ]]
+				</td>
+				<td>
 					<div ng-bind-html="page.body | trusted" class="limited-height-preview"></div>
 				</td>
 				<td>
+					<a href="/sivu/[[ page.id ]]/[[ page.tag ]]" class="btn btn-primary btn-sm" target="_blank">
+						<span class="glyphicon glyphicon-search"></span> Avaa sivu
+					</a>
 					<a href="#/pages/[[ page.id ]]/edit" class="btn btn-success btn-sm">
 						<span class="glyphicon glyphicon-edit"></span> Muokkaa
 					</a>
@@ -49,7 +60,7 @@
 				</td>
 			</tr>
 			<tr ng-hide="(pages | filter : searchFilter).length > 0">
-				<td colspan="4" style="text-align: center;">
+				<td colspan="6" style="text-align: center;">
 					<b>Ei tuloksia.</b>
 				</td>
 			</tr>

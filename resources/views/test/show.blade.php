@@ -126,14 +126,6 @@
 	</div>
 @endsection
 
-@section('extra_navigation')
-	<li>
-		<a href="/course/{{ $test->course->id }}">
-			{{ $test->course->title }}
-		</a>
-	</li>
-@endsection
-
 @section('sidebar_content')
 	@include('course.test-progress-sidebar')
 @endsection

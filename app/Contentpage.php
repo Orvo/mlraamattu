@@ -9,4 +9,9 @@ class Contentpage extends Model
 	
 	protected $table = 'contentpages';
 	
+	public function scopePinned()
+	{
+		return $this->where('pinned', 1);
+	}
+	
 }

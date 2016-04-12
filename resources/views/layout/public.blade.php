@@ -1,5 +1,15 @@
 @include('layout.public.footer-text')
 
+@section('extra_navigation')
+	@foreach($content_pages as $page)
+		@if($page->id == 1)
+			<?php continue; ?>
+		@endif
+		
+		<li><a href="/sivu/{{ $page->id }}/{{ $page->tag }}">{{ $page->title }}</a></li>
+	@endforeach
+@append
+
 @section('layout-body')
 	<!doctype html>
 	<html>

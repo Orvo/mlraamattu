@@ -37,6 +37,10 @@ Route::get('/home', function ()
 	Public
 */
 
+Route::get('/test', function ()
+{
+	return redirect('/');
+});
 Route::get('test/{id}', 'TestsController@show');
 Route::get('test/{id}/material', 'TestsController@material');
 Route::get('test/{id}/material/popup', 'TestsController@material_popup');

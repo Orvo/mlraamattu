@@ -101,6 +101,15 @@ class PagesController extends Controller
 		];
 	}
 	
+	protected function _tagify($input)
+	{
+		$input = strtolower($input);
+		$input = strtr($input, "åäö ", "aao-");
+		$input = preg_replace('/[^a-zA-Z0-9\-]/g', '', $input);
+		
+		return $input;
+	}
+	
 	protected function _validate($data)
 	{
 		$errors = [
@@ -114,6 +123,17 @@ class PagesController extends Controller
 		{
 			$errors['messages'][] = "Sivun otsikko puuttuu!";
 			$errors['fields']['page_title'] = true;
+		}
+		
+		if((!@$data['tag'] || strlen(trim($data['tag'])) == 0) && strlen(trim(@$data['title'])) > 0)
+		{
+			$data['tag'] = $this->_tagify($data['title']);
+		}
+		
+		if(Contentpage::where('tag', $data['tag'])->exists())
+		{
+			$errors['messages'][] = "Sama viite on jo käytössä!";
+			$errors['fields']['page_tag'] = true;
 		}
 		
 		if(!@$data['body'] || strlen(trim($data['body'])) == 0)
@@ -138,6 +158,7 @@ class PagesController extends Controller
 		$page->title 	= $data['title'];
 		$page->tag 		= $data['tag'];
 		$page->body 	= $data['body'];
+		$page->pinned 	= $data['pinned'];
 		
 		$page->save();
 		

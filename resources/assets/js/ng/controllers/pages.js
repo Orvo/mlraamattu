@@ -81,7 +81,16 @@ app.controller('PagesFormController', function($rootScope, $scope, $window, $loc
 		autoGrow_bottomSpace: 50,
 	};
 	
-	$scope.$watch('data.page.title', function(new_value)
+	$scope.$watch('data.page.title', function(new_value, old_value)
+	{
+		if(!$scope.data.page) return;
+		if($scope.id) return;
+		if(tagify(old_value) != $scope.data.page.tag && $scope.data.page.tag.length > 0) return;
+		
+		$scope.data.page.tag = tagify(new_value);
+	});
+	
+	$scope.$watch('data.page.tag', function(new_value, old_value)
 	{
 		if(!$scope.data.page) return;
 		
@@ -91,6 +100,8 @@ app.controller('PagesFormController', function($rootScope, $scope, $window, $loc
 	if(!$scope.id)
 	{
 		$scope.data.page = new PagesModel;
+		$scope.data.page.pinned = 0;
+		
 		$scope.loaded = true;
 		
 		$breadcrumbs.segment('Uusi sivu');
@@ -115,6 +126,11 @@ app.controller('PagesFormController', function($rootScope, $scope, $window, $loc
 		{
 			$scope.save_success = false;
 			// $scope.data.errors = [];
+			
+			if($scope.data.page.tag.length == 0)
+			{
+				$scope.data.page.tag = tagify($scope.data.page.title);
+			}
 			
 			if($scope.id) // existing entry
 			{
