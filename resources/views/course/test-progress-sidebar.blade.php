@@ -58,7 +58,7 @@
 				<li class="test-title">
 					<div>
 						<?php $num_hidden = count($tests) + 1 - $test->order; ?>
-						+ {{ $num_hidden }} koe{{ $num_hidden != 1 ? 'tta' : '' }}
+						+ {{ $num_hidden }} osa{{ $num_hidden != 1 ? 'a' : '' }} lisää
 					</div>
 				</li>
 			@endif
