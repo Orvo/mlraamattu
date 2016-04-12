@@ -260,7 +260,7 @@ header nav li a:active
 	background: #fff;
 	box-shadow: 0 15px 15px #ddd;
 	z-index: 0;
-	min-height: 100%;
+	min-height: 88%;
 }
 
 #sidebar-content
