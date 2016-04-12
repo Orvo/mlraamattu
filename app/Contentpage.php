@@ -14,4 +14,9 @@ class Contentpage extends Model
 		return $this->where('pinned', 1);
 	}
 	
+	static public function tagExists($tag, $id = null)
+	{
+		
+	}
+	
 }
