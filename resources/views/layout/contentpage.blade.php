@@ -8,7 +8,7 @@
 			Aloita tai jatka kurssien suorittamista valitsemalla jokin tarjolla olevista kursseistamme <a href="/course">kurssit</a>-sivulta.
 		</p>
 		<p>
-			Voit päästä alkuun nopeasti klikkaamalla <b>Aloita ensimmäisestä kokeesta</b> -painiketta. Jos olet jo aloittanut kurssin niin pääset nopeasti jatkamaan sitä <b>Jatka kurssia</b> -painikkeella.
+			Kurssit sivulla voit päästä alkuun nopeasti klikkaamalla <b>Aloita ensimmäisestä kokeesta</b> -painiketta. Jos olet jo aloittanut kurssin niin pääset nopeasti jatkamaan sitä <b>Jatka kurssia</b> -painikkeella.
 		</p>
 		@if(!Auth::check())
 			<hr>
