@@ -393,3 +393,18 @@
 	}
 	
 }
+
+@media screen and (orientation:landscape) and (max-width: 767px) {
+	
+	div.course-description img,
+	.course.list-item .description img,
+	div.test-material-body img,
+	div.page-body img
+	{
+		float: right !important;
+		width: 50% !important;
+		height: auto !important;
+		margin: 1em 0 !important;
+	}
+	
+}
