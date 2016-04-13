@@ -1,6 +1,6 @@
 @extends('layout.public')
 
-@section('title', 'Koe ' . $test->title)
+@section('title', $test->title)
 
 @section('authentication_form')
 	

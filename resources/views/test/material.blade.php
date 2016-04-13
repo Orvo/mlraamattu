@@ -1,6 +1,6 @@
 @extends('layout.public')
 
-@section('title', 'Opintomateriaali kokeelle ' . $test->title)
+@section('title', $test->title . ' opintomateriaali')
 
 @section('sidebar_content')
 	@include('course.test-progress-sidebar')
