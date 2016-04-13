@@ -177,7 +177,7 @@
 			<hr>
 		@endif
 		
-		@if(@$validation)
+		@if($validation)
 			<div class="test-status-alert">
 				@if(isset($authFailed) && $authFailed)
 					<div class="alert alert-warning alert-icon">
@@ -213,11 +213,13 @@
 							<p>
 								Sinun pitää vastata oikein vähintään {{ $minimumToPass }} kysymykseen. Et ole saavuttanut vaadittua vähimmäismäärää, joten et voi jatkaa kurssilla eteenpäin ennen sitä. Voit tehdä korjauksia nyt tai odottaa kunnes koe on tarkistettu ja vastaanotat palautetta.
 							</p>
-							<p id="top-spoiler-warning">
-								<a class="spoiler-warning">
-									<span class="glyphicon glyphicon-eye-open"></span> Oikeat vastaukset piilotettu. Klikkaa tästä nähdäksesi kaikki.
-								</a>
-							</p>
+							@if($hasPassed)
+								<p id="top-spoiler-warning">
+									<a class="spoiler-warning">
+										<span class="glyphicon glyphicon-eye-open"></span> Oikeat vastaukset piilotettu. Klikkaa tästä nähdäksesi kaikki.
+									</a>
+								</p>
+							@endif
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -397,7 +399,7 @@
 						<div class="clearfix"></div>
 					</div>
 					
-					@if(isset($validation) && array_key_exists($question->id, $validation))
+					@if($validation && array_key_exists($question->id, $validation))
 						@if($validation[$question->id]['status'] == \App\Question::CORRECT)
 							<div class="validation correct">
 								<span class="glyphicon glyphicon-ok"></span>
@@ -443,7 +445,7 @@
 											<label>
 												{!! Form::checkbox('answer-' . $question->id . '[]', $answer->id, @in_array($answer->id, @$given_answers[$question->id])) !!}
 												{{ $answer->text }}
-												@if(@$validation && @in_array($answer->id, @$given_answers[$question->id]))
+												@if($validation && @in_array($answer->id, @$given_answers[$question->id]))
 													@if($answer->is_correct)
 														<span class="glyphicon glyphicon-ok" style="color:#329f07"></span>
 													@else
@@ -454,11 +456,11 @@
 										</div>
 									@endforeach
 
-									@if(isset($validation) && @$validation[$question->id]['correct_answers'])
+									@if($validation && $validation[$question->id]['correct_answers'] && $hasPassed)
 										<hr>
 										<div class="correct-answers {{
 												css([
-													'spoiled' => $test->hasFeedback() || @$hasPassed || @$validation[$question->id]['correct'],
+													'spoiled' => $test->hasFeedback() || ($validation && $validation[$question->id]['correct']),
 												])
 											}}">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>
@@ -498,11 +500,11 @@
 										</div>
 									@endforeach
 
-									@if(@$validation && @$validation[$question->id]['correct_answers'])
+									@if($validation && $validation[$question->id]['correct_answers'] && $hasPassed)
 										<hr>
 										<div class="correct-answers {{
 												css([
-													'spoiled' => $test->hasFeedback() || @$hasPassed || @$validation[$question->id]['correct'],
+													'spoiled' => $test->hasFeedback() || ($validation && $validation[$question->id]['correct']),
 												])
 											}}">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>
@@ -522,18 +524,18 @@
 								?>
 									<div class="row {{
 										css([
-											'has-success' 	=> (isset($validation) && $validation[$question->id]['correct']),
-											'has-error'		=> (isset($validation) && !$validation[$question->id]['correct']),
+											'has-success' 	=> $validation && $validation[$question->id]['correct'],
+											'has-error'		=> $validation && !$validation[$question->id]['correct'],
 										])
 									}}">
 										<div class="col-xs-12">
 											{!! Form::text('answer-' . $question->id, @$given_answers[$question->id], [
-												'class' => 'form-control',
-												'placeholder' => 'Vastaus tähän',
-												'maxlength' => '200',
+												'class' 		=> 'form-control',
+												'placeholder' 	=> 'Vastaus tähän',
+												'maxlength' 	=> '200',
 											]) !!}
-											@if(@$validation)
-												@if(@$validation[$question->id]['correct'])
+											@if($validation)
+												@if($validation[$question->id]['correct'])
 													<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
 												@else
 													<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
@@ -542,11 +544,11 @@
 										</div>
 									</div>
 									
-									@if(isset($validation) && @$validation[$question->id]['correct_answers'])
+									@if($validation && $validation[$question->id]['correct_answers'] && $hasPassed)
 										<hr>
 										<div class="correct-answers {{
 												css([
-													'spoiled' => $test->hasFeedback() || @$hasPassed || @$validation[$question->id]['correct'],
+													'spoiled' => $test->hasFeedback()|| ($validation && $validation[$question->id]['correct']),
 												])
 											}}">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>
@@ -573,8 +575,8 @@
 										@for($i=0; $i < min($question->data->multitext_required, $question->answers->count()); ++$i)
 											<div class="row {{
 												css([
-													'has-success' 	=> (isset($validation) && @$validation[$question->id]['correct_rows'][$i]),
-													'has-error'		=> (isset($validation) && @!$validation[$question->id]['correct_rows'][$i]),
+													'has-success' 	=> $validation && @$validation[$question->id]['correct_rows'][$i],
+													'has-error'		=> $validation && !@$validation[$question->id]['correct_rows'][$i],
 												])
 											}}">
 												@if(min($question->data->multitext_required, $question->answers->count()) > 1)
@@ -585,10 +587,10 @@
 														'col-xs-12' => min($question->data->multitext_required, $question->answers->count()) == 1,
 													]) }}">
 													{!! Form::text('answer-' . $question->id . '[]', @$given_answers[$question->id][$i], [
-														'class' => 'form-control',
-														'placeholder' => 'Vastaus tähän',
-														'id' => 'answer-' . $question->id .'-'. $i,
-														'maxlength' => '200',
+														'class' 		=> 'form-control',
+														'placeholder' 	=> 'Vastaus tähän',
+														'id' 			=> 'answer-' . $question->id .'-'. $i,
+														'maxlength' 	=> '200',
 													]) !!}
 													@if(@$validation)
 														@if(@$validation[$question->id]['correct_rows'][$i])
@@ -601,11 +603,11 @@
 											</div>
 										@endfor
 
-										@if(isset($validation) && @$validation[$question->id]['correct_answers'])
+										@if($validation && $validation[$question->id]['correct_answers'] && $hasPassed)
 											<hr>
 											<div class="correct-answers {{
 												css([
-													'spoiled' => $test->hasFeedback() || @$hasPassed || @$validation[$question->id]['correct'],
+													'spoiled' => $test->hasFeedback() || ($validation && $validation[$question->id]['correct']),
 												])
 											}}">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>
@@ -631,7 +633,7 @@
 								    	'placeholder' => 'Vastaus tähän'
 								    ]) !!}
 
-									@if(isset($validation))
+									@if($validation)
 										<hr>
 										<div class="correct-answers spoiled">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>

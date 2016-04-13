@@ -35,6 +35,21 @@ class TestsController extends Controller
 			]);
 		}
 		
+		$viewData = [
+			'test' 					=> $test,
+				
+			'hasPassed' 			=> false,
+			'hasPassedFull' 		=> false,
+			'minimumToPass' 		=> ceil($test->questions()->count() * 0.5),
+			
+			'validation' 			=> false,
+			'given_answers'			=> [],
+			'feedback'				=> [],
+			
+			'authentication_type' 	=> 0,
+			'isMaterialPage'		=> false,
+		];
+		
 		$data = [];
 		if(Auth::check())
 		{
@@ -43,26 +58,18 @@ class TestsController extends Controller
 			if($archive && $archive->data)
 			{
 				$data = (object)json_decode($archive->data, true);
-				$validation = $testvalidator->WithAnswers($test, $data->given_answers);
+				$viewData['given_answers'] 	= $data->given_answers;
+				$viewData['feedback'] 		= $data->feedback;
 				
-				$passed = ($validation['num_correct'] / $validation['total']) >= 0.5;
-				$passedFull = $validation['num_correct'] == $validation['total'];
-				$minimumToPass 	= ceil($validation['total'] * 0.5);
+				$fullValidation 			= $testvalidator->WithAnswers($test, $data->given_answers);
+				$viewData['validation'] 	= $fullValidation['validation'];
+				
+				$viewData['hasPassed'] 		= ($fullValidation['num_correct'] / $fullValidation['total']) >= 0.5;
+				$viewData['hasPassedFull'] 	= $fullValidation['num_correct'] == $fullValidation['total'];
 			}
 		}
 		
-		return view('test.show')
-			->with([
-				'test' 					=> $test,
-				'given_answers' 		=> @$data->given_answers,
-				'feedback' 				=> @$data->feedback,
-				'hasPassed'				=> @$passed,
-				'hasPassedFull'			=> @$passedFull,
-				'validation' 			=> @$validation['validation'],
-				'minimumToPass'			=> @$minimumToPass,
-				'authentication_type' 	=> 0,
-				'isMaterialPage'		=> false,
-			]);
+		return view('test.show')->with($viewData);
 	}
 	
 	public function material($id)
@@ -103,8 +110,8 @@ class TestsController extends Controller
 		$test = Test::findOrFail($id);
 		
 		$validation 	= $testvalidator->WithRequest($test, $request);
-		$passed 		= ($validation['num_correct'] / $validation['total']) >= 0.5;
-		$passedFull		= $validation['num_correct'] == $validation['total'];
+		$hasPassed 		= ($validation['num_correct'] / $validation['total']) >= 0.5;
+		$hasPassedFull		= $validation['num_correct'] == $validation['total'];
 		$minimumToPass 	= ceil($validation['total'] * 0.5);
 		
 		$customErrors = new MessageBag;
@@ -250,8 +257,8 @@ class TestsController extends Controller
 			->with(array_merge($validation, [
 				'test' 					=> $test,
 				'feedback' 				=> @$data['feedback'],
-				'hasPassed'				=> @$passed,
-				'hasPassedFull'			=> @$passedFull,
+				'hasPassed'				=> @$hasPassed,
+				'hasPassedFull'			=> @$hasPassedFull,
 				'minimumToPass'			=> @$minimumToPass,
 				'authentication_type'	=> @$authenticationType,
 				'isMaterialPage'		=> false,

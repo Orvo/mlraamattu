@@ -1,3 +1,8 @@
+php_flag xcache.cacher Off
+php_flag xcache.size 0
+php_flag xcache.stat Off
+php_flag opcache.enable Off
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews

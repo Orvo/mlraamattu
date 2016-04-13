@@ -73,7 +73,7 @@
 	<div id="content-main">
 		<h1>
 			<span ng-show="!id">Uusi koe</span>
-			<span ng-show="id">Muokataan koetta</span>
+			<span ng-show="id">Muokataan koetta #[[ data.test.order ]]</span>
 			<span ng-show="data.test.title">/ <b>[[ data.test.title ]]</b></span>
 		</h1>
 		<div class="form-group">
