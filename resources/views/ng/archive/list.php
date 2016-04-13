@@ -119,7 +119,8 @@
 					</a>
 					<div class="labels pull-right">
 						<span class="label label-success" ng-if="item.replied_to">Vastattu</span>
-						<span class="label label-warning" ng-if="item.discarded">Kuitattu</span>
+						<span class="label label-warning" ng-if="item.discarded && item.test.autodiscard == 0">Kuitattu</span>
+						<span class="label label-warning" ng-if="item.discarded && item.test.autodiscard != 0">Automaattinen kuittaus</span>
 					</div>
 				</td>
 				<td class="test-result">
