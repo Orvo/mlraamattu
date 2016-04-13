@@ -275,6 +275,11 @@ header nav li a:active
 	padding: 0 0 0 20px;
 }
 
+#main-content.col-xs-12
+{
+	padding: 0 !important;
+}
+
 #content-wrapper-popup
 {
 	background: #fff;
