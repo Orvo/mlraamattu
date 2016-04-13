@@ -24,7 +24,22 @@ class Course extends Model
 	
 	public function scopePublished()
 	{
+		if(Auth::check() && Auth::user()->isAdmin())
+		{
+			return $this;
+		}
+		
 		return $this->where('published', 1);
+	}
+	
+	public function isPublished()
+	{
+		if(Auth::check() && Auth::user()->isAdmin())
+		{
+			return true;
+		}
+		
+		return $this->published == 1;
 	}
 	
 	public function getNextTestAttribute()
@@ -142,11 +157,6 @@ class Course extends Model
 		];
 		
 		return $this->courseProgress;
-	}
-	
-	public function isPublished()
-	{
-		return $this->published == 1;
 	}
 	
 }

@@ -23,7 +23,7 @@
 		<div class="sidebar-help">
 			<h3>Ohjeet</h3>
 			<p ng-show="userData.user.id == data.user.id">
-				Muokkaa omia käyttäjätietojasi.
+				Muokkaa omia käyttäjätietojasi. Jätä salasanakenttä tyhjäksi jos et halua vaihtaa sitä.
 			</p>
 			<p ng-show="data.user.id && userData.user.id != data.user.id">
 				Muokkaa toisen käyttäjätunnuksen tietoja käyttäjän puolesta. Tehdyistä muutoksista lähetetään käyttäjälle ilmoitus sähköpostiin.

@@ -78,12 +78,6 @@
 					</div>
 				</div>
 			</fieldset>
-			<fieldset>
-				<legend>Ryhmän jäsenet</legend>
-				<p>
-					Voit lisätä ryhmään jäseniä.
-				</p>
-			</fieldset>
 		</div>
 	</div>
 </form>
@@ -98,7 +92,6 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
 				<h4 class="modal-title">Poiston varmistus</h4>
 			</div>
 			<div class="modal-body" style="text-align:center;font-size:120%">

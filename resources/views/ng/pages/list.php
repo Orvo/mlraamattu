@@ -48,7 +48,7 @@
 					<div ng-bind-html="page.body | trusted" class="limited-height-preview"></div>
 				</td>
 				<td>
-					<a href="/sivu/[[ page.id ]]/[[ page.tag ]]" class="btn btn-primary btn-sm" target="_blank">
+					<a href="/page/[[ page.id ]]/[[ page.tag ]]" class="btn btn-primary btn-sm" target="_blank">
 						<span class="glyphicon glyphicon-search"></span> Avaa sivu
 					</a>
 					<a href="#/pages/[[ page.id ]]/edit" class="btn btn-success btn-sm">

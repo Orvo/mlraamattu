@@ -30,6 +30,8 @@ class PagesController extends Controller
 	 */
 	public function store(Request $request)
 	{
+		abort_unauthorized();
+		
 		$validation = $this->_validate($request->all());
 		
 		$data = $validation->data;

@@ -27,6 +27,11 @@
 		</a>
 	</div>
 	<div class="description">
+		@if($course->published == 0)
+			<div class="alert alert-danger unpublish-alert">
+				Tämä kurssi ei ole vielä julkinen. Voit nähdä sen koska olet kirjautunut sisään.
+			</div>
+		@endif
 		<div class="inner">
 			{!! $course->description !!}
 		</div>

@@ -6,7 +6,7 @@
 			<?php continue; ?>
 		@endif
 		
-		<li><a href="/sivu/{{ $page->id }}/{{ $page->tag }}">{{ $page->title }}</a></li>
+		<li><a href="/page/{{ $page->id }}/{{ $page->tag }}">{{ $page->title }}</a></li>
 	@endforeach
 @append
 

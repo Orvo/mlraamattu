@@ -147,6 +147,11 @@
 					<span>{{ $test->title }}</span>
 				</div>
 			</h3>
+			@if($test->course->published == 0)
+				<div class="alert alert-danger unpublish-alert" style="margin-bottom: 1em">
+					Tämä kurssi ei ole vielä julkinen. Voit nähdä sen koska olet kirjautunut sisään.
+				</div>
+			@endif
 			@if($test->description && strlen($test->description) > 0)
 				<div class="test-description">
 					{!! $test->description !!}

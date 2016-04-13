@@ -54,7 +54,7 @@
 									</span>
 								</a>
 							</li>
-							<li>
+							<li ng-if="userData.user.access_level == 'ADMIN'">
 								<a href="#/pages">
 									Sisältösivut
 								</a>

@@ -130,7 +130,6 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 	
 	Route::resource('users', 'Ajax\UsersController');
 	Route::resource('groups', 'Ajax\GroupsController');
-	Route::resource('pages', 'Ajax\PagesController');
 	
 	Route::get('archive', 'Ajax\ArchiveController@index');
 	Route::get('archive/stats', 'Ajax\ArchiveController@stats');
@@ -144,9 +143,10 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 
 Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax:admin'], function()
 {
-	Route::resource('courses', 'Ajax\CoursesController');
-	Route::resource('questions', 'Ajax\QuestionsController');
-	Route::resource('tests', 'Ajax\TestsController');
+	Route::resource('courses', 		'Ajax\CoursesController');
+	Route::resource('questions', 	'Ajax\QuestionsController');
+	Route::resource('tests', 		'Ajax\TestsController');
+	Route::resource('pages', 		'Ajax\PagesController');
 });
 
 ///////////////////////////////////////////////////////////////////////
@@ -161,7 +161,7 @@ Route::get('{tag}', function($tag)
 	]);
 });
 
-Route::get('sivu/{id}/{tag}', function($id, $tag)
+Route::get('page/{id}/{tag}', function($id, $tag)
 {
 	$page = Contentpage::where('id', $id)->orWhere('tag', $tag)->firstOrFail();
 	
