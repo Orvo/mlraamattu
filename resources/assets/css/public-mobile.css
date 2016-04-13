@@ -402,9 +402,9 @@
 	div.page-body img
 	{
 		float: right !important;
-		width: 50% !important;
+		width: 44% !important;
 		height: auto !important;
-		margin: 1em 0 !important;
+		margin: 1em 0 1em 1em !important;
 	}
 	
 }
