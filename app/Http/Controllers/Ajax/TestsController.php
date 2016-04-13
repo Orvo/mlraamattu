@@ -193,12 +193,17 @@ class TestsController extends Controller
 								$errors['questions'][$key][] = "Kysymyksellä pitää olla pitää olla ainakin yksi oikea vastaus.";
 							}
 						}
-						
+					// NO BREAK
 					case 'MULTITEXT':
 						$non_empty_answers = 0;
 						
 						foreach($question['answers'] as $akey => &$answer)
 						{
+							if(!array_key_exists('text', $answer))
+							{
+								$answer['text'] = '';
+							}
+							
 							if(strlen(trim($answer['text'])) == 0)
 							{
 								if(count($question['answers']) > 2)
@@ -241,7 +246,7 @@ class TestsController extends Controller
 						}
 					break;
 					case 'TEXTAREA':
-						
+						// Nothing really
 					break;
 					default:
 						$errors['messages'][] = "Hax! Kysymyksen tyyppiä " . $question['type'] . " ei ole olemassa!";
