@@ -235,7 +235,8 @@
 
 	div.course-description img,
 	.course.list-item .description img,
-	div.test-material-body img
+	div.test-material-body img,
+	div.page-body img
 	{
 		float: none !important;
 		width: 100% !important;

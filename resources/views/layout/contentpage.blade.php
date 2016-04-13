@@ -1,6 +1,10 @@
 @extends('layout.public')
 
-@section('content', $page->body)
+@section('content')
+	<div class="page-body">
+		{!! $page->body !!}
+	</div>
+@endsection
 
 @if($page->id == 1)
 	@section('sidebar_content')
