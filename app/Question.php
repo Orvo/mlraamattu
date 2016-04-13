@@ -38,11 +38,26 @@ class Question extends Model
 			return (object)[];
 		}
 		
+		if(!property_exists($value, 'check'))
+		{
+			$value->check = 1;
+		}
+		
 		return $value;
 	}
 	
 	public function setDataAttribute($value)
 	{
+		if(is_object($value) && !property_exists($value, 'check'))
+		{
+			$value->check = 1;
+		}
+		
+		if(is_array($value) && !array_key_exists('check', $value))
+		{
+			$value['check'] = 1;
+		}
+		
 		$this->attributes['data'] = json_encode($value, JSON_FORCE_OBJECT);
 	}
 	

@@ -364,7 +364,9 @@ app.controller('TestsFormController', function($rootScope, $scope, $window, $loc
 					is_correct: false,
 				},
 			],
-			data: {},
+			data: {
+				check: 1,
+			},
 		});
 
 		var key = $scope.data.test.questions.length-1;

@@ -349,7 +349,7 @@
 			</div>
 		@endif
 		
-		@if(@$validation && !$hasPassed && $test->page()->exists() && !$test->page->hidden)
+		@if($validation && !$hasPassed && $test->page()->exists() && !$test->page->hidden)
 			<div class="alert alert-info alert-icon alert-icon-small">
 				<i class="fa fa-exclamation"></i>
 				<div>
@@ -366,15 +366,15 @@
 			@foreach($test->questions as $qkey => $question)
 				<div class="question {{
 					css([
-						'no-validation'		=> !@$validation,
-						'correct'			=> @$validation && @$validation[$question->id]['status'] == \App\Question::CORRECT,
-						'partially-correct'	=> @$validation && @$validation[$question->id]['status'] == \App\Question::PARTIALLY_CORRECT,
-						'incorrect'			=> @$validation && @$validation[$question->id]['status'] == \App\Question::INCORRECT,
+						'no-validation'		=> !$validation,
+						'correct'			=> $validation && @$validation[$question->id]['status'] == \App\Question::CORRECT,
+						'partially-correct'	=> $validation && @$validation[$question->id]['status'] == \App\Question::PARTIALLY_CORRECT,
+						'incorrect'			=> $validation && @$validation[$question->id]['status'] == \App\Question::INCORRECT,
 					])
 				}}">
 					<input type="hidden" name="questions[]" value="{{ $question->id }}">
 					<div class="header">
-						@if(@$validation)
+						@if($validation)
 							<div class="big-validation-icon">
 								@if(@$validation[$question->id]['correct'])
 									<span class="glyphicon glyphicon-ok-circle"></span>
@@ -403,7 +403,7 @@
 						@if($validation[$question->id]['status'] == \App\Question::CORRECT)
 							<div class="validation correct">
 								<span class="glyphicon glyphicon-ok"></span>
-								@if($question->type == 'TEXTAREA')
+								@if($question->type == 'TEXTAREA' || $question->data->check == 0)
 									Hyväksytty!
 								@else
 									Oikein!
@@ -445,7 +445,7 @@
 											<label>
 												{!! Form::checkbox('answer-' . $question->id . '[]', $answer->id, @in_array($answer->id, @$given_answers[$question->id])) !!}
 												{{ $answer->text }}
-												@if($validation && @in_array($answer->id, @$given_answers[$question->id]))
+												@if($validation && @in_array($answer->id, @$given_answers[$question->id]) && $question->data->check == 1)
 													@if($answer->is_correct)
 														<span class="glyphicon glyphicon-ok" style="color:#329f07"></span>
 													@else
@@ -456,7 +456,7 @@
 										</div>
 									@endforeach
 
-									@if($validation && $validation[$question->id]['correct_answers'] && $hasPassed)
+									@if($question->data->check == 1 && $validation && $validation[$question->id]['correct_answers'] && $hasPassed)
 										<hr>
 										<div class="correct-answers {{
 												css([
@@ -489,7 +489,7 @@
 											<label>
 												{!! Form::radio('answer-' . $question->id, $answer->id, @$given_answers[$question->id] == $answer->id) !!}
 												{{ $answer->text }}
-												@if(@$validation && @$given_answers[$question->id] == $answer->id)
+												@if($validation && @$given_answers[$question->id] == $answer->id && $question->data->check == 1)
 													@if($answer->is_correct)
 														<span class="glyphicon glyphicon-ok" style="color:#329f07"></span>
 													@else
@@ -500,7 +500,7 @@
 										</div>
 									@endforeach
 
-									@if($validation && $validation[$question->id]['correct_answers'] && $hasPassed)
+									@if($question->data->check == 1 && $validation && $validation[$question->id]['correct_answers'] && $hasPassed)
 										<hr>
 										<div class="correct-answers {{
 												css([
@@ -524,8 +524,8 @@
 								?>
 									<div class="row {{
 										css([
-											'has-success' 	=> $validation && $validation[$question->id]['correct'],
-											'has-error'		=> $validation && !$validation[$question->id]['correct'],
+											'has-success' 	=> $validation && $validation[$question->id]['correct'] || $question->data->check == 0,
+											'has-error'		=> $validation && !$validation[$question->id]['correct'] && $question->data->check == 1,
 										])
 									}}">
 										<div class="col-xs-12">
@@ -544,7 +544,7 @@
 										</div>
 									</div>
 									
-									@if($validation && $validation[$question->id]['correct_answers'] && $hasPassed)
+									@if($question->data->check == 1 && $validation && $validation[$question->id]['correct_answers'] && $hasPassed)
 										<hr>
 										<div class="correct-answers {{
 												css([
@@ -575,8 +575,8 @@
 										@for($i=0; $i < min($question->data->multitext_required, $question->answers->count()); ++$i)
 											<div class="row {{
 												css([
-													'has-success' 	=> $validation && @$validation[$question->id]['correct_rows'][$i],
-													'has-error'		=> $validation && !@$validation[$question->id]['correct_rows'][$i],
+													'has-success' 	=> $validation && @$validation[$question->id]['correct_rows'][$i] || $question->data->check == 0,
+													'has-error'		=> $validation && !@$validation[$question->id]['correct_rows'][$i] && $question->data->check == 1,
 												])
 											}}">
 												@if(min($question->data->multitext_required, $question->answers->count()) > 1)
@@ -603,7 +603,7 @@
 											</div>
 										@endfor
 
-										@if($validation && $validation[$question->id]['correct_answers'] && $hasPassed)
+										@if($question->data->check == 1 && $validation && $validation[$question->id]['correct_answers'] && $hasPassed)
 											<hr>
 											<div class="correct-answers {{
 												css([

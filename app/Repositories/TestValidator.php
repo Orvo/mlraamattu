@@ -76,99 +76,109 @@ class TestValidator
 		$response = [];
 		$empty_answer = ($given_answer === null || (!is_array($given_answer) && strlen(trim($given_answer)) == 0) || is_array($given_answer) && count($given_answer) == 0);
 		
-		$correct_answers = $question->correctAnswers();
-		
-		switch($question->type)
+		// Check question if marked for checking or missing the value
+		if($question->data->check == 1 || !property_exists($question->data, 'check'))
 		{
-			case 'CHOICE':
-				$response = [
-					'correct' 			=> $correct_answers->first()->id == $given_answer,
-					'correct_answers' 	=> $correct_answers->first(),
-				];
-			break;
-			
-			case 'MULTI':
-				$matched = [];
+			$correct_answers = $question->correctAnswers();
+		
+			switch($question->type)
+			{
+				case 'CHOICE':
+					$response = [
+						'correct' 			=> $correct_answers->first()->id == $given_answer,
+						'correct_answers' 	=> $correct_answers->first(),
+					];
+				break;
 				
-				if(!$empty_answer)
-				{
-					foreach($correct_answers as $correct_answer)
+				case 'MULTI':
+					$matched = [];
+					
+					if(!$empty_answer)
 					{
-						if(in_array($correct_answer->id, $given_answer))
+						foreach($correct_answers as $correct_answer)
 						{
-							$matched[] = $correct_answer->id;
-						}
-					}
-				}
-				
-				$response = [
-					'correct' 			=> count($matched) == $correct_answers->count() && $correct_answers->count() == count($given_answer),
-					'partial' 			=> count($matched),
-					'total'				=> $correct_answers->count(),
-					'correct_answers' 	=> $correct_answers,
-				];
-			break;
-			
-			case 'TEXT':
-				$correct_answer = $correct_answers->first();
-				
-				$response = [
-					'correct' 			=> $this->_string_match($correct_answer->text, $given_answer, $correct_answer->error_margin),
-					'correct_answers'	=> $correct_answer,
-				];
-			break;
-			
-			case 'MULTITEXT':
-				$matched = [];
-				$correct_rows = [];
-				
-				$required = $question->data->multitext_required;
-				
-				if(!$empty_answer)
-				{
-					foreach($correct_answers as $correct_answer)
-					{
-						foreach($given_answer as $key => $answer)
-						{
-							if($this->_string_match($correct_answer->text, $answer, $correct_answer->error_margin))
+							if(in_array($correct_answer->id, $given_answer))
 							{
-								$matched[] = $answer;
-								$correct_rows[$key] = true;
-								unset($given_answer[$key]);
-								break;
+								$matched[] = $correct_answer->id;
 							}
 						}
 					}
-				}
+					
+					$response = [
+						'correct' 			=> count($matched) == $correct_answers->count() && $correct_answers->count() == count($given_answer),
+						'partial' 			=> count($matched),
+						'total'				=> $correct_answers->count(),
+						'correct_answers' 	=> $correct_answers,
+					];
+				break;
 				
-				$response = [
-					'correct'			=> count($matched) == min($required, $correct_answers->count()),
-					'partial'			=> count($matched),
-					'total'				=> min($required, $correct_answers->count()),
-					'correct_answers'	=> $correct_answers,
-					'correct_rows'		=> $correct_rows,
-				];
-			break;
+				case 'TEXT':
+					$correct_answer = $correct_answers->first();
+					
+					$response = [
+						'correct' 			=> $this->_string_match($correct_answer->text, $given_answer, $correct_answer->error_margin),
+						'correct_answers'	=> $correct_answer,
+					];
+				break;
+				
+				case 'MULTITEXT':
+					$matched = [];
+					$correct_rows = [];
+					
+					$required = $question->data->multitext_required;
+					
+					if(!$empty_answer)
+					{
+						foreach($correct_answers as $correct_answer)
+						{
+							foreach($given_answer as $key => $answer)
+							{
+								if($this->_string_match($correct_answer->text, $answer, $correct_answer->error_margin))
+								{
+									$matched[] = $answer;
+									$correct_rows[$key] = true;
+									unset($given_answer[$key]);
+									break;
+								}
+							}
+						}
+					}
+					
+					$response = [
+						'correct'			=> count($matched) == min($required, $correct_answers->count()),
+						'partial'			=> count($matched),
+						'total'				=> min($required, $correct_answers->count()),
+						'correct_answers'	=> $correct_answers,
+						'correct_rows'		=> $correct_rows,
+					];
+				break;
+				
+				case 'TEXTAREA':
+					// Text area just needs to be something else than empty
+					$response = [
+						'correct' => strlen($given_answer) > 0,
+					];
+				break;
+				
+				default:
+					$response = [
+						'correct' 	=> false,
+						'error'		=> 'Invalid question type.',
+					];
+				break;
+			}
 			
-			case 'TEXTAREA':
-				// Text area just needs to be something else than empty
-				$response = [
-					'correct' => strlen($given_answer) > 0,
-				];
-			break;
-			
-			default:
-				$response = [
-					'correct' 	=> false,
-					'error'		=> 'Invalid question type.',
-				];
-			break;
+			if($empty_answer)
+			{
+				$response['correct'] = false;
+				$response['empty_answer'] = true;
+			}
 		}
-		
-		if($empty_answer)
+		else
 		{
-			$response['correct'] = false;
-			$response['empty_answer'] = true;
+			$response = [
+				'correct' => true,
+			];
 		}
 		
 		$status = Question::INCORRECT;

@@ -171,7 +171,7 @@
 									</ul>
 								</div>
 								<div class="form-group clearfix">
-									<div class="col-xs-7">
+									<div class="col-xs-9">
 										<div class="form-group">
 											<label for="">Kysymys</label>
 											<input type="text" class="question-title form-control" ng-model="question.title" placeholder="Syötä kysymys">
@@ -179,15 +179,28 @@
 										<div class="form-group">
 											<label for="">Kysymyksen tarkennus</label>
 											<textarea class="question-subtitle form-control vertical-textarea" ng-model="question.subtitle" placeholder="Syötä tarkentava kuvaus"></textarea>
+											<p class="help-block">
+												Voit kysymystä vaikka syöttämällä esimerkkejä, lisämateriaalia tai jopa kuvia. Voit käyttää normaalia HTML-merkintäkoodia kentässä.
+											</p>
 										</div>
 									</div>
-									<div class="col-xs-5 help-sidepanel">
-										<p>
-											Syötä kysymys viereiseen tekstikenttään.
-										</p>
-										<p>
-											Voit halutessassi myös tarkentaa kysymystä alempaan kenttään, vaikka syöttämällä esimerkkejä, lisämateriaalia tai jopa kuvia. Voit käyttää normaalia HTML-merkintäkoodia kentässä.
-										</p>
+									<div class="col-xs-3 help-sidepanel">
+										<div class="form-group fancy-radio">
+											<label>Tarkistus</label>
+											<div class="radio" ng-class="{'active': question.data.check == 1}">
+												<label>
+													<input type="radio" ng-model="question.data.check" ng-value="1"> Tarkista kysymys
+												</label>
+											</div>
+											<div class="radio" ng-class="{'active': question.data.check == 0}">
+												<label>
+													<input type="radio" ng-model="question.data.check" ng-value="0"> Älä tarkista
+												</label>
+											</div>
+											<div class="help">
+												Kysymys voidaan jättää tarkistamatta, jolloin se hyväksytään aina.
+											</div>
+										</div>
 									</div>
 								</div>
 								
@@ -203,7 +216,7 @@
 										<div ng-show="question.type == 'MULTI'">
 											<h3>Vaihtoehdot / Monivalinta usealla oikealla vastauksella</h3>
 											<p>
-												Käyttäjän tulee valita yksi tai useampi oikea vastaus monesta. Kysymyksellä pitää olla ainakin kaksi vaihtoehtoa.
+												Käyttäjän tulee valita yksi tai useampi oikea vastaus monesta. Kysymyksellä pitää olla ainakin kaksi vaihtoehtoa. <b>Kaikki merkityt vastaukset pitää olla valittuina.</b>
 											</p>
 											<div class="form-group answer" ng-repeat="(akey, answer) in question.answers">
 												<label for="question-[[ qkey ]]-answer-[[ akey ]]" class="answer-label">[[ akey + 1 ]].</label>

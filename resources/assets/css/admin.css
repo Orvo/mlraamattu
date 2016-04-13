@@ -764,8 +764,6 @@ ul.question-type, ul.question-type li
 div.help-sidepanel
 {
 	border-left: 1px solid #eee;
-	max-height: 180px;
-	overflow-y: auto;
 }
 
 div.spacer

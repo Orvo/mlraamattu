@@ -66,8 +66,8 @@
 						<div class="title-row clearfix">
 							<div class="right-aligned">
 								<div class="result-badge correct" ng-if="data.validation.validation[question.id].correct">
-									<span ng-if="question.type == 'TEXTAREA'">Hyväksytty</span>
-									<span ng-if="question.type != 'TEXTAREA'">Oikein</span>
+									<span ng-if="question.type == 'TEXTAREA' || question.data.check == 0">Hyväksytty</span>
+									<span ng-if="question.type != 'TEXTAREA' && question.data.check == 1">Oikein</span>
 								</div>
 								<div class="result-badge partially-correct" ng-if="!data.validation.validation[question.id].correct && data.validation.validation[question.id].partial > 0">
 									Osittain oikein
@@ -93,7 +93,7 @@
 								<span>Annettu vastaus:</span>
 								<div ng-if="question.type == 'MULTI'">
 									<ul>
-										<li ng-repeat="answer in data.archive.given_answers[question.id]">
+										<li ng-repeat="answer in data.archive.given_answers[question.id] track by $index">
 											[[ data.indexed_answers[answer].text ]]
 											<span ng-if="!data.indexed_answers[answer].is_correct" style="color:#A80505">
 												<span class="glyphicon glyphicon-remove"></span>
@@ -113,7 +113,7 @@
 								</div>
 								<div ng-if="question.type == 'MULTITEXT'">
 									<ul>
-										<li ng-repeat="answer in data.archive.given_answers[question.id]">
+										<li ng-repeat="answer in data.archive.given_answers[question.id] track by $index">
 											[[ answer ]]
 										</li>
 									</ul>
@@ -126,11 +126,11 @@
 									</ul>
 								</div>
 							</div>
-							<div class="col-lg-6 test-answer" ng-if="question.type != 'TEXTAREA'">
+							<div class="col-lg-6 test-answer" ng-if="question.type != 'TEXTAREA' && question.data.check == 1">
 								<span>Oikea vastaus:</span>
 								<div>
 									<ul>
-										<li ng-repeat="answer in question.answers | filter : {is_correct:1}">
+										<li ng-repeat="answer in question.answers | filter : {is_correct:1} track by $index">
 											[[ answer.text ]]
 										</li>
 									</ul>

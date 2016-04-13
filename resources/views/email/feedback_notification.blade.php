@@ -74,7 +74,7 @@
 							<b>väärin</b>.
 						@endif
 					</p>
-					@if(!$validation[$question->id]['correct'])
+					@if(!$validation[$question->id]['correct'] && $question->data->check == 1)
 						<h4>Oikea vastaus</h4>
 						<ul>
 							@foreach($question->answers()->where('is_correct', 1)->get() as $answer)
