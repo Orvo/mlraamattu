@@ -43,13 +43,13 @@ class ArchiveEntries
 				}
 			});
 			
-			$archive = $archive->orderBy('created_at', 'ASC')->get();
+			$archive = $archive->orderBy('created_at', 'ASC');
 		}
 		else
 		{
 			$archive = Archive::with('user', 'test', 'test.course', 'test.questions')
 				->has('test')->has('user')
-				->orderBy('created_at', 'ASC')->get();
+				->orderBy('created_at', 'ASC');
 		}
 		
 		return $archive;

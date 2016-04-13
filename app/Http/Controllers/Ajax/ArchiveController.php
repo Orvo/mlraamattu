@@ -19,7 +19,7 @@ class ArchiveController extends Controller
 	
 	public function index(ArchiveEntries $entries)
 	{
-		$archive = $entries->getEntries();
+		$archive = $entries->getEntries()->get();
 		
 		foreach($archive as &$row)
 		{
@@ -50,8 +50,14 @@ class ArchiveController extends Controller
 	{
 		$archive = $entries->getEntries();
 		
+		$new_count = 0;
+		foreach($archive->where('replied_to', 0)->where('discarded', 0)->get() as $archive)
+		{
+			if($archive->discarded == Archive::NOT_DISCARDED) $new_count++;
+		}
+		
 		return [
-			'new' 		=> count($archive->where('replied_to', 0)->where('discarded', 0)),
+			'new' 		=> $new_count,
 			'total' 	=> $archive->count(),
 		];
 	}
