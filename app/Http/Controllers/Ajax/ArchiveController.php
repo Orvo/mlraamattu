@@ -51,7 +51,7 @@ class ArchiveController extends Controller
 		$archive = $entries->getEntries();
 		
 		return [
-			'new' 		=> $archive->where('replied_to', 0)->where('discarded', 0)->count(),
+			'new' 		=> count($archive->where('replied_to', 0)->where('discarded', 0)),
 			'total' 	=> $archive->count(),
 		];
 	}
