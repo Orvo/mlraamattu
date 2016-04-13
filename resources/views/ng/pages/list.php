@@ -26,7 +26,7 @@
 				<td></td>
 				<td style="width:110px">Viite</td>
 				<td>Sisällön esikatselu</td>
-				<td style="width:240px">Toiminnot</td>
+				<td style="width:260px">Toiminnot</td>
 			</tr>
 		</thead>
 		<tbody>
