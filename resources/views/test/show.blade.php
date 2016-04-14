@@ -594,11 +594,11 @@
 													]) !!}
 													@if(@$validation)
 														@if(@$validation[$question->id]['correct_rows'][$i])
-	  														<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-	  													@else
+															<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+														@else
 															<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
-	  													@endif
-	  												@endif
+														@endif
+													@endif
 												</div>
 											</div>
 										@endfor
@@ -628,12 +628,12 @@
 									//--------------------------------------------------------------------------
 									case 'TEXTAREA':
 								?>
-								    {!! Form::textarea('answer-' . $question->id, @$given_answers[$question->id], [
-								    	'class' => 'form-control',
-								    	'placeholder' => 'Vastaus tähän'
-								    ]) !!}
+									{!! Form::textarea('answer-' . $question->id, @$given_answers[$question->id], [
+										'class' => 'form-control',
+										'placeholder' => 'Vastaus tähän'
+									]) !!}
 
-									@if($validation)
+									@if($question->data->check == 1 && $validation)
 										<hr>
 										<div class="correct-answers spoiled">
 											<span class="glyphicon glyphicon-exclamation-sign"></span>

@@ -44,7 +44,7 @@
 					@if($course->progressStatus == \App\Course::IN_PROGRESS || $course->progressStatus == \App\Course::STARTED)
 						Jatka kurssia
 					@elseif($course->progressStatus == \App\Course::UNSTARTED)
-						Aloita ensimmäisestä kokeesta
+						Aloita ensimmäisestä osasta
 					@endif
 					<span class="glyphicon glyphicon-chevron-right"></span>
 				</a>
