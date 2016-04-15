@@ -1,5 +1,6 @@
 #!/bin/bash
 echo "Checking for updates..."
+
 git remote update
 LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse @{u})
@@ -17,3 +18,5 @@ elif [ $LOCAL = $BASE ]; then
 	    echo "Repository update failed. Aborting..."
 	fi
 fi
+
+echo "Deploy finished."
