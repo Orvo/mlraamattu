@@ -1,10 +1,13 @@
 #!/bin/bash
+echo "Checking for updates..."
 git remote update
 LOCAL=$(git rev-parse @)
 REMOTE=$(git rev-parse @{u})
 BASE=$(git merge-base @ @{u})
 
-if [ $LOCAL = $BASE ]; then
+if [ $LOCAL = $REMOTE ]; then
+	echo "Local repository is already up to date."
+elif [ $LOCAL = $BASE ]; then
 	git pull
 	if [ $? -eq 0 ]; then
 		echo "Updated repository. Building with Grunt..."
@@ -13,6 +16,4 @@ if [ $LOCAL = $BASE ]; then
 	else
 	    echo "Repository update failed. Aborting..."
 	fi
-elif [ $LOCAL = $REMOTE ]; then
-	echo "Local repository is up to date."
 fi
