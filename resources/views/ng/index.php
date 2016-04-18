@@ -51,6 +51,11 @@
 								</a>
 							</td>
 						</tr>
+						<tr ng-if="loaded && recent.archive_new > 5">
+							<td colspan="5" style="text-align:center;font-weight: bold;">
+								<a href="#/archive">Tarkista kaikki [[ recent.archive_new ]] suoritusta</a>
+							</td>
+						</tr>
 						<tr ng-if="!loaded">
 							<td colspan="5" style="text-align:center;font-weight: bold;">
 								<img src="/img/ajax-loader.gif" alt="" style="height:38px;"> Ladataan...
