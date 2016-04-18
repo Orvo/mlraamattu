@@ -1027,35 +1027,35 @@ textarea.form-control:focus
 	box-shadow: 0 2px 1px #F5D57B;
 }
 
-td.test-result span
+td.archive-test-result span
 {
 	display: inline-block;
 	float: left;
 }
 
-td.test-result span.icon
+td.archive-test-result span.icon
 {
 	padding: 4px 5px 0 0;
 	font-size: 16pt;
 }
 
-td.test-result span.number
+td.archive-test-result span.number
 {
 	padding: 5px 0 0 5px;
 	font-size: 11pt;
 }
 
-td.test-result span.icon.all-correct
+td.archive-test-result span.icon.all-correct
 {
 	color: #379315;
 }
 
-td.test-result span.icon.partially-correct
+td.archive-test-result span.icon.partially-correct
 {
 	color: #E19C28;
 }
 
-td.test-result span.icon.incorrect
+td.archive-test-result span.icon.incorrect
 {
 	color: #A70014;
 }

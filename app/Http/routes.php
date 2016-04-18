@@ -116,15 +116,31 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 {
 	Route::get('/recent', function(App\Repositories\ArchiveEntries $entries)
 	{
-		$tests = App\Test::with('course', 'questions')->orderBy('updated_at', 'DESC')->limit(6)->get();
-		$courses = App\Course::with('tests')->orderBy('updated_at', 'DESC')->limit(6)->get();
+		$tests = App\Test::with('course', 'questions')->orderBy('updated_at', 'DESC')->limit(5)->get();
+		$courses = App\Course::with('tests')->orderBy('updated_at', 'DESC')->limit(5)->get();
 		
-		$archive = $entries->getEntries();
+		$archive = $entries->getEntries()->where('replied_to', 0)->where('discarded', 0)->orderBy('created_at', 'ASC');
+		
+		$new_count = 0;
+		$new_archive = [];
+		foreach($archive->get() as $item)
+		{
+			if($item->discarded == App\Archive::NOT_DISCARDED)
+			{
+				$new_count++;
+				if(count($new_archive) < 5)
+				{
+					$item->data = json_decode($item->data);
+					$new_archive[] = $item;
+				}
+			}
+		}
 		
 		return [
-			'archive'	=> $archive,
-			'tests' 	=> $tests,
-			'courses' 	=> $courses,
+			'archive'		=> $new_archive,
+			'archive_new'	=> $new_count,
+			'tests' 		=> $tests,
+			'courses' 		=> $courses,
 		];
 	});
 	

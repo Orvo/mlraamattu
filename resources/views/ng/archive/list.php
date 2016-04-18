@@ -123,7 +123,7 @@
 						<span class="label label-warning" ng-if="item.discarded && item.test.autodiscard != 0">Automaattinen kuittaus</span>
 					</div>
 				</td>
-				<td class="test-result">
+				<td class="archive-test-result">
 					<div class="clearfix">
 						<span class="icon" ng-class="{'all-correct': item.data.all_correct, 'partially-correct': !item.data.all_correct && item.data.num_correct > 0, 'incorrect': item.data.num_correct == 0}">
 							<span class="glyphicon glyphicon-ok-circle" ng-show="item.data.all_correct"></span>
