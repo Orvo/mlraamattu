@@ -94,7 +94,7 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 			{
 				item.created_at = convertToDate(item.created_at);
 				
-				// item.test_id = parseInt(item.test.id);
+				item.test_id = parseInt(item.test_id);
 				item.course_id = parseInt(item.test.course.id);
 				
 				item.replied_to = parseInt(item.replied_to);

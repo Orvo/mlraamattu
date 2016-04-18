@@ -11,6 +11,11 @@ class Archive extends Model
 	const VALITATED_DISCARDED	= 1;
 	const FULLY_DISCARDED		= 2;
 	
+	protected $casts = [
+		'test_id' 		=> 'integer',
+		'course_id'		=> 'integer',
+	];
+	
     protected $table = 'archive';
     
 	public function test()

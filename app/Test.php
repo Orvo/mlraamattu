@@ -25,6 +25,10 @@ class Test extends Model
 	const REQUIRE_CORRECT	= 1;
 	const FULL_AUTODISCARD	= 2;
 	
+	protected $casts = [
+		'id' 		=> 'integer',
+	];
+	
 	public function course()
 	{
 		return $this->belongsTo('App\Course');

@@ -16,6 +16,10 @@ class Course extends Model
 	const STARTED 		= 2;
 	const IN_PROGRESS	= 3;
 	const COMPLETED 	= 4;
+	
+	protected $casts = [
+		'id' 		=> 'integer',
+	];
 		
 	public function tests()
 	{
