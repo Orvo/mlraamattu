@@ -88,7 +88,7 @@ app.controller('UsersFormController', function($rootScope, $scope, $window, $loc
 		$scope.data.user = new UsersModel;
 		$scope.loaded = true;
 		
-		$scope.access_level = $scope.access_levels[0];
+		$scope.access_level = $scope.access_levels['USER'];
 		
 		$breadcrumbs.segment('Uusi käyttäjä');
 	}

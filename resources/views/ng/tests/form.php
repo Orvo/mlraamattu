@@ -180,7 +180,7 @@
 											<label for="">Kysymyksen tarkennus</label>
 											<textarea class="question-subtitle form-control vertical-textarea" ng-model="question.subtitle" placeholder="Syötä tarkentava kuvaus"></textarea>
 											<p class="help-block">
-												Voit kysymystä vaikka syöttämällä esimerkkejä, lisämateriaalia tai jopa kuvia. Voit käyttää normaalia HTML-merkintäkoodia kentässä.
+												Voit tarkentaa kysymystä vaikka syöttämällä esimerkkejä, lisämateriaalia tai jopa kuvia. Voit käyttää normaalia HTML-merkintäkoodia kentässä.
 											</p>
 										</div>
 									</div>
