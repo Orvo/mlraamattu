@@ -83,12 +83,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function()
 {
 	Route::get('/', function ()
 	{
-		if(Auth::user()->id == 1)
-		{
-			Auth::logout();
-			return redirect('/');
-		}
-		
 		return view('admin.index');
 	});
 });

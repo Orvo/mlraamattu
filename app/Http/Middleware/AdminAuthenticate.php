@@ -34,6 +34,12 @@ class AdminAuthenticate
      */
     public function handle($request, Closure $next)
     {
+        if($this->auth->user()->id == 1)
+        {
+            $this->auth->logout();
+            return redirect('/');
+        }
+        
         if (!$this->auth->check() or !$this->auth->user()->canAccessAdminPanel())
         {
             return redirect('/auth/login?ref=admin');
