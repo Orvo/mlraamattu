@@ -81,6 +81,71 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 	
 	$scope.tests = { 0: { id: undefined, title: 'Rajaa kokeen mukaan', } };
  	$scope.courses = { 0: { id: undefined, title: 'Rajaa kurssin mukaan', } };
+ 	
+ 	$scope.searchName = '';
+ 	$scope.searchFilterParsed = '';
+ 	
+ 	$scope.currentPage = 1;
+ 	$scope.pagesList = [];
+ 	$scope.perPage = 10;
+ 	
+ 	$scope.filtered_archive = [];
+ 	$scope.paginated_archive = [];
+	
+	$scope.update_filtering = function()
+	{
+		//archive | keyfilter : ({ key: 'user.name', value: searchName }) | filter : searchFilterParsed | filter : archiveFilter : true
+		$scope.filtered_archive = $scope.archive;
+		$scope.filtered_archive = $filter('filter')($scope.filtered_archive, $scope.searchFilterParsed);
+		$scope.filtered_archive = $filter('filter')($scope.filtered_archive, $scope.archiveFilter, true);
+		
+		if($scope.searchName && $scope.searchName.length > 0)
+		{
+			$scope.filtered_archive = $filter('keyfilter')($scope.filtered_archive,
+				{ key: 'user.name', value: $scope.searchName }
+			);
+		}
+		
+		$scope.update_pagination();
+	}
+	
+	$scope.update_pagination = function()
+	{
+		if(!$scope.filtered_archive) return;
+		
+		var num_pages = Math.ceil($scope.filtered_archive.length / $scope.perPage);
+		if(num_pages < $scope.currentPage)
+		{
+			$scope.currentPage = num_pages;
+		}
+		
+		var begin = ($scope.currentPage - 1) * $scope.perPage;
+		var end = begin + $scope.perPage;
+		
+		$scope.paginated_archive = $scope.filtered_archive.slice(begin, end);
+		
+		$scope.pagesList = [];
+		for(var i=0; i<num_pages; ++i)
+		{
+			$scope.pagesList.push(i+1);
+		}
+	}
+	
+	$scope.go_to_page = function(pageNumber)
+	{
+		$scope.currentPage = pageNumber;
+		if($scope.currentPage < 1) $scope.currentPage = 1;
+		if($scope.currentPage > $scope.pagesList.length) $scope.currentPage = $scope.pagesList.length;
+		
+		$scope.update_pagination();
+		
+		return false;
+	}
+	
+	$scope.$watchGroup(['archiveFilter.discarded', 'archiveFilter.replied_to', 'searchFilter'], function()
+	{
+		$scope.update_filtering();
+	});
 	
 	$http.get('/ajax/archive').then(function success(response)
 	{
@@ -92,8 +157,6 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 			
 			angular.forEach($scope.archive, function(item, key)
 			{
-				item.created_at = convertToDate(item.created_at);
-				
 				item.test_id = parseInt(item.test_id);
 				item.course_id = parseInt(item.test.course.id);
 				
@@ -121,6 +184,8 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 				$scope.select_filters.test = $scope.tests[$location.search().test];
 				$scope.test_filter_changed();
 			}
+			
+			$scope.update_filtering();
 		}
 	});
 	
@@ -189,6 +254,8 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 			$location.search('course', undefined);
 			$location.search('test', undefined);
 		}
+		
+		$scope.update_filtering();
 	}
 	
 	$scope.reset_select_filter(true);
@@ -202,6 +269,8 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 		
 		$location.search('course', $scope.archiveFilter.course_id);
 		$location.search('test', undefined);
+		
+		$scope.update_filtering();
 	}
 	
 	$scope.test_filter_changed = function()
@@ -221,6 +290,8 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 		
 		$location.search('test', $scope.archiveFilter.test_id);
 		$location.search('course', undefined);
+		
+		$scope.update_filtering();
 	}
 	
 	$scope.save_success = $rootScope.archiveFeedbackSent;

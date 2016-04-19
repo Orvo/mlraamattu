@@ -101,13 +101,13 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="(key, item) in archive | keyfilter : ({ key: 'user.name', value: searchName }) | filter : searchFilterParsed | filter : archiveFilter : true" ng-class="{'missing-test':!item.test}">
-				<td style="font-weight: bold;text-align: right;">[[ key + 1 ]].</td>
+			<tr ng-repeat="(key, item) in paginated_archive" ng-class="{'missing-test':!item.test}">
+				<td style="font-weight: bold;text-align: right;">[[ key + 1 + (currentPage-1) * perPage ]].</td>
 				<td>
 					[[ item.user.name ]]
 				</td>
 				<td>
-					[[ item.created_at | date:  "dd.MM.yyyy 'klo' HH:mm" ]]
+					[[ item.created_at | convertToDate | date:  "dd.MM.yyyy 'klo' HH:mm" ]]
 				</td>
 				<td>
 					<a href="#/courses/[[ item.test.course.id ]]">
@@ -150,13 +150,43 @@
 					</div>
 				</td>
 			</tr>
-			<tr ng-if="(archive | keyfilter : ({ key: 'user.name', value: searchName }) | filter : searchFilterParsed | filter : archiveFilter : true).length == 0">
+			<tr ng-if="paginated_archive.length == 0">
 				<td colspan="7" style="text-align: center;font-weight: bold;">
-					Ei suorituksia annetuilla hakuehdoilla
+					Ei osumia annetuilla hakuehdoilla.
 				</td>
 			</tr>
 		</tbody>
 	</table>
+	
+	<div class="pagination-block" ng-if="filtered_archive.length > 0">
+		<div>
+			Yhteensä <b>[[ filtered_archive.length ]]</b> osumaa.
+		</div>
+		<ul class="pagination">
+			<li ng-class="{'disabled': currentPage == 1}">
+				<a ng-click="go_to_page(currentPage-1)" aria-label="Edellinen" ng-if="currentPage != 1">
+					<span aria-hidden="true">&laquo;</span>
+				</a>
+				<span ng-if="currentPage == 1">
+					&laquo;
+				</span>
+			</li>
+			<li ng-repeat="pageNumber in pagesList" ng-class="{ 'active': currentPage == pageNumber }">
+				<a ng-click="go_to_page(pageNumber)" ng-if="currentPage != pageNumber">
+					[[ pageNumber ]]
+				</a>
+				<span ng-if="currentPage == pageNumber">
+					[[ pageNumber ]]
+				</span>
+			</li>
+			<li ng-class="{'disabled': currentPage == pagesList.length}">
+				<a ng-click="go_to_page(currentPage+1)" aria-label="Seuraava">
+					<span aria-hidden="true">&raquo;</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	
 </div>
 
 <div class="modal fade" id="modal-display-feedback">

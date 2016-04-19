@@ -1546,3 +1546,15 @@ blockquote
 {
 	font-size: inherit !important;
 }
+
+.pagination-block
+{
+	width: 100%;
+	display: block;
+	text-align: center;
+}
+
+.pagination-block li a
+{
+	cursor: pointer;
+}
