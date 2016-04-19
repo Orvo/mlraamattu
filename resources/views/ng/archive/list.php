@@ -180,9 +180,12 @@
 				</span>
 			</li>
 			<li ng-class="{'disabled': currentPage == pagesList.length}">
-				<a ng-click="go_to_page(currentPage+1)" aria-label="Seuraava">
+				<a ng-click="go_to_page(currentPage+1)" aria-label="Seuraava" ng-if="currentPage != pagesList.length">
 					<span aria-hidden="true">&raquo;</span>
 				</a>
+				<span ng-if="currentPage == pagesList.length">
+					&laquo;
+				</span>
 			</li>
 		</ul>
 	</div>
