@@ -59,7 +59,11 @@ class TestsController extends Controller
 			{
 				$data = (object)json_decode($archive->data, true);
 				$viewData['given_answers'] 	= $data->given_answers;
-				$viewData['feedback'] 		= $data->feedback;
+				
+				if(@$data->feedback)
+				{
+					$viewData['feedback'] 		= $data->feedback;
+				}
 				
 				$fullValidation 			= $testvalidator->WithAnswers($test, $data->given_answers);
 				$viewData['validation'] 	= $fullValidation['validation'];
