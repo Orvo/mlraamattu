@@ -134,7 +134,7 @@ class ArchiveController extends Controller
 				Mail::send('email.feedback_notification', $mail_data, function($m) use ($archive)
 				{
 					$m->to($archive->user->email, $archive->user->name)
-					  ->subject('Koepalautetta Media7 raamattuopistolta');
+					  ->subject('Koepalautetta Media7 Raamattuopistolta');
 				});
 			}
 			

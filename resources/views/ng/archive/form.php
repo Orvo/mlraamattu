@@ -119,11 +119,8 @@
 									</ul>
 								</div>
 								<div ng-if="question.type == 'TEXT' || question.type == 'TEXTAREA'">
-									<ul>
-										<li>
-											[[ data.archive.given_answers[question.id] ]]
-										</li>
-									</ul>
+									[[ data.archive.given_answers[question.id] ]]
+									<span ng-if="data.archive.given_answers[question.id] && data.archive.given_answers[question.id].length == 0" style="font-style:italic;">Tyhjä vastaus</span>
 								</div>
 							</div>
 							<div class="col-lg-6 test-answer" ng-if="question.type != 'TEXTAREA' && question.data.check == 1">

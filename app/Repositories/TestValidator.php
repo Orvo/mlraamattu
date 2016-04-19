@@ -77,7 +77,7 @@ class TestValidator
 		$empty_answer = ($given_answer === null || (!is_array($given_answer) && strlen(trim($given_answer)) == 0) || is_array($given_answer) && count($given_answer) == 0);
 		
 		// Check question if marked for checking or missing the value
-		if($question->data->check == 1 || !property_exists($question->data, 'check'))
+		if(!property_exists($question->data, 'check') || $question->data->check == 1)
 		{
 			$correct_answers = $question->correctAnswers();
 		
