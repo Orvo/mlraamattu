@@ -144,6 +144,28 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 		];
 	});
 	
+	Route::get('/sessions', function()
+	{
+		return App\ValidSession::where('user_id', Auth::user()->id)->get();
+	});
+	
+	Route::post('/sessions/{hash}/logout', function($hash)
+	{
+		$session = App\ValidSession::where('hash', $hash)->first();
+		if($session)
+		{
+			$session->delete();
+			
+			return [
+				'success' => true,
+			];
+		}
+		
+		return [
+			'success' => false,
+		];
+	});
+	
 	Route::resource('users', 'Ajax\UsersController');
 	Route::resource('groups', 'Ajax\GroupsController');
 	

@@ -28,7 +28,7 @@ class UsersController extends Controller
 			];
 		}
 		
-		$users = User::with('archives')->get();
+		$users = User::with('archives', 'sessions')->get();
 		
 		foreach($users as &$user)
 		{
@@ -92,7 +92,9 @@ class UsersController extends Controller
 	{
 		abort_unauthorized($id);
 		
-		$user = User::findOrFail($id);
+		$user = User::with('sessions')->findOrFail($id);
+		
+		$user->currentSessionHash = \App\ValidSession::generateFingerprint(request())['hash'];
 		
 		return $user;
 	}

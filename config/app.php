@@ -146,8 +146,9 @@ return [
 		App\Providers\RouteServiceProvider::class,
 		'Illuminate\Html\HtmlServiceProvider',
 		
-		BackupManager\Laravel\Laravel5ServiceProvider::class,
 		App\Providers\ViewServiceProvider::class,
+		
+		BackupManager\Laravel\Laravel5ServiceProvider::class,
 
 	],
 

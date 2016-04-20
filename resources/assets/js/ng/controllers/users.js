@@ -176,4 +176,22 @@ app.controller('UsersFormController', function($rootScope, $scope, $window, $loc
 				}
 			});
 	}
+	
+	$scope.logoutSession = function(session, key)
+	{
+		session.processing = true;
+		
+		$http.post('/ajax/sessions/' + session.hash + '/logout', session)
+		.then(function success(response, textStatus, xhr)
+		{
+			console.log(response);
+			
+			session.processing = false;
+			
+			if(response.data.success == true)
+			{
+				session.terminated = true;
+			}
+		});
+	}
 });
