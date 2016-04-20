@@ -23,6 +23,8 @@
 		'forward' => 7,
 	];
 	
+	$backward_hidden = 0;
+	
 ?>
 <h4 class="hide-in-desktop-width">Kurssikartta</h4>
 <ul class="sidebar-course-progress fixed">
@@ -49,11 +51,14 @@
 				</li>
 				<li class="lock-spacer"></li>
 			@endif
-			<?php continue; ?>
+			<?php 
+				$backward_hidden++;
+				continue;
+			?>
 		@endif
 			
-		@if($distance >= $hiding['forward'])
-			@if($distance == $hiding['forward'])
+		@if($distance >= ($hiding['forward']-$backward_hidden))
+			@if($distance == ($hiding['forward']-$backward_hidden))
 				<li class="lock-spacer"></li>
 				<li class="test-title">
 					<div>
