@@ -174,6 +174,8 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth.ajax'], function()
 	Route::get('archive/{id}', 'Ajax\ArchiveController@show');
 	Route::put('archive/{id}', 'Ajax\ArchiveController@store');
 	Route::post('archive/{id}/discard', 'Ajax\ArchiveController@discard');
+	
+	Route::post('archive/{id}/revalidate', 'Ajax\ArchiveController@revalidate');
 });
 
 ///////////////////////////////////////////////////////////////////////

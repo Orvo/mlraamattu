@@ -20,7 +20,7 @@ class TestValidator
 		
 		foreach($test->questions as $question)
 		{
-			if(array_key_exists($question->id, $given_answers))
+			if(isset($given_answers[$question->id]) || array_key_exists($question->id, $given_answers))
 			{
 				$result = $this->ValidateAnswer($question, $given_answers[$question->id]);
 			}
