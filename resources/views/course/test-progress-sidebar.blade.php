@@ -79,7 +79,9 @@
 				'active' => $is_test_page && $test->id == $current_test->id && @$isMaterialPage
 			]) }}">
 				@if($test->progress->status != \App\Test::LOCKED)
-					<a href="/test/{{ $test->id }}/material" class="anchor">
+					<a href="/test/{{ $test->id }}/material" class="anchor {{ css([
+							'material-popup' => $is_test_page && $test->id == $current_test->id && !@$isMaterialPage
+						]) }}">
 				@else
 					<div class="anchor">
 				@endif

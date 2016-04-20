@@ -340,7 +340,7 @@
 								</p>
 								<p>
 									Olet vastannut oikein läpäisyyn vaadittuun vähimmäismäärään kysymyksistä. Halutessasi voit vielä korjata vastauksia.
-								</p>
+								</p>§
 							@endif
 						</div>
 						<div class="clearfix"></div>
@@ -354,7 +354,7 @@
 				<i class="fa fa-exclamation"></i>
 				<div>
 					<p>
-						<b>Eikö suju?</b> Halutessasi voit kerrata opintomateriaalia <a href="/test/{{ $test->id }}/material" class="popup"><span class="ul">täällä</span></a>.
+						<b>Eikö suju?</b> Halutessasi voit kerrata opintomateriaalia <a href="/test/{{ $test->id }}/material" class="material-popup"><span class="ul">täällä</span></a>.
 					</p>
 				</div>
 				<div class="clearfix"></div>
@@ -403,7 +403,7 @@
 						@if($validation[$question->id]['status'] == \App\Question::CORRECT)
 							<div class="validation correct">
 								<span class="glyphicon glyphicon-ok"></span>
-								@if($question->type == 'TEXTAREA' || $question->data->check == 0)
+								@if($question->type == 'TEXTAREA' || @$question->data->check == 0)
 									Hyväksytty!
 								@else
 									Oikein!
