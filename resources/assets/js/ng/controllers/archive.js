@@ -116,7 +116,7 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 		var num_pages = Math.ceil($scope.filtered_archive.length / $scope.perPage);
 		if(num_pages < $scope.currentPage)
 		{
-			$scope.currentPage = num_pages;
+			$scope.currentPage = Math.max(1, num_pages);
 		}
 		
 		var begin = ($scope.currentPage - 1) * $scope.perPage;
