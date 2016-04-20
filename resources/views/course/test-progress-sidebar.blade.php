@@ -20,7 +20,7 @@
 	
 	$hiding = [
 		'backward' => 3,
-		'forward' => 7,
+		'forward' => 6,
 	];
 	
 	$backward_hidden = 0;
