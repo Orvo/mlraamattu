@@ -184,7 +184,7 @@
 					<span aria-hidden="true">&raquo;</span>
 				</a>
 				<span ng-if="currentPage == pagesList.length">
-					&laquo;
+					&raquo;
 				</span>
 			</li>
 		</ul>
