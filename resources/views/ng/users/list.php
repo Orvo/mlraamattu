@@ -68,9 +68,7 @@
 						<div ng-if="user.access_level == 'TEACHER'" class="label label-warning">Opettaja</div>
 					</div>
 					<div class="info">
-						<a href="#/users/[[ user.id ]]">
-							[[ user.name ]]
-						</a>
+						[[ user.name ]]
 						([[ user.email ]])
 					</div>
 				</td>
