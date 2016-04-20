@@ -1639,6 +1639,16 @@ ul.user-groups li .btn
 	margin-top: -16px;
 }
 
+a.bref
+{
+	text-decoration: underline;
+}
+
+a.bref:hover
+{
+	text-decoration: none;
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */
