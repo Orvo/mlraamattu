@@ -53,7 +53,8 @@
 		<thead>
 			<tr>
 				<td style="width:40px">ID</td>
-				<td style="width:35%">Käyttäjän tiedot</td>
+				<td style="min-width:12%">Käyttäjä nimi</td>
+				<td style="width:23%">Sähköposti</td>
 				<td>Koesuoritukset</td>
 				<td style="width:180px">Toiminnot</td>
 			</tr>
@@ -62,20 +63,27 @@
 			<tr ng-repeat="user in users | filter : searchFilter | filter : usersFilter">
 				<td style="font-weight: bold; background:#fafafa">[[ user.id ]]</td>
 				<td>
+					[[ user.name ]]
+				</td>
+				<td>
 					<div class="pull-right">
 						<div ng-if="user.id == userData.user.id" class="label label-info">Sinä</div>
 						<div ng-if="user.access_level == 'ADMIN'" class="label label-primary">Ylläpitäjä</div>
 						<div ng-if="user.access_level == 'TEACHER'" class="label label-warning">Opettaja</div>
 					</div>
 					<div class="info">
-						<b>[[ user.name ]]</b>
-						([[ user.email ]])
+						[[ user.email ]]
 					</div>
 				</td>
 				<td style="text-align: left">
-					Suorittanut <b>[[ user.archives.length ]]</b> koetta joista <b>[[ user.tests_completed ]]</b> oikein
-					
-					(<a href="#/archive?q=nimi:&quot;[[ user.name ]]&quot;&amp;replied=all&amp;discarded=show">käyttäjän koesuoritukset</a>)
+					<div class="pull-right">
+						<a href="#/archive?q=nimi:&quot;[[ user.name ]]&quot;&amp;replied=all&amp;discarded=show">
+							Näytä tarkemmin
+						</a>
+					</div>
+					Suorittanut <b>[[ user.archives.length ]]</b> koetta:
+					<b>[[ user.tests_passed ]]</b> läpäisty /
+					<b>[[ user.tests_completed ]]</b> täysin oikein
 				</td>
 				<td>
 					<a href="#/users/[[ user.id ]]/edit" class="btn btn-primary btn-sm">
