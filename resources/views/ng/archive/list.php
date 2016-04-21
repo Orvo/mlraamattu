@@ -120,7 +120,7 @@
 					<div class="labels pull-right">
 						<span class="label label-success" ng-if="item.replied_to">Vastattu</span>
 						<span class="label label-warning" ng-if="item.discarded && item.test.autodiscard == 0">Kuitattu</span>
-						<span class="label label-warning" ng-if="item.discarded && item.test.autodiscard != 0">Automaattinen kuittaus</span>
+						<span class="label label-primary" ng-if="item.discarded && item.test.autodiscard != 0">Automaattinen kuittaus</span>
 					</div>
 				</td>
 				<td class="archive-test-result">
@@ -132,6 +132,12 @@
 						<span class="number">
 							<b>[[ item.data.num_correct ]] / [[ item.data.total ]]</b> oikein
 						</span>
+						<div class="revalidate-button">
+							<a ng-click="revalidate_test(item)" title="Tarkista uudelleen" ng-if="!item.processing">
+								<span class="glyphicon glyphicon-refresh"></span>
+							</a>
+							<img src="/img/ajax-loader-breadcrumb.gif" alt="" style="width: 30px; opacity: 0.75" ng-if="item.processing">
+						</div>
 					</div>
 				</td>
 				<td class="list-actions">
@@ -184,7 +190,7 @@
 					<span aria-hidden="true">&raquo;</span>
 				</a>
 				<span ng-if="currentPage == pagesList.length">
-					&laquo;
+					&raquo;
 				</span>
 			</li>
 		</ul>

@@ -28,14 +28,12 @@ class Question extends Model
 		
 		if(is_null($value))
 		{
+			$value = (object)[];
+			
 			if($this->type == "MULTITEXT")
 			{
-				return (object)[
-					'multitext_required' => $this->answers()->count(),
-				];
+				$value->multitext_required = $this->answers()->count();
 			}
-			
-			return (object)[];
 		}
 		
 		if(!property_exists($value, 'check'))

@@ -20,8 +20,10 @@
 	
 	$hiding = [
 		'backward' => 3,
-		'forward' => 7,
+		'forward' => 6,
 	];
+	
+	$backward_hidden = 0;
 	
 ?>
 <h4 class="hide-in-desktop-width">Kurssikartta</h4>
@@ -49,11 +51,14 @@
 				</li>
 				<li class="lock-spacer"></li>
 			@endif
-			<?php continue; ?>
+			<?php 
+				$backward_hidden++;
+				continue;
+			?>
 		@endif
 			
-		@if($distance >= $hiding['forward'])
-			@if($distance == $hiding['forward'])
+		@if($distance >= ($hiding['forward']-$backward_hidden))
+			@if($distance == ($hiding['forward']-$backward_hidden))
 				<li class="lock-spacer"></li>
 				<li class="test-title">
 					<div>
@@ -79,7 +84,9 @@
 				'active' => $is_test_page && $test->id == $current_test->id && @$isMaterialPage
 			]) }}">
 				@if($test->progress->status != \App\Test::LOCKED)
-					<a href="/test/{{ $test->id }}/material" class="anchor">
+					<a href="/test/{{ $test->id }}/material" class="anchor {{ css([
+							'material-popup' => $is_test_page && $test->id == $current_test->id && !@$isMaterialPage
+						]) }}">
 				@else
 					<div class="anchor">
 				@endif

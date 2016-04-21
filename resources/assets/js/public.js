@@ -109,7 +109,7 @@ $(function()
 		$('#top-spoiler-warning').slideUp(400);
 	});
 	
-	$('a.popup').click(function(e)
+	$('a.material-popup').click(function(e)
 	{
 		var href = $(this).attr('href');
 		

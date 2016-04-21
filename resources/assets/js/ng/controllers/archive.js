@@ -116,7 +116,7 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 		var num_pages = Math.ceil($scope.filtered_archive.length / $scope.perPage);
 		if(num_pages < $scope.currentPage)
 		{
-			$scope.currentPage = num_pages;
+			$scope.currentPage = Math.max(1, num_pages);
 		}
 		
 		var begin = ($scope.currentPage - 1) * $scope.perPage;
@@ -301,9 +301,8 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 	{
 		$http.post('/ajax/archive/' + item.id + '/discard').then(function success(response)
 		{
-			if(response && response.data.success == true)
+			if(response && response.data.success)
 			{
-				//$scope.archive[$scope.archive.indexOf(item)].discarded = true;
 				item.discarded = 1;
 				$rootScope.update_archive_stats();
 			}
@@ -314,6 +313,25 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 	{
 		$scope.modal_info = item;
 		$('#modal-display-feedback').modal('show');
+	}
+	
+	$scope.revalidate_test = function(item)
+	{
+		item.processing = true;
+		
+		$http.post('/ajax/archive/' + item.id + '/revalidate')
+		.then(function success(response)
+		{
+			item.processing = false;
+			
+			if(response.data.success)
+			{
+				item.data = response.data.data;
+			}
+		}, function error(response)
+		{
+			item.processing = false;
+		});
 	}
 });
 

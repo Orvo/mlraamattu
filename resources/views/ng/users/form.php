@@ -23,7 +23,7 @@
 		<div class="sidebar-help">
 			<h3>Ohjeet</h3>
 			<p ng-show="userData.user.id == data.user.id">
-				Muokkaa omia käyttäjätietojasi. Jätä salasanakenttä tyhjäksi jos et halua vaihtaa sitä.
+				Muokkaa omia käyttäjätietojasi. Jätä salasanakenttä tyhjäksi jos et halua vaihtaa sitä. Voit myös kirjautua ulos aktiivisista istunnoista tällä sivulla.
 			</p>
 			<p ng-show="data.user.id && userData.user.id != data.user.id">
 				Muokkaa toisen käyttäjätunnuksen tietoja käyttäjän puolesta. Tehdyistä muutoksista lähetetään käyttäjälle ilmoitus sähköpostiin.
@@ -105,6 +105,55 @@
 					</label>
 					<div class="col-xs-6">
 						<input type="password" class="form-control" id="user-password_confirmation" ng-model="data.user.password_confirmation" placeholder="Salasana uudestaan">
+					</div>
+				</div>
+			</fieldset>
+			<fieldset ng-if="id && id == userData.user.id">
+				<legend>Aktiiviset istunnot</legend>
+				<div>
+					<p>
+						Alla on listattu kaikki aktiiviset istunnot tälle käyttäjätilille. Voit kirjautua ulos istunnoista jos haluat.
+					</p>
+					<div class="form-group col-xs-12">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<td></td>
+									<td>IP-osoite</td>
+									<td>Selain</td>
+									<td>Viimeksi aktiivinen</td>
+									<td>Toiminnot</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="session in data.user.sessions">
+									<td></td>
+									<td>
+										[[ session.ip ]]
+									</td>
+									<td>
+										[[ session.useragent ]]
+									</td>
+									<td>
+										[[ session.last_active | convertToDate | date : "dd.MM.yyyy 'klo' HH:mm" ]]
+									</td>
+									<td>
+										<div ng-if="!session.processing">
+											<span class="label label-success" ng-if="data.user.currentSessionHash == session.hash">
+												Tämänhetkinen istunto
+											</span>
+											<span class="label label-danger" ng-if="session.terminated">
+												Istunto päätetty
+											</span>
+											<button type="button" class="btn btn-primary" ng-if="data.user.currentSessionHash != session.hash && !session.terminated" ng-click="logoutSession(session)">
+												Kirjaa ulos <span class="glyphicon glyphicon-log-out"></span>
+											</button>
+										</div>
+										<img src="/img/ajax-loader.gif" alt="" ng-if="session.processing" style="width:32px">
+									</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 			</fieldset>

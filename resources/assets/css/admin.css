@@ -1060,6 +1060,23 @@ td.archive-test-result span.icon.incorrect
 	color: #A70014;
 }
 
+.revalidate-button
+{
+	display: inline-block;
+	padding: 6px 12px 2px 12px;
+}
+
+.revalidate-button a
+{
+	color: #afafaf;
+	cursor: pointer;
+}
+
+.revalidate-button a:hover
+{
+	color: #DA2010;
+}
+
 td.list-actions
 {
 	min-width: 120px;

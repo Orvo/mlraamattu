@@ -28,7 +28,7 @@ class UsersController extends Controller
 			];
 		}
 		
-		$users = User::with('archives')->get();
+		$users = User::with('archives', 'sessions')->get();
 		
 		foreach($users as &$user)
 		{
@@ -46,12 +46,22 @@ class UsersController extends Controller
 				$user->tests_completed = 0;
 			}
 			
+			if(!$user->tests_passed)
+			{
+				$user->tests_passed = 0;
+			}
+			
 			foreach($user->archives as $archive)
 			{
 				$data = json_decode($archive->data);
-				if($data->all_correct)
+				if(($data->num_correct / $data->total) >= 0.5)
 				{
-					$user->tests_completed += 1;
+					$user->tests_passed += 1;
+					
+					if($data->all_correct)
+					{
+						$user->tests_completed += 1;
+					}
 				}
 			}
 		}
@@ -92,7 +102,9 @@ class UsersController extends Controller
 	{
 		abort_unauthorized($id);
 		
-		$user = User::findOrFail($id);
+		$user = User::with('sessions')->findOrFail($id);
+		
+		$user->currentSessionHash = \App\ValidSession::generateFingerprint(request())['hash'];
 		
 		return $user;
 	}

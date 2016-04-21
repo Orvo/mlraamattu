@@ -184,4 +184,27 @@ class ArchiveController extends Controller
 			'success' => true,
 		];
 	}
+	
+	function revalidate($id, TestValidator $testvalidator)
+	{
+		$archive = Archive::findOrFail($id);
+		
+		$archive->data = json_decode($archive->data, true);
+		$old_data = $archive->data;
+		
+		$data = $testvalidator->WithAnswers($archive->test, $archive->data['given_answers']);
+		
+		if(@$old_data['feedback'])
+		{
+			$data['feedback'] = $old_data['feedback'];
+		}
+		
+		$archive->data = json_encode($data);
+		$archive->save();
+		
+		return [
+			'success' 	=> true,
+			'data'		=> $data,
+		];
+	}
 }
