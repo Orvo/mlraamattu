@@ -57,9 +57,14 @@ class ValidSession extends Model
 	
 	static public function makeSession($fingerprint)
 	{
-		$fingerprint['last_active'] = Carbon::now();
+		$session = ValidSession::findSession($fingerprint, false);
 		
-		$session = ValidSession::create($fingerprint);
+		if(!$session)
+		{
+			$fingerprint['last_active'] = Carbon::now();
+			
+			$session = ValidSession::create($fingerprint);
+		}
 		
 		return $session;
 	}
