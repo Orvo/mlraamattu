@@ -40,7 +40,7 @@ module.exports = function(grunt)
 			},
 			js_public: {
 				files: {
-					'public/js/build/public.min.js': 'public/js/build/public.min.js',	
+					'public/js/build/public.min.js': 'public/js/build/public.min.js',
 				},
 			},
 			js_admin: {
@@ -49,7 +49,7 @@ module.exports = function(grunt)
 					'public/js/build/admin.min.js': 'public/js/build/admin.min.js',
 				},
 			},
-		}, 
+		},
 		cssmin: {
 			options: {
 				shorthandCompacting: false,
