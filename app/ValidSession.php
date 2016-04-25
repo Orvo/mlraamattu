@@ -38,13 +38,17 @@ class ValidSession extends Model
 		return $fingerprint;
 	}
 	
-	static public function findSession($fingerprint)
+	static public function findSession($fingerprint, $updateTimestamp = true)
 	{
 		$session = ValidSession::where('hash', $fingerprint['hash'])->first();
 		
 		if($session)
 		{
-			$session->last_active = Carbon::now();
+			if($updateTimestamp)
+			{
+				$session->last_active = Carbon::now();
+			}
+			
 			$session->save();
 		}
 		

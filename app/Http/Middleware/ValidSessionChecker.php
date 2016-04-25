@@ -42,7 +42,8 @@ class ValidSessionChecker
 		if(!Auth::check()) return $next($request);
 		
 		$fingerprint = ValidSession::generateFingerprint($request);
-		$session = ValidSession::findSession($fingerprint);
+		
+		$session = ValidSession::findSession($fingerprint, !$request->is('ajax/archive/stats'));
 		
 		if(!$session)
 		{
