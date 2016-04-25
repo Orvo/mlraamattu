@@ -5,8 +5,6 @@
 @section('content')
 	
 	{!! Form::open(['method' => 'POST', 'action' => 'AuthController@login', 'class' => 'centered-form']) !!}
-
-		{!! csrf_field() !!}
 		
 		@if($referer)
 			<input type="hidden" name="ref" value="{{ $referer }}">
