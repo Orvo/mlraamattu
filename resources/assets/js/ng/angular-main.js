@@ -41,7 +41,7 @@ app.config(
 						$rootScope.promptLogin({
 							unsavedData: false,
 							redirectURL: '/auth/login/?ref=admin&route=' + $window.location.hash.substr(1),
-							callback: function()
+							callback: function(response)
 							{
 								deferred.resolve(response.data);
 								
@@ -61,8 +61,8 @@ app.config(
 					deferred.reject(false);
 					
 					var hash = $window.location.hash.substr(1);
-					//$window.location.hash = '';
-					//$window.location = "/auth/login/?ref=admin&route=" + hash;
+					$window.location.hash = '';
+					$window.location = "/auth/login/?ref=admin&route=" + hash;
 				});
 			
 			return deferred.promise;
@@ -244,7 +244,6 @@ app.controller('AjaxLogin', function($rootScope, $scope, $window, $location, $ro
 		}).then(function success(response)
 			{
 				$scope.verifying = false;
-				console.log(response.status, response.data);
 				
 				if(response.data.success)
 				{
@@ -252,6 +251,12 @@ app.controller('AjaxLogin', function($rootScope, $scope, $window, $location, $ro
 					{
 						$window.location = '/';
 					}
+					
+					console.log("$rootScope.userData", $rootScope.userData);
+					
+					console.log("LOGIN DATA", response.data);
+					
+					console.log("$rootScope.userData", $rootScope.userData);
 					
 					$rootScope.userData = response.data;
 					$scope.errors = [];
@@ -264,7 +269,7 @@ app.controller('AjaxLogin', function($rootScope, $scope, $window, $location, $ro
 					
 					if($rootScope.login_callback)
 					{
-						$rootScope.login_callback();	
+						$rootScope.login_callback(response);
 					}
 				}
 				else
