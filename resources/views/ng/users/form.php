@@ -126,7 +126,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr ng-repeat="session in data.user.sessions">
+								<tr ng-repeat="session in data.user.sessions | orderBy : '-last_active'">
 									<td></td>
 									<td>
 										[[ session.ip ]]
