@@ -49,6 +49,10 @@ class ValidSessionChecker
 		{
 			Auth::logout();
 		}
+		elseif(!Auth::check())
+		{
+			$session->delete();
+		}
 		
 		return $next($request);
 	}

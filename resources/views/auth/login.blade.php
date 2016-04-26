@@ -71,4 +71,9 @@
 		</div>
 	</div>
 	
+	<script type="text/javascript">
+		// Reload page every 2 hours to refresh CSRF-token
+		setTimeout(function() { document.location.reload(); }, 120 * 60 * 1000 - 1000);
+	</script>
+	
 @endsection
