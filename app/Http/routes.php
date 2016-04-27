@@ -31,6 +31,11 @@ Route::get('/home', function ()
 	return redirect('/');
 });
 
+Route::get('/raamattuopisto', function ()
+{
+	return redirect('/');
+});
+
 /**********************************************	
 	Public
 */

@@ -3,7 +3,16 @@
 @section('title', 'Tilaa kirjekurssi')
 
 @section('sidebar_content')
-	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia tempore eaque quas odio dolore perspiciatis natus fugit ex, dolorem! Cum totam rerum doloribus, facere similique atque reiciendis dignissimos odit voluptatem expedita voluptate! Cum quo, ipsum dolore accusamus voluptatibus eius saepe minus, at vero dignissimos exercitationem. Aliquid recusandae ducimus, facere saepe iusto, sunt nam sint iure, alias earum dicta modi libero.
+	<p>
+		Media7 Raamattuopisto tarjoaa kirjeitse ja Internetissä käytäviä raamattu- ja terveysaiheisia kursseja ja luentoja. 
+	</p>
+	<p>
+		Kaikki tarjoamme kurssit ovat ilmaisia, sitoumuksettemia, käytiin ne sitten kirjeitse, Internetissä tai osallistumalla luentosarjaan tai leirille.
+	</p>
+	<hr>
+	<p>
+		Jos haluat käydä kursseja Internetissä, valitse nettikurssit ylävalikosta.
+	</p>
 @endsection
 
 @section('content')
@@ -100,13 +109,13 @@
 			<div class="form-group">
 				<label class="control-label col-xs-4" for="phone">Puhelinnumero</label>
 				<div class="col-xs-8">
-					<input type="text" class="form-control" id="phone" name="phone" placeholder="Postinumero ja -toimipaikka" value="{{ old('phone') }}">
+					<input type="text" class="form-control" id="phone" name="phone" placeholder="Puhelinnumero" value="{{ old('phone') }}">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-xs-4" for="email">Sähköposti</label>
 				<div class="col-xs-8">
-					<input type="text" class="form-control" id="email" name="email" placeholder="Postinumero ja -toimipaikka" value="{{ old('email') }}">
+					<input type="text" class="form-control" id="email" name="email" placeholder="Sähköposti" value="{{ old('email') }}">
 				</div>
 			</div>
 		</fieldset>
