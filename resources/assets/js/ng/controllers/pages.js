@@ -81,6 +81,16 @@ app.controller('PagesFormController', function($rootScope, $scope, $window, $loc
 		autoGrow_bottomSpace: 50,
 	};
 	
+	////////////////////////////////////////////////////
+	
+	$scope.activeTab = 1;
+	$scope.setActiveTab = function(index)
+	{
+		$scope.activeTab = index;
+	}
+	
+	////////////////////////////////////////////////////
+	
 	$scope.$watch('data.page.title', function(new_value, old_value)
 	{
 		if(!$scope.data.page) return;

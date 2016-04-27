@@ -82,10 +82,50 @@
 			</p>
 		</div>
 		
-		<div class="form-group">
-			<label class="control-label">Sivun sisältö</label>
-			<textarea class="form-control vertical-textarea big" id="page-body"
-				ng-model="data.page.body" placeholder="Sivun kuvaus" ckeditor="editor_options"></textarea>
+		
+		<ul class="tabs">
+			<li ng-class="{'active': activeTab == 1}"><a ng-click="setActiveTab(1)">Sivun sisältö</a></li>
+			<li ng-class="{'active': activeTab == 2}"><a ng-click="setActiveTab(2)">Sivupalkki</a></li>
+		</ul>
+		
+		<div class="tab-wrapper">
+		
+			<div class="tab-panel" ng-show="activeTab == 1">
+				<div class="form-group">
+					<textarea class="form-control vertical-textarea big" id="page-body"
+						ng-model="data.page.body" placeholder="Sivun sisältö" ckeditor="editor_options"></textarea>
+				</div>
+			</div>
+			
+			<div class="tab-panel" ng-show="activeTab == 2">
+				<div class="row">
+					<div class="col-xs-9">
+						<div class="form-group">
+							<textarea class="form-control vertical-textarea big" id="page-body"
+								ng-model="data.page.sidebar_body" placeholder="Sivupalkin sisältö" ckeditor="editor_options"></textarea>
+						</div>
+					</div>
+					<div class="col-xs-3">
+						<label>Sivupalkin sijainti mobiililla</label>
+						<p>
+							Sivupalkin sisältö pitää näyttää mobiilialustalla joko sisällön jälkeen tai sitä ennen.
+						</p>
+						<div class="fancy-radio">
+							<div class="radio" ng-class="{'active': data.page.sticky_sidebar == 0}">
+								<label>
+									<input type="radio" ng-model="data.page.sticky_sidebar" value="0"> Sisällön jälkeen
+								</label>
+							</div>
+							<div class="radio" ng-class="{'active': data.page.sticky_sidebar == 1}">
+								<label>
+									<input type="radio" ng-model="data.page.sticky_sidebar" value="1"> Ennen sisältöä
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 		</div>
 		
 	</div>

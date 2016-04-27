@@ -26,4 +26,12 @@ class Contentpage extends Model
 		return !$page->exists();
 	}
 	
+	public function getViewData()
+	{
+		return [
+			'page' 				=> $this,
+			'sidebar_before'	=> $this->sticky_sidebar == 1,
+		];
+	}
+	
 }

@@ -20,9 +20,7 @@ Route::get('/', function ()
 	
 	if($page)
 	{
-		return view('layout.contentpage', [
-			'page' => $page,
-		]);	
+		return view('layout.contentpage', $page->getViewData());	
 	}
 	
 	return redirect('/course');
@@ -196,16 +194,12 @@ Route::get('{tag}', function($tag)
 {
 	$page = Contentpage::where('tag', $tag)->firstOrFail();
 	
-	return view('layout.contentpage', [
-		'page' => $page,
-	]);
+	return view('layout.contentpage', $page->getViewData());
 });
 
 Route::get('page/{id}/{tag}', function($id, $tag)
 {
 	$page = Contentpage::where('id', $id)->orWhere('tag', $tag)->firstOrFail();
 	
-	return view('layout.contentpage', [
-		'page' => $page,
-	]);
+	return view('layout.contentpage', $page->getViewData());
 });

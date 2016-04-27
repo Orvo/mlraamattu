@@ -69,7 +69,7 @@
 				<div id="content-wrapper" class="row {{ isset($sidebar_before) && $sidebar_before ? 'sidebar_before' : 'sidebar_after' }}">
 					@if(isset($__env->getSections()['sidebar_content']))
 						<div id="sidebar-content" class="col-xs-3">
-							@yield('sidebar_content', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.')
+							@yield('sidebar_content')
 						</div>
 					@endif
 					<div id="main-content" class="{{ css([

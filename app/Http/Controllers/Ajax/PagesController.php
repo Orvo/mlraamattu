@@ -157,10 +157,12 @@ class PagesController extends Controller
 		
 		$page = Contentpage::findOrNew(@$data['id']);
 		
-		$page->title 	= $data['title'];
-		$page->tag 		= $data['tag'];
-		$page->body 	= $data['body'];
-		$page->pinned 	= $data['pinned'];
+		$page->title 			= $data['title'];
+		$page->tag 				= $data['tag'];
+		$page->body 			= $data['body'];
+		$page->sidebar_body 	= $data['sidebar_body'];
+		$page->sticky_sidebar 	= $data['sticky_sidebar'];
+		$page->pinned 			= $data['pinned'];
 		
 		$page->save();
 		
