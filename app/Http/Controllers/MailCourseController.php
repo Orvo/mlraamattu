@@ -43,7 +43,7 @@ class MailCourseController extends Controller
 		$users = [
 			(object)['email' => 'media7rtv@gmail.com', 'name' => 'Media7'],
 			(object)['email' => 'temu92@gmail.com', 'name' => 'Potato'],
-		]
+		];
 		
 		foreach($users as $user)
 		{
