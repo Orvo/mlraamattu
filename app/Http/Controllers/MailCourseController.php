@@ -42,11 +42,7 @@ class MailCourseController extends Controller
 			return redirect()->back()->withInput()->withErrors($validation);
 		}
 		
-		//$users = \App\User::where('access_level', 'ADMIN')->get();
-		$users = [
-			(object)['email' => 'media7rtv@gmail.com', 'name' => 'Media7'],
-			(object)['email' => 'temu92@gmail.com', 'name' => 'Potato'],
-		];
+		$users = \App\User::where('access_level', 'ADMIN')->get();
 		
 		foreach($users as $user)
 		{
