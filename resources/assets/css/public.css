@@ -1649,15 +1649,48 @@ a.bref:hover
 	text-decoration: none;
 }
 
+.big-info,
 .big-error
 {
 	padding-top: 50px;
 	text-align: center;
 }
 
+label.control-label small
+{
+	font-weight: normal !important;
+	color: #555;
+	display: block;
+}
 
+.fancy-radio 
+{
+	padding-bottom: 1em;
+}
 
+.fancy-radio .radio label
+{
+	display: block;
+	padding: 6px 6px 6px 30px;
+	border-radius: 4px;
+	background: #f4f4f4;
+	border: 1px solid #E3E3E3;
+	transition: background 150ms ease-out, border 150ms ease-out;
+	box-shadow: 0 2px 0 rgba(0, 0, 0, 0.1);
+}
 
+.fancy-radio .radio.active label
+{
+	background: #ABD9FF;
+	border: 1px solid #8BB9E3;
+}
+
+.fancy-radio .radio label:hover
+{
+	background: #FED081;
+	border: 1px solid #EDBA68;
+	box-shadow: 0 2px 3px #FFE5B7;
+}
 
 
 

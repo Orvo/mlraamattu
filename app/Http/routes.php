@@ -39,6 +39,7 @@ Route::get('/test', function ()
 {
 	return redirect('/');
 });
+
 Route::get('test/{id}', 'TestsController@show');
 Route::get('test/{id}/material', 'TestsController@material');
 Route::get('test/{id}/material/popup', 'TestsController@material_popup');
@@ -46,6 +47,9 @@ Route::post('test/{id}', 'TestsController@check');
 
 Route::get('course', 'CoursesController@index');
 Route::get('course/{id}', 'CoursesController@show');
+
+Route::get('mailcourse', 'MailCourseController@index');
+Route::post('mailcourse', 'MailCourseController@submit');
 
 Route::group(['prefix' => 'auth'], function()
 {
@@ -73,9 +77,8 @@ Route::group(['prefix' => 'groups', 'middleware' => 'auth'], function()
 	Route::get('leave/{id}', 'GroupsController@leave');
 });
 
-/**********************************************	
-	Admin
-*/
+///////////////////////////////////////////////////////////////////////
+// Admin
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function()
 {
@@ -85,9 +88,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth.admin'], function()
 	});
 });
 
-/**********************
-	Ajax Routes
-**********************/
+///////////////////////////////////////////////////////////////////////
+//	Ajax Routes
 
 Route::get('/ajax/', function ()
 {

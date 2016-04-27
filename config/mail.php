@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'noreply@mlrprod.sonaza.com', 'name' => 'Media7 Raamattuopisto'],
+    'from' => ['address' => 'noreply@uusi.raamattuavautuu.fi', 'name' => 'Media7 Raamattuopisto'],
 
     /*
     |--------------------------------------------------------------------------
