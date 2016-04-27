@@ -52,7 +52,7 @@
 				<li class="lock-spacer"></li>
 			@endif
 			<?php 
-				$backward_hidden++;
+				$backward_hidden = min($hiding['backward'], $backward_hidden+1);
 				continue;
 			?>
 		@endif
@@ -92,7 +92,7 @@
 				@endif
 					<i class="fa fa-bookmark"></i>
 					<span>
-						@if($test->isUnlocked())
+						@if(!$test->isUnlocked())
 							<span class="glyphicon glyphicon-lock"></span>
 						@elseif($is_test_page && $test->id == $current_test->id && @$isMaterialPage)
 							<span class="glyphicon glyphicon-record"></span>
