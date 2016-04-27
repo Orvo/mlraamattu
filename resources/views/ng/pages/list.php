@@ -40,6 +40,7 @@
 				</td>
 				<td>
 					<div class="label label-success" ng-if="page.id == 1 || page.pinned == 1">Navigaatiossa</div>
+					<div class="label label-primary" ng-if="page.sidebar_body.length > 0">Sivupalkki</div>
 				</td>
 				<td>
 					[[ page.tag ]]

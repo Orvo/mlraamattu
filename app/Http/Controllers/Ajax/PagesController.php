@@ -159,8 +159,8 @@ class PagesController extends Controller
 		
 		$page->title 			= $data['title'];
 		$page->tag 				= $data['tag'];
-		$page->body 			= $data['body'];
-		$page->sidebar_body 	= $data['sidebar_body'];
+		$page->body 			= trim($data['body']);
+		$page->sidebar_body 	= trim($data['sidebar_body']);
 		$page->sticky_sidebar 	= $data['sticky_sidebar'];
 		$page->pinned 			= $data['pinned'];
 		
