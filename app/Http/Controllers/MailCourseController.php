@@ -15,7 +15,9 @@ class MailCourseController extends Controller
 	
 	public function index()
 	{
-		return view('mailcourse.form');
+		return view('mailcourse.form')->with([
+			'sidebar_before' => true,	
+		]);
 	}
 	
 	public function submit(Request $request)
