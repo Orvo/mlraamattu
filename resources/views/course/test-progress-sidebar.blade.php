@@ -70,7 +70,7 @@
 			<?php continue; ?>
 		@endif
 		
-		@if($test->progress->status == \App\Test::LOCKED && !@$hasLockSpacer)
+		@if(!$test->isUnlocked() && !@$hasLockSpacer)
 			<li class="lock-spacer"></li>
 			<?php $hasLockSpacer = true; ?>
 		@endif
