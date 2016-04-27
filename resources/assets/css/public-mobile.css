@@ -233,10 +233,10 @@
 		font-size: 13pt !important;
 	}
 
-	div.course-description img,
-	.course.list-item .description img,
-	div.test-material-body img,
-	div.page-body img
+	div.course-description img:not(.no-mobile-scale),
+	.course.list-item .description img:not(.no-mobile-scale),
+	div.test-material-body img:not(.no-mobile-scale),
+	div.page-body img:not(.no-mobile-scale)
 	{
 		float: none !important;
 		width: 100% !important;
