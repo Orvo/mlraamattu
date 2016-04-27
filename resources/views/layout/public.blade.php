@@ -18,10 +18,7 @@
 			<meta name="description" content="">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<title>
-				@if(isset($__env->getSections()['title']))
-					@yield('title') - 
-				@endif
-				{{ Config::get('site.title') }}
+				<?php if(isset($__env->getSections()['title'])): ?>@yield('title') - <?php endif; ?>{{ Config::get('site.title') }}
 			</title>
 			<link rel="shortcut icon" type="image/ico" href="/favicon.ico">
 	        <link rel="stylesheet" href="/css/normalize.css">
