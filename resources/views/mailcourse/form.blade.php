@@ -46,7 +46,7 @@
 				Valitse kurssi
 			</legend>
 			<div class="form-group fancy-radio">
-				<div class="col-xs-12">
+				<div class="col-md-12">
 					<div class="radio active">
 						<label>
 							<input type="radio" name="course" value="Maailman valo" checked>
@@ -89,32 +89,32 @@
 		<fieldset>
 			<legend>Yhteystietosi</legend>
 			<div class="form-group">
-				<label class="control-label col-xs-4" for="name">Nimi<small>Pakollinen</small></label>
-				<div class="col-xs-8">
+				<label class="control-label col-md-4" for="name">Nimi<small>Pakollinen</small></label>
+				<div class="col-md-8">
 					<input type="text" class="form-control" id="name" name="name" placeholder="Nimi" value="{{ old('name') }}">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-4" for="address">Lähiosoite<small>Pakollinen</small></label>
-				<div class="col-xs-8">
+				<label class="control-label col-md-4" for="address">Lähiosoite<small>Pakollinen</small></label>
+				<div class="col-md-8">
 					<input type="text" class="form-control" id="address" name="address" placeholder="Lähisoite" value="{{ old('address') }}">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-4" for="city">Postinumero ja -toimipaikka<small>Pakollinen</small></label>
-				<div class="col-xs-8">
+				<label class="control-label col-md-4" for="city">Postinumero ja -toimipaikka<small>Pakollinen</small></label>
+				<div class="col-md-8">
 					<input type="text" class="form-control" id="city" name="city" placeholder="Postinumero ja -toimipaikka" value="{{ old('city') }}">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-4" for="phone">Puhelinnumero</label>
-				<div class="col-xs-8">
+				<label class="control-label col-md-4" for="phone">Puhelinnumero</label>
+				<div class="col-md-8">
 					<input type="text" class="form-control" id="phone" name="phone" placeholder="Puhelinnumero" value="{{ old('phone') }}">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-4" for="email">Sähköposti</label>
-				<div class="col-xs-8">
+				<label class="control-label col-md-4" for="email">Sähköposti</label>
+				<div class="col-md-8">
 					<input type="text" class="form-control" id="email" name="email" placeholder="Sähköposti" value="{{ old('email') }}">
 				</div>
 			</div>
@@ -122,12 +122,12 @@
 		<fieldset>
 			<legend></legend>
 			<div class="form-group">
-				<div class="col-xs-7">
+				<div class="col-md-7">
 					<p style="padding-top:8px">
 						Varmista, että tietosi ovat oikein ja jatka eteenpäin.
 					</p>
 				</div>
-				<div class="col-xs-5">
+				<div class="col-md-5">
 					<button type="submit" class="btn btn-block btn-primary">
 						<span class="glyphicon glyphicon-ok"></span> Tilaa kurssi
 					</button>
