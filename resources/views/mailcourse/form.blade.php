@@ -17,10 +17,10 @@
 
 @section('content')
 
-	<h2>Tilaa kirjekurssi postiisi</h2>
+	<h2>Tilaa kirjekurssi postitse</h2>
 	
 	<p>
-		Tilaa Raamattuopiston kirjekurssi postiisi täyttämällä tämä lomake.
+		Tilaa Raamattuopiston kirjekurssi kotiisi täyttämällä tämä lomake.
 	</p>
 	
 	@if($errors->any())
