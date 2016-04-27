@@ -20,7 +20,7 @@
 	
 	$hiding = [
 		'backward' => 3,
-		'forward' => 6,
+		'forward' => 7,
 	];
 	
 	$backward_hidden = 0;
@@ -52,7 +52,7 @@
 				<li class="lock-spacer"></li>
 			@endif
 			<?php 
-				$backward_hidden = min($hiding['backward'], $backward_hidden+1);
+				$backward_hidden = min($hiding['backward']-1, $backward_hidden+1);
 				continue;
 			?>
 		@endif
