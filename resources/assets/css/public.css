@@ -1681,15 +1681,15 @@ label.control-label small
 
 .fancy-radio .radio.active label
 {
-	background: #ABD9FF;
-	border: 1px solid #8BB9E3;
+	background: #8FE147;
+	border: 1px solid #70C332;
 }
 
 .fancy-radio .radio label:hover
 {
-	background: #FED081;
-	border: 1px solid #EDBA68;
-	box-shadow: 0 2px 3px #FFE5B7;
+	background: #FFDB6F;
+	border: 1px solid #E8CA56;
+	box-shadow: 0 2px 3px #FFEAA9;
 }
 
 
