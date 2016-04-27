@@ -11,7 +11,7 @@
 			<link rel="shortcut icon" type="image/ico" href="/favicon.ico">
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 			<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-			<link rel="stylesheet" href="/css/build/admin.min.css">
+			<link rel="stylesheet" href="{{ resource_url('/css/build/admin.min.css') }}">
 		</head>
 		<body>
 			<nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavbarController">
@@ -128,8 +128,8 @@
 			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-route.min.js"></script>
 			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-sanitize.min.js"></script>
 			
-			<script src="/js/build/admin-angular.min.js"></script>
-			<script src="/js/build/admin.min.js"></script>
+			<script src="{{ resource_url('/js/build/admin-angular.min.js') }}"></script>
+			<script src="{{ resource_url('/js/build/admin.min.js') }}"></script>
 		</body>
 
 	</html>

@@ -52,3 +52,9 @@ function abort_unauthorized($user_id_compare = null)
 	// throw new \Exception("Unauthorized Ajax Request", 1337);
 	abort(401, "Unauthorized");
 }
+
+function resource_url($url)
+{
+	$na_url = $url[0] == '/' ? substr($url, 1) : $url;
+	return $url . '?v=' . filemtime($na_url);
+}

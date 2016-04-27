@@ -27,7 +27,7 @@
 	        <link rel="stylesheet" href="/css/normalize.css">
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-			<link rel="stylesheet" href="/css/build/public.min.css">
+			<link rel="stylesheet" href="{{ resource_url('/css/build/public.min.css') }}">
 		</head>
 		<body>
 			<div id="login-status">
@@ -60,7 +60,7 @@
 						<div class="inner">
 							<ul>
 								<li><a href="/">Etusivu</a></li>
-								<li><a href="/course">Kurssit</a></li>
+								<li><a href="/course">Nettikurssit</a></li>
 								@yield('extra_navigation')
 							</ul>
 						</div>
@@ -109,7 +109,7 @@
 			</div>
 			
 			<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-			<script src="/js/build/public.min.js"></script>
+			<script src="{{ resource_url('/js/build/public.min.js') }}"></script>
 		</body>
 	</html>
 @show
