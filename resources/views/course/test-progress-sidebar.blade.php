@@ -83,7 +83,7 @@
 			<li class="material {{ css([
 				'active' => $is_test_page && $test->id == $current_test->id && @$isMaterialPage
 			]) }}">
-				@if($test->progress->status != \App\Test::LOCKED)
+				@if($test->isUnlocked())
 					<a href="/test/{{ $test->id }}/material" class="anchor {{ css([
 							'material-popup' => $is_test_page && $test->id == $current_test->id && !@$isMaterialPage
 						]) }}">
@@ -92,14 +92,14 @@
 				@endif
 					<i class="fa fa-bookmark"></i>
 					<span>
-						@if($test->progress->status == \App\Test::LOCKED)
+						@if($test->isUnlocked())
 							<span class="glyphicon glyphicon-lock"></span>
 						@elseif($is_test_page && $test->id == $current_test->id && @$isMaterialPage)
 							<span class="glyphicon glyphicon-record"></span>
 						@endif
 						Opintomateriaali
 					</span>
-				@if($test->progress->status != \App\Test::LOCKED)
+				@if($test->isUnlocked())
 					</a>
 				@else
 					</div>
@@ -111,21 +111,21 @@
 			'active' 		=> $is_test_page && $test->id == $current_test->id && @!$isMaterialPage,
 			'no-material' 	=> !$test->page()->exists()
 		]) }}">
-			@if($test->progress->status != \App\Test::LOCKED)
+			@if($test->isUnlocked())
 				<a href="/test/{{ $test->id }}" class="anchor">
 			@else
 				<div class="anchor">
 			@endif
 				<i class="fa fa-file-text-o"></i>
 				<span>
-					@if($test->progress->status == \App\Test::LOCKED)
+					@if(!$test->isUnlocked())
 						<span class="glyphicon glyphicon-lock"></span>
 					@elseif($is_test_page && $test->id == $current_test->id && @!$isMaterialPage)
 						<span class="glyphicon glyphicon-record"></span>
 					@endif
 					Koe
 				</span>
-			@if($test->progress->status != \App\Test::LOCKED)
+			@if($test->isUnlocked())
 				</a>
 			@else
 				</div>
