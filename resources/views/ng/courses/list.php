@@ -73,16 +73,18 @@
 					</div>
 				</td>
 				<td ng-bind-html="course.description">[[ course.description ]]</td>
-				<td class="list-no-padding list-scroll">
-					<ol>
-						<li ng-repeat="test in course.tests">
-							<a href="#/tests/[[ test.id ]]/edit">[[ test.title ]]</a>
-						</li>
-					</ol>
-					<span ng-show="course.tests.length == 0">
-						<span style="font-weight: bold;color: #BC2020">Ei kokeita!</span><br>
-						<span style="color: #545454">Kurssia ei näytetä.</span>
-					</span>
+				<td class="list-no-padding">
+					<div class="list-scroll">
+						<ol>
+							<li ng-repeat="test in course.tests">
+								<a href="#/tests/[[ test.id ]]/edit">[[ test.title ]]</a>
+							</li>
+						</ol>
+						<span ng-show="course.tests.length == 0">
+							<span style="font-weight: bold;color: #BC2020">Ei kokeita!</span><br>
+							<span style="color: #545454">Kurssia ei näytetä.</span>
+						</span>
+					</div>
 				</td>
 				<td>
 					<a href="#/courses/[[ course.id ]]" class="btn btn-primary btn-xs">
