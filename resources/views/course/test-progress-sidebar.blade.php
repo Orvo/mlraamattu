@@ -18,13 +18,27 @@
 		$current_test = false;
 	}
 	
-	$hiding = [
-		'backward' => 3,
-		'forward' => 7,
-	];
+	function getDisplayRange($current, $limit, $numEntries, $offset = 0)
+	{
+		if($current - ceil($limit / 2) < 1)
+		{
+			$start 	= max(1, $current - ceil($limit / 2));
+			$end 	= min($numEntries, $start + $limit);
+		}
+		else
+		{
+			$end 	= min($numEntries, $current + floor($limit / 2));
+			$start	= max(1, $end - $limit);
+		}
+		
+		return [
+			'start'		=> $start,
+			'current'	=> $current,
+			'end'		=> $end,
+		];
+	}
 	
-	$backward_hidden = 0;
-	
+	$ranges = getDisplayRange($current_test_order, 7, $tests->count());
 ?>
 <h4 class="hide-in-desktop-width">Kurssikartta</h4>
 <ul class="sidebar-course-progress fixed">
@@ -40,25 +54,18 @@
 	@foreach($tests as $key => $test)
 		<?php if(!$test->hasQuestions()) break; ?>
 		
-		<?php
-			$distance = $test->order - $current_test_order;
-		?>
-		
-		@if($distance <= -$hiding['backward'])
-			@if($distance == -$hiding['backward'])
+		@if($test->order < $ranges['start'])
+			@if($test->order == $ranges['start'])
 				<li class="test-title">
 					<div>...</div>
 				</li>
 				<li class="lock-spacer"></li>
 			@endif
-			<?php 
-				$backward_hidden = min($hiding['backward']-1, $backward_hidden+1);
-				continue;
-			?>
+			<?php continue; ?>
 		@endif
 			
-		@if($distance >= ($hiding['forward']-$backward_hidden))
-			@if($distance == ($hiding['forward']-$backward_hidden))
+		@if($test->order > $ranges['end'])
+			@if($test->order == $ranges['end'])
 				<li class="lock-spacer"></li>
 				<li class="test-title">
 					<div>
