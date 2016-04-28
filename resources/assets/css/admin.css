@@ -1114,6 +1114,12 @@ tbody > tr.missing-test > td:first-child
 	padding: 0 0 0 0.2em;
 }
 
+.list-scroll
+{
+	max-height: 225px;
+	overflow-y: auto;
+}
+
 #modal-login .modal-body > p
 {
 	padding-bottom: 0.4em;

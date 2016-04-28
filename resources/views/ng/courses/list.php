@@ -73,7 +73,7 @@
 					</div>
 				</td>
 				<td ng-bind-html="course.description">[[ course.description ]]</td>
-				<td class="list-no-padding">
+				<td class="list-no-padding list-scroll">
 					<ol>
 						<li ng-repeat="test in course.tests">
 							<a href="#/tests/[[ test.id ]]/edit">[[ test.title ]]</a>
