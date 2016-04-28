@@ -63,20 +63,6 @@
 				<div>...</div>
 			</li>
 			<li class="lock-spacer"></li>
-		@endif	
-		
-		@if($test->order == $ranges['end'])
-			<li class="lock-spacer"></li>
-			<li class="test-title">
-				<div>
-					<?php $num_hidden = count($tests) + 1 - $test->order; ?>
-					+ {{ $num_hidden }} osa{{ $num_hidden != 1 ? 'a' : '' }} lisää
-				</div>
-			</li>
-		@endif
-		
-		@if($test->order > $ranges['end'])
-			<?php continue; ?>
 		@endif
 		
 		@if(!$test->isUnlocked() && !@$hasLockSpacer)
@@ -141,5 +127,19 @@
 			@endif
 		</li>
 		<li class="spacer"></li>
+		
+		@if($test->order == $ranges['end'])
+			<li class="lock-spacer"></li>
+			<li class="test-title">
+				<div>
+					<?php $num_hidden = count($tests) + 1 - $test->order; ?>
+					+ {{ $num_hidden }} osa{{ $num_hidden != 1 ? 'a' : '' }} lisää
+				</div>
+			</li>
+		@endif
+		
+		@if($test->order > $ranges['end'])
+			<?php continue; ?>
+		@endif
 	@endforeach
 </ul>
