@@ -1105,7 +1105,7 @@ tbody > tr.missing-test > td:first-child
 .list-no-padding ul, .list-no-padding ol
 {
 	padding: 0 0 0 1em;
-	margin: 0;
+	margin: 0 0 0 0.5em;
 }
 
 .list-no-padding ul > li, .list-no-padding ol > li
@@ -1117,7 +1117,7 @@ tbody > tr.missing-test > td:first-child
 .list-scroll
 {
 	max-height: 200px;
-	padding-right: 10em;
+	padding-right: 1.5em;
 	overflow-y: auto;
 }
 
