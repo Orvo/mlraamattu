@@ -38,7 +38,7 @@
 		];
 	}
 	
-	$ranges = getDisplayRange($current_test_order, 7, $tests->count());
+	$ranges = getDisplayRange($current_test_order, 5, $tests->count());
 ?>
 <h4 class="hide-in-desktop-width">Kurssikartta</h4>
 <ul class="sidebar-course-progress fixed">
