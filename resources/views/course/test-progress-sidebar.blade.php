@@ -55,25 +55,27 @@
 		<?php if(!$test->hasQuestions()) break; ?>
 		
 		@if($test->order < $ranges['start'])
-			@if($test->order == $ranges['start'])
-				<li class="test-title">
-					<div>...</div>
-				</li>
-				<li class="lock-spacer"></li>
-			@endif
 			<?php continue; ?>
 		@endif
-			
+		
+		@if($test->order == $ranges['start'])
+			<li class="test-title">
+				<div>...</div>
+			</li>
+			<li class="lock-spacer"></li>
+		@endif	
+		
+		@if($test->order == $ranges['end'])
+			<li class="lock-spacer"></li>
+			<li class="test-title">
+				<div>
+					<?php $num_hidden = count($tests) + 1 - $test->order; ?>
+					+ {{ $num_hidden }} osa{{ $num_hidden != 1 ? 'a' : '' }} lisää
+				</div>
+			</li>
+		@endif
+		
 		@if($test->order > $ranges['end'])
-			@if($test->order == $ranges['end'])
-				<li class="lock-spacer"></li>
-				<li class="test-title">
-					<div>
-						<?php $num_hidden = count($tests) + 1 - $test->order; ?>
-						+ {{ $num_hidden }} osa{{ $num_hidden != 1 ? 'a' : '' }} lisää
-					</div>
-				</li>
-			@endif
 			<?php continue; ?>
 		@endif
 		
