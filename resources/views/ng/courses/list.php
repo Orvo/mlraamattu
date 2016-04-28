@@ -45,7 +45,7 @@
 				<td style="min-width:180px;max-width:260px;">Kurssin otsikko</td>
 				<td style="width:100px;"></td>
 				<td>Kuvaus</td>
-				<td style="min-width:200px;">Kurssin kokeet</td>
+				<td style="min-width:220px;">Kurssin kokeet</td>
 				<td style="width:210px">Toiminnot</td>
 			</tr>
 		</thead>

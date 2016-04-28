@@ -1111,12 +1111,13 @@ tbody > tr.missing-test > td:first-child
 .list-no-padding ul > li, .list-no-padding ol > li
 {
 	margin: 0;
-	padding: 0 0 0 0.2em;
+	padding: 0 0 0 0.25em;
 }
 
 .list-scroll
 {
-	max-height: 225px;
+	max-height: 200px;
+	padding-right: 10em;
 	overflow-y: auto;
 }
 
