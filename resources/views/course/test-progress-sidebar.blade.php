@@ -20,14 +20,14 @@
 	
 	function getDisplayRange($current, $limit, $numEntries, $offset = 0)
 	{
-		if($current - ceil($limit / 2) < 1)
+		if($current - floor($limit / 2) < 1)
 		{
-			$start 	= max(1, $current - ceil($limit / 2));
+			$start 	= max(1, $current - floor($limit / 2));
 			$end 	= min($numEntries, $start + $limit);
 		}
 		else
 		{
-			$end 	= min($numEntries, $current + floor($limit / 2));
+			$end 	= min($numEntries, $current + ceil($limit / 2));
 			$start	= max(1, $end - $limit);
 		}
 		
