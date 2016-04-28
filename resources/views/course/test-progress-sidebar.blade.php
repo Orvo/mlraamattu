@@ -58,7 +58,7 @@
 			<?php continue; ?>
 		@endif
 		
-		@if($test->order == $ranges['start'])
+		@if($test->order == $ranges['start'] && $test->order != 1)
 			<li class="test-title">
 				<div>...</div>
 			</li>
