@@ -55,7 +55,7 @@
 				<span ng-if="!data.archive.all_correct && data.archive.num_correct > 0" style="color:#E19C28;">Osittain oikein</span>
 				<span ng-if="!data.archive.all_correct && data.archive.num_correct == 0" style="color:#A70014;">Kaikki väärin</span>
 				<span class="sbadge">
-					[[ data.archive.num_correct ]] / [[ data.archive.total ]]
+					[[ data.archive.num_correct ]] / [[ data.archive.total ]]<span ng-if="data.archive.num_unchecked && data.archive.num_unchecked > 0"> + [[ data.archive.num_unchecked ]] hyväksytty</span>
 				</span>
 			</div>
 		</div>

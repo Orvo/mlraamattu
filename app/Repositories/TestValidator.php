@@ -14,9 +14,10 @@ class TestValidator
 	
 	public function WithAnswers($test, $given_answers)
 	{
-		$all_correct = true;
-		$num_correct = 0;
-		$validation = [];
+		$all_correct 	= true;
+		$num_correct 	= 0;
+		$num_unchecked 		= 0;
+		$validation 	= [];
 		
 		foreach($test->questions as $question)
 		{
@@ -39,15 +40,21 @@ class TestValidator
 			{
 				$num_correct++;
 			}
+			
+			if(isset($result['unchecked']) && $result['unchecked'])
+			{
+				$num_unchecked++;
+			}
 		}
 		
 		return [
-			'all_correct'	=> $all_correct,
-			'num_correct'	=> $num_correct,
-			'total'			=> $test->questions->count(),
+			'all_correct'		=> $all_correct,
+			'num_correct'		=> $num_correct - $num_unchecked,
+			'total'				=> $test->questions->count() - $num_unchecked,
+			'num_unchecked'		=> $num_unchecked,
 			
-			'given_answers'	=> $given_answers,
-			'validation'	=> $validation,
+			'given_answers'		=> $given_answers,
+			'validation'		=> $validation,
 		];
 	}
 	
@@ -177,7 +184,8 @@ class TestValidator
 		else
 		{
 			$response = [
-				'correct' => true,
+				'correct' 	=> true,
+				'unchecked'	=> true,
 			];
 		}
 		

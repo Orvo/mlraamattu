@@ -130,7 +130,7 @@
 							<span class="glyphicon glyphicon-remove-circle" ng-show="!item.data.all_correct"></span>
 						</span>
 						<span class="number">
-							<b>[[ item.data.num_correct ]] / [[ item.data.total ]]</b> oikein
+							<b>[[ item.data.num_correct ]] / [[ item.data.total ]]</b> oikein<b ng-if="item.data.num_unchecked && item.data.num_unchecked > 0"> + [[ item.data.num_unchecked ]]</b>
 						</span>
 						<div class="revalidate-button">
 							<a ng-click="revalidate_test(item)" title="Tarkista uudelleen" ng-if="!item.processing">
