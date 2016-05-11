@@ -109,8 +109,7 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
  		}
  		
  		$scope.sorting.predicate = predicate;
- 		
- 		$scope.update_sorting();
+ 		$scope.update_pagination();
  	}
 	
 	$scope.update_filtering = function()
@@ -132,7 +131,7 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 	
 	$scope.update_sorting = function()
 	{
-		$scope.paginated_archive = $filter('orderBy')($scope.paginated_archive, $scope.sorting.predicate, $scope.sorting.reverse);
+		
 	}
 	
 	$scope.update_pagination = function()
@@ -148,8 +147,8 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 		var begin = ($scope.currentPage - 1) * $scope.perPage;
 		var end = begin + $scope.perPage;
 		
+		$scope.filtered_archive = $filter('orderBy')($scope.filtered_archive, $scope.sorting.predicate, $scope.sorting.reverse);
 		$scope.paginated_archive = $scope.filtered_archive.slice(begin, end);
-		$scope.update_sorting();
 		
 		$scope.pagesList = [];
 		for(var i=0; i<num_pages; ++i)
