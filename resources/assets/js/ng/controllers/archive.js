@@ -129,11 +129,6 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 		$scope.update_pagination();
 	}
 	
-	$scope.update_sorting = function()
-	{
-		
-	}
-	
 	$scope.update_pagination = function()
 	{
 		if(!$scope.filtered_archive) return;
