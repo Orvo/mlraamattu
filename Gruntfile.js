@@ -91,10 +91,18 @@ module.exports = function(grunt)
 					'resources/assets/js/*.js',
 					'resources/assets/js/ng/*.js',
 					'resources/assets/js/ng/controllers/*.js',
+				],
+				tasks: [
+					'concat',
+					'uglify',
+				],
+			},
+			css: {
+				files: [
 					'resources/assets/css/*.css',
 				],
 				tasks: [
-					'build',
+					'cssmin',
 				],
 			},
 		}
@@ -108,7 +116,13 @@ module.exports = function(grunt)
     grunt.loadNpmTasks('grunt-phpunit');
 	
 	// Task definition
-	grunt.registerTask('default', ['watch']);
+	grunt.registerTask('default', [
+		'concat',
+		'uglify',
+		'cssmin',
+		'watch'
+	]);
+	
 	grunt.registerTask('build', [
 		'concat',
 		'uglify',

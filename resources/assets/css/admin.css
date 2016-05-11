@@ -1582,3 +1582,20 @@ blockquote
 {
 	cursor: pointer;
 }
+
+/*********************/
+
+.has-predicate
+{
+	cursor: pointer;
+}
+
+.has-predicate:hover
+{
+	background: #f8f8f8;
+}
+
+.sorting
+{
+	color: #777;
+}

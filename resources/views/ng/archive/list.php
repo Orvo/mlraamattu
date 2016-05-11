@@ -94,7 +94,13 @@
 			<tr>
 				<td style="width:40px;"></td>
 				<td style="width:170px">Kokeen suorittaja</td>
-				<td style="width:180px">Suoritusaika</td>
+				<td style="width:180px" class="has-predicate" ng-click="setPredicate('created_at')">
+					Suoritusaika
+					<div class="sorting pull-right" ng-if="sorting.predicate == 'created_at'">
+						<span class="glyphicon glyphicon-chevron-up" ng-if="!sorting.reverse"></span>
+						<span class="glyphicon glyphicon-chevron-down" ng-if="sorting.reverse"></span>
+					</div>
+				</td>
 				<td style="min-width:150px">Kurssi / Koe</td>
 				<td style="width:20%">Tulos</td>
 				<td class="list-actions" style="width:180px">Toiminnot</td>

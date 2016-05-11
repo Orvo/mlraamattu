@@ -91,6 +91,27 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
  	
  	$scope.filtered_archive = [];
  	$scope.paginated_archive = [];
+ 	
+ 	$scope.sorting = {
+ 		predicate: 'created_at',
+ 		reverse: true,
+ 	};
+ 	
+ 	$scope.setPredicate = function(predicate)
+ 	{
+ 		if($scope.sorting.predicate == predicate)
+ 		{
+ 			$scope.sorting.reverse = !$scope.sorting.reverse;
+ 		}
+ 		else
+ 		{
+ 			$scope.sorting.reverse = true;
+ 		}
+ 		
+ 		$scope.sorting.predicate = predicate;
+ 		
+ 		$scope.update_sorting();
+ 	}
 	
 	$scope.update_filtering = function()
 	{
@@ -109,6 +130,11 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 		$scope.update_pagination();
 	}
 	
+	$scope.update_sorting = function()
+	{
+		$scope.paginated_archive = $filter('orderBy')($scope.paginated_archive, $scope.sorting.predicate, $scope.sorting.reverse);
+	}
+	
 	$scope.update_pagination = function()
 	{
 		if(!$scope.filtered_archive) return;
@@ -123,6 +149,7 @@ app.controller('ArchiveController', function($rootScope, $scope, $window, $locat
 		var end = begin + $scope.perPage;
 		
 		$scope.paginated_archive = $scope.filtered_archive.slice(begin, end);
+		$scope.update_sorting();
 		
 		$scope.pagesList = [];
 		for(var i=0; i<num_pages; ++i)
