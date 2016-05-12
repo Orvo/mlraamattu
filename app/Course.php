@@ -18,7 +18,8 @@ class Course extends Model
 	const COMPLETED 	= 4;
 	
 	protected $casts = [
-		'id' 		=> 'integer',
+		'id' 			=> 'integer',
+		'published'		=> 'boolean',
 	];
 		
 	public function tests()
