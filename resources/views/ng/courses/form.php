@@ -2,8 +2,11 @@
 	<div id="content-sidebar" class="fixed">
 		<div class="sidebar-actions">
 			<div class="form-group">
-				<a href="#/courses/" class="btn btn-default btn-block">
-					<span class="glyphicon glyphicon-chevron-left"></span> Palaa kursseihin
+				<a href="#/courses/" class="btn btn-default btn-block" ng-if="!id">
+					<span class="glyphicon glyphicon-chevron-left"></span> Palaa kurssilistaukseen
+				</a>
+				<a href="#/courses/[[ id ]]" class="btn btn-default btn-block" ng-if="id">
+					<span class="glyphicon glyphicon-chevron-left"></span> Palaa kurssiin
 				</a>
 			</div>
 			
