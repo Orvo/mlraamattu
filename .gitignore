@@ -6,7 +6,6 @@ Homestead.yaml
 Homestead.json
 .env
 *.sublime-workspace
-ml.sublime-workspace
 mlraamattu.zip
 
 *.docx#
