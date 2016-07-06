@@ -7,5 +7,5 @@ Homestead.json
 .env
 *.sublime-workspace
 mlraamattu.zip
-
+.sublime-grunt.cache
 *.docx#
