@@ -5,21 +5,22 @@
 
 @section('footer-links')
 	<ul>
-		<li><a href="http://www.nykyaika.fi">Media7 Julkaisut </a></li>
-		<li><a href="http://media7.adventist.fi">Media7 Verkkomedia</a></li>
-		<li><a href="http://adventist.fi">Suomen Adventtikirkko</a></li>
+		<li><a href="https://www.nykyaika.fi">Nykyaika – hengellisiä uutisia</a></li>
+		<li><a href="https://hopechannel.fi">Hopechannel – suoratoistopalvelu</a></li>
+		<li><a href="https://media7.adventist.fi">Media7 Verkkomedia – opetus- ja hartausohjelmia</a></li>
+		<li><a href="https://adventist.fi">Suomen Adventtikirkko</a></li>
 	</ul>
 @endsection
 
 @section('footer-side-top')
 	<p>
-		Ilmaiset kirjeitse ja Internetissä käyttävät raamattu- ja terveysaiheiset kurssit, raamattuleirit ja nettiraamattukoulu.
+		Ilmaiset kirjeitse ja Internetissä käytävät raamattu- ja terveysaiheiset kurssit, raamattuleirit ja nettiraamattukoulu.
 	</p>
 @endsection
 
 @section('footer-side-bottom')
 	<p>
-		Media7 Raamattuopisto on Suomen Adventtikirkon mediapohjaiseen raamattuopistukseen keskittyvä yksikkö.
+		Media7 Raamattuopisto on Suomen Adventtikirkon mediapohjaiseen raamattuopetukseen keskittyvä yksikkö.
 	</p>
 	<p>
 		Muita Media7:n yksikköjä ovat Media7 Julkaisut (ent. Kirjatoimi) ja Media7 Verkkomedia (Radio, TV ja nettipohjaiset palvelut, mm. nettilähetykset).

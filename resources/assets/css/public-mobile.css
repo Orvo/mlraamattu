@@ -1,7 +1,7 @@
 /*********************************************************
 
 	Website mobile layout styling
-	
+
 */
 
 @media screen and (max-width: 999px) {
@@ -17,7 +17,7 @@
 	{
 		position: static;
 	}
-	
+
 	.mobile-width #content-wrapper
 	{
 		padding-top: 20px;
@@ -27,7 +27,7 @@
 	{
 		display: none;
 	}
-	
+
 	.sidebar_before #sidebar-content
 	{
 		display: block;
@@ -36,7 +36,7 @@
 		clear: both;
 		padding: 0 0 20px 0;
 	}
-	
+
 	#sidebar-content-after
 	{
 		display: block;
@@ -44,12 +44,12 @@
 		clear: both;
 		padding: 20px 0 0 0;
 	}
-	
+
 	.sidebar_before #sidebar-content-after
 	{
 		display: none;
 	}
-	
+
 	#sidebar-content-after h4
 	{
 		border-bottom: 1px solid #ddd;
@@ -62,7 +62,7 @@
 		width: 100%;
 		padding: 0;
 	}
-	
+
 	header > .inner
 	{
 		background: none center top !important;
@@ -72,7 +72,7 @@
 
 /*********************************************************************/
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 999px) { /*767*/
 
 	body
 	{
@@ -96,7 +96,7 @@
 		font-size: 13pt;
 		text-align: right;
 	}
-	
+
 	/***********************************
 		Layout structure */
 
@@ -120,10 +120,10 @@
 
 	footer .inner
 	{
-		padding-left: 12px;	
-		padding-right: 12px;	
+		padding-left: 12px;
+		padding-right: 12px;
 	}
-	
+
 	footer .inner a:link,
 	footer .inner a:visited
 	{
@@ -155,7 +155,7 @@
 		margin-bottom: 15px;
 		text-align: center;
 	}
-	
+
 	/***********************************
 		Misc */
 
@@ -165,7 +165,7 @@
 		width: 100%;
 		text-align: center !important;
 	}
-	
+
 	.mobile-full-width a
 	{
 		display: block;
@@ -177,7 +177,7 @@
 	{
 		float: none;
 	}
-	
+
 	/***********************************
 		Lists */
 
@@ -189,7 +189,7 @@
 		border-bottom: 1px solid #ddd;
 		padding-top: 5px;
 	}
-	
+
 	div.list div.list-item.list-item-flat .title .title-anchor
 	{
 		line-height: 1em;
@@ -197,7 +197,7 @@
 		height: auto !important;
 		border-bottom: none;
 	}
-	
+
 	div.list div.list-item .title div.status
 	{
 		padding: 5px 0 0 0;
@@ -229,7 +229,7 @@
 
 	.list-item .description,
 	.course-description
-	{	
+	{
 		font-size: 13pt !important;
 	}
 
@@ -253,48 +253,48 @@
 	{
 		display: block;
 	}
-	
+
 	div.list div.list-item .description .read-more
 	{
 		font-size: 14pt;
 		text-align: center;
 	}
-	
+
 	div.list div.list-item .description .read-more .btn
 	{
 		display: block;
 		font-size: 14pt;
 		padding: 9px 14px;
 	}
-	
+
 	/***********************************
 		Questions */
-	
+
 	.big-validation-icon
 	{
 		display: none !important;
 	}
-	
+
 	div.question div.correct-answers h4,
 	div.question div.answer-feedback h4
 	{
 		font-size: 13pt;
 	}
-	
+
 	div.question div.correct-answers p,
 	div.question div.answer-feedback p
 	{
 		font-size: 12pt;
 	}
-	
+
 	div.question textarea
 	{
 		font-size: 12pt;
 	}
-	
+
 	/***********************************
 		Tabs */
-	
+
 	div.tab-content-wrapper
 	{
 		overflow: hidden;
@@ -309,13 +309,13 @@
 	{
 		height: 390px !important;
 	}
-	
+
 	div.tab-content-row
 	{
 		width: 100%;
 		height: 200%;
 	}
-	
+
 	div.tab-content-row > div.tab-panel
 	{
 		width: 100%;
@@ -342,21 +342,21 @@
 		max-width: 90%;
 		padding: 1.5em 0 1.5em 0;
 	}
-	
+
 	/***********************************
 		Test */
-	
+
 	.test-status-alert .pull-right
 	{
 		float: none !important;
 		margin: 1em 0;
 	}
-	
+
 	.test-status-alert .btn
 	{
 		display: block;
 	}
-	
+
 	/***********************************
 		Sidebar */
 
@@ -365,37 +365,37 @@
 		padding-left: 27px;
 		border-left: none;
 	}
-	
+
 	ul.sidebar-course-progress li .anchor
 	{
 		padding: 12px 6px 10px 30px;
 	}
-	
+
 	ul.sidebar-course-progress li.course-title .anchor
 	{
 		border-radius: 5px !important;
 	}
-	
+
 	ul.sidebar-course-progress li.test .anchor
 	{
 		border-bottom-left-radius: 5px;
 	}
-	
+
 	ul.sidebar-course-progress li.material .anchor,
 	ul.sidebar-course-progress li.test.no-material .anchor
 	{
 		border-top-left-radius: 5px;
 	}
-	
+
 	ul.sidebar-course-progress li.test.no-material .anchor
 	{
 		border-radius: 5px !important;
 	}
-	
+
 }
 /*
 @media screen and (orientation:landscape) and (max-width: 767px) {
-	
+
 	div.course-description img,
 	.course.list-item .description img,
 	div.test-material-body img,
@@ -406,6 +406,6 @@
 		height: auto !important;
 		margin: 1em 0 1em 1em !important;
 	}
-	
+
 }
 */
