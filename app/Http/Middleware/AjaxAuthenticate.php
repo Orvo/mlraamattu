@@ -41,7 +41,7 @@ class AjaxAuthenticate
 			];
 		}
 		
-		if($role & !$this->auth->user()->hasPermission($role))
+		if($role && !$this->auth->user()->hasPermission($role))
 		{
 			return [
 				'error' => 'Insufficient permissions',
