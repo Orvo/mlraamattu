@@ -77,12 +77,6 @@
 							<b>Ilmestyskirja avautuu</b> (16 opintovihkoa)
 						</label>
 					</div>
-					<div class="radio">
-						<label>
-							<input type="radio" name="course" value="Elämää ja Terveyttä">
-							<b>Elämää ja Terveyttä</b> (18 opintovihkoa)
-						</label>
-					</div>
 				</div>
 			</div>
 		</fieldset>
