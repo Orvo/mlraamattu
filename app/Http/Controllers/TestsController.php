@@ -128,6 +128,12 @@ class TestsController extends Controller
 			switch($authenticationType)
 			{
 				case 0:
+				    if ($validation['num_correct'] == 0) {
+			    	    // Kaikki vastaukset väärin – ei tallenneta käyttäjää
+			        	return redirect()->back()->withErrors(['Kaikki vastaukset olivat väärin, tiliä ei luotu.']);
+			    	}
+
+
 					$authvalidator = \Validator::make($request->all(),
 					[
 						'user-name'		=> 'required',

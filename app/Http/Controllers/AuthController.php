@@ -85,54 +85,58 @@ class AuthController extends Controller
 	
 	public function ajax_login(Request $request)
 	{
-		if(Auth::check())
-		{
+		$guard = Auth::guard('web');
+
+		// Jos käyttäjä on jo kirjautunut
+		if($guard->check()) {
 			return [
-				'success' 				=> true,
-				'user'					=> Auth::user(),
-				'canAccessAdminPanel'	=> Auth::user()->canAccessAdminPanel(),
+				'success' => true,
+				'user' => $guard->user(),
+				'canAccessAdminPanel' => $guard->user()->canAccessAdminPanel(),
 			];
 		}
-		
+
+		// Validointi
 		$validation = Validator::make($request->all(), [
-			'email' => 'required',
+			'email' => 'required|email',
 			'password' => 'required',
 		], [
-			'email.required' 	=> 'Sähköpostiosoite puuttuu.',
-			'email.email' 		=> 'Annettu sähköpostiosoite ei ole pätevä.',
+			'email.required' => 'Sähköpostiosoite puuttuu.',
+			'email.email' => 'Annettu sähköpostiosoite ei ole pätevä.',
 			'password.required' => 'Salasana puuttuu.',
 		]);
-		
-		if($validation->passes())
-		{
-			$credentials = [
-				'email' 		=> $request->input('email'),
-				'password'		=> $request->input('password'),
-			];
-			$remember = $request->input('remember_me');
 
-			if(Auth::attempt($credentials, $remember))
-			{
-				return [
-					'success' 				=> true,
-					'user'					=> Auth::user(),
-					'canAccessAdminPanel'	=> Auth::user()->canAccessAdminPanel(),
-				];
-			}
-			else
-			{
-				return [
-					'success' 	=> false,
-					'errors'	=> [
-						'Virheelliset tunnukset tai oikeudet.',
-					],
-				];
-			}
+		if($validation->fails()) {
+			return [
+				'success' => false,
+				'errors' => $validation->errors()->all(),
+			];
 		}
-		
+
+		// Kredienssit ja remember
+		$credentials = $request->only('email','password');
+		$remember = (bool) $request->input('remember_me', false);
+
+		if($guard->attempt($credentials, $remember)) {
+			// Regeneroi session
+			$request->session()->regenerate();
+
+			// Luo tai päivitä ValidSession tietokantaan
+			ValidSession::updateOrCreate(
+				['user_id' => $guard->id()],
+				['hash' => session()->getId(), 'created_at' => now()]
+			);
+
+			return [
+				'success' => true,
+				'user' => $guard->user(),
+				'canAccessAdminPanel' => $guard->user()->canAccessAdminPanel(),
+			];
+		}
+
 		return [
-			'success'	=> false,
-			'errors'	=> $validation->errors()->all(),
+			'success' => false,
+			'errors' => ['Virheelliset tunnukset tai oikeudet.'],
 		];
 	}
 	

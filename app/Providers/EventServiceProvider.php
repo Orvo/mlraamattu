@@ -2,51 +2,37 @@
 
 namespace App\Providers;
 
-use Illuminate\Http\Request;
-
-use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-
+use Illuminate\Contracts\Events\Dispatcher;
 use App\ValidSession;
 
 class EventServiceProvider extends ServiceProvider
 {
-	/**
-	 * The event listener mappings for the application.
-	 *
-	 * @var array
-	 */
-	protected $listen = [
-		'App\Events\SomeEvent' => [
-			'App\Listeners\EventListener',
-		],
-	];
+    protected $listen = [
+        'App\Events\SomeEvent' => [
+            'App\Listeners\EventListener',
+        ],
+    ];
 
-	/**
-	 * Register any other events for your application.
-	 *
-	 * @param  \Illuminate\Contracts\Events\Dispatcher  $events
-	 * @return void
-	 */
-	public function boot(DispatcherContract $events)
-	{
-		parent::boot($events);
-		
-		$events->listen('auth.login', function ($user, $remember)
-		{
-			$fingerprint = ValidSession::generateFingerprint(request());
-			ValidSession::makeSession($fingerprint);
-		});
-		
-		$events->listen('auth.logout', function ($user)
-		{
-			$fingerprint = ValidSession::generateFingerprint(request());
-			$session = ValidSession::findSession($fingerprint);
-			
-			if($session)
-			{
-				$session->delete();
-			}
-		});
-	}
+    public function boot()
+    {
+        parent::boot();
+
+        $events = $this->app[Dispatcher::class];
+
+        $events->listen('auth.login', function ($user, $remember) {
+            $fingerprint = ValidSession::generateFingerprint(request());
+            ValidSession::makeSession($fingerprint);
+        });
+
+        $events->listen('auth.logout', function ($user) {
+            $fingerprint = ValidSession::generateFingerprint(request());
+            $session = ValidSession::findSession($fingerprint);
+
+            if ($session) {
+                $session->delete();
+            }
+        });
+    }
 }
+

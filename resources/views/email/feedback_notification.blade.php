@@ -29,7 +29,7 @@
 				<p>
 					<ul>
 						@if($question->type == 'MULTI')
-							@foreach($data['given_answers'][$question->id] as $answer_id)
+							@foreach(($data['given_answers'][$question->id] ?? []) as $answer_id)
 								<li>
 									<?php
 										$answer = findByProperty($question->answers, 'id', $answer_id);
@@ -53,7 +53,7 @@
 								@endif
 							</li>
 						@elseif($question->type == 'MULTITEXT')
-							@foreach($data['given_answers'][$question->id] as $answer)
+							@foreach(($data['given_answers'][$question->id] ?? []) as $answer)
 								<li>
 									{!! alt($answer, '<i>Ei vastausta</i>') !!}
 								</li>

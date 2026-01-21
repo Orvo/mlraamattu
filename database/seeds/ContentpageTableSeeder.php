@@ -20,6 +20,10 @@ class ContentpageTableSeeder extends Seeder
 		$page->tag      = "etusivu";
 		$page->body     = "<h1>Etusivu</h1><p>  Tervetuloa etusivulle. Tämä on oletusetusivu jota voit muokata ylläpitopaneelissa.</p><p>   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus sunt, quam. Commodi in est eum mollitia incidunt maiores cumque. Laboriosam quisquam facere ut fugiat est ad laborum cumque, accusamus quasi perferendis. Quam dicta, sunt, similique beatae earum excepturi error quasi quos velit iste accusamus temporibus? Iste earum necessitatibus pariatur excepturi at recusandae consectetur quasi.</p><h2>Hello World</h2><p>  Error, quia suscipit architecto expedita obcaecati nisi pariatur recusandae odit vel animi neque voluptatibus deserunt, quidem voluptatem totam facilis a quae rerum hic, reiciendis dolore? Nemo optio corporis tempora, excepturi doloremque, voluptatum quae fugiat cupiditate iure amet, facilis, earum eligendi libero voluptatem illo. Voluptas at alias delectus nulla adipisci quasi cupiditate ipsa eligendi recusandae.</p>";
 		
+		// Lisätty puuttuva NOT NULL -kenttä
+		$page->sidebar_body = '';
+		$page->sticky_sidebar = 0; // jos kenttä boolean/INT, 0 on sopiva
+
 		$page->save();
 	}
 }

@@ -3,127 +3,128 @@
 @section('title', $test->title)
 
 @section('authentication_form')
-	
-	@if($errors->any())
-		<div class="alert alert-danger alert-icon" role="alert">
-			<span class="glyphicon glyphicon-remove-sign"></span>
-			<div>
-				<b>Hupsis!</b> {{ @$authentication_type == 0 ? 'Rekisteröinnissä' : 'Kirjautumisessa' }} tapahtui virhe eikä vastauksiasi ole vielä tallennettu!
-				<hr>
-				<ul>
-					@foreach($errors->all() as $error)
-						<li>{{ $error }}</li>
-					@endforeach
-				</ul>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-	@endif
-	
-	<div class="tabs">
-		<div class="col-xs-6 tab {{ css(['active' => @$authentication_type == 0]) }}" id="tab-register">
-			<a>
-				Rekisteröidy <span class="glyphicon glyphicon-lock"></span>
-			</a>
-		</div>
-		<div class="col-xs-6 tab {{ css(['active' => @$authentication_type == 1]) }}" id="tab-login">
-			<a>
-				Kirjaudu sisään <span class="glyphicon glyphicon-log-in"></span>
-			</a>
-		</div>
-	</div>
-	<div class="clearfix"></div>
-	
-	<input type="hidden" id="authentication_type" name="authentication_type" value="{{ $authentication_type }}">
-	
-	<div id="authentication-form" class="form-horizontal">
-		<div class="tab-content-wrapper">
-			<div class="tab-content-row">
-				<div class="tab-panel">
-					<p class="form-help form-help-register">
-						Jatkaaksesi sinun tulee rekisteröityä, jotta järjestelmä voi pitää
-						kirjaa vastauksistasi ja sinulle voidaan antaa palautetta.
-					</p>
-					
-					<div class="form-group field-name">
-						<label for="user-name" class="control-label col-sm-3">Nimi</label>
-						<div class="col-sm-7">
-							<input type="text" class="form-control" id="user-name" name="user-name" value="{{ @$old['user-name'] }}">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="user-email" class="control-label col-sm-3">Sähköpostiosoite</label>
-						<div class="col-sm-7">
-							<input type="text" class="form-control" id="user-email" name="user-email" value="{{ @$old['user-email'] }}">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="user-password" class="control-label col-sm-3">Salasana</label>
-						<div class="col-sm-7">
-							<input type="password" class="form-control" id="user-password" name="user-password">
-						</div>
-					</div>
-					<div class="form-group field-password-confirmation">
-						<label for="user-password_confirmation" class="control-label col-sm-3">Salasana uudestaan</label>
-						<div class="col-sm-7">
-							<input type="password" class="form-control" id="user-password_confirmation" name="user-password_confirmation">
-						</div>
-					</div>
+
+		@if($errors->any())
+			<div class="alert alert-danger alert-icon" role="alert">
+				<span class="glyphicon glyphicon-remove-sign"></span>
+				<div>
+					<b>Hupsis!</b> {{ @$authentication_type == 0 ? 'Rekisteröinnissä' : 'Kirjautumisessa' }} tapahtui virhe eikä vastauksiasi ole vielä tallennettu!
+					<hr>
+					<ul>
+						@foreach($errors->all() as $error)
+							<li>{{ $error }}</li>
+						@endforeach
+					</ul>
 				</div>
-				<div class="tab-panel">
-					<div class="form-help">
-						<p>
-							Kirjaudu sisään syöttämällä sähköpostiosoitteesi ja salasanasi.
-							Jos olet jo suorittanut tämän kokeen ennen, uusia vastauksiasi ei tallenneta.
-						</p>
-					</div>
-					
-					<div class="form-group">
-						<label for="user-login-email" class="control-label col-sm-3">Sähköpostiosoite</label>
-						<div class="col-sm-7">
-							<input type="text" class="form-control" id="user-login-email" name="user-login-email" value="{{ @$old['user-login-email'] }}">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="user-login-password" class="control-label col-sm-3">Salasana</label>
-						<div class="col-sm-7">
-							<input type="password" class="form-control" id="user-login-password" name="user-login-password">
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="col-sm-4 col-sm-offset-3">
-							<div class="checkbox">
-								<label>
-									<input type="checkbox" name="remember_me"> Muista kirjautuminen
-								</label>
-							</div>
-						</div>
-						<div class="col-sm-3">
-							<p style="text-align: right; padding: 0.45em 0" class="mobile-full-width">
-								<a href="/auth/reset" target="_blank">Unohtunut salasana?</a>
-							</p>
-						</div>
-					</div>
-				</div>
-				
 				<div class="clearfix"></div>
 			</div>
-		</div>
+		@endif
 		
-		<div class="group-code">
-			<div class="form-group">
-				<label for="group-code" class="control-label col-sm-3">
-					Ryhmäkoodi
-				</label>
-				<div class="col-sm-7">
-					<input type="text" id="group-code" class="form-control" name="group-code" value="{{ @$old['group-code'] }}">
-					<p class="help-block">
-						Jos olet osa opetusryhmää ja sinulla on ryhmäkoodi, syötä se tähän. Muutoin jätä tyhjäksi.
-					</p>
+		<div class="tabs">
+			<div class="col-xs-6 tab {{ css(['active' => @$authentication_type == 0]) }}" id="tab-register">
+				<a>
+					Rekisteröidy <span class="glyphicon glyphicon-lock"></span>
+				</a>
+			</div>
+			<div class="col-xs-6 tab {{ css(['active' => @$authentication_type == 1]) }}" id="tab-login">
+				<a>
+					Kirjaudu sisään <span class="glyphicon glyphicon-log-in"></span>
+				</a>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		
+		<input type="hidden" id="authentication_type" name="authentication_type" value="{{ $authentication_type }}">
+		
+		<div id="authentication-form" class="form-horizontal">
+			<div class="tab-content-wrapper">
+				<div class="tab-content-row">
+					<div class="tab-panel">
+						<p class="form-help form-help-register">
+							Jatkaaksesi sinun tulee rekisteröityä, jotta järjestelmä voi pitää
+							kirjaa vastauksistasi ja sinulle voidaan antaa palautetta.
+						</p>
+						
+						<div class="form-group field-name">
+							<label for="user-name" class="control-label col-sm-3">Nimi</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="user-name" name="user-name" value="{{ @$old['user-name'] }}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="user-email" class="control-label col-sm-3">Sähköpostiosoite</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="user-email" name="user-email" value="{{ @$old['user-email'] }}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="user-password" class="control-label col-sm-3">Salasana</label>
+							<div class="col-sm-7">
+								<input type="password" class="form-control" id="user-password" name="user-password">
+							</div>
+						</div>
+						<div class="form-group field-password-confirmation">
+							<label for="user-password_confirmation" class="control-label col-sm-3">Salasana uudestaan</label>
+							<div class="col-sm-7">
+								<input type="password" class="form-control" id="user-password_confirmation" name="user-password_confirmation">
+							</div>
+						</div>
+					</div>
+					<div class="tab-panel">
+						<div class="form-help">
+							<p>
+								Kirjaudu sisään syöttämällä sähköpostiosoitteesi ja salasanasi.
+								Jos olet jo suorittanut tämän kokeen ennen, uusia vastauksiasi ei tallenneta.
+							</p>
+						</div>
+						
+						<div class="form-group">
+							<label for="user-login-email" class="control-label col-sm-3">Sähköpostiosoite</label>
+							<div class="col-sm-7">
+								<input type="text" class="form-control" id="user-login-email" name="user-login-email" value="{{ @$old['user-login-email'] }}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="user-login-password" class="control-label col-sm-3">Salasana</label>
+							<div class="col-sm-7">
+								<input type="password" class="form-control" id="user-login-password" name="user-login-password">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-4 col-sm-offset-3">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="remember_me"> Muista kirjautuminen
+									</label>
+								</div>
+							</div>
+							<div class="col-sm-3">
+								<p style="text-align: right; padding: 0.45em 0" class="mobile-full-width">
+									<a href="/auth/reset" target="_blank">Unohtunut salasana?</a>
+								</p>
+							</div>
+						</div>
+					</div>
+					
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			
+			<div class="group-code">
+				<div class="form-group">
+					<label for="group-code" class="control-label col-sm-3">
+						Ryhmäkoodi
+					</label>
+					<div class="col-sm-7">
+						<input type="text" id="group-code" class="form-control" name="group-code" value="{{ @$old['group-code'] }}">
+						<p class="help-block">
+							Jos olet osa opetusryhmää ja sinulla on ryhmäkoodi, syötä se tähän. Muutoin jätä tyhjäksi.
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+
 @endsection
 
 @section('sidebar_content')

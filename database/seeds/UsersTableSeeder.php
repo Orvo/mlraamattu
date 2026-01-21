@@ -22,6 +22,9 @@ class UsersTableSeeder extends Seeder
 			$user->password 	= Hash::make("password");
 			$user->access_level = "ADMIN";
 					
+			// Lisätty puuttuva NOT NULL -sarake
+			$user->change_password = 0; // tai false jos sarake on boolean
+
 			$user->save();
 			
 			echo "Created user ID " . $user->id . "\n";

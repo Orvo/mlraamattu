@@ -22,7 +22,9 @@ class ChangeAccessLevelTypeInUsersTable extends Migration
 			$levels[$user->id] = $user->access_level;
 		}
 		
-		DB::statement('ALTER TABLE users MODIFY COLUMN access_level VARCHAR(20)');
+		if (DB::getDriverName() !== 'sqlite') {
+			DB::statement('ALTER TABLE users MODIFY COLUMN access_level VARCHAR(20)');
+		}
 		
 		foreach($levels as $id => $level)
 		{

@@ -3,57 +3,47 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
 use Illuminate\Http\Request;
-use Illuminate\Contracts\Auth\Guard;
-
+use Illuminate\Support\Facades\Auth;
 use App\ValidSession;
-use Auth;
 
 class ValidSessionChecker
 {
-	/**
-	 * The Guard implementation.
-	 *
-	 * @var Guard
-	 */
-	protected $auth;
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @return mixed
+     */
+    public function handle(Request $request, Closure $next)
+    {
+        // Jos käyttäjä ei ole kirjautunut, ohitetaan middleware
+        if (!Auth::check()) {
+            return $next($request);
+        }
 
-	/**
-	 * Create a new filter instance.
-	 *
-	 * @param  Guard  $auth
-	 * @return void
-	 */
-	public function __construct(Guard $auth)
-	{
-		$this->auth = $auth;
-	}
-	
-	/**
-	 * Handle an incoming request.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @param  \Closure  $next
-	 * @return mixed
-	 */
-	public function handle(Request $request, Closure $next)
-	{
-		if(!Auth::check()) return $next($request);
-		
-		$fingerprint = ValidSession::generateFingerprint($request);
-		
-		$session = ValidSession::findSession($fingerprint, !$request->is('ajax/archive/stats'));
-		
-		if(!$session)
-		{
-			Auth::logout();
-		}
-		elseif(!Auth::check())
-		{
-			$session->delete();
-		}
-		
-		return $next($request);
-	}
+        // Hae nykyinen session ID
+        $currentSessionId = session()->getId();
+
+        // Tarkista, onko käyttäjällä voimassa oleva ValidSession
+        $valid = ValidSession::where('user_id', Auth::id())
+                             ->where('hash', $currentSessionId)
+                             ->exists();
+
+        // Jos ei ole validia sessionia, logout ja redirect
+        if (!$valid) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect('/auth/login')->withErrors([
+                'session' => 'Istuntosi ei ole enää voimassa. Kirjaudu uudelleen.'
+            ]);
+        }
+
+        // Jos session on validi, jatketaan normaalisti
+        return $next($request);
+    }
 }
+
